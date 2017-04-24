@@ -10,7 +10,6 @@ namespace SyntaxAnalysis.ST
     {
         public TreeNode<T> Root { get; private set; }
         public TreeNode<T> CurrentNode { get; private set; }
-        private TreeNode<T> LastAddedNode;
 
 
         public SyntaxTree(T rootValue)
@@ -24,17 +23,24 @@ namespace SyntaxAnalysis.ST
             TreeNode<T> newNode = new TreeNode<T>(CurrentNode, value);
             CurrentNode.Children.Add(newNode);
             CurrentNode = newNode;
-            LastAddedNode = CurrentNode;
         }
         public void EndNode()
         {
             CurrentNode = CurrentNode.Parent;
         }
-        //public void BackTrack()
-        //{
-        //    LastAddedNode.Children.Clear();
-        //    LastAddedNode.Parent.Children.Remove(LastAddedNode);
-        //}
+        public void RemoveLatestNode()
+        {
+            if (CurrentNode.Children.Count == 0)
+            {
+                CurrentNode.Parent.Children.Remove(CurrentNode);
+            }
+            else
+            {
+                CurrentNode.Children.Remove(CurrentNode.Children.Last());
+            }
+        }
+
+
 
 
 
@@ -50,7 +56,7 @@ namespace SyntaxAnalysis.ST
             Queue<TreeNode<T>> nodeQueue = new Queue<TreeNode<T>>();
             nodeQueue.Enqueue(Root);
             TreeNode<T> currentNode = Root;
-            while(nodeQueue.Count != 0)
+            while (nodeQueue.Count != 0)
             {
                 currentNode = nodeQueue.Peek();
                 nodeQueue.Dequeue();

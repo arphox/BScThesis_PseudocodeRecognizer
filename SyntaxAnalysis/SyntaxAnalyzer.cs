@@ -34,6 +34,10 @@ namespace SyntaxAnalysis
             currentIndex++;
             syntaxTree.EndNode();
 
+            if (!result)
+            {
+                syntaxTree.RemoveLatestNode();
+            }
             return result;
         }
         private bool MatchTerminalType(Type tokenType)
@@ -42,6 +46,11 @@ namespace SyntaxAnalysis
             bool result = (CurrentToken.GetType().Equals(tokenType));
             currentIndex++;
             syntaxTree.EndNode();
+
+            if (!result)
+            {
+                syntaxTree.RemoveLatestNode();
+            }
             return result;
         }
 
@@ -65,6 +74,7 @@ namespace SyntaxAnalysis
                 syntaxTree.EndNode();
                 return true;
             }
+            syntaxTree.RemoveLatestNode();
 
             currentIndex = savedIndex;
             if (Allitasok2())
@@ -72,6 +82,7 @@ namespace SyntaxAnalysis
                 syntaxTree.EndNode();
                 return true;
             }
+            syntaxTree.RemoveLatestNode();
 
             syntaxTree.EndNode();
             return false;
@@ -89,6 +100,7 @@ namespace SyntaxAnalysis
                 syntaxTree.EndNode();
                 return true;
             }
+            syntaxTree.RemoveLatestNode();
 
             currentIndex = savedIndex;
             if (EgysorosAllitas2())
@@ -96,6 +108,7 @@ namespace SyntaxAnalysis
                 syntaxTree.EndNode();
                 return true;
             }
+            syntaxTree.RemoveLatestNode();
 
             syntaxTree.EndNode();
             return false;
@@ -108,6 +121,11 @@ namespace SyntaxAnalysis
             syntaxTree.StartNode(new NonTerminalToken("állítás"));
             bool result = MatchTerminalType(typeof(LiteralToken));
             syntaxTree.EndNode();
+
+            if (!result)
+            {
+                syntaxTree.RemoveLatestNode();
+            }
             return result;
         }
     }
