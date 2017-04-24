@@ -1,0 +1,13 @@
+program_kezd
+egész x=2
+ha x>=2 akkor
+	kiír "x nem kisebb kettőnél..."
+különben
+	kiír "x kisebb, mint kettő!"
+elágazás_vége
+egész[] y = létrehoz(egész)[10]
+ciklus egész i=0-tól 9-ig
+	y[i]=i
+	kiír y[i]
+ciklus_vége
+program_vége

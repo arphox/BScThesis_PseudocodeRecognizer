@@ -1,0 +1,177 @@
+Generált kimenet a '..\..\..\_input\13_deepBlocks.opl' fájlhoz:
+
+Token lista:
+
+KeywordToken ID=1001 egész 
+KeywordToken ID=201 [ 
+KeywordToken ID=202 ] 
+IdentifierToken SymbolID=53, név=tömb
+KeywordToken ID=208 = 
+KeywordToken ID=15 létrehoz 
+KeywordToken ID=206 ( 
+KeywordToken ID=1001 egész 
+KeywordToken ID=207 ) 
+KeywordToken ID=201 [ 
+LiteralToken ID=110 (egész literál) "10" 
+KeywordToken ID=202 ] 
+KeywordToken ID=0 újsor 
+KeywordToken ID=1001 egész 
+IdentifierToken SymbolID=54, név=a
+KeywordToken ID=208 = 
+LiteralToken ID=110 (egész literál) "2" 
+KeywordToken ID=0 újsor 
+KeywordToken ID=8 ciklus 
+KeywordToken ID=1001 egész 
+IdentifierToken SymbolID=56, név=aa
+KeywordToken ID=208 = 
+LiteralToken ID=110 (egész literál) "0" 
+KeywordToken ID=10 -tól 
+IdentifierToken SymbolID=56, név=aa
+KeywordToken ID=213 < 
+LiteralToken ID=110 (egész literál) "9" 
+KeywordToken ID=11 -ig 
+KeywordToken ID=0 újsor 
+KeywordToken ID=1002 tört 
+IdentifierToken SymbolID=57, név=aaa
+KeywordToken ID=208 = 
+LiteralToken ID=120 (tört literál) "2,4" 
+KeywordToken ID=0 újsor 
+KeywordToken ID=12 ciklus_vége 
+KeywordToken ID=0 újsor 
+KeywordToken ID=1001 egész 
+IdentifierToken SymbolID=58, név=b
+KeywordToken ID=208 = 
+LiteralToken ID=110 (egész literál) "0" 
+KeywordToken ID=0 újsor 
+KeywordToken ID=8 ciklus 
+KeywordToken ID=1001 egész 
+IdentifierToken SymbolID=60, név=bb
+KeywordToken ID=208 = 
+LiteralToken ID=110 (egész literál) "0" 
+KeywordToken ID=10 -tól 
+IdentifierToken SymbolID=60, név=bb
+KeywordToken ID=213 < 
+LiteralToken ID=110 (egész literál) "9" 
+KeywordToken ID=11 -ig 
+KeywordToken ID=0 újsor 
+KeywordToken ID=1003 szöveg 
+IdentifierToken SymbolID=61, név=bbb
+KeywordToken ID=208 = 
+LiteralToken ID=130 (szöveg literál) "alma" 
+KeywordToken ID=0 újsor 
+KeywordToken ID=4 ha 
+IdentifierToken SymbolID=60, név=bb
+KeywordToken ID=219 mod 
+LiteralToken ID=110 (egész literál) "2" 
+KeywordToken ID=209 == 
+LiteralToken ID=110 (egész literál) "0" 
+KeywordToken ID=5 akkor 
+KeywordToken ID=0 újsor 
+KeywordToken ID=1003 szöveg 
+IdentifierToken SymbolID=63, név=bbbb
+KeywordToken ID=208 = 
+LiteralToken ID=130 (szöveg literál) "asd" 
+KeywordToken ID=0 újsor 
+KeywordToken ID=7 elágazás_vége 
+KeywordToken ID=0 újsor 
+KeywordToken ID=12 ciklus_vége 
+KeywordToken ID=0 újsor 
+KeywordToken ID=1001 egész 
+IdentifierToken SymbolID=64, név=c
+KeywordToken ID=208 = 
+LiteralToken ID=110 (egész literál) "0" 
+KeywordToken ID=0 újsor 
+KeywordToken ID=9 ciklus_amíg 
+IdentifierToken SymbolID=64, név=c
+KeywordToken ID=213 < 
+LiteralToken ID=110 (egész literál) "2" 
+KeywordToken ID=0 újsor 
+KeywordToken ID=1001 egész 
+IdentifierToken SymbolID=66, név=ccc
+KeywordToken ID=208 = 
+LiteralToken ID=110 (egész literál) "2" 
+KeywordToken ID=0 újsor 
+KeywordToken ID=4 ha 
+IdentifierToken SymbolID=66, név=ccc
+KeywordToken ID=209 == 
+LiteralToken ID=110 (egész literál) "3" 
+KeywordToken ID=5 akkor 
+KeywordToken ID=0 újsor 
+KeywordToken ID=8 ciklus 
+KeywordToken ID=1001 egész 
+IdentifierToken SymbolID=69, név=cccc
+KeywordToken ID=208 = 
+LiteralToken ID=110 (egész literál) "1" 
+KeywordToken ID=10 -tól 
+IdentifierToken SymbolID=69, név=cccc
+KeywordToken ID=213 < 
+LiteralToken ID=110 (egész literál) "10" 
+KeywordToken ID=11 -ig 
+KeywordToken ID=0 újsor 
+KeywordToken ID=1002 tört 
+IdentifierToken SymbolID=70, név=ccccc
+KeywordToken ID=208 = 
+LiteralToken ID=120 (tört literál) "3,14" 
+KeywordToken ID=0 újsor 
+KeywordToken ID=9 ciklus_amíg 
+IdentifierToken SymbolID=66, név=ccc
+KeywordToken ID=211 > 
+LiteralToken ID=110 (egész literál) "2" 
+KeywordToken ID=0 újsor 
+IdentifierToken SymbolID=66, név=ccc
+KeywordToken ID=208 = 
+IdentifierToken SymbolID=66, név=ccc
+KeywordToken ID=204 - 
+LiteralToken ID=110 (egész literál) "2" 
+KeywordToken ID=0 újsor 
+KeywordToken ID=12 ciklus_vége 
+KeywordToken ID=0 újsor 
+KeywordToken ID=1001 egész 
+IdentifierToken SymbolID=72, név=ccccc2
+KeywordToken ID=0 újsor 
+KeywordToken ID=12 ciklus_vége 
+KeywordToken ID=0 újsor 
+KeywordToken ID=1004 logikai 
+IdentifierToken SymbolID=73, név=l
+KeywordToken ID=208 = 
+LiteralToken ID=142 (hamis) "hamis" 
+KeywordToken ID=0 újsor 
+KeywordToken ID=7 elágazás_vége 
+KeywordToken ID=0 újsor 
+KeywordToken ID=1003 szöveg 
+IdentifierToken SymbolID=74, név=sz
+KeywordToken ID=208 = 
+LiteralToken ID=130 (szöveg literál) "haha" 
+KeywordToken ID=0 újsor 
+KeywordToken ID=12 ciklus_vége 
+KeywordToken ID=0 újsor 
+
+Szimbólumtábla:
+ID = 53, név=tömb, típus=EgeszTomb, def=3.sor
+ID = 54, név=a, típus=Egesz, def=5.sor
+AT
+	ID = 56, név=aa, típus=Egesz, def=6.sor
+	ID = 57, név=aaa, típus=Tort, def=7.sor
+/AT
+ID = 58, név=b, típus=Egesz, def=11.sor
+AT
+	ID = 60, név=bb, típus=Egesz, def=12.sor
+	ID = 61, név=bbb, típus=Szoveg, def=13.sor
+	AT
+		ID = 63, név=bbbb, típus=Szoveg, def=15.sor
+	/AT
+/AT
+ID = 64, név=c, típus=Egesz, def=19.sor
+AT
+	ID = 66, név=ccc, típus=Egesz, def=21.sor
+	AT
+		AT
+			ID = 69, név=cccc, típus=Egesz, def=23.sor
+			ID = 70, név=ccccc, típus=Tort, def=24.sor
+			ID = 72, név=ccccc2, típus=Egesz, def=28.sor
+		/AT
+		ID = 73, név=l, típus=Logikai, def=30.sor
+	/AT
+	ID = 74, név=sz, típus=Szoveg, def=32.sor
+/AT
+

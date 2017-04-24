@@ -1,0 +1,7 @@
+Generált kimenet a '..\..\..\_input\02_nostartend.opl' fájlhoz:
+
+Token lista:
+
+
+Szimbólumtábla:
+

@@ -1,0 +1,5 @@
+﻿//private static bool IsStringLiteral(string input)
+//{
+//    string pattern = @"^""(?:(\\n|\\t|\\""|\\\\)|[^\\""])*""$";
+//    return Regex.Match(input, pattern).Success;
+//}

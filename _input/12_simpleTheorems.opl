@@ -1,0 +1,28 @@
+﻿program_kezd
+
+egész[] tömb = létrehoz(egész)[10]
+
+ciklus egész i=0-tól i<9-ig
+	tömb[i] = i*10
+	kiír tömb[i]
+ciklus_vége
+
+
+
+egész db=0
+ciklus egész i=0-tól i<9-ig
+	ha tömb[i]mod 2==0 akkor
+		db=db+1
+	elágazás_vége
+ciklus_vége
+kiír "Ennyi darab páros \"szám van: ".db
+
+egész maxi=0
+ciklus egész i=0-tól i<9-ig
+	ha tömb[i]>tömb[maxi]
+		maxi=i
+	elágazás_vége
+ciklus_vége
+kiír "A maximális elem: tömb[".maxi."]=".tömb[maxi]
+egész xxx = szövegből_egészbe("10")
+program_vége

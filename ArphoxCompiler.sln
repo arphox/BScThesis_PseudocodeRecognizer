@@ -1,0 +1,34 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 15
+VisualStudioVersion = 15.0.26403.7
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LexicalAnalysis", "LexicalAnalysis\LexicalAnalysis.csproj", "{5C7EF03C-6FC4-4BD7-A714-8F2B7B7765DE}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Tester", "Tester\Tester.csproj", "{BDF1FDCE-17CB-42A1-A66E-359DDA8BB71C}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SyntaxAnalysis", "SyntaxAnalysis\SyntaxAnalysis.csproj", "{7572F7AF-2DCE-4F54-BB01-A4E319BB8142}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{5C7EF03C-6FC4-4BD7-A714-8F2B7B7765DE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5C7EF03C-6FC4-4BD7-A714-8F2B7B7765DE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5C7EF03C-6FC4-4BD7-A714-8F2B7B7765DE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5C7EF03C-6FC4-4BD7-A714-8F2B7B7765DE}.Release|Any CPU.Build.0 = Release|Any CPU
+		{BDF1FDCE-17CB-42A1-A66E-359DDA8BB71C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BDF1FDCE-17CB-42A1-A66E-359DDA8BB71C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{BDF1FDCE-17CB-42A1-A66E-359DDA8BB71C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{BDF1FDCE-17CB-42A1-A66E-359DDA8BB71C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7572F7AF-2DCE-4F54-BB01-A4E319BB8142}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7572F7AF-2DCE-4F54-BB01-A4E319BB8142}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7572F7AF-2DCE-4F54-BB01-A4E319BB8142}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7572F7AF-2DCE-4F54-BB01-A4E319BB8142}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal

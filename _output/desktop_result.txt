@@ -1,0 +1,13 @@
+Generált kimenet a '..\..\..\_input\desktop.ini' fájlhoz:
+
+Token lista:
+
+>>> ErrorToken a 3.sorban: Nem tudom felismerni ezt a szöveget: ":"<<<
+>>> ErrorToken a 3.sorban: Nem tudom felismerni ezt a szöveget: "\"<<<
+>>> ErrorToken a 3.sorban: Nem tudom felismerni ezt a szöveget: "\"<<<
+>>> ErrorToken a 3.sorban: Nem tudom felismerni ezt a szöveget: "\"<<<
+>>> ErrorToken a 3.sorban: Nem tudom felismerni ezt a szöveget: "\"<<<
+KeywordToken ID=0 újsor 
+
+Szimbólumtábla:
+
