@@ -135,8 +135,8 @@
   <beágyazottÁllítás>
  
 <lokálisVáltozóDeklaráció>:
-  <típus> azonosító
   <típus> azonosító = <kifejezés>
+  <típus> azonosító
   
 <beágyazottÁllítás>:
   <értékadás>

@@ -4,7 +4,7 @@
     {
         public int ID { get; private set; }
 
-        internal Token(int ID)
+        public Token(int ID)
         {
             this.ID = ID;
         }

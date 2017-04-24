@@ -1,12 +1,16 @@
 ﻿using LexicalAnalysis;
 using LexicalAnalysis.Tokens;
+using SyntaxAnalysis.ST;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 
 namespace SyntaxAnalysis
 {
     public class SyntaxAnalyzer
     {
+        private SyntaxTree<Token> syntaxTree;
+
         private List<Token> tokens;
         private int currentIndex = 0;
         private Token CurrentToken { get { return tokens[currentIndex]; } }
@@ -17,25 +21,34 @@ namespace SyntaxAnalysis
             this.tokens = tokens;
         }
 
-        public bool Start()
+        public Tuple<SyntaxTree<Token>, bool> Start()
         {
-            return Program();
+            bool success = Program();
+            return new Tuple<SyntaxTree<Token>, bool>(syntaxTree, success);
         }
+
         private bool MatchTerminal(string tokenName)
         {
+            syntaxTree.StartNode(CurrentToken);
             bool result = CurrentToken.ID == LexicalElementCodes.Singleton[tokenName];
             currentIndex++;
+            syntaxTree.EndNode();
+
             return result;
         }
         private bool MatchTerminalType(Type tokenType)
         {
+            syntaxTree.StartNode(CurrentToken);
             bool result = (CurrentToken.GetType().Equals(tokenType));
             currentIndex++;
+            syntaxTree.EndNode();
             return result;
         }
 
         private bool Program()
         {
+            syntaxTree = new SyntaxTree<Token>(new NonTerminalToken("program"));
+
             return MatchTerminal("program_kezd")
                 && MatchTerminal("újsor")
                 && Allitasok()
@@ -43,61 +56,59 @@ namespace SyntaxAnalysis
         }
         private bool Allitasok()
         {
+            syntaxTree.StartNode(new NonTerminalToken("állítások"));
             int savedIndex = currentIndex;
 
             currentIndex = savedIndex;
             if (Allitasok1())
             {
+                syntaxTree.EndNode();
                 return true;
             }
 
             currentIndex = savedIndex;
             if (Allitasok2())
             {
+                syntaxTree.EndNode();
                 return true;
             }
 
+            syntaxTree.EndNode();
             return false;
         }
-        private bool Allitasok1()
-        {
-            return EgysorosAllitas() && Allitasok();
-        }
-        private bool Allitasok2()
-        {
-            return EgysorosAllitas();
-        }
+        private bool Allitasok1() => EgysorosAllitas() && Allitasok();
+        private bool Allitasok2() => EgysorosAllitas();
 
         private bool EgysorosAllitas()
         {
+            syntaxTree.StartNode(new NonTerminalToken("egysorosÁllítás"));
             int savedIndex = currentIndex;
 
             if (EgysorosAllitas1())
             {
+                syntaxTree.EndNode();
                 return true;
             }
 
             currentIndex = savedIndex;
             if (EgysorosAllitas2())
             {
+                syntaxTree.EndNode();
                 return true;
             }
 
+            syntaxTree.EndNode();
             return false;
         }
-        private bool EgysorosAllitas1()
-        {
-            return Allitas() && MatchTerminal("újsor");
-        }
-        private bool EgysorosAllitas2()
-        {
-            return MatchTerminal("újsor");
-        }
-
+        private bool EgysorosAllitas1() => Allitas() && MatchTerminal("újsor");
+        private bool EgysorosAllitas2() => MatchTerminal("újsor");
 
         private bool Allitas()
         {
-            return MatchTerminalType(typeof(LiteralToken));
+            syntaxTree.StartNode(new NonTerminalToken("állítás"));
+            bool result = MatchTerminalType(typeof(LiteralToken));
+            syntaxTree.EndNode();
+            return result;
         }
     }
 }

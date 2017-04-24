@@ -1,6 +1,7 @@
 ﻿using LexicalAnalysis;
 using LexicalAnalysis.SymbolTables;
 using SyntaxAnalysis;
+using SyntaxAnalysis.ST;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
@@ -18,8 +19,9 @@ namespace Tester
         {
             string path = _inputFolderPath + "syntaxtest.opl";
             List<Token> tokenList = new LexicalAnalyzer().PerformLexicalAnalysisOnFile(path);
-            bool accepted = new SyntaxAnalyzer(tokenList).Start();
-            Console.WriteLine(accepted);
+            Tuple<SyntaxTree<Token>, bool> result = new SyntaxAnalyzer(tokenList).Start();
+            Console.WriteLine(result);
+            Console.ReadLine();
         }
 
 
