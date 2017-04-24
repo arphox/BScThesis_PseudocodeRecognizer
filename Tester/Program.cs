@@ -16,9 +16,6 @@ namespace Tester
         const string _outputFolderPath = @"..\..\..\_output\";
         static void Main(string[] args)
         {
-
-
-
             string path = _inputFolderPath + "syntaxtest.opl";
             List<Token> tokenList = new LexicalAnalyzer().PerformLexicalAnalysisOnFile(path);
             bool accepted = new SyntaxAnalyzer(tokenList).Start();

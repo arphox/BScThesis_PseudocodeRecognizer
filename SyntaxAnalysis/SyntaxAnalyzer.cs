@@ -54,8 +54,6 @@ namespace SyntaxAnalysis
             currentIndex = savedIndex;
             if (Allitasok2())
             {
-
-
                 return true;
             }
 
