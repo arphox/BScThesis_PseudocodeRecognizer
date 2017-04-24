@@ -18,6 +18,7 @@ namespace Tester
         {
 
 
+
             string path = _inputFolderPath + "syntaxtest.opl";
             List<Token> tokenList = new LexicalAnalyzer().PerformLexicalAnalysisOnFile(path);
             bool accepted = new SyntaxAnalyzer(tokenList).Start();
