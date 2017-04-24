@@ -74,7 +74,10 @@ namespace SyntaxAnalysis
                 syntaxTree.EndNode();
                 return true;
             }
-            syntaxTree.RemoveLatestNode();
+            else
+            {
+                syntaxTree.RemoveLatestNode();
+            }
 
             currentIndex = savedIndex;
             if (Allitasok2())
@@ -82,7 +85,10 @@ namespace SyntaxAnalysis
                 syntaxTree.EndNode();
                 return true;
             }
-            syntaxTree.RemoveLatestNode();
+            else
+            {
+                syntaxTree.RemoveLatestNode();
+            }
 
             syntaxTree.EndNode();
             return false;
@@ -100,7 +106,10 @@ namespace SyntaxAnalysis
                 syntaxTree.EndNode();
                 return true;
             }
-            syntaxTree.RemoveLatestNode();
+            else
+            {
+                syntaxTree.RemoveLatestNode();
+            }
 
             currentIndex = savedIndex;
             if (EgysorosAllitas2())
@@ -108,7 +117,10 @@ namespace SyntaxAnalysis
                 syntaxTree.EndNode();
                 return true;
             }
-            syntaxTree.RemoveLatestNode();
+            else
+            {
+                syntaxTree.RemoveLatestNode();
+            }
 
             syntaxTree.EndNode();
             return false;
