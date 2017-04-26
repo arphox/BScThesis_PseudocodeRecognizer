@@ -41,12 +41,13 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="ST\NonTerminalToken.cs" />
+    <Compile Include="NonTerminalToken.cs" />
+    <Compile Include="Util\ObjectExtensions.cs" />
     <Compile Include="ST\SyntaxTree.cs" />
     <Compile Include="ST\TreeNode.cs" />
     <Compile Include="SyntaxAnalyzer.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Util.cs" />
+    <Compile Include="Util\Util.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\LexicalAnalysis\LexicalAnalysis.csproj">

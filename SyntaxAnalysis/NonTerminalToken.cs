@@ -1,6 +1,6 @@
 ﻿using LexicalAnalysis.Tokens;
 
-namespace SyntaxAnalysis.ST
+namespace SyntaxAnalysis
 {
     class NonTerminalToken : Token
     {

@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 
 namespace SyntaxAnalysis.ST
@@ -20,8 +21,26 @@ namespace SyntaxAnalysis.ST
 
         public override string ToString()
         {
-            string children = string.Join(", ", Children.Select(s => s.Value));
-            return $"TreeNode Value={Value.ToString()}, children:{children}, Parent: {Parent.Value}";
+            return $"Node: {Value.ToString()} ({Children.Count} children)";
+        }
+
+
+        public void PrintNode(string prefix, TreeNode<T> currentNode)
+        {
+            string op = currentNode == this ? "~" : "+";
+            Console.WriteLine($"{prefix} {op} {Value}");
+
+            foreach (TreeNode<T> n in Children)
+            {
+                if (Children.IndexOf(n) == Children.Count - 1)
+                {
+                    n.PrintNode(prefix + "    ", currentNode);
+                }
+                else
+                {
+                    n.PrintNode(prefix + "   |", currentNode);
+                }
+            }
         }
     }
 }

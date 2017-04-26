@@ -8,6 +8,8 @@ namespace SyntaxAnalysis.ST
 {
     public class SyntaxTree<T>
     {
+        public static bool PRINTPRETTY_ON = false;
+
         public TreeNode<T> Root { get; private set; }
         public TreeNode<T> CurrentNode { get; private set; }
 
@@ -18,26 +20,32 @@ namespace SyntaxAnalysis.ST
             CurrentNode = this.Root;
         }
 
-        public void StartNode(T value)
+        public void StartNodeDescend(T value)
         {
             TreeNode<T> newNode = new TreeNode<T>(CurrentNode, value);
             CurrentNode.Children.Add(newNode);
             CurrentNode = newNode;
+
+            PrintPretty();
         }
-        public void EndNode()
+        public void EndNodeAscend()
         {
             CurrentNode = CurrentNode.Parent;
+
+            PrintPretty();
         }
         public void RemoveLatestNode()
         {
             if (CurrentNode.Children.Count == 0)
             {
                 CurrentNode.Parent.Children.Remove(CurrentNode);
+                CurrentNode = CurrentNode.Parent;
             }
             else
             {
                 CurrentNode.Children.Remove(CurrentNode.Children.Last());
             }
+            PrintPretty();
         }
 
 
@@ -55,23 +63,35 @@ namespace SyntaxAnalysis.ST
 
             Queue<TreeNode<T>> nodeQueue = new Queue<TreeNode<T>>();
             nodeQueue.Enqueue(Root);
+
             TreeNode<T> currentNode = Root;
             while (nodeQueue.Count != 0)
             {
-                currentNode = nodeQueue.Peek();
-                nodeQueue.Dequeue();
-
+                currentNode = nodeQueue.Dequeue();
                 if (currentNode.Children.Count == 0)
-                {
+                { 
                     leaves.Add(currentNode.Value);
                 }
-
-                for (int i = 0; i < currentNode.Children.Count(); i++)
-                {
-                    nodeQueue.Enqueue(currentNode.Children[i]);
-                }
+                currentNode.Children.ForEach(child => nodeQueue.Enqueue(child));
             }
             return leaves;
         }
+
+        public void PrintPretty()
+        {
+            if (!PRINTPRETTY_ON)
+            {
+                return;
+            }
+
+            Console.WriteLine("\n\n\n\n\n");
+            Root.PrintNode("", CurrentNode);
+        }
+
+
+
+
+
+
     }
 }

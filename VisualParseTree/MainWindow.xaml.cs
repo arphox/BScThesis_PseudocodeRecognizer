@@ -47,6 +47,7 @@ namespace VisualParseTree
             syntaxTree = result.Item1;
 
             new SyntaxTreeConverter(treeView, syntaxTree).SetTreeView();
+            Console.WriteLine("SUCCESS? : " + result.Item2);
 
             Console.WriteLine();
         }
