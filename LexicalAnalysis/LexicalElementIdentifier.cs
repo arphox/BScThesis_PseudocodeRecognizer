@@ -45,7 +45,7 @@ namespace LexicalAnalysis
             }
             else
             {
-                return -1;
+                return LexicalElementCodes.ERROR;
             }
         }
         private static bool IsIntegerLiteral(string input) => Regex.Match(input, IntegerLiteralPattern).Success;

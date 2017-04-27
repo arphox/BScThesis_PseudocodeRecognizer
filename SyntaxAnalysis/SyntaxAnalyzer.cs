@@ -4,55 +4,59 @@ using SyntaxAnalysis.ST;
 using SyntaxAnalysis.Utilities;
 using System;
 using System.Collections.Generic;
-using System.Diagnostics;
+using System.Linq;
 
 namespace SyntaxAnalysis
 {
     public class SyntaxAnalyzer
     {
-        private SyntaxTree<Token> syntaxTree;
+        private SyntaxTree<Token> tree;
 
         private List<Token> tokens;
-        private int currentIndex = 0;
-        private Token CurrentToken { get { return tokens[currentIndex]; } }
+        private int pointer = 0;
+        private Token CurrentToken { get { return tokens[pointer]; } }
 
         public SyntaxAnalyzer(List<Token> tokens)
         {
-            // TODO: Üres token lista?
+            if (tokens == null || tokens.Any(token => token is ErrorToken))
+            {
+                throw new ArgumentException("A szintaktikus elemző nem indul el, ha a lexikális elemző hibát jelez.");
+            }
+
             this.tokens = tokens;
         }
 
         public Tuple<SyntaxTree<Token>, bool> Start()
         {
-            bool success = program();
-            return new Tuple<SyntaxTree<Token>, bool>(syntaxTree, success);
+            bool success = program(); // do not inline this method call into the next line.
+            return new Tuple<SyntaxTree<Token>, bool>(tree, success);
         }
 
         private bool AcceptTerminal(string tokenName)
         {
-            syntaxTree.StartNodeDescend(new NonTerminalToken(tokenName));
-            bool result = CurrentToken.ID == LexicalElementCodes.Singleton[tokenName];
-            currentIndex++;
-            syntaxTree.EndNodeAscend();
+            tree.StartNode(new NonTerminalToken(tokenName));
+            bool isSuccessful = CurrentToken.ID == LexicalElementCodes.Singleton[tokenName];
+            pointer++;
+            tree.EndNode();
 
-            if (!result)
+            if (!isSuccessful)
             {
-                syntaxTree.RemoveLatestNode();
+                tree.RemoveLastNode();
             }
-            return result;
+            return isSuccessful;
         }
         private bool AcceptTerminalType(Type tokenType)
         {
-            syntaxTree.StartNodeDescend(CurrentToken);
-            bool result = (CurrentToken.GetType().Equals(tokenType));
-            currentIndex++;
-            syntaxTree.EndNodeAscend();
+            tree.StartNode(CurrentToken);
+            bool isSuccessful = (CurrentToken.GetType().Equals(tokenType));
+            pointer++;
+            tree.EndNode();
 
-            if (!result)
+            if (!isSuccessful)
             {
-                syntaxTree.RemoveLatestNode();
+                tree.RemoveLastNode();
             }
-            return result;
+            return isSuccessful;
         }
 
 
@@ -63,7 +67,7 @@ namespace SyntaxAnalysis
                 <program>:
                   program_kezd újsor <állítások> program_vége
             */
-            syntaxTree = new SyntaxTree<Token>(new NonTerminalToken(GeneralUtil.GetCurrentMethodName()));
+            tree = new SyntaxTree<Token>(new NonTerminalToken(GeneralUtil.GetCurrentMethodName()));
 
             return AcceptTerminal("program_kezd")
                 && AcceptTerminal("újsor")
@@ -77,38 +81,38 @@ namespace SyntaxAnalysis
                   <egysorosÁllítás> <állítások>
                   <egysorosÁllítás>
             */
-            syntaxTree.StartNodeDescend(new NonTerminalToken(GeneralUtil.GetCurrentMethodName()));
-            int savedIndex = currentIndex;
+            tree.StartNode(new NonTerminalToken(GeneralUtil.GetCurrentMethodName()));
+            int savedPointer = pointer;
 
             if (egysorosÁllítás())
             {
                 if (állítások())
                 {
-                    syntaxTree.EndNodeAscend();
+                    tree.EndNode();
                     return true;
                 }
                 else
                 {
-                    syntaxTree.RemoveLatestNode();
+                    tree.RemoveLastNode();
                 }
             }
             else
             {
-                currentIndex = savedIndex;
+                pointer = savedPointer;
             }
 
             if (egysorosÁllítás())
             {
-                syntaxTree.EndNodeAscend();
+                tree.EndNode();
                 return true;
             }
             else
             {
-                currentIndex = savedIndex;
+                pointer = savedPointer;
             }
 
-            syntaxTree.EndNodeAscend();
-            syntaxTree.RemoveLatestNode();
+            tree.EndNode();
+            tree.RemoveLastNode();
             return false;
         }
         private bool egysorosÁllítás()
@@ -118,38 +122,38 @@ namespace SyntaxAnalysis
                   <állítás> újsor
                   újsor
             */
-            syntaxTree.StartNodeDescend(new NonTerminalToken(GeneralUtil.GetCurrentMethodName()));
-            int savedIndex = currentIndex;
+            tree.StartNode(new NonTerminalToken(GeneralUtil.GetCurrentMethodName()));
+            int savedPointer = pointer;
 
             if (állítás())
             {
                 if (AcceptTerminal("újsor"))
                 {
-                    syntaxTree.EndNodeAscend();
+                    tree.EndNode();
                     return true;
                 }
                 else
                 {
-                    syntaxTree.RemoveLatestNode();
+                    tree.RemoveLastNode();
                 }
             }
             else
             {
-                currentIndex = savedIndex;
+                pointer = savedPointer;
             }
 
             if (AcceptTerminal("újsor"))
             {
-                syntaxTree.EndNodeAscend();
+                tree.EndNode();
                 return true;
             }
             else
             {
-                currentIndex = savedIndex;
+                pointer = savedPointer;
             }
 
-            syntaxTree.EndNodeAscend();
-            syntaxTree.RemoveLatestNode();
+            tree.EndNode();
+            tree.RemoveLastNode();
             return false;
         }
         private bool állítás()
@@ -159,15 +163,15 @@ namespace SyntaxAnalysis
                     literál
             */
 
-            syntaxTree.StartNodeDescend(new NonTerminalToken(GeneralUtil.GetCurrentMethodName()));
-            bool result = AcceptTerminalType(typeof(LiteralToken));
-            syntaxTree.EndNodeAscend();
+            tree.StartNode(new NonTerminalToken(GeneralUtil.GetCurrentMethodName()));
+            bool isSuccessful = AcceptTerminalType(typeof(LiteralToken));
+            tree.EndNode();
 
-            if (!result)
+            if (!isSuccessful)
             {
-                syntaxTree.RemoveLatestNode();
+                tree.RemoveLastNode();
             }
-            return result;
+            return isSuccessful;
         }
     }
 }

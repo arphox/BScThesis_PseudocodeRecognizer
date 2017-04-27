@@ -17,7 +17,7 @@ namespace SyntaxAnalysis.ST
             CurrentNode = this.Root;
         }
 
-        internal void StartNodeDescend(T value)
+        internal void StartNode(T value)
         {
             TreeNode<T> newNode = new TreeNode<T>(CurrentNode, value);
             CurrentNode.Children.Add(newNode);
@@ -25,13 +25,13 @@ namespace SyntaxAnalysis.ST
 
             PrintPretty();
         }
-        internal void EndNodeAscend()
+        internal void EndNode()
         {
             CurrentNode = CurrentNode.Parent;
 
             PrintPretty();
         }
-        internal void RemoveLatestNode()
+        internal void RemoveLastNode()
         {
             if (CurrentNode.Children.Count == 0)
             {
