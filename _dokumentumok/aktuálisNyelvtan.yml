@@ -1,47 +1,37 @@
 <program>:
   program_kezd újsor <állítások> program_vége
-
 <állítások>:
   <egysorosÁllítás> <állítások>
   <egysorosÁllítás>
-  
 <egysorosÁllítás>:
   <állítás> újsor
   újsor
-  
 <állítás>:
   <lokálisVáltozóDeklaráció>
   <beágyazottÁllítás>
- 
 <lokálisVáltozóDeklaráció>:
   <típus> azonosító = <kifejezés>
   <típus> azonosító
-  
 <típus>:
   <tömbTípus>
   <alapTípus>
-  
 <alapTípus>:
   egész
   tört
   szöveg
   logikai
-  
 <tömbTípus>:
   <alapTípus> [ ]
- 
- <belsőFüggvény>:
+<belsőFüggvény>:
   belsőFüggvényToken
-<literál>:
-  literálToken
-
 <beágyazottÁllítás>:
   <értékadás>
   ha <logikaiKifejezés> akkor <beágyazottÁllítás> különben <beágyazottÁllítás> elágazás_vége
   ha <logikaiKifejezés> akkor <beágyazottÁllítás> elágazás_vége
   ciklus_amíg <logikaiKifejezés> <beágyazottÁllítás>
   ciklus <számlálóCiklusInicializáló> -tól <logikaiKifejezés> -ig <beágyazottÁllítás>
-  
-  
 <értékadás>:
   <unárisKifejezés> = <kifejezés>
+<számlálóCiklusInicializáló>:
+  <lokálisVáltozóDeklaráció>
+  <értékadás>

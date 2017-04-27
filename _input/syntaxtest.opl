@@ -1,6 +1,6 @@
 ﻿program_kezd
 egész x = 5
-egész[] y x
+egész[] y
 tört z
 logikai c
 szöveg[] szövi = "alma"

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace SyntaxAnalysis.ST
 {
@@ -36,6 +37,22 @@ namespace SyntaxAnalysis.ST
                 {
                     n.PrintNode(prefix + "   |", currentNode);
                 }
+            }
+        }
+        internal List<T> GetLeaves()
+        {
+            if (Children.Count == 0)
+            {
+                return new List<T>() { Value };
+            }
+            else
+            {
+                IEnumerable<T> leaves = new List<T>();
+                foreach (TreeNode<T> child in Children)
+                {
+                    leaves = leaves.Concat(child.GetLeaves());
+                }
+                return leaves.ToList();
             }
         }
     }
