@@ -11,10 +11,6 @@ namespace SyntaxAnalysis
             this.Value = value;
         }
 
-        public override string ToString()
-        {
-            //return "NonTerminalToken: " + Value;
-            return Value;
-        }
+        public override string ToString() => Value;
     }
 }

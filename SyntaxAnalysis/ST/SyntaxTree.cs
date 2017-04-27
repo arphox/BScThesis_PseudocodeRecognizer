@@ -1,26 +1,23 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace SyntaxAnalysis.ST
 {
     public class SyntaxTree<T>
     {
-        public static bool PRINTPRETTY_ON = false;
+        private static readonly bool PRINTPRETTY_ENABLED = false; // only not const because I don't want compiler warnings
 
         public TreeNode<T> Root { get; private set; }
-        public TreeNode<T> CurrentNode { get; private set; }
+        internal TreeNode<T> CurrentNode { get; private set; }
 
-
-        public SyntaxTree(T rootValue)
+        internal SyntaxTree(T rootValue)
         {
             this.Root = new TreeNode<T>(null, rootValue);
             CurrentNode = this.Root;
         }
 
-        public void StartNodeDescend(T value)
+        internal void StartNodeDescend(T value)
         {
             TreeNode<T> newNode = new TreeNode<T>(CurrentNode, value);
             CurrentNode.Children.Add(newNode);
@@ -28,13 +25,13 @@ namespace SyntaxAnalysis.ST
 
             PrintPretty();
         }
-        public void EndNodeAscend()
+        internal void EndNodeAscend()
         {
             CurrentNode = CurrentNode.Parent;
 
             PrintPretty();
         }
-        public void RemoveLatestNode()
+        internal void RemoveLatestNode()
         {
             if (CurrentNode.Children.Count == 0)
             {
@@ -45,10 +42,9 @@ namespace SyntaxAnalysis.ST
             {
                 CurrentNode.Children.Remove(CurrentNode.Children.Last());
             }
+
             PrintPretty();
         }
-
-
 
 
 
@@ -76,10 +72,9 @@ namespace SyntaxAnalysis.ST
             }
             return leaves;
         }
-
-        public void PrintPretty()
+        private void PrintPretty()
         {
-            if (!PRINTPRETTY_ON)
+            if (!PRINTPRETTY_ENABLED)
             {
                 return;
             }
@@ -87,11 +82,5 @@ namespace SyntaxAnalysis.ST
             Console.WriteLine("\n\n\n\n\n");
             Root.PrintNode("", CurrentNode);
         }
-
-
-
-
-
-
     }
 }

@@ -1,6 +1,7 @@
 ﻿using LexicalAnalysis;
 using LexicalAnalysis.Tokens;
 using SyntaxAnalysis.ST;
+using SyntaxAnalysis.Utilities;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
@@ -62,7 +63,7 @@ namespace SyntaxAnalysis
                 <program>:
                   program_kezd újsor <állítások> program_vége
             */
-            syntaxTree = new SyntaxTree<Token>(new NonTerminalToken(Util.GetCurrentMethod()));
+            syntaxTree = new SyntaxTree<Token>(new NonTerminalToken(GeneralUtil.GetCurrentMethodName()));
 
             return AcceptTerminal("program_kezd")
                 && AcceptTerminal("újsor")
@@ -76,19 +77,24 @@ namespace SyntaxAnalysis
                   <egysorosÁllítás> <állítások>
                   <egysorosÁllítás>
             */
-            syntaxTree.StartNodeDescend(new NonTerminalToken(Util.GetCurrentMethod()));
+            syntaxTree.StartNodeDescend(new NonTerminalToken(GeneralUtil.GetCurrentMethodName()));
             int savedIndex = currentIndex;
-            SyntaxTree<Token> savedTree = syntaxTree.Copy();
 
-            if (egysorosÁllítás() && állítások())
+            if (egysorosÁllítás())
             {
-                syntaxTree.EndNodeAscend();
-                return true;
+                if (állítások())
+                {
+                    syntaxTree.EndNodeAscend();
+                    return true;
+                }
+                else
+                {
+                    syntaxTree.RemoveLatestNode();
+                }
             }
             else
             {
                 currentIndex = savedIndex;
-                syntaxTree = savedTree;
             }
 
             if (egysorosÁllítás())
@@ -99,7 +105,6 @@ namespace SyntaxAnalysis
             else
             {
                 currentIndex = savedIndex;
-                syntaxTree = savedTree;
             }
 
             syntaxTree.EndNodeAscend();
@@ -113,19 +118,24 @@ namespace SyntaxAnalysis
                   <állítás> újsor
                   újsor
             */
-            syntaxTree.StartNodeDescend(new NonTerminalToken(Util.GetCurrentMethod()));
+            syntaxTree.StartNodeDescend(new NonTerminalToken(GeneralUtil.GetCurrentMethodName()));
             int savedIndex = currentIndex;
-            SyntaxTree<Token> savedTree = syntaxTree.Copy();
 
-            if (állítás() && AcceptTerminal("újsor"))
+            if (állítás())
             {
-                syntaxTree.EndNodeAscend();
-                return true;
+                if (AcceptTerminal("újsor"))
+                {
+                    syntaxTree.EndNodeAscend();
+                    return true;
+                }
+                else
+                {
+                    syntaxTree.RemoveLatestNode();
+                }
             }
             else
             {
                 currentIndex = savedIndex;
-                syntaxTree = savedTree;
             }
 
             if (AcceptTerminal("újsor"))
@@ -136,7 +146,6 @@ namespace SyntaxAnalysis
             else
             {
                 currentIndex = savedIndex;
-                syntaxTree = savedTree;
             }
 
             syntaxTree.EndNodeAscend();
@@ -150,7 +159,7 @@ namespace SyntaxAnalysis
                     literál
             */
 
-            syntaxTree.StartNodeDescend(new NonTerminalToken(Util.GetCurrentMethod()));
+            syntaxTree.StartNodeDescend(new NonTerminalToken(GeneralUtil.GetCurrentMethodName()));
             bool result = AcceptTerminalType(typeof(LiteralToken));
             syntaxTree.EndNodeAscend();
 
