@@ -19,7 +19,7 @@ namespace SyntaxAnalysis.ST
             this.Value = value;
         }
 
-        public override string ToString() => $"Node: {Value.ToString()} ({Children.Count} children(s))";
+        public override string ToString() => Value.ToString();
 
 
         internal void PrintNode(string prefix, TreeNode<T> currentNode)

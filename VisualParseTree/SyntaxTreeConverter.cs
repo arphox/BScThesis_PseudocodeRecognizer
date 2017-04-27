@@ -30,7 +30,7 @@ namespace VisualParseTree
         {
             TreeViewItem item = new TreeViewItem()
             {
-                Header = node.Value
+                Header = node.ToString()
             };
             foreach (TreeNode<Token> child in node.Children)
             {

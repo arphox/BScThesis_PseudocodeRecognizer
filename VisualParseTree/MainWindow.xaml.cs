@@ -17,6 +17,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using System.IO;
 
 namespace VisualParseTree
 {
@@ -40,7 +41,8 @@ namespace VisualParseTree
 
         void Main()
         {
-            string path = _inputFolderPath + "syntaxtest.opl";
+            string path = _inputFolderPath + "08_masodfoku.opl";
+
             List<Token> tokenList = new LexicalAnalyzer().PerformLexicalAnalysisOnFile(path);
 
             Tuple<SyntaxTree<Token>, bool> result = new SyntaxAnalyzer(tokenList).Start();
@@ -48,8 +50,6 @@ namespace VisualParseTree
 
             new SyntaxTreeConverter(treeView, syntaxTree).SetTreeView();
             Console.WriteLine("SUCCESS? : " + result.Item2);
-
-            Console.WriteLine();
         }
 
         private void ButtonExpandAll_Click(object sender, RoutedEventArgs e)
