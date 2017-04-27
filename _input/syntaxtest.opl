@@ -1,10 +1,9 @@
 ﻿program_kezd
-0
-igaz
-2
-"3"
-4,1
-hamis
-"hamisss"
-10000
+egész x = 5
+egész[] y x
+tört z
+logikai c
+szöveg[] szövi = "alma"
+szöveg szövi2 = "alma"
+x = 2
 program_vége

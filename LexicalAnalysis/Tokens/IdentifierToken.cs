@@ -1,13 +1,13 @@
 ﻿using LexicalAnalysis.SymbolTables;
 namespace LexicalAnalysis.Tokens
 {
-    public class IdentifierToken : Token
+    public class IdentifierToken : TerminalToken
     {
         internal int SymbolID { get; private set; }
-        internal IdentifierToken(int ID, int SymbolTableID)
-            : base(ID)
+        internal IdentifierToken(int ID, int symbolTableID, int rowNumber)
+            : base(ID, rowNumber)
         {
-            SymbolID = SymbolTableID;
+            SymbolID = symbolTableID;
         }
 
         public override string ToString()

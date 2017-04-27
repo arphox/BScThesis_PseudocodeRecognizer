@@ -1,14 +1,12 @@
 ﻿namespace LexicalAnalysis.Tokens
 {
-    public class ErrorToken : Token
+    public class ErrorToken : TerminalToken
     {
         internal readonly string Message;
-        internal readonly int RowNumber;
 
-        internal ErrorToken(string message, int rowNumber) : base(LexicalElementCodes.ERROR)
+        internal ErrorToken(string message, int rowNumber) : base(LexicalElementCodes.ERROR, rowNumber)
         {
             this.Message = message;
-            this.RowNumber = rowNumber;
         }
 
         public override string ToString()

@@ -40,7 +40,7 @@ namespace LexicalAnalysis
             }
             else
             {
-                OutputTokens.Add(new KeywordToken(code));
+                OutputTokens.Add(new KeywordToken(code, currentRowNumber));
             }
         }
         internal void AddKeyword(int code, int currentRowNumber)
@@ -52,11 +52,11 @@ namespace LexicalAnalysis
             else if (code == LexicalElementCodes.Singleton["program_vége"])
             {
                 ProgramEndTokenAdded = true;
-                OutputTokens.Add(new KeywordToken(code));
+                OutputTokens.Add(new KeywordToken(code, currentRowNumber));
             }
             else
             {
-                OutputTokens.Add(new KeywordToken(code));
+                OutputTokens.Add(new KeywordToken(code, currentRowNumber));
             }
         }
         internal void AddIdentifierToken(string symbolName, int currentRowNumber)
@@ -85,7 +85,7 @@ namespace LexicalAnalysis
             symbolTableHandler.InsertNewSymbolTableEntry(name, code, currentRowNumber);
             int insertedID = symbolTableHandler.LastInsertedSymbolID.Value;
             int identifierCode = LexicalElementCodes.Singleton["azonosító"];
-            OutputTokens.Add(new IdentifierToken(identifierCode, insertedID));
+            OutputTokens.Add(new IdentifierToken(identifierCode, insertedID, currentRowNumber));
         }
         private void AddExistingIdentifier(string symbolName, int SymbolTableID, int currentRowNumber)
         {
@@ -98,7 +98,7 @@ namespace LexicalAnalysis
             else
             {
                 int code = LexicalElementCodes.Singleton["azonosító"];
-                OutputTokens.Add(new IdentifierToken(code, SymbolTableID));
+                OutputTokens.Add(new IdentifierToken(code, SymbolTableID, currentRowNumber));
             }
         }
 

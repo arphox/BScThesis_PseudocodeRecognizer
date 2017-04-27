@@ -6,7 +6,7 @@ namespace SyntaxAnalysis
     {
         public string Value { get; private set; }
 
-        public NonTerminalToken(string value) : base(-1)
+        public NonTerminalToken(string value, int currentRowNumber) : base(-1, currentRowNumber)
         {
             this.Value = value;
         }

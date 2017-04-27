@@ -140,8 +140,8 @@
   
 <beágyazottÁllítás>:
   <értékadás>
-  ha <logikaiKifejezés> akkor <beágyazottÁllítás> elágazás_vége
   ha <logikaiKifejezés> akkor <beágyazottÁllítás> különben <beágyazottÁllítás> elágazás_vége
+  ha <logikaiKifejezés> akkor <beágyazottÁllítás> elágazás_vége
   ciklus_amíg <logikaiKifejezés> <beágyazottÁllítás>
   ciklus <számlálóCiklusInicializáló> -tól <logikaiKifejezés> -ig <beágyazottÁllítás>
   

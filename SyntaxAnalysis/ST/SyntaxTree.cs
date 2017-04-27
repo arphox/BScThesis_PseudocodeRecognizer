@@ -45,6 +45,21 @@ namespace SyntaxAnalysis.ST
 
             PrintPretty();
         }
+        public T GetLastToken()
+        {
+            if (CurrentNode == null)
+            {
+                return Root.Value;
+            }
+            if (CurrentNode.Children.Count == 0)
+            {
+                return CurrentNode.Value;
+            }
+            else
+            {
+                return CurrentNode.Children.Last().Value;
+            }
+        }
 
 
 

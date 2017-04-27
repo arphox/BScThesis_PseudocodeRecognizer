@@ -231,7 +231,7 @@ namespace LexicalAnalysis
             inputIndexer++; //   skip closing "
 
             int code = LexicalElementCodes.Singleton["szöveg literál"];
-            outputTokensHandler.AddToken(new LiteralToken(code, currentLiteral.ToString()));
+            outputTokensHandler.AddToken(new LiteralToken(code, currentLiteral.ToString(), currentRowNumber));
         }
 
 
@@ -241,7 +241,7 @@ namespace LexicalAnalysis
             if (outputTokensHandler.IsLastTokenNotNewLine()) // prevents adding mutiple newline tokens.
             {
                 int code = LexicalElementCodes.Singleton["újsor"];
-                outputTokensHandler.AddToken(new KeywordToken(code));
+                outputTokensHandler.AddToken(new KeywordToken(code, currentRowNumber));
             }
         }
         private void AddNonWhitespaceToken(string recognizedSubString, int code)
@@ -258,22 +258,22 @@ namespace LexicalAnalysis
             switch (LexicalElementCodes.GetCodeType(code))
             {
                 case LexicalElementCodeType.Operator:
-                    outputTokensHandler.AddToken(new KeywordToken(code));
+                    outputTokensHandler.AddToken(new KeywordToken(code, currentRowNumber));
                     break;
                 case LexicalElementCodeType.Keyword:
                     AddKeyword(code);
                     break;
                 case LexicalElementCodeType.Literal:
-                    outputTokensHandler.AddToken(new LiteralToken(code, recognizedSubString));
+                    outputTokensHandler.AddToken(new LiteralToken(code, recognizedSubString, currentRowNumber));
                     break;
                 case LexicalElementCodeType.Identifier:
                     outputTokensHandler.AddIdentifierToken(recognizedSubString, currentRowNumber);
                     break;
                 case LexicalElementCodeType.TypeName:
-                    outputTokensHandler.AddToken(new KeywordToken(code));
+                    outputTokensHandler.AddToken(new KeywordToken(code, currentRowNumber));
                     break;
                 case LexicalElementCodeType.InternalFunction:
-                    outputTokensHandler.AddToken(new InternalFunctionToken(code));
+                    outputTokensHandler.AddToken(new InternalFunctionToken(code, currentRowNumber));
                     break;
             }
         }

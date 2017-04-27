@@ -1,10 +1,10 @@
 ﻿namespace LexicalAnalysis.Tokens
 {
-    public class LiteralToken : Token
+    public class LiteralToken : TerminalToken
     {
         internal string LiteralValue { get; private set; }
-        internal LiteralToken(int id, string literalValue)
-            : base(id)
+        internal LiteralToken(int id, string literalValue, int rowNumber)
+            : base(id, rowNumber)
         {
             this.LiteralValue = literalValue;
         }
