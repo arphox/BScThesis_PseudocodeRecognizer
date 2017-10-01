@@ -16,14 +16,12 @@ namespace Tester
         static void Main(string[] args)
         {
             LexerTests.TestAllFiles();
-            Console.ReadLine();
         }
 
         private static string ReadUTF8File(string path)
         {
             return File.ReadAllText(path);
         }
-
 
         private static class LexerTests
         {
@@ -33,7 +31,7 @@ namespace Tester
                 List<string> output = CreateOutputList(path);
 
                 string outputFilePath = _outputFolderPath + Path.GetFileNameWithoutExtension(path) + "_result.txt";
-                File.WriteAllLines(outputFilePath, output.ToArray());
+                File.WriteAllLines(outputFilePath, output);
                 Process.Start("notepad.exe", outputFilePath);
             }
             internal static void TestAllFiles()
@@ -45,7 +43,7 @@ namespace Tester
                     File.WriteAllLines(outputFilePath, output.ToArray());
                 }
             }
-            internal static List<string> CreateOutputList(string testFilePath)
+            private static List<string> CreateOutputList(string testFilePath)
             {
                 Stopwatch stopper = Stopwatch.StartNew();
                 List<Token> tokenList = new LexicalAnalyzer()

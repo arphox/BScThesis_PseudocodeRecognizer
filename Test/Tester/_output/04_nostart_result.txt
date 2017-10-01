@@ -1,7 +1,0 @@
-Generált kimenet a '..\..\..\_input\04_nostart.opl' fájlhoz:
-
-Token lista:
-
-
-Szimbólumtábla:
-
