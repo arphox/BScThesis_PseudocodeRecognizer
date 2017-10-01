@@ -2,7 +2,6 @@
 using NUnit.Framework;
 using LexicalAnalysis;
 using LexicalAnalysis.SymbolTables;
-using LexicalAnalysis.Tokens;
 
 namespace LexicalAnalysisTests
 {
