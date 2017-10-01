@@ -3,18 +3,18 @@ using System;
 
 namespace SyntaxAnalysis
 {
-    class SyntaxAnalysisException : ApplicationException
+    internal class SyntaxAnalysisException : ApplicationException
     {
-        public Token LastToken { get; private set; }
-        public int CurrentRowNumber { get; private set; }
-        public int FurthestRowNumber { get; private set; }
+        public Token LastToken { get; }
+        public int CurrentRowNumber { get; }
+        public int FurthestRowNumber { get; }
 
         public SyntaxAnalysisException(string message) : base(message) { }
-        public SyntaxAnalysisException(Token lastToken, int currentRowNumber, int furthestRowNumber) : base()
+        public SyntaxAnalysisException(Token lastToken, int currentRowNumber, int furthestRowNumber)
         {
-            this.LastToken = lastToken;
-            this.CurrentRowNumber = currentRowNumber;
-            this.FurthestRowNumber = furthestRowNumber;
+            LastToken = lastToken;
+            CurrentRowNumber = currentRowNumber;
+            FurthestRowNumber = furthestRowNumber;
         }
 
 

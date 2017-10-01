@@ -7,16 +7,16 @@ namespace SyntaxAnalysis.ST
     public class TreeNode<T>
     {
         public T Value { get; set; }
-        public List<TreeNode<T>> Children { get; private set; } = new List<TreeNode<T>>();
-        internal TreeNode<T> Parent { get; private set; }
+        public List<TreeNode<T>> Children { get; } = new List<TreeNode<T>>();
+        internal TreeNode<T> Parent { get; }
 
         internal TreeNode(TreeNode<T> parent)
         {
-            this.Parent = parent;
+            Parent = parent;
         }
         internal TreeNode(TreeNode<T> parent, T value) : this(parent)
         {
-            this.Value = value;
+            Value = value;
         }
 
         public override string ToString() => Value.ToString();

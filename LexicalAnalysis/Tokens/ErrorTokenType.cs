@@ -2,10 +2,10 @@
 {
     internal enum ErrorTokenType
     {
-        SourceCodeCannotBeEmpty,
-        CannotRecognizeElement,
-        CanBeOnlyOneProgramStart,
-        CannotRedefineVariable,
-        VariableTypeNotSpecified
+        SourceCodeCannotBeEmpty = 0,
+        CannotRecognizeElement = 1,
+        CanBeOnlyOneProgramStart = 2,
+        CannotRedefineVariable = 3,
+        VariableTypeNotSpecified = 4
     }
 }

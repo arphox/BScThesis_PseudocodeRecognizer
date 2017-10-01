@@ -2,13 +2,13 @@
 {
     public abstract class Token
     {
-        public int ID { get; private set; }
-        public int RowNumber { get; private set; }
+        public int Id { get; }
+        public int RowNumber { get; }
 
-        public Token(int ID, int rowNumber)
+        protected Token(int id, int rowNumber)
         {
-            this.ID = ID;
-            this.RowNumber = rowNumber;
+            Id = id;
+            RowNumber = rowNumber;
         }
     }
 }

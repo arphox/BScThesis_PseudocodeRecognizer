@@ -2,13 +2,13 @@
 {
     public class IdentifierToken : TerminalToken
     {
-        internal int SymbolID { get; private set; }
-        internal IdentifierToken(int ID, int symbolTableID, int rowNumber)
-            : base(ID, rowNumber)
+        internal int SymbolId { get; }
+        internal IdentifierToken(int id, int symbolTableId, int rowNumber)
+            : base(id, rowNumber)
         {
-            SymbolID = symbolTableID;
+            SymbolId = symbolTableId;
         }
 
-        public override string ToString() => string.Format("IdentifierToken SymbolID=" + SymbolID);
+        public override string ToString() => $"IdentifierToken SymbolID={SymbolId}";
     }
 }

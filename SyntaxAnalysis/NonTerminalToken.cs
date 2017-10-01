@@ -2,13 +2,13 @@
 
 namespace SyntaxAnalysis
 {
-    class NonTerminalToken : Token
+    internal class NonTerminalToken : Token
     {
-        public string Value { get; private set; }
+        public string Value { get; }
 
         public NonTerminalToken(string value, int currentRowNumber) : base(-1, currentRowNumber)
         {
-            this.Value = value;
+            Value = value;
         }
 
         public override string ToString() => Value;

@@ -4,10 +4,10 @@ namespace LexicalAnalysis.Tokens
 {
     public sealed class InternalFunctionToken : TerminalToken
     {
-        internal InternalFunctionToken(int ID, int rowNumber)
-            : base(ID, rowNumber)
+        internal InternalFunctionToken(int id, int rowNumber)
+            : base(id, rowNumber)
         { }
 
-        public override string ToString() => string.Format("InternalFunctionToken ID={0} {1} ", ID, LexicalElementCodeProvider.GetCodeType(ID));
+        public override string ToString() => $"InternalFunctionToken ID={Id} {LexicalElementCodeProvider.GetCodeType(Id)} ";
     }
 }

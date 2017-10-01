@@ -35,18 +35,18 @@ namespace VisualParseTree
             Main();
         }
 
-        private SyntaxTree<Token> syntaxTree;
+        private SyntaxTree<Token> _syntaxTree;
 
         void Main()
         {
             string path = "08_masodfoku.opl";
 
-            List<Token> tokenList = new LexicalAnalyzer().Analyze(ReadUTF8File(path)).Tokens;
+            List<Token> tokenList = new LexicalAnalyzer().Analyze(ReadUtf8File(path)).Tokens;
 
             Tuple<SyntaxTree<Token>, bool> result = new SyntaxAnalyzer(tokenList).Start();
-            syntaxTree = result.Item1;
+            _syntaxTree = result.Item1;
 
-            new SyntaxTreeConverter(treeView, syntaxTree).SetTreeView();
+            new SyntaxTreeConverter(treeView, _syntaxTree).SetTreeView();
             Console.WriteLine("SUCCESS? : " + result.Item2);
         }
 
@@ -64,12 +64,12 @@ namespace VisualParseTree
 
         private void ButtonPrintLeaves_Click(object sender, RoutedEventArgs e)
         {
-            List<Token> leaves = syntaxTree.GetLeaves();
+            List<Token> leaves = _syntaxTree.GetLeaves();
             string[] leaves2 = leaves.Select(s => s.ToString()).ToArray();
             Console.WriteLine(string.Join("\n", leaves2));
         }
 
-        internal static string ReadUTF8File(string path)
+        internal static string ReadUtf8File(string path)
         {
             return File.ReadAllText(path);
         }

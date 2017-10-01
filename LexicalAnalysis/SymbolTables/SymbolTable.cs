@@ -6,31 +6,27 @@ namespace LexicalAnalysis.SymbolTables
 {
     public sealed class SymbolTable
     {
-        private const int NOT_FOUND_ID = -1;
+        private const int NotFoundId = -1;
 
-        private SymbolTableManager parentManager;
-        private List<SymbolTableEntry> Entries { get; set; } = new List<SymbolTableEntry>();
+        private readonly SymbolTableManager _parentManager;
+        private List<SymbolTableEntry> Entries { get; } = new List<SymbolTableEntry>();
         internal SymbolTable ParentTable { get; set; }
         internal bool IsEmpty => Entries.Count == 0;
 
-
         /// <summary>
         /// Searches the given symbol table for the given symbol name
-        /// and returns the ID, if found; otherwise <see cref="NOT_FOUND_ID"/>.
+        /// and returns the ID, if found; otherwise <see cref="NotFoundId"/>.
         /// </summary>
-        private int FindID(string nameToFind)
+        private int FindId(string nameToFind)
         {
             foreach (SymbolTableEntry currentEntry in Entries)
             {
-                if (currentEntry is SingleEntry single)
+                if (currentEntry is SingleEntry single && single.Name == nameToFind)
                 {
-                    if (single.Name == nameToFind)
-                    {
-                        return single.ID;
-                    }
+                    return single.Id;
                 }
             }
-            return NOT_FOUND_ID;
+            return NotFoundId;
         }
 
         private int RemoveEmptySymbolTables()
@@ -66,7 +62,7 @@ namespace LexicalAnalysis.SymbolTables
 
         internal SymbolTable(SymbolTableManager symbolTableManager, SymbolTable parentTable)
         {
-            parentManager = symbolTableManager;
+            _parentManager = symbolTableManager;
             ParentTable = parentTable;
         }
 
@@ -74,30 +70,30 @@ namespace LexicalAnalysis.SymbolTables
         {
             if (entry is SingleEntry single)
             {
-                parentManager.SymbolIDToName.Add(single.ID, single.Name);
+                _parentManager.SymbolIdToName.Add(single.Id, single.Name);
             }
             Entries.Add(entry);
         }
 
-        internal int FindIDByName(string nameToFind)
+        internal int FindIdByName(string nameToFind)
         {
             SymbolTable currentTable = this;
             while (currentTable != null)
             {
-                int id = currentTable.FindID(nameToFind);
-                if (id != NOT_FOUND_ID)
+                int id = currentTable.FindId(nameToFind);
+                if (id != NotFoundId)
                 {
                     return id;
                 }
                 currentTable = currentTable.ParentTable; // Try in parent.
             }
-            return NOT_FOUND_ID;
+            return NotFoundId;
         }
 
-        internal int FindIDByNameInFullTable(string nameToFind)
+        internal int FindIdByNameInFullTable(string nameToFind)
         {
             if (Entries.Count == 0)
-                return NOT_FOUND_ID;
+                return NotFoundId;
 
             foreach (SymbolTableEntry currentEntry in Entries)
             {
@@ -105,19 +101,19 @@ namespace LexicalAnalysis.SymbolTables
                 {
                     if (entry.Name == nameToFind)
                     {
-                        return entry.ID;
+                        return entry.Id;
                     }
                 }
                 else // SubTableEntry
                 {
-                    int id = (currentEntry as SubTableEntry).Table.FindIDByName(nameToFind);
-                    if (id != NOT_FOUND_ID)
+                    int id = (currentEntry as SubTableEntry).Table.FindIdByName(nameToFind);
+                    if (id != NotFoundId)
                     {
                         return id;
                     }
                 }
             }
-            return NOT_FOUND_ID;
+            return NotFoundId;
         }
 
         internal void CleanUpIfNeeded()
@@ -156,5 +152,5 @@ namespace LexicalAnalysis.SymbolTables
 
             return output.ToString();
         }
- }
+    }
 }

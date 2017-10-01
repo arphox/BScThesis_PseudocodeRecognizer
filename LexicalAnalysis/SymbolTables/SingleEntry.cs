@@ -13,11 +13,6 @@
             DefinitionRowNumber = definitionRowNumber;
         }
 
-        public override string ToString()
-        {
-            return
-                base.ToString() +
-                string.Format("név={0}, típus={1}, def={2}.sor", Name, EntryType, DefinitionRowNumber);
-        }
+        public override string ToString() => base.ToString() + $"név={Name}, típus={EntryType}, def={DefinitionRowNumber}.sor";
     }
 }

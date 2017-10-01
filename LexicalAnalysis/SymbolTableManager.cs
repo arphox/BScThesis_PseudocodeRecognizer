@@ -8,7 +8,7 @@ namespace LexicalAnalysis
     {
         internal SymbolTable RootSymbolTable { get; private set; }
 
-        internal int? LastInsertedSymbolID { get; private set; }
+        internal int? LastInsertedSymbolId { get; private set; }
 
         internal SymbolTableManager()
         {
@@ -30,7 +30,7 @@ namespace LexicalAnalysis
         {
             SingleEntry entry = new SingleEntry(name, (SingleEntryType)(tokenType), currentRowNumber);
             RootSymbolTable.InsertNewEntry(entry);
-            LastInsertedSymbolID = entry.ID;
+            LastInsertedSymbolId = entry.Id;
         }
         internal void ChangeSymbolTableIndentIfNeeded(int code)
         {
@@ -43,13 +43,12 @@ namespace LexicalAnalysis
                 DecreaseSymbolTableIndent();
             }
         }
-        internal int FindIDByName(string name)
+        internal int FindIdByName(string name)
         {
-            return RootSymbolTable.FindIDByName(name);
+            return RootSymbolTable.FindIdByName(name);
         }
         internal void CleanUpIfNeeded() => RootSymbolTable.CleanUpIfNeeded();
 
-        private bool IsRootSymbolTableCreated { get; set; } = false;
-        internal Dictionary<int, string> SymbolIDToName { get; private set; } = new Dictionary<int, string>();
+        internal Dictionary<int, string> SymbolIdToName { get; } = new Dictionary<int, string>();
     }
 }

@@ -1,6 +1,5 @@
-﻿using System.Collections.Generic;
-using System.Linq;
-using LexicalAnalysis.LexicalElementCodes;
+﻿using LexicalAnalysis.LexicalElementCodes;
+using System.Collections.Generic;
 
 namespace LexicalAnalysis.Tokens
 {
@@ -17,21 +16,21 @@ namespace LexicalAnalysis.Tokens
                 return LexicalElementCodeProvider.ErrorCode;
 
             int lastIndex = outputTokens.Count - 1;
-            int lastTokenID = outputTokens[lastIndex].ID;
+            int lastTokenId = outputTokens[lastIndex].Id;
             // Ha az előző token TÍPUS, akkor egyszerű változó (nem tömb)
-            if (lastTokenID >= 1000 && lastTokenID < 1100)
-                return lastTokenID;
+            if (lastTokenId >= 1000 && lastTokenId < 1100)
+                return lastTokenId;
 
             // Egyébként tömb lesz, vagy hiba:
             // Pontosan akkor jó, ha a következő mintára illeszkedik:
             // típus[]
             else if (lastIndex >= 2 &&                       // Nem indexelünk ki ÉS
-                    outputTokens[lastIndex].ID == 202 &&       // ]
-                    outputTokens[lastIndex - 1].ID == 201 &&   // [
-                    outputTokens[lastIndex - 2].ID >= 1000 && outputTokens[lastIndex - 2].ID < 1100 // típus van előtte
+                    outputTokens[lastIndex].Id == 202 &&       // ]
+                    outputTokens[lastIndex - 1].Id == 201 &&   // [
+                    outputTokens[lastIndex - 2].Id >= 1000 && outputTokens[lastIndex - 2].Id < 1100 // típus van előtte
                     )
             {
-                return 50 + outputTokens[lastIndex - 2].ID;
+                return 50 + outputTokens[lastIndex - 2].Id;
             }
             else
             {

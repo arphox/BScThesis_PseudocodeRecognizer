@@ -7,27 +7,26 @@ esetén magát csak az első 'b'-t már helyes kifejezésnek ismeri fel, aztán 
 */
 
 
-using LexicalAnalysis;
+using LexicalAnalysis.LexicalElementCodes;
 using LexicalAnalysis.Tokens;
 using SyntaxAnalysis.ST;
 using SyntaxAnalysis.Utilities;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using LexicalAnalysis.LexicalElementCodes;
 
 namespace SyntaxAnalysis
 {
     public class SyntaxAnalyzer
     {
-        private SyntaxTree<Token> tree;
+        private SyntaxTree<Token> _tree;
 
-        private List<Token> tokens;
-        private int pointer = 0;
-        private Token CurrentToken { get { return tokens[pointer]; } }
+        private readonly List<Token> _tokens;
+        private int _pointer = 0;
+        private Token CurrentToken => _tokens[_pointer];
 
-        private int currentRowNumber = 0;
-        private int furthestRowNumber = 0;
+        private int _currentRowNumber = 0;
+        private int _furthestRowNumber = 0;
 
         public SyntaxAnalyzer(List<Token> tokens)
         {
@@ -36,263 +35,263 @@ namespace SyntaxAnalysis
                 throw new SyntaxAnalysisException("A szintaktikus elemző nem indul el, ha a lexikális elemző hibát jelez.");
             }
 
-            this.tokens = tokens;
+            this._tokens = tokens;
         }
 
         public Tuple<SyntaxTree<Token>, bool> Start()
         {
-            bool success = program();
+            bool success = Program();
             //if (!success)
             //{
             //    throw new SyntaxAnalysisException(tree.GetLastToken(), currentRowNumber, furthestRowNumber);
             //}
-            return new Tuple<SyntaxTree<Token>, bool>(tree, success);
+            return new Tuple<SyntaxTree<Token>, bool>(_tree, success);
         }
 
         // Terminal checkers
-        private bool t(string tokenName)
+        private bool T(string tokenName)
         {
             //if (tokenName != LexicalElementCodes.Singleton[CurrentToken.ID])
             //{
 
             //}
 
-            currentRowNumber = CurrentToken.RowNumber;
-            tree.StartNode(CurrentToken);
-            bool isSuccessful = CurrentToken.ID == LexicalElementCodeProvider.GetCode(tokenName);
-            tree.EndNode();
+            _currentRowNumber = CurrentToken.RowNumber;
+            _tree.StartNode(CurrentToken);
+            bool isSuccessful = CurrentToken.Id == LexicalElementCodeProvider.GetCode(tokenName);
+            _tree.EndNode();
 
             if (isSuccessful)
             {
-                furthestRowNumber = CurrentToken.RowNumber;
+                _furthestRowNumber = CurrentToken.RowNumber;
             }
             else
             {
-                tree.RemoveLastNode();
+                _tree.RemoveLastNode();
             }
-            pointer++;
+            _pointer++;
             return isSuccessful;
         }
-        private bool t(Type tokenType)
+        private bool T(Type tokenType)
         {
-            currentRowNumber = CurrentToken.RowNumber;
-            tree.StartNode(CurrentToken);
-            bool isSuccessful = (CurrentToken.GetType().Equals(tokenType));
-            tree.EndNode();
+            _currentRowNumber = CurrentToken.RowNumber;
+            _tree.StartNode(CurrentToken);
+            bool isSuccessful = (CurrentToken.GetType() == tokenType);
+            _tree.EndNode();
 
             if (isSuccessful)
             {
-                furthestRowNumber = CurrentToken.RowNumber;
+                _furthestRowNumber = CurrentToken.RowNumber;
             }
             else
             {
-                tree.RemoveLastNode();
+                _tree.RemoveLastNode();
             }
-            pointer++;
+            _pointer++;
             return isSuccessful;
         }
 
         // Production rules:
-        private bool program()
+        private bool Program()
         {
             /*
                 <program>:
                   program_kezd újsor <állítások> program_vége
             */
-            tree = new SyntaxTree<Token>(new NonTerminalToken(GeneralUtil.GetCurrentMethodName(), currentRowNumber));
+            _tree = new SyntaxTree<Token>(new NonTerminalToken(GeneralUtil.GetCurrentMethodName(), _currentRowNumber));
 
-            return t("program_kezd")
-                && t("újsor")
-                && állítások()
-                && t("program_vége");
+            return T("program_kezd")
+                && T("újsor")
+                && Állítások()
+                && T("program_vége");
         }
-        private bool állítások()
+        private bool Állítások()
         {
             /*
                 <állítások>:
                   <egysorosÁllítás> <állítások>
                   <egysorosÁllítás>
             */
-            tree.StartNode(new NonTerminalToken(GeneralUtil.GetCurrentMethodName(), currentRowNumber));
-            int backupPointer = pointer;
-            SyntaxTree<Token> backupTree = tree.Copy();
+            _tree.StartNode(new NonTerminalToken(GeneralUtil.GetCurrentMethodName(), _currentRowNumber));
+            int backupPointer = _pointer;
+            SyntaxTree<Token> backupTree = _tree.Copy();
 
-            if (egysorosÁllítás() && állítások())
+            if (EgysorosÁllítás() && Állítások())
             {
-                tree.EndNode();
+                _tree.EndNode();
                 return true;
             }
             else
             {
-                pointer = backupPointer;
-                tree = backupTree;
+                _pointer = backupPointer;
+                _tree = backupTree;
             }
 
-            if (egysorosÁllítás())
+            if (EgysorosÁllítás())
             {
-                tree.EndNode();
+                _tree.EndNode();
                 return true;
             }
             else
             {
-                pointer = backupPointer;
-                tree = backupTree;
+                _pointer = backupPointer;
+                _tree = backupTree;
             }
 
-            tree.EndNode();
-            tree.RemoveLastNode();
+            _tree.EndNode();
+            _tree.RemoveLastNode();
             return false;
         }
-        private bool egysorosÁllítás()
+        private bool EgysorosÁllítás()
         {
             /*
                 <egysorosÁllítás>:
                   <állítás> újsor
                   újsor
             */
-            tree.StartNode(new NonTerminalToken(GeneralUtil.GetCurrentMethodName(), currentRowNumber));
-            int backupPointer = pointer;
-            SyntaxTree<Token> backupTree = tree.Copy();
+            _tree.StartNode(new NonTerminalToken(GeneralUtil.GetCurrentMethodName(), _currentRowNumber));
+            int backupPointer = _pointer;
+            SyntaxTree<Token> backupTree = _tree.Copy();
 
-            if (állítás() && t("újsor"))
+            if (Állítás() && T("újsor"))
             {
-                tree.EndNode();
+                _tree.EndNode();
                 return true;
             }
             else
             {
-                pointer = backupPointer;
-                tree = backupTree;
+                _pointer = backupPointer;
+                _tree = backupTree;
             }
 
-            if (t("újsor"))
+            if (T("újsor"))
             {
-                tree.EndNode();
+                _tree.EndNode();
                 return true;
             }
             else
             {
-                pointer = backupPointer;
-                tree = backupTree;
+                _pointer = backupPointer;
+                _tree = backupTree;
             }
 
-            tree.EndNode();
-            tree.RemoveLastNode();
+            _tree.EndNode();
+            _tree.RemoveLastNode();
             return false;
         }
-        private bool állítás()
+        private bool Állítás()
         {
             /*
                 <állítás>:
                     <lokálisVáltozóDeklaráció>
                     <beágyazottÁllítás>
             */
-            tree.StartNode(new NonTerminalToken(GeneralUtil.GetCurrentMethodName(), currentRowNumber));
-            int backupPointer = pointer;
-            SyntaxTree<Token> backupTree = tree.Copy();
+            _tree.StartNode(new NonTerminalToken(GeneralUtil.GetCurrentMethodName(), _currentRowNumber));
+            int backupPointer = _pointer;
+            SyntaxTree<Token> backupTree = _tree.Copy();
 
-            if (lokálisVáltozóDeklaráció())
+            if (LokálisVáltozóDeklaráció())
             {
-                tree.EndNode();
+                _tree.EndNode();
                 return true;
             }
             else
             {
-                pointer = backupPointer;
-                tree = backupTree;
+                _pointer = backupPointer;
+                _tree = backupTree;
             }
 
-            if (beágyazottÁllítás())
+            if (BeágyazottÁllítás())
             {
-                tree.EndNode();
+                _tree.EndNode();
                 return true;
             }
             else
             {
-                pointer = backupPointer;
-                tree = backupTree;
+                _pointer = backupPointer;
+                _tree = backupTree;
             }
 
-            tree.EndNode();
-            tree.RemoveLastNode();
+            _tree.EndNode();
+            _tree.RemoveLastNode();
             return false;
         }
-        private bool lokálisVáltozóDeklaráció()
+        private bool LokálisVáltozóDeklaráció()
         {
             /*
                 <lokálisVáltozóDeklaráció>:
                     <típus> azonosító = <kifejezés>
                     <típus> azonosító
             */
-            tree.StartNode(new NonTerminalToken(GeneralUtil.GetCurrentMethodName(), currentRowNumber));
-            int backupPointer = pointer;
-            SyntaxTree<Token> backupTree = tree.Copy();
+            _tree.StartNode(new NonTerminalToken(GeneralUtil.GetCurrentMethodName(), _currentRowNumber));
+            int backupPointer = _pointer;
+            SyntaxTree<Token> backupTree = _tree.Copy();
 
-            if (típus() && t("azonosító") && t("=") && kifejezés())
+            if (Típus() && T("azonosító") && T("=") && Kifejezés())
             {
-                tree.EndNode();
+                _tree.EndNode();
                 return true;
             }
             else
             {
-                pointer = backupPointer;
-                tree = backupTree;
+                _pointer = backupPointer;
+                _tree = backupTree;
             }
 
 
-            if (típus() && t("azonosító"))
+            if (Típus() && T("azonosító"))
             {
-                tree.EndNode();
+                _tree.EndNode();
                 return true;
             }
             else
             {
-                pointer = backupPointer;
-                tree = backupTree;
+                _pointer = backupPointer;
+                _tree = backupTree;
             }
 
-            tree.EndNode();
-            tree.RemoveLastNode();
+            _tree.EndNode();
+            _tree.RemoveLastNode();
             return false;
         }
-        private bool típus()
+        private bool Típus()
         {
             /*
                 <típus>:
                     <tömbTípus>        
                     <alapTípus>
             */
-            tree.StartNode(new NonTerminalToken(GeneralUtil.GetCurrentMethodName(), currentRowNumber));
-            int backupPointer = pointer;
-            SyntaxTree<Token> backupTree = tree.Copy();
+            _tree.StartNode(new NonTerminalToken(GeneralUtil.GetCurrentMethodName(), _currentRowNumber));
+            int backupPointer = _pointer;
+            SyntaxTree<Token> backupTree = _tree.Copy();
 
-            if (tömbTípus())
+            if (TömbTípus())
             {
-                tree.EndNode();
+                _tree.EndNode();
                 return true;
             }
             else
             {
-                pointer = backupPointer;
-                tree = backupTree;
+                _pointer = backupPointer;
+                _tree = backupTree;
             }
 
-            if (alapTípus())
+            if (AlapTípus())
             {
-                tree.EndNode();
+                _tree.EndNode();
                 return true;
             }
             else
             {
-                pointer = backupPointer;
-                tree = backupTree;
+                _pointer = backupPointer;
+                _tree = backupTree;
             }
 
-            tree.EndNode();
-            tree.RemoveLastNode();
+            _tree.EndNode();
+            _tree.RemoveLastNode();
             return false;
         }
-        private bool alapTípus()
+        private bool AlapTípus()
         {
             /*
                 <alapTípus>:
@@ -301,84 +300,84 @@ namespace SyntaxAnalysis
                     szöveg
                     logikai
             */
-            tree.StartNode(new NonTerminalToken(GeneralUtil.GetCurrentMethodName(), currentRowNumber));
-            int backupPointer = pointer;
-            SyntaxTree<Token> backupTree = tree.Copy();
+            _tree.StartNode(new NonTerminalToken(GeneralUtil.GetCurrentMethodName(), _currentRowNumber));
+            int backupPointer = _pointer;
+            SyntaxTree<Token> backupTree = _tree.Copy();
 
-            if (t("egész"))
+            if (T("egész"))
             {
-                tree.EndNode();
+                _tree.EndNode();
                 return true;
             }
             else
             {
-                pointer = backupPointer;
-                tree = backupTree;
+                _pointer = backupPointer;
+                _tree = backupTree;
             }
 
-            if (t("tört"))
+            if (T("tört"))
             {
-                tree.EndNode();
+                _tree.EndNode();
                 return true;
             }
             else
             {
-                pointer = backupPointer;
-                tree = backupTree;
+                _pointer = backupPointer;
+                _tree = backupTree;
             }
 
-            if (t("szöveg"))
+            if (T("szöveg"))
             {
-                tree.EndNode();
+                _tree.EndNode();
                 return true;
             }
             else
             {
-                pointer = backupPointer;
-                tree = backupTree;
+                _pointer = backupPointer;
+                _tree = backupTree;
             }
 
-            if (t("logikai"))
+            if (T("logikai"))
             {
-                tree.EndNode();
+                _tree.EndNode();
                 return true;
             }
             else
             {
-                pointer = backupPointer;
-                tree = backupTree;
+                _pointer = backupPointer;
+                _tree = backupTree;
             }
 
-            tree.EndNode();
-            tree.RemoveLastNode();
+            _tree.EndNode();
+            _tree.RemoveLastNode();
             return false;
         }
-        private bool tömbTípus()
+        private bool TömbTípus()
         {
             /*
                 <tömbTípus>:
                     <alapTípus> [ ]
             */
-            tree.StartNode(new NonTerminalToken(GeneralUtil.GetCurrentMethodName(), currentRowNumber));
-            int backupPointer = pointer;
-            SyntaxTree<Token> backupTree = tree.Copy();
+            _tree.StartNode(new NonTerminalToken(GeneralUtil.GetCurrentMethodName(), _currentRowNumber));
+            int backupPointer = _pointer;
+            SyntaxTree<Token> backupTree = _tree.Copy();
 
-            if (alapTípus() && t("[") && t("]"))
+            if (AlapTípus() && T("[") && T("]"))
             {
-                tree.EndNode();
+                _tree.EndNode();
                 return true;
             }
             else
             {
-                pointer = backupPointer;
-                tree = backupTree;
+                _pointer = backupPointer;
+                _tree = backupTree;
             }
 
-            tree.EndNode();
-            tree.RemoveLastNode();
+            _tree.EndNode();
+            _tree.RemoveLastNode();
             return false;
         }
-        private bool belsőFüggvény()
+        private bool BelsőFüggvény()
         {
             /*
                 <belsőFüggvény>:
@@ -392,26 +391,26 @@ namespace SyntaxAnalysis
                     szövegből_logikaiba
             */
 
-            tree.StartNode(new NonTerminalToken(GeneralUtil.GetCurrentMethodName(), currentRowNumber));
-            int savedPointer = pointer;
-            SyntaxTree<Token> backupTree = tree.Copy();
+            _tree.StartNode(new NonTerminalToken(GeneralUtil.GetCurrentMethodName(), _currentRowNumber));
+            int savedPointer = _pointer;
+            SyntaxTree<Token> backupTree = _tree.Copy();
 
-            if (t(typeof(InternalFunctionToken)))
+            if (T(typeof(InternalFunctionToken)))
             {
-                tree.EndNode();
+                _tree.EndNode();
                 return true;
             }
             else
             {
-                pointer = savedPointer;
-                tree = backupTree;
+                _pointer = savedPointer;
+                _tree = backupTree;
             }
 
-            tree.EndNode();
-            tree.RemoveLastNode();
+            _tree.EndNode();
+            _tree.RemoveLastNode();
             return false;
         }
-        private bool beágyazottÁllítás()
+        private bool BeágyazottÁllítás()
         {
             /*
                  <beágyazottÁllítás>:
@@ -422,242 +421,242 @@ namespace SyntaxAnalysis
                     ciklus <számlálóCiklusInicializáló> -tól <logikaiKifejezés> -ig <beágyazottÁllítás>
                     <parancsÁllítás>
             */
-            tree.StartNode(new NonTerminalToken(GeneralUtil.GetCurrentMethodName(), currentRowNumber));
-            int backupPointer = pointer;
-            SyntaxTree<Token> backupTree = tree.Copy();
+            _tree.StartNode(new NonTerminalToken(GeneralUtil.GetCurrentMethodName(), _currentRowNumber));
+            int backupPointer = _pointer;
+            SyntaxTree<Token> backupTree = _tree.Copy();
 
-            if (értékadás())
+            if (Értékadás())
             {
-                tree.EndNode();
+                _tree.EndNode();
                 return true;
             }
             else
             {
-                pointer = backupPointer;
-                tree = backupTree;
+                _pointer = backupPointer;
+                _tree = backupTree;
             }
 
-            if (t("ha") && logikaiKifejezés() && t("akkor") && beágyazottÁllítás() && t("különben") && beágyazottÁllítás() && t("elágazás_vége"))
+            if (T("ha") && LogikaiKifejezés() && T("akkor") && BeágyazottÁllítás() && T("különben") && BeágyazottÁllítás() && T("elágazás_vége"))
             {
-                tree.EndNode();
+                _tree.EndNode();
                 return true;
             }
             else
             {
-                pointer = backupPointer;
-                tree = backupTree;
+                _pointer = backupPointer;
+                _tree = backupTree;
             }
 
-            if (t("ha") && logikaiKifejezés() && t("akkor") && beágyazottÁllítás() && t("elágazás_vége"))
+            if (T("ha") && LogikaiKifejezés() && T("akkor") && BeágyazottÁllítás() && T("elágazás_vége"))
             {
-                tree.EndNode();
+                _tree.EndNode();
                 return true;
             }
             else
             {
-                pointer = backupPointer;
-                tree = backupTree;
+                _pointer = backupPointer;
+                _tree = backupTree;
             }
 
-            if (t("ciklus_amíg") && logikaiKifejezés() && beágyazottÁllítás())
+            if (T("ciklus_amíg") && LogikaiKifejezés() && BeágyazottÁllítás())
             {
-                tree.EndNode();
+                _tree.EndNode();
                 return true;
             }
             else
             {
-                pointer = backupPointer;
-                tree = backupTree;
+                _pointer = backupPointer;
+                _tree = backupTree;
             }
 
-            if (t("ciklus") && számlálóCiklusInicializáló() && t("-tól") && logikaiKifejezés() && t("-ig") && beágyazottÁllítás())
+            if (T("ciklus") && SzámlálóCiklusInicializáló() && T("-tól") && LogikaiKifejezés() && T("-ig") && BeágyazottÁllítás())
             {
-                tree.EndNode();
+                _tree.EndNode();
                 return true;
             }
             else
             {
-                pointer = backupPointer;
-                tree = backupTree;
+                _pointer = backupPointer;
+                _tree = backupTree;
             }
 
-            if (parancsÁllítás())
+            if (ParancsÁllítás())
             {
-                tree.EndNode();
+                _tree.EndNode();
                 return true;
             }
             else
             {
-                pointer = backupPointer;
-                tree = backupTree;
+                _pointer = backupPointer;
+                _tree = backupTree;
             }
 
-            tree.EndNode();
-            tree.RemoveLastNode();
+            _tree.EndNode();
+            _tree.RemoveLastNode();
             return false;
         }
-        private bool parancsÁllítás()
+        private bool ParancsÁllítás()
         {
             /*
                 <parancsÁllítás>:
                     <parancs> azonosító
             */
-            tree.StartNode(new NonTerminalToken(GeneralUtil.GetCurrentMethodName(), currentRowNumber));
-            int backupPointer = pointer;
-            SyntaxTree<Token> backupTree = tree.Copy();
+            _tree.StartNode(new NonTerminalToken(GeneralUtil.GetCurrentMethodName(), _currentRowNumber));
+            int backupPointer = _pointer;
+            SyntaxTree<Token> backupTree = _tree.Copy();
 
-            if (parancs() && t("azonosító"))
+            if (Parancs() && T("azonosító"))
             {
-                tree.EndNode();
+                _tree.EndNode();
                 return true;
             }
             else
             {
-                pointer = backupPointer;
-                tree = backupTree;
+                _pointer = backupPointer;
+                _tree = backupTree;
             }
 
-            tree.EndNode();
-            tree.RemoveLastNode();
+            _tree.EndNode();
+            _tree.RemoveLastNode();
             return false;
         }
-        private bool parancs()
+        private bool Parancs()
         {
             /*
                 <parancs>:
                     beolvas
                     kiír
              */
-            tree.StartNode(new NonTerminalToken(GeneralUtil.GetCurrentMethodName(), currentRowNumber));
-            int backupPointer = pointer;
-            SyntaxTree<Token> backupTree = tree.Copy();
+            _tree.StartNode(new NonTerminalToken(GeneralUtil.GetCurrentMethodName(), _currentRowNumber));
+            int backupPointer = _pointer;
+            SyntaxTree<Token> backupTree = _tree.Copy();
 
-            if (t("beolvas"))
+            if (T("beolvas"))
             {
-                tree.EndNode();
+                _tree.EndNode();
                 return true;
             }
             else
             {
-                pointer = backupPointer;
-                tree = backupTree;
+                _pointer = backupPointer;
+                _tree = backupTree;
             }
 
-            if (t("kiír"))
+            if (T("kiír"))
             {
-                tree.EndNode();
+                _tree.EndNode();
                 return true;
             }
             else
             {
-                pointer = backupPointer;
-                tree = backupTree;
+                _pointer = backupPointer;
+                _tree = backupTree;
             }
 
-            tree.EndNode();
-            tree.RemoveLastNode();
+            _tree.EndNode();
+            _tree.RemoveLastNode();
             return false;
         }
-        private bool értékadás()
+        private bool Értékadás()
         {
             /*
                 <értékadás>:
                     <unárisKifejezés> = <kifejezés>
             */
-            tree.StartNode(new NonTerminalToken(GeneralUtil.GetCurrentMethodName(), currentRowNumber));
-            int backupPointer = pointer;
-            SyntaxTree<Token> backupTree = tree.Copy();
+            _tree.StartNode(new NonTerminalToken(GeneralUtil.GetCurrentMethodName(), _currentRowNumber));
+            int backupPointer = _pointer;
+            SyntaxTree<Token> backupTree = _tree.Copy();
 
-            if (unárisKifejezés() && t("=") && kifejezés())
+            if (UnárisKifejezés() && T("=") && Kifejezés())
             {
-                tree.EndNode();
+                _tree.EndNode();
                 return true;
             }
             else
             {
-                pointer = backupPointer;
-                tree = backupTree;
+                _pointer = backupPointer;
+                _tree = backupTree;
             }
 
-            tree.EndNode();
-            tree.RemoveLastNode();
+            _tree.EndNode();
+            _tree.RemoveLastNode();
             return false;
         }
-        private bool számlálóCiklusInicializáló()
+        private bool SzámlálóCiklusInicializáló()
         {
             /*
                 <számlálóCiklusInicializáló>:
                     <lokálisVáltozóDeklaráció>
                     <értékadás>
             */
-            tree.StartNode(new NonTerminalToken(GeneralUtil.GetCurrentMethodName(), currentRowNumber));
-            int backupPointer = pointer;
-            SyntaxTree<Token> backupTree = tree.Copy();
+            _tree.StartNode(new NonTerminalToken(GeneralUtil.GetCurrentMethodName(), _currentRowNumber));
+            int backupPointer = _pointer;
+            SyntaxTree<Token> backupTree = _tree.Copy();
 
-            if (lokálisVáltozóDeklaráció())
+            if (LokálisVáltozóDeklaráció())
             {
-                tree.EndNode();
+                _tree.EndNode();
                 return true;
             }
             else
             {
-                pointer = backupPointer;
-                tree = backupTree;
+                _pointer = backupPointer;
+                _tree = backupTree;
             }
 
-            if (értékadás())
+            if (Értékadás())
             {
-                tree.EndNode();
+                _tree.EndNode();
                 return true;
             }
             else
             {
-                pointer = backupPointer;
-                tree = backupTree;
+                _pointer = backupPointer;
+                _tree = backupTree;
             }
 
-            tree.EndNode();
-            tree.RemoveLastNode();
+            _tree.EndNode();
+            _tree.RemoveLastNode();
             return false;
         }
-        private bool elsődlegesKifejezés()
+        private bool ElsődlegesKifejezés()
         {
             /*
                 <elsődlegesKifejezés>:
                     <elsődlegesNemTömbLétrehozóKifejezés>
                     <tömbLétrehozóKifejezés>
             */
-            tree.StartNode(new NonTerminalToken(GeneralUtil.GetCurrentMethodName(), currentRowNumber));
-            int backupPointer = pointer;
-            SyntaxTree<Token> backupTree = tree.Copy();
+            _tree.StartNode(new NonTerminalToken(GeneralUtil.GetCurrentMethodName(), _currentRowNumber));
+            int backupPointer = _pointer;
+            SyntaxTree<Token> backupTree = _tree.Copy();
 
-            if (elsődlegesNemTömbLétrehozóKifejezés())
+            if (ElsődlegesNemTömbLétrehozóKifejezés())
             {
-                tree.EndNode();
+                _tree.EndNode();
                 return true;
             }
             else
             {
-                pointer = backupPointer;
-                tree = backupTree;
+                _pointer = backupPointer;
+                _tree = backupTree;
             }
 
-            if (tömbLétrehozóKifejezés())
+            if (TömbLétrehozóKifejezés())
             {
-                tree.EndNode();
+                _tree.EndNode();
                 return true;
             }
             else
             {
-                pointer = backupPointer;
-                tree = backupTree;
+                _pointer = backupPointer;
+                _tree = backupTree;
             }
 
-            tree.EndNode();
-            tree.RemoveLastNode();
+            _tree.EndNode();
+            _tree.RemoveLastNode();
             return false;
         }
-        private bool elsődlegesNemTömbLétrehozóKifejezés()
+        private bool ElsődlegesNemTömbLétrehozóKifejezés()
         {
             /*
                 <elsődlegesNemTömbLétrehozóKifejezés>:
@@ -666,271 +665,271 @@ namespace SyntaxAnalysis
                     <zárójelesKifejezés>
                     <tömbElemElérés>
             */
-            tree.StartNode(new NonTerminalToken(GeneralUtil.GetCurrentMethodName(), currentRowNumber));
-            int backupPointer = pointer;
-            SyntaxTree<Token> backupTree = tree.Copy();
+            _tree.StartNode(new NonTerminalToken(GeneralUtil.GetCurrentMethodName(), _currentRowNumber));
+            int backupPointer = _pointer;
+            SyntaxTree<Token> backupTree = _tree.Copy();
 
-            if (t(typeof(LiteralToken)))
+            if (T(typeof(LiteralToken)))
             {
-                tree.EndNode();
+                _tree.EndNode();
                 return true;
             }
             else
             {
-                pointer = backupPointer;
-                tree = backupTree;
+                _pointer = backupPointer;
+                _tree = backupTree;
             }
 
-            if (t("azonosító"))
+            if (T("azonosító"))
             {
-                tree.EndNode();
+                _tree.EndNode();
                 return true;
             }
             else
             {
-                pointer = backupPointer;
-                tree = backupTree;
+                _pointer = backupPointer;
+                _tree = backupTree;
             }
 
-            if (zárójelesKifejezés())
+            if (ZárójelesKifejezés())
             {
-                tree.EndNode();
+                _tree.EndNode();
                 return true;
             }
             else
             {
-                pointer = backupPointer;
-                tree = backupTree;
+                _pointer = backupPointer;
+                _tree = backupTree;
             }
 
-            if (tömbElemElérés())
+            if (TömbElemElérés())
             {
-                tree.EndNode();
+                _tree.EndNode();
                 return true;
             }
             else
             {
-                pointer = backupPointer;
-                tree = backupTree;
+                _pointer = backupPointer;
+                _tree = backupTree;
             }
 
-            tree.EndNode();
-            tree.RemoveLastNode();
+            _tree.EndNode();
+            _tree.RemoveLastNode();
             return false;
         }
-        private bool zárójelesKifejezés()
+        private bool ZárójelesKifejezés()
         {
             /*
                 <zárójelesKifejezés>:
                     ( <kifejezés> )
             */
-            tree.StartNode(new NonTerminalToken(GeneralUtil.GetCurrentMethodName(), currentRowNumber));
-            int backupPointer = pointer;
-            SyntaxTree<Token> backupTree = tree.Copy();
+            _tree.StartNode(new NonTerminalToken(GeneralUtil.GetCurrentMethodName(), _currentRowNumber));
+            int backupPointer = _pointer;
+            SyntaxTree<Token> backupTree = _tree.Copy();
 
-            if (t("(") && kifejezés() && t(")"))
+            if (T("(") && Kifejezés() && T(")"))
             {
-                tree.EndNode();
+                _tree.EndNode();
                 return true;
             }
             else
             {
-                pointer = backupPointer;
-                tree = backupTree;
+                _pointer = backupPointer;
+                _tree = backupTree;
             }
 
-            tree.EndNode();
-            tree.RemoveLastNode();
+            _tree.EndNode();
+            _tree.RemoveLastNode();
             return false;
         }
-        private bool tömbElemElérés()
+        private bool TömbElemElérés()
         {
             /*
                 <tömbElemElérés>:
                     azonosító [ azonosító ]
                     azonosító [ <kifejezés> ]
             */
-            tree.StartNode(new NonTerminalToken(GeneralUtil.GetCurrentMethodName(), currentRowNumber));
-            int backupPointer = pointer;
-            SyntaxTree<Token> backupTree = tree.Copy();
+            _tree.StartNode(new NonTerminalToken(GeneralUtil.GetCurrentMethodName(), _currentRowNumber));
+            int backupPointer = _pointer;
+            SyntaxTree<Token> backupTree = _tree.Copy();
 
-            if (t("azonosító") && t("[") && t("azonosító") && t("]"))
+            if (T("azonosító") && T("[") && T("azonosító") && T("]"))
             {
-                tree.EndNode();
+                _tree.EndNode();
                 return true;
             }
             else
             {
-                pointer = backupPointer;
-                tree = backupTree;
+                _pointer = backupPointer;
+                _tree = backupTree;
             }
 
-            if (t("azonosító") && t("[") && kifejezés() && t("]"))
+            if (T("azonosító") && T("[") && Kifejezés() && T("]"))
             {
-                tree.EndNode();
+                _tree.EndNode();
                 return true;
             }
             else
             {
-                pointer = backupPointer;
-                tree = backupTree;
+                _pointer = backupPointer;
+                _tree = backupTree;
             }
 
-            tree.EndNode();
-            tree.RemoveLastNode();
+            _tree.EndNode();
+            _tree.RemoveLastNode();
             return false;
         }
-        private bool tömbLétrehozóKifejezés()
+        private bool TömbLétrehozóKifejezés()
         {
             /*
                 <tömbLétrehozóKifejezés>:
                     létrehoz ( <alapTípus> ) [ <elsődlegesNemTömbLétrehozóKifejezés> ]
             */
-            tree.StartNode(new NonTerminalToken(GeneralUtil.GetCurrentMethodName(), currentRowNumber));
-            int backupPointer = pointer;
-            SyntaxTree<Token> backupTree = tree.Copy();
+            _tree.StartNode(new NonTerminalToken(GeneralUtil.GetCurrentMethodName(), _currentRowNumber));
+            int backupPointer = _pointer;
+            SyntaxTree<Token> backupTree = _tree.Copy();
 
-            if (t("létrehoz") && t("(") && alapTípus() && t(")") && t("[")
-                && elsődlegesNemTömbLétrehozóKifejezés() && t("]"))
+            if (T("létrehoz") && T("(") && AlapTípus() && T(")") && T("[")
+                && ElsődlegesNemTömbLétrehozóKifejezés() && T("]"))
             {
-                tree.EndNode();
+                _tree.EndNode();
                 return true;
             }
             else
             {
-                pointer = backupPointer;
-                tree = backupTree;
+                _pointer = backupPointer;
+                _tree = backupTree;
             }
 
-            tree.EndNode();
-            tree.RemoveLastNode();
+            _tree.EndNode();
+            _tree.RemoveLastNode();
             return false;
         }
-        private bool logikaiKifejezés()
+        private bool LogikaiKifejezés()
         {
             /*
                 <logikaiKifejezés>:
                     <kifejezés>
             */
-            tree.StartNode(new NonTerminalToken(GeneralUtil.GetCurrentMethodName(), currentRowNumber));
-            int backupPointer = pointer;
-            SyntaxTree<Token> backupTree = tree.Copy();
+            _tree.StartNode(new NonTerminalToken(GeneralUtil.GetCurrentMethodName(), _currentRowNumber));
+            int backupPointer = _pointer;
+            SyntaxTree<Token> backupTree = _tree.Copy();
 
-            if (kifejezés())
+            if (Kifejezés())
             {
-                tree.EndNode();
+                _tree.EndNode();
                 return true;
             }
             else
             {
-                pointer = backupPointer;
-                tree = backupTree;
+                _pointer = backupPointer;
+                _tree = backupTree;
             }
 
-            tree.EndNode();
-            tree.RemoveLastNode();
+            _tree.EndNode();
+            _tree.RemoveLastNode();
             return false;
         }
-        private bool kifejezés()
+        private bool Kifejezés()
         {
             /*
                 <kifejezés>:
                     <feltételesVagyKifejezés>
             */
-            tree.StartNode(new NonTerminalToken(GeneralUtil.GetCurrentMethodName(), currentRowNumber));
-            int backupPointer = pointer;
-            SyntaxTree<Token> backupTree = tree.Copy();
+            _tree.StartNode(new NonTerminalToken(GeneralUtil.GetCurrentMethodName(), _currentRowNumber));
+            int backupPointer = _pointer;
+            SyntaxTree<Token> backupTree = _tree.Copy();
 
-            if (feltételesVagyKifejezés())
+            if (FeltételesVagyKifejezés())
             {
-                tree.EndNode();
+                _tree.EndNode();
                 return true;
             }
             else
             {
-                pointer = backupPointer;
-                tree = backupTree;
+                _pointer = backupPointer;
+                _tree = backupTree;
             }
 
-            tree.EndNode();
-            tree.RemoveLastNode();
+            _tree.EndNode();
+            _tree.RemoveLastNode();
             return false;
         }
-        private bool feltételesVagyKifejezés()
+        private bool FeltételesVagyKifejezés()
         {
             /*
                 <feltételesVagyKifejezés>:
                     <feltételesÉsKifejezés>
                     <feltételesVagyKifejezés> vagy <feltételesÉsKifejezés>
             */
-            tree.StartNode(new NonTerminalToken(GeneralUtil.GetCurrentMethodName(), currentRowNumber));
-            int backupPointer = pointer;
-            SyntaxTree<Token> backupTree = tree.Copy();
+            _tree.StartNode(new NonTerminalToken(GeneralUtil.GetCurrentMethodName(), _currentRowNumber));
+            int backupPointer = _pointer;
+            SyntaxTree<Token> backupTree = _tree.Copy();
 
-            if (feltételesÉsKifejezés())
+            if (FeltételesÉsKifejezés())
             {
-                tree.EndNode();
+                _tree.EndNode();
                 return true;
             }
             else
             {
-                pointer = backupPointer;
-                tree = backupTree;
+                _pointer = backupPointer;
+                _tree = backupTree;
             }
 
-            if (feltételesVagyKifejezés() && t("vagy") && feltételesÉsKifejezés())
+            if (FeltételesVagyKifejezés() && T("vagy") && FeltételesÉsKifejezés())
             {
-                tree.EndNode();
+                _tree.EndNode();
                 return true;
             }
             else
             {
-                pointer = backupPointer;
-                tree = backupTree;
+                _pointer = backupPointer;
+                _tree = backupTree;
             }
 
-            tree.EndNode();
-            tree.RemoveLastNode();
+            _tree.EndNode();
+            _tree.RemoveLastNode();
             return false;
         }
-        private bool feltételesÉsKifejezés()
+        private bool FeltételesÉsKifejezés()
         {
             /*
                 <feltételesÉsKifejezés>:
                     <egyenlőségKifejezés>
                     <feltételesÉsKifejezés> és <egyenlőségKifejezés>
             */
-            tree.StartNode(new NonTerminalToken(GeneralUtil.GetCurrentMethodName(), currentRowNumber));
-            int backupPointer = pointer;
-            SyntaxTree<Token> backupTree = tree.Copy();
+            _tree.StartNode(new NonTerminalToken(GeneralUtil.GetCurrentMethodName(), _currentRowNumber));
+            int backupPointer = _pointer;
+            SyntaxTree<Token> backupTree = _tree.Copy();
 
-            if (egyenlőségKifejezés())
+            if (EgyenlőségKifejezés())
             {
-                tree.EndNode();
+                _tree.EndNode();
                 return true;
             }
             else
             {
-                pointer = backupPointer;
-                tree = backupTree;
+                _pointer = backupPointer;
+                _tree = backupTree;
             }
 
-            if (feltételesÉsKifejezés() && t("és") && egyenlőségKifejezés())
+            if (FeltételesÉsKifejezés() && T("és") && EgyenlőségKifejezés())
             {
-                tree.EndNode();
+                _tree.EndNode();
                 return true;
             }
             else
             {
-                pointer = backupPointer;
-                tree = backupTree;
+                _pointer = backupPointer;
+                _tree = backupTree;
             }
 
-            tree.EndNode();
-            tree.RemoveLastNode();
+            _tree.EndNode();
+            _tree.RemoveLastNode();
             return false;
         }
-        private bool egyenlőségKifejezés()
+        private bool EgyenlőségKifejezés()
         {
             /*
                 <egyenlőségKifejezés>:
@@ -938,48 +937,48 @@ namespace SyntaxAnalysis
                     <egyenlőségKifejezés> == <relációsKifejezés>
                     <egyenlőségKifejezés> != <relációsKifejezés>
             */
-            tree.StartNode(new NonTerminalToken(GeneralUtil.GetCurrentMethodName(), currentRowNumber));
-            int backupPointer = pointer;
-            SyntaxTree<Token> backupTree = tree.Copy();
+            _tree.StartNode(new NonTerminalToken(GeneralUtil.GetCurrentMethodName(), _currentRowNumber));
+            int backupPointer = _pointer;
+            SyntaxTree<Token> backupTree = _tree.Copy();
 
-            if (relációsKifejezés())
+            if (RelációsKifejezés())
             {
-                tree.EndNode();
+                _tree.EndNode();
                 return true;
             }
             else
             {
-                pointer = backupPointer;
-                tree = backupTree;
+                _pointer = backupPointer;
+                _tree = backupTree;
             }
 
-            if (egyenlőségKifejezés() && t("==") && relációsKifejezés())
+            if (EgyenlőségKifejezés() && T("==") && RelációsKifejezés())
             {
-                tree.EndNode();
+                _tree.EndNode();
                 return true;
             }
             else
             {
-                pointer = backupPointer;
-                tree = backupTree;
+                _pointer = backupPointer;
+                _tree = backupTree;
             }
 
-            if (egyenlőségKifejezés() && t("!=") && relációsKifejezés())
+            if (EgyenlőségKifejezés() && T("!=") && RelációsKifejezés())
             {
-                tree.EndNode();
+                _tree.EndNode();
                 return true;
             }
             else
             {
-                pointer = backupPointer;
-                tree = backupTree;
+                _pointer = backupPointer;
+                _tree = backupTree;
             }
 
-            tree.EndNode();
-            tree.RemoveLastNode();
+            _tree.EndNode();
+            _tree.RemoveLastNode();
             return false;
         }
-        private bool relációsKifejezés()
+        private bool RelációsKifejezés()
         {
             /*
                 <relációsKifejezés>:
@@ -989,70 +988,70 @@ namespace SyntaxAnalysis
                     <relációsKifejezés> <= <additívKifejezés>
                     <relációsKifejezés> >= <additívKifejezés>
             */
-            tree.StartNode(new NonTerminalToken(GeneralUtil.GetCurrentMethodName(), currentRowNumber));
-            int backupPointer = pointer;
-            SyntaxTree<Token> backupTree = tree.Copy();
+            _tree.StartNode(new NonTerminalToken(GeneralUtil.GetCurrentMethodName(), _currentRowNumber));
+            int backupPointer = _pointer;
+            SyntaxTree<Token> backupTree = _tree.Copy();
 
-            if (additívKifejezés())
+            if (AdditívKifejezés())
             {
-                tree.EndNode();
+                _tree.EndNode();
                 return true;
             }
             else
             {
-                pointer = backupPointer;
-                tree = backupTree;
+                _pointer = backupPointer;
+                _tree = backupTree;
             }
 
-            if (relációsKifejezés() && t("<") && additívKifejezés())
+            if (RelációsKifejezés() && T("<") && AdditívKifejezés())
             {
-                tree.EndNode();
+                _tree.EndNode();
                 return true;
             }
             else
             {
-                pointer = backupPointer;
-                tree = backupTree;
+                _pointer = backupPointer;
+                _tree = backupTree;
             }
 
-            if (relációsKifejezés() && t(">") && additívKifejezés())
+            if (RelációsKifejezés() && T(">") && AdditívKifejezés())
             {
-                tree.EndNode();
+                _tree.EndNode();
                 return true;
             }
             else
             {
-                pointer = backupPointer;
-                tree = backupTree;
+                _pointer = backupPointer;
+                _tree = backupTree;
             }
 
-            if (relációsKifejezés() && t("<=") && additívKifejezés())
+            if (RelációsKifejezés() && T("<=") && AdditívKifejezés())
             {
-                tree.EndNode();
+                _tree.EndNode();
                 return true;
             }
             else
             {
-                pointer = backupPointer;
-                tree = backupTree;
+                _pointer = backupPointer;
+                _tree = backupTree;
             }
 
-            if (relációsKifejezés() && t(">=") && additívKifejezés())
+            if (RelációsKifejezés() && T(">=") && AdditívKifejezés())
             {
-                tree.EndNode();
+                _tree.EndNode();
                 return true;
             }
             else
             {
-                pointer = backupPointer;
-                tree = backupTree;
+                _pointer = backupPointer;
+                _tree = backupTree;
             }
 
-            tree.EndNode();
-            tree.RemoveLastNode();
+            _tree.EndNode();
+            _tree.RemoveLastNode();
             return false;
         }
-        private bool additívKifejezés()
+        private bool AdditívKifejezés()
         {
             /*
                 <additívKifejezés>:
@@ -1062,59 +1061,59 @@ namespace SyntaxAnalysis
                     <additívKifejezés> . <multiplikatívKifejezés>
                         # ^ nem vagyok biztos hogy ezt ide kéne
             */
-            tree.StartNode(new NonTerminalToken(GeneralUtil.GetCurrentMethodName(), currentRowNumber));
-            int backupPointer = pointer;
-            SyntaxTree<Token> backupTree = tree.Copy();
+            _tree.StartNode(new NonTerminalToken(GeneralUtil.GetCurrentMethodName(), _currentRowNumber));
+            int backupPointer = _pointer;
+            SyntaxTree<Token> backupTree = _tree.Copy();
 
-            if (multiplikatívKifejezés())
+            if (MultiplikatívKifejezés())
             {
-                tree.EndNode();
+                _tree.EndNode();
                 return true;
             }
             else
             {
-                pointer = backupPointer;
-                tree = backupTree;
+                _pointer = backupPointer;
+                _tree = backupTree;
             }
 
-            if (additívKifejezés() && t("+") && multiplikatívKifejezés())
+            if (AdditívKifejezés() && T("+") && MultiplikatívKifejezés())
             {
-                tree.EndNode();
+                _tree.EndNode();
                 return true;
             }
             else
             {
-                pointer = backupPointer;
-                tree = backupTree;
+                _pointer = backupPointer;
+                _tree = backupTree;
             }
 
-            if (additívKifejezés() && t("-") && multiplikatívKifejezés())
+            if (AdditívKifejezés() && T("-") && MultiplikatívKifejezés())
             {
-                tree.EndNode();
+                _tree.EndNode();
                 return true;
             }
             else
             {
-                pointer = backupPointer;
-                tree = backupTree;
+                _pointer = backupPointer;
+                _tree = backupTree;
             }
 
-            if (additívKifejezés() && t(".") && multiplikatívKifejezés())
+            if (AdditívKifejezés() && T(".") && MultiplikatívKifejezés())
             {
-                tree.EndNode();
+                _tree.EndNode();
                 return true;
             }
             else
             {
-                pointer = backupPointer;
-                tree = backupTree;
+                _pointer = backupPointer;
+                _tree = backupTree;
             }
 
-            tree.EndNode();
-            tree.RemoveLastNode();
+            _tree.EndNode();
+            _tree.RemoveLastNode();
             return false;
         }
-        private bool multiplikatívKifejezés()
+        private bool MultiplikatívKifejezés()
         {
             /*
                 <multiplikatívKifejezés>:
@@ -1123,59 +1122,59 @@ namespace SyntaxAnalysis
                     <multiplikatívKifejezés> / <unárisKifejezés>
                     <multiplikatívKifejezés> mod <unárisKifejezés>
             */
-            tree.StartNode(new NonTerminalToken(GeneralUtil.GetCurrentMethodName(), currentRowNumber));
-            int backupPointer = pointer;
-            SyntaxTree<Token> backupTree = tree.Copy();
+            _tree.StartNode(new NonTerminalToken(GeneralUtil.GetCurrentMethodName(), _currentRowNumber));
+            int backupPointer = _pointer;
+            SyntaxTree<Token> backupTree = _tree.Copy();
 
-            if (unárisKifejezés())
+            if (UnárisKifejezés())
             {
-                tree.EndNode();
+                _tree.EndNode();
                 return true;
             }
             else
             {
-                pointer = backupPointer;
-                tree = backupTree;
+                _pointer = backupPointer;
+                _tree = backupTree;
             }
 
-            if (multiplikatívKifejezés() && t("*") && unárisKifejezés())
+            if (MultiplikatívKifejezés() && T("*") && UnárisKifejezés())
             {
-                tree.EndNode();
+                _tree.EndNode();
                 return true;
             }
             else
             {
-                pointer = backupPointer;
-                tree = backupTree;
+                _pointer = backupPointer;
+                _tree = backupTree;
             }
 
-            if (multiplikatívKifejezés() && t("/") && unárisKifejezés())
+            if (MultiplikatívKifejezés() && T("/") && UnárisKifejezés())
             {
-                tree.EndNode();
+                _tree.EndNode();
                 return true;
             }
             else
             {
-                pointer = backupPointer;
-                tree = backupTree;
+                _pointer = backupPointer;
+                _tree = backupTree;
             }
 
-            if (multiplikatívKifejezés() && t("mod") && unárisKifejezés())
+            if (MultiplikatívKifejezés() && T("mod") && UnárisKifejezés())
             {
-                tree.EndNode();
+                _tree.EndNode();
                 return true;
             }
             else
             {
-                pointer = backupPointer;
-                tree = backupTree;
+                _pointer = backupPointer;
+                _tree = backupTree;
             }
 
-            tree.EndNode();
-            tree.RemoveLastNode();
+            _tree.EndNode();
+            _tree.RemoveLastNode();
             return false;
         }
-        private bool unárisKifejezés()
+        private bool UnárisKifejezés()
         {
             /*
                 <unárisKifejezés>:
@@ -1185,92 +1184,92 @@ namespace SyntaxAnalysis
                     ! <unárisKifejezés>
                     <belsőFüggvényHívóKifejezés>
             */
-            tree.StartNode(new NonTerminalToken(GeneralUtil.GetCurrentMethodName(), currentRowNumber));
-            int backupPointer = pointer;
-            SyntaxTree<Token> backupTree = tree.Copy();
+            _tree.StartNode(new NonTerminalToken(GeneralUtil.GetCurrentMethodName(), _currentRowNumber));
+            int backupPointer = _pointer;
+            SyntaxTree<Token> backupTree = _tree.Copy();
 
-            if (elsődlegesKifejezés())
+            if (ElsődlegesKifejezés())
             {
-                tree.EndNode();
+                _tree.EndNode();
                 return true;
             }
             else
             {
-                pointer = backupPointer;
-                tree = backupTree;
+                _pointer = backupPointer;
+                _tree = backupTree;
             }
 
-            if (t("+") && unárisKifejezés())
+            if (T("+") && UnárisKifejezés())
             {
-                tree.EndNode();
+                _tree.EndNode();
                 return true;
             }
             else
             {
-                pointer = backupPointer;
-                tree = backupTree;
+                _pointer = backupPointer;
+                _tree = backupTree;
             }
 
-            if (t("-") && unárisKifejezés())
+            if (T("-") && UnárisKifejezés())
             {
-                tree.EndNode();
+                _tree.EndNode();
                 return true;
             }
             else
             {
-                pointer = backupPointer;
-                tree = backupTree;
+                _pointer = backupPointer;
+                _tree = backupTree;
             }
 
-            if (t("!") && unárisKifejezés())
+            if (T("!") && UnárisKifejezés())
             {
-                tree.EndNode();
+                _tree.EndNode();
                 return true;
             }
             else
             {
-                pointer = backupPointer;
-                tree = backupTree;
+                _pointer = backupPointer;
+                _tree = backupTree;
             }
 
-            if (belsőFüggvényHívóKifejezés())
+            if (BelsőFüggvényHívóKifejezés())
             {
-                tree.EndNode();
+                _tree.EndNode();
                 return true;
             }
             else
             {
-                pointer = backupPointer;
-                tree = backupTree;
+                _pointer = backupPointer;
+                _tree = backupTree;
             }
 
-            tree.EndNode();
-            tree.RemoveLastNode();
+            _tree.EndNode();
+            _tree.RemoveLastNode();
             return false;
         }
-        private bool belsőFüggvényHívóKifejezés()
+        private bool BelsőFüggvényHívóKifejezés()
         {
             /*
                 <belsőFüggvényHívóKifejezés>:
                     <belsőFüggvény> ( <elsődlegesNemTömbLétrehozóKifejezés> )
             */
-            tree.StartNode(new NonTerminalToken(GeneralUtil.GetCurrentMethodName(), currentRowNumber));
-            int backupPointer = pointer;
-            SyntaxTree<Token> backupTree = tree.Copy();
+            _tree.StartNode(new NonTerminalToken(GeneralUtil.GetCurrentMethodName(), _currentRowNumber));
+            int backupPointer = _pointer;
+            SyntaxTree<Token> backupTree = _tree.Copy();
 
-            if (belsőFüggvény() && t("(") && elsődlegesNemTömbLétrehozóKifejezés())
+            if (BelsőFüggvény() && T("(") && ElsődlegesNemTömbLétrehozóKifejezés())
             {
-                tree.EndNode();
+                _tree.EndNode();
                 return true;
             }
             else
             {
-                pointer = backupPointer;
-                tree = backupTree;
+                _pointer = backupPointer;
+                _tree = backupTree;
             }
 
-            tree.EndNode();
-            tree.RemoveLastNode();
+            _tree.EndNode();
+            _tree.RemoveLastNode();
             return false;
         }
         //private bool MINTA()

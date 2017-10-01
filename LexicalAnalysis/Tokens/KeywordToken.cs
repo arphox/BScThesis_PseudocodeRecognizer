@@ -4,8 +4,8 @@ namespace LexicalAnalysis.Tokens
 {
     public sealed class KeywordToken : TerminalToken
     {
-        internal KeywordToken(int ID, int rowNumber) : base(ID, rowNumber) { }
+        internal KeywordToken(int id, int rowNumber) : base(id, rowNumber) { }
 
-        public override string ToString() => string.Format("KeywordToken ID={0} {1} ", ID, LexicalElementCodeProvider.GetCodeType(ID));
+        public override string ToString() => $"KeywordToken ID={Id} {LexicalElementCodeProvider.GetCodeType(Id)}";
     }
 }

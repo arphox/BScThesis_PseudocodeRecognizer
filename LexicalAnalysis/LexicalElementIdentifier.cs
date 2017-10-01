@@ -14,14 +14,7 @@ namespace LexicalAnalysis
         {
             word = word.ToLower();
 
-            if (IsReservedWord(word))
-            {
-                return LexicalElementCodeProvider.GetCode(word);
-            }
-            else
-            {
-                return TryGetOtherLexElementCode(word);
-            }
+            return IsReservedWord(word) ? LexicalElementCodeProvider.GetCode(word) : TryGetOtherLexElementCode(word);
         }
 
 

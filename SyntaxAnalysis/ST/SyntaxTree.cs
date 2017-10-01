@@ -6,15 +6,15 @@ namespace SyntaxAnalysis.ST
 {
     public class SyntaxTree<T>
     {
-        private static readonly bool PRINTPRETTY_ENABLED = false; // only not const because I don't want compiler warnings
+        private static readonly bool PrintprettyEnabled = false; // only not const because I don't want compiler warnings
 
-        public TreeNode<T> Root { get; private set; }
+        public TreeNode<T> Root { get; }
         internal TreeNode<T> CurrentNode { get; private set; }
 
         internal SyntaxTree(T rootValue)
         {
-            this.Root = new TreeNode<T>(null, rootValue);
-            CurrentNode = this.Root;
+            Root = new TreeNode<T>(null, rootValue);
+            CurrentNode = Root;
         }
 
         internal void StartNode(T value)
@@ -69,7 +69,7 @@ namespace SyntaxAnalysis.ST
         }
         private void PrintPretty()
         {
-            if (!PRINTPRETTY_ENABLED)
+            if (!PrintprettyEnabled)
             {
                 return;
             }

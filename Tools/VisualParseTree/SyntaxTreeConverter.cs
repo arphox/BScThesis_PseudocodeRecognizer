@@ -11,19 +11,19 @@ namespace VisualParseTree
 {
     class SyntaxTreeConverter
     {
-        private TreeView visualTree;
-        private SyntaxTree<Token> dataTree;
+        private TreeView _visualTree;
+        private SyntaxTree<Token> _dataTree;
 
         public SyntaxTreeConverter(TreeView treeView, SyntaxTree<Token> syntaxTree)
         {
-            this.visualTree = treeView;
-            this.dataTree = syntaxTree;
+            _visualTree = treeView;
+            _dataTree = syntaxTree;
         }
 
 
         public void SetTreeView()
         {
-            visualTree.Items.Add(TraverseNode(dataTree.Root));
+            _visualTree.Items.Add(TraverseNode(_dataTree.Root));
         }
 
         private TreeViewItem TraverseNode(TreeNode<Token> node)

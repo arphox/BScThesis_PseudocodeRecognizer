@@ -8,12 +8,12 @@ namespace LexicalAnalysis.Tokens
 
         internal ErrorToken(string message, int rowNumber) : base(LexicalElementCodeProvider.ErrorCode, rowNumber)
         {
-            this.Message = message;
+            Message = message;
         }
 
         public override string ToString()
         {
-            return string.Format(">>> ErrorToken a {0}.sorban: {1}<<<", RowNumber, Message);
+            return $">>> ErrorToken a {RowNumber}.sorban: {Message}<<<";
         }
     }
 }
