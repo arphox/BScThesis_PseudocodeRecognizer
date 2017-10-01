@@ -3,11 +3,12 @@
 namespace LexicalAnalysisTests
 {
     [TestFixture]
-    public class UnitTest1
+    public class AcceptanceTests
     {
         [Test]
         public void TestMethod1()
         {
+
         }
     }
 }
