@@ -14,6 +14,7 @@ using SyntaxAnalysis.Utilities;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using LexicalAnalysis.LexicalElementCodes;
 
 namespace SyntaxAnalysis
 {
@@ -58,7 +59,7 @@ namespace SyntaxAnalysis
 
             currentRowNumber = CurrentToken.RowNumber;
             tree.StartNode(CurrentToken);
-            bool isSuccessful = CurrentToken.ID == LexicalElementCodes.Singleton[tokenName];
+            bool isSuccessful = CurrentToken.ID == LexicalElementCodeProvider.GetCode(tokenName);
             tree.EndNode();
 
             if (isSuccessful)

@@ -1,4 +1,5 @@
 ﻿using System.Text.RegularExpressions;
+using LexicalAnalysis.LexicalElementCodes;
 
 namespace LexicalAnalysis
 {
@@ -9,43 +10,43 @@ namespace LexicalAnalysis
         private const string IdentifierPattern = @"^[a-záéíóöőúüű]+[0-9a-z_áéíóöőúüű]*$";
 
 
-        internal static int IdentifyLexicalElement(string input)
+        internal static int IdentifyLexicalElement(string word)
         {
-            input = input.ToLower();
+            word = word.ToLower();
 
-            if (IsReservedWord(input))
+            if (IsReservedWord(word))
             {
-                return LexicalElementCodes.Singleton[input];
+                return LexicalElementCodeProvider.GetCode(word);
             }
             else
             {
-                return TryGetOtherLexElementCode(input);
+                return TryGetOtherLexElementCode(word);
             }
         }
 
 
-        private static bool IsReservedWord(string input)
+        private static bool IsReservedWord(string word)
         {
-            int code = LexicalElementCodes.Singleton[input];
-            return code != LexicalElementCodes.ERROR;
+            int code = LexicalElementCodeProvider.GetCode(word);
+            return code != LexicalElementCodeProvider.ErrorCode;
         }
         private static int TryGetOtherLexElementCode(string input)
         {
             if (IsIntegerLiteral(input))
             {
-                return LexicalElementCodes.Singleton["egész literál"];
+                return LexicalElementCodeProvider.GetCode("egész literál");
             }
             else if (IsDecimalLiteral(input))
             {
-                return LexicalElementCodes.Singleton["tört literál"];
+                return LexicalElementCodeProvider.GetCode("tört literál");
             }
             else if (IsIdentifier(input))
             {
-                return LexicalElementCodes.Singleton["azonosító"];
+                return LexicalElementCodeProvider.GetCode("azonosító");
             }
             else
             {
-                return LexicalElementCodes.ERROR;
+                return LexicalElementCodeProvider.ErrorCode;
             }
         }
         private static bool IsIntegerLiteral(string input) => Regex.Match(input, IntegerLiteralPattern).Success;

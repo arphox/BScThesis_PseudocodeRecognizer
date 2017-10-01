@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
+using LexicalAnalysis.LexicalElementCodes;
 
 namespace LexicalAnalysis.Tokens
 {
@@ -13,7 +14,7 @@ namespace LexicalAnalysis.Tokens
         internal static int FindTypeOfLastIdentifier(this List<Token> outputTokens)
         {
             if (outputTokens.Count == 0)
-                return LexicalElementCodes.ERROR;
+                return LexicalElementCodeProvider.ErrorCode;
 
             int lastIndex = outputTokens.Count - 1;
             int lastTokenID = outputTokens[lastIndex].ID;
@@ -34,7 +35,7 @@ namespace LexicalAnalysis.Tokens
             }
             else
             {
-                return LexicalElementCodes.ERROR;
+                return LexicalElementCodeProvider.ErrorCode;
             }
         }
 

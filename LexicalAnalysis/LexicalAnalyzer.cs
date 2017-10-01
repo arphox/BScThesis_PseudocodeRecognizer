@@ -3,6 +3,7 @@ using LexicalAnalysis.Tokens;
 using System;
 using System.Collections.Generic;
 using System.Text;
+using LexicalAnalysis.LexicalElementCodes;
 
 namespace LexicalAnalysis
 {
@@ -11,11 +12,11 @@ namespace LexicalAnalysis
         // PUBLIC //
         public LexicalAnalyzer()
         {
-            SymbolTable.ResetEverything();
-            outputTokensHandler = new OutputTokenListHandler(symbolTableHandler);
+            symbolTableManager = new SymbolTableManager();
+            outputTokensHandler = new OutputTokenListHandler(symbolTableManager);
         }
 
-        public List<Token> PerformLexicalAnalysis(string sourceCode)
+        public LexicalAnalyzerResult Analyze(string sourceCode)
         {
             if (string.IsNullOrWhiteSpace(sourceCode))
                 throw new ArgumentNullException(nameof(sourceCode), "The source code cannot be null or empty.");
@@ -24,9 +25,8 @@ namespace LexicalAnalysis
 
             DoLexicalAnalysis();
 
-            SymbolTable.CleanupGlobalSymbolTable();
-            SymbolTable.GlobalSymbolTable = symbolTableHandler.SymbolTable;
-            return outputTokensHandler.OutputTokens;
+            symbolTableManager.CleanUpIfNeeded();
+            return new LexicalAnalyzerResult(outputTokensHandler.OutputTokens, symbolTableManager.RootSymbolTable);
         }
 
 
@@ -38,7 +38,7 @@ namespace LexicalAnalysis
         private int currentRowNumber = 1;
         private bool programStartTokenFound = false;
         private LexicalAnalyzerState state = LexicalAnalyzerState.Initial;
-        private SymbolTableHandler symbolTableHandler = new SymbolTableHandler();
+        private SymbolTableManager symbolTableManager;
         private OutputTokenListHandler outputTokensHandler;
         private char CurrentChar => input[inputIndexer];
         private char NextChar => input[inputIndexer + 1];
@@ -124,7 +124,7 @@ namespace LexicalAnalysis
             }
 
             offset = 0;
-            lastCorrectCode = LexicalElementCodes.ERROR; // last correctly recognised lexical element
+            lastCorrectCode = LexicalElementCodeProvider.ErrorCode; // last correctly recognised lexical element
             lastCorrectLength = -1; // last correctly recognised lexical element's length
             currentCode = int.MaxValue; //current lexical element to recognise
             currentLookaheadLength = 0;
@@ -132,7 +132,7 @@ namespace LexicalAnalysis
 
             RecognizeNonWhitespace();
 
-            if (lastCorrectCode == LexicalElementCodes.ERROR)
+            if (lastCorrectCode == LexicalElementCodeProvider.ErrorCode)
             {
                 string errorMsg = $"Nem tudom felismerni ezt a szöveget: \"{currentSubstring}\"";
                 outputTokensHandler.AddToken(new ErrorToken(errorMsg, currentRowNumber));
@@ -149,11 +149,11 @@ namespace LexicalAnalysis
         {
             while (inputIndexer + offset < input.Length &&
                 !IsWhitespace(input[inputIndexer + offset]) &&
-                currentCode != LexicalElementCodes.ERROR)
+                currentCode != LexicalElementCodeProvider.ErrorCode)
             {
                 currentSubstring = input.Substring(inputIndexer, offset + 1);
                 currentCode = LexicalElementIdentifier.IdentifyLexicalElement(currentSubstring);
-                if (currentCode != LexicalElementCodes.ERROR)
+                if (currentCode != LexicalElementCodeProvider.ErrorCode)
                 {
                     lastCorrectCode = currentCode;
                     lastCorrectLength = offset + 1;
@@ -166,16 +166,16 @@ namespace LexicalAnalysis
         }
         private void HandleConflict()
         {
-            if (currentCode != LexicalElementCodes.ERROR)
+            if (currentCode != LexicalElementCodeProvider.ErrorCode)
             {
                 return;
             }
 
-            if (lastCorrectCode == LexicalElementCodes.Singleton["egész literál"] && input[inputIndexer + offset] == ',')
+            if (lastCorrectCode == LexicalElementCodeProvider.GetCode("egész literál") && input[inputIndexer + offset] == ',')
             {   // Conflict handling between integer and fractional literals
                 currentCode = int.MaxValue;
             }
-            else if (LexicalElementCodes.IsOperator(lastCorrectCode) && input[inputIndexer + offset - 1] == '-')
+            else if (LexicalElementCodeProvider.IsOperator(lastCorrectCode) && input[inputIndexer + offset - 1] == '-')
             {   // Conflict handling between the '-' operator and the following reserved words: "-tól", "-től", "-ig"
                 currentCode = int.MaxValue;
                 currentLookaheadLength = 2;
@@ -224,7 +224,7 @@ namespace LexicalAnalysis
             }
             inputIndexer++; //   skip closing "
 
-            int code = LexicalElementCodes.Singleton["szöveg literál"];
+            int code = LexicalElementCodeProvider.GetCode("szöveg literál");
             outputTokensHandler.AddToken(new LiteralToken(code, currentLiteral.ToString(), currentRowNumber));
         }
 
@@ -234,13 +234,13 @@ namespace LexicalAnalysis
             currentRowNumber++;
             if (outputTokensHandler.IsLastTokenNotNewLine()) // prevents adding mutiple newline tokens.
             {
-                int code = LexicalElementCodes.Singleton["újsor"];
+                int code = LexicalElementCodeProvider.GetCode("újsor");
                 outputTokensHandler.AddToken(new KeywordToken(code, currentRowNumber));
             }
         }
         private void AddNonWhitespaceToken(string recognizedSubString, int code)
         {
-            if (code == LexicalElementCodes.Singleton["program_kezd"])
+            if (code == LexicalElementCodeProvider.GetCode("program_kezd"))
             {
                 programStartTokenFound = true;
             }
@@ -249,7 +249,7 @@ namespace LexicalAnalysis
                 return;
             }
 
-            switch (LexicalElementCodes.GetCodeType(code))
+            switch (LexicalElementCodeProvider.GetCodeType(code))
             {
                 case LexicalElementCodeType.Operator:
                     outputTokensHandler.AddToken(new KeywordToken(code, currentRowNumber));
@@ -273,7 +273,7 @@ namespace LexicalAnalysis
         }
         private void AddKeyword(int code)
         {
-            symbolTableHandler.ChangeSymbolTableIndentIfNeeded(code);
+            symbolTableManager.ChangeSymbolTableIndentIfNeeded(code);
             outputTokensHandler.AddKeyword(code, currentRowNumber);
             if (outputTokensHandler.ProgramEndTokenAdded)
             {

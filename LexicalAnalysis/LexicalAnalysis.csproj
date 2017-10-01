@@ -36,6 +36,7 @@
     <Reference Include="Microsoft.CSharp" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="LexicalAnalyzerResult.cs" />
     <Compile Include="LexicalAnalyzerState.cs" />
     <Compile Include="LexicalElementIdentifier.cs" />
     <Compile Include="OutputTokenListHandler.cs" />
@@ -44,11 +45,11 @@
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
       <DependentUpon>Settings.settings</DependentUpon>
     </Compile>
-    <Compile Include="LexicalElementCodes\LexicalElementCodes.cs" />
+    <Compile Include="LexicalElementCodes\LexicalElementCodeProvider.cs" />
     <Compile Include="LexicalAnalyzer.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="LexicalElementCodes\LexicalElementCodeType.cs" />
-    <Compile Include="SymbolTableHandler.cs" />
+    <Compile Include="SymbolTableManager.cs" />
     <Compile Include="SymbolTables\SingleEntryType.cs" />
     <Compile Include="SymbolTables\SymbolTable.cs" />
     <Compile Include="SymbolTables\SubTableEntry.cs" />

@@ -1,5 +1,4 @@
-﻿using LexicalAnalysis.SymbolTables;
-namespace LexicalAnalysis.Tokens
+﻿namespace LexicalAnalysis.Tokens
 {
     public class IdentifierToken : TerminalToken
     {
@@ -10,12 +9,6 @@ namespace LexicalAnalysis.Tokens
             SymbolID = symbolTableID;
         }
 
-        public override string ToString()
-        {
-            SymbolTable.SymbolIDToName.TryGetValue(SymbolID, out string symbolname);
-
-            return string.Format("IdentifierToken SymbolID={0}, név={1}",
-                SymbolID, symbolname);
-        }
+        public override string ToString() => string.Format("IdentifierToken SymbolID=" + SymbolID);
     }
 }
