@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
-VisualStudioVersion = 15.0.26403.7
+VisualStudioVersion = 15.0.26730.16
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LexicalAnalysis", "LexicalAnalysis\LexicalAnalysis.csproj", "{5C7EF03C-6FC4-4BD7-A714-8F2B7B7765DE}"
 EndProject
@@ -10,6 +10,10 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SyntaxAnalysis", "SyntaxAnalysis\SyntaxAnalysis.csproj", "{7572F7AF-2DCE-4F54-BB01-A4E319BB8142}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "VisualParseTree", "VisualParseTree\VisualParseTree.csproj", "{AAE83F8A-F6C8-43ED-8C50-712F292C518E}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Test", "Test", "{9344FD14-A141-4F46-9986-699690373442}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tools", "Tools", "{66259EB7-1BED-43C5-9517-B3E79EC15375}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -36,5 +40,12 @@ Global
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{BDF1FDCE-17CB-42A1-A66E-359DDA8BB71C} = {9344FD14-A141-4F46-9986-699690373442}
+		{AAE83F8A-F6C8-43ED-8C50-712F292C518E} = {66259EB7-1BED-43C5-9517-B3E79EC15375}
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {26E9ED42-D1DB-43FE-9E4E-7084A53BB9DA}
 	EndGlobalSection
 EndGlobal
