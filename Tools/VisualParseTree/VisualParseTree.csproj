@@ -97,11 +97,11 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\LexicalAnalysis\LexicalAnalysis.csproj">
+    <ProjectReference Include="..\..\LexicalAnalysis\LexicalAnalysis.csproj">
       <Project>{5c7ef03c-6fc4-4bd7-a714-8f2b7b7765de}</Project>
       <Name>LexicalAnalysis</Name>
     </ProjectReference>
-    <ProjectReference Include="..\SyntaxAnalysis\SyntaxAnalysis.csproj">
+    <ProjectReference Include="..\..\SyntaxAnalysis\SyntaxAnalysis.csproj">
       <Project>{7572f7af-2dce-4f54-bb01-a4e319bb8142}</Project>
       <Name>SyntaxAnalysis</Name>
     </ProjectReference>
