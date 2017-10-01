@@ -1,7 +1,6 @@
-BSc. Thesis of Károly Ozsvárt:
+BSc. Thesis of Károly Ozsvárt
+=============================
 
-*Title:*
-
-EN: Pseudocode Recognizer Creation
-
-HU: Pszeudokód elemzõ készítése
+Pseudocode Recognizer Creation
+------------------------------
+( Pszeudokód elemzõ készítése )
