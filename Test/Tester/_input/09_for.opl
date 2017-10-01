@@ -1,6 +1,0 @@
-program_kezd
-szöveg x="alma"
-ciklus egész i=1-től i<10-ig
-	kiír x
-ciklus_vége
-program_vége

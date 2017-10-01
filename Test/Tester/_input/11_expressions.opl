@@ -1,9 +1,0 @@
-program_kezd
-logikai éhes = igaz
-ha éhes == igaz vagy hamis akkor
-	kiír "menj enni!"
-elágazás_vége
-szöveg konkatenált = "valami"."mégvalami"." "."még valami"
-tört törtpélda=(+-6,0*+++10-(--0,3*+4,1)/--28,3-4)
-kiír törtpélda
-program_vége
