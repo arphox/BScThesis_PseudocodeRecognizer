@@ -2,21 +2,15 @@
 {
     internal abstract class SymbolTableEntry
     {
-        internal int ID { get; private set; }
+        private static int CurrentSymbolID = 1;
+
+        internal int ID { get; }
 
         internal SymbolTableEntry()
         {
             ID = CurrentSymbolID++;
         }
 
-        public override string ToString()
-        {
-            return string.Format("ID = {0}, ", ID);
-        }
-
-
-
-        // STATIC //
-        private static int CurrentSymbolID = 1;
+        public override string ToString() => string.Format("ID = {0}, ", ID);
     }
 }
