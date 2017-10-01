@@ -1,6 +1,0 @@
-﻿program_kezd
-egész x = 2;
-egész y = 3;
-y = x + y;
-x = x + 1;
-program_vége

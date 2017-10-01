@@ -117,17 +117,242 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="ArrayForIf" xml:space="preserve">
+    <value>program_kezd
+egész x=2
+ha x&gt;=2 akkor
+	kiír "x nem kisebb kettőnél..."
+különben
+	kiír "x kisebb, mint kettő!"
+elágazás_vége
+egész[] y = létrehoz(egész)[10]
+ciklus egész i=0-tól 9-ig
+	y[i]=i
+	kiír y[i]
+ciklus_vége
+program_vége</value>
+    <comment>deklarációt, szelekciót, számlálós ciklust, tömbkezelést tartalmazó kód</comment>
+  </data>
+  <data name="Comments" xml:space="preserve">
+    <value>//komment
+program_kezd
+
+kiír     "H//ello világ!" //Ez egy egysoros komment
+//kiír    "Hello világ!" //Ez egy egysoros komment
+/*
+Elvileg működnie kellene. :P
+//
+*/
+szöveg alma="almavagyok"
+program_vége</value>
+    <comment>főleg kommenteket tartalmazó kód</comment>
+  </data>
+  <data name="Declarations" xml:space="preserve">
+    <value>program_kezd
+egész a
+egész b
+egész[] tömb = létrehoz(egész)[10]
+szöveg error
+logikai lenniVAGYnemLENNI
+tört burgonya = 2,3
+program_vége</value>
+    <comment>deklarációkat tartalmazó kód</comment>
+  </data>
+  <data name="DeepBlocks" xml:space="preserve">
+    <value>program_kezd
+
+egész[] tömb = létrehoz(egész)[10]
+
+egész a = 2
+ciklus egész aa = 0-tól aa &lt; 9-ig
+	tört aaa = 2,4
+ciklus_vége
+
+
+egész b = 0
+ciklus egész bb = 0-tól bb &lt; 9-ig
+	szöveg bbb = "alma"
+	ha bb mod 2 == 0 akkor
+		szöveg bbbb = "asd"
+	elágazás_vége
+ciklus_vége
+
+egész c = 0
+ciklus_amíg c &lt; 2
+	egész ccc = 2
+	ha ccc == 3 akkor
+		ciklus egész cccc = 1-től cccc &lt; 10-ig
+			tört ccccc = 3,14
+			ciklus_amíg ccc &gt; 2
+				ccc = ccc - 2
+			ciklus_vége
+			egész ccccc2
+		ciklus_vége
+		logikai l = hamis
+	elágazás_vége
+	szöveg sz = "haha"
+ciklus_vége
+program_vége</value>
+    <comment>mélyen egymásba épített blokkokat, azokon belül deklarációkat (szimbólumtáblát) tartalmazó kód</comment>
+  </data>
+  <data name="Expressions" xml:space="preserve">
+    <value>program_kezd
+logikai éhes = igaz
+ha éhes == igaz vagy hamis akkor
+	kiír "menj enni!"
+elágazás_vége
+szöveg konkatenált = "valami"."mégvalami"." "."még valami"
+tört törtpélda=(+-6,0*+++10-(--0,3*+4,1)/--28,3-4)
+kiír törtpélda
+program_vége</value>
+    <comment>összetett aritmetikai kifejezéseket tartalmazó kód</comment>
+  </data>
+  <data name="For" xml:space="preserve">
+    <value>program_kezd
+szöveg x="alma"
+ciklus egész i=1-től i&lt;10-ig
+	kiír x
+ciklus_vége
+program_vége</value>
+    <comment>számlálós ciklust tartalmazó kód</comment>
+  </data>
+  <data name="InternalFunctions" xml:space="preserve">
+    <value>program_kezd
+
+egész[] tömb = létrehoz(egész)[10]
+egész a = törtből_egészbe(tömb[0] * 2,5) + logikaiból_egészbe(igaz)
+szöveg sz = szövegből_egészbe(a)
+logikai log = igaz
+tört tttt = logikaiból_törtbe(log)
+tttt = szövegből_törtbe(sz)
+log = egészből_logikaiba(123231)
+ciklus egész b = 0-tól b &lt; 9-ig
+	logikai xxxxxxxx = törtből_logikaiba(0,0)
+ciklus_vége
+szöveg sx = "hamis"
+log = szövegből_logikaiba(sx)
+program_vége</value>
+    <comment>beépített függvényeket tartalmazó kód</comment>
+  </data>
+  <data name="Masodfoku" xml:space="preserve">
+    <value>program_kezd
+	egész a
+	beolvas a
+	egész b
+	beolvas b
+	egész c
+	beolvas c
+	tört diszkrimináns=b*b-(4*a*c)
+	ha diszkrimináns&lt;0,0 akkor
+		kiír "Nincs valós gyöke!"
+	különben
+		kiír "Van legalább egy valós gyöke!"
+	elágazás_vége
+program_vége</value>
+    <comment>deklarációkat, beolvasást, szelekciót tartalmazó kód</comment>
+  </data>
+  <data name="MultipleStart" xml:space="preserve">
+    <value>program_kezd
+egész x = 2
+program_kezd
+x = x + 1
+program_vége</value>
+    <comment>többszörös program_kezd sorokat egymás után tartalmazó kód</comment>
+  </data>
   <data name="NoEnd" xml:space="preserve">
     <value>program_kezd
 egész x = 2
 x = x + 1</value>
-    <comment>program_vége utasítást nem tartalmazó fájl</comment>
+    <comment>program_vége utasítást nem tartalmazó kód</comment>
+  </data>
+  <data name="NoStart" xml:space="preserve">
+    <value>egész x = 2
+x = x + 1
+program_vége</value>
+    <comment>program_kezd utasítást nem tartalmazó kód</comment>
   </data>
   <data name="NoStartEnd" xml:space="preserve">
     <value>alma körte barack
 nincs is értelmes
 kód a fájlban!
 Jaj.</value>
-    <comment>program_kezd és program_vége utasításokat nem tartalmazó fájl</comment>
+    <comment>program_kezd és program_vége utasításokat nem tartalmazó kód</comment>
+  </data>
+  <data name="NotOnlyCode" xml:space="preserve">
+    <value>egész x = 2
+x = x + 1
+program_kezd
+egész x = 2
+x = x + 1
+egész a = 2
+ciklus egész b = 0-tól b &lt; 9-ig
+	egész c = törtből_egészbe(2,4)
+ciklus_vége
+program_vége
+egész x = 2
+x = x + 1
+ciklus_vége
+program_vége
+program_kezd
+program_vége</value>
+    <comment>a program_kezd és program_vége sorok előtt és után egyéb karaktereket is tartalmazó kód</comment>
+  </data>
+  <data name="NoType" xml:space="preserve">
+    <value>program_kezd
+x = x + 1
+program_vége</value>
+    <comment>nem deklarált változóhasználatot tartalmazó kód</comment>
+  </data>
+  <data name="Redeclaration" xml:space="preserve">
+    <value>program_kezd
+egész a
+egész b
+logikai a
+egész[] tömb = létrehoz(egész)[10]
+szöveg error
+logikai lenniVAGYnemLENNI
+tört burgonya = 2,3
+program_vége</value>
+    <comment>változó újradeklarálását tartalmazó kód</comment>
+  </data>
+  <data name="SimpleTheorems" xml:space="preserve">
+    <value>program_kezd
+
+egész[] tömb = létrehoz(egész)[10]
+
+ciklus egész i=0-tól i&lt;9-ig
+	tömb[i] = i*10
+	kiír tömb[i]
+ciklus_vége
+
+
+
+egész db=0
+ciklus egész i=0-tól i&lt;9-ig
+	ha tömb[i]mod 2==0 akkor
+		db=db+1
+	elágazás_vége
+ciklus_vége
+kiír "Ennyi darab páros \"szám van: ".db
+
+egész maxi=0
+ciklus egész i=0-tól i&lt;9-ig
+	ha tömb[i]&gt;tömb[maxi]
+		maxi=i
+	elágazás_vége
+ciklus_vége
+kiír "A maximális elem: tömb[".maxi."]=".tömb[maxi]
+egész xxx = szövegből_egészbe("10")
+program_vége</value>
+    <comment>egymásba épített blokkokat, szelekciót, tömbkezelést tartalmazó kód</comment>
+  </data>
+  <data name="UnknownSymbol" xml:space="preserve">
+    <value>program_kezd
+egész x = 2;
+egész y = 3;
+y = x + y;
+x = x + 1;
+program_vége</value>
+    <comment>a nyelvben nem létező lexikális elemet (;) tartalmazó kód</comment>
   </data>
 </root>
