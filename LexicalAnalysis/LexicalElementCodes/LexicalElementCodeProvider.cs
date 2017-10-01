@@ -47,7 +47,7 @@ namespace LexicalAnalysis.LexicalElementCodes
             WordsToCodes.Add("egész literál", 110);
             WordsToCodes.Add("tört literál", 120);
             WordsToCodes.Add("szöveg literál", 130);
-            WordsToCodes.Add("igaz", 141); ;
+            WordsToCodes.Add("igaz", 141);
             WordsToCodes.Add("hamis", 142);
 
             #endregion

@@ -22,11 +22,10 @@ namespace SyntaxAnalysis
         private SyntaxTree<Token> _tree;
 
         private readonly List<Token> _tokens;
-        private int _pointer = 0;
+        private int _pointer;
         private Token CurrentToken => _tokens[_pointer];
 
-        private int _currentRowNumber = 0;
-        private int _furthestRowNumber = 0;
+        private int _currentRowNumber;
 
         public SyntaxAnalyzer(List<Token> tokens)
         {
@@ -35,7 +34,7 @@ namespace SyntaxAnalysis
                 throw new SyntaxAnalysisException("A szintaktikus elemző nem indul el, ha a lexikális elemző hibát jelez.");
             }
 
-            this._tokens = tokens;
+            _tokens = tokens;
         }
 
         public Tuple<SyntaxTree<Token>, bool> Start()
@@ -63,7 +62,6 @@ namespace SyntaxAnalysis
 
             if (isSuccessful)
             {
-                _furthestRowNumber = CurrentToken.RowNumber;
             }
             else
             {
@@ -81,7 +79,6 @@ namespace SyntaxAnalysis
 
             if (isSuccessful)
             {
-                _furthestRowNumber = CurrentToken.RowNumber;
             }
             else
             {

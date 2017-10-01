@@ -1,22 +1,12 @@
 ﻿using LexicalAnalysis;
-using VisualParseTree;
 using LexicalAnalysis.Tokens;
 using SyntaxAnalysis;
 using SyntaxAnalysis.ST;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
 using System.IO;
 
 namespace VisualParseTree
@@ -46,20 +36,20 @@ namespace VisualParseTree
             Tuple<SyntaxTree<Token>, bool> result = new SyntaxAnalyzer(tokenList).Start();
             _syntaxTree = result.Item1;
 
-            new SyntaxTreeConverter(treeView, _syntaxTree).SetTreeView();
+            new SyntaxTreeConverter(TreeView, _syntaxTree).SetTreeView();
             Console.WriteLine("SUCCESS? : " + result.Item2);
         }
 
         private void ButtonExpandAll_Click(object sender, RoutedEventArgs e)
         {
-            (treeView.Items[0] as TreeViewItem).ExpandAll();
-            treeView.Items.Refresh();
+            (TreeView.Items[0] as TreeViewItem).ExpandAll();
+            TreeView.Items.Refresh();
         }
 
         private void ButtonCollapseAll_Click(object sender, RoutedEventArgs e)
         {
-            (treeView.Items[0] as TreeViewItem).CollapseAll();
-            treeView.Items.Refresh();
+            (TreeView.Items[0] as TreeViewItem).CollapseAll();
+            TreeView.Items.Refresh();
         }
 
         private void ButtonPrintLeaves_Click(object sender, RoutedEventArgs e)

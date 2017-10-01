@@ -14,8 +14,7 @@ namespace LexicalAnalysis.SymbolTables
         internal bool IsEmpty => Entries.Count == 0;
 
         /// <summary>
-        /// Searches the given symbol table for the given symbol name
-        /// and returns the ID, if found; otherwise <see cref="NotFoundId"/>.
+        /// Searches the given symbol table for the given symbol name and returns the ID, if found; otherwise <see cref="NotFoundId"/>.
         /// </summary>
         private int FindId(string nameToFind)
         {
@@ -120,7 +119,7 @@ namespace LexicalAnalysis.SymbolTables
         {
             if (Properties.Settings.Default.Cleanup_SymbolTable)
             {
-                int cleanCount = 0;
+                int cleanCount;
                 do
                 {
                     cleanCount = RemoveEmptySymbolTables();
@@ -139,7 +138,7 @@ namespace LexicalAnalysis.SymbolTables
                 if (currentEntry is SingleEntry single)
                 {
                     output.Append(prefix);
-                    output.Append(single.ToString());
+                    output.Append(single);
                 }
                 else // SubTableEntry
                 {

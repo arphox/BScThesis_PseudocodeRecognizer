@@ -7,10 +7,29 @@ namespace LexicalAnalysis
 {
     public class LexicalAnalyzer
     {
-        // PUBLIC //
+        private string _input;
+        private int _inputIndexer = 0;
+        private int _currentRowNumber = 1;
+        private bool _programStartTokenFound = false;
+        private LexicalAnalyzerState _state = LexicalAnalyzerState.Initial;
+        private readonly SymbolTableManager _symbolTableManager = new SymbolTableManager();
+        private readonly OutputTokenListHandler _outputTokensHandler;
+        private char CurrentChar => _input[_inputIndexer];
+        private char NextChar => _input[_inputIndexer + 1];
+        private bool InputEndReached => _inputIndexer >= _input.Length;
+
+        // Used at non whitespace analysis:
+        private int _lastCorrectCode;
+        private int _lastCorrectLength;
+        private int _currentCode;
+        private int _currentLookaheadLength;
+        private int _offset;
+        private string _currentSubstring;
+        // -------------------------------
+
+
         public LexicalAnalyzer()
         {
-            _symbolTableManager = new SymbolTableManager();
             _outputTokensHandler = new OutputTokenListHandler(_symbolTableManager);
         }
 
@@ -27,32 +46,6 @@ namespace LexicalAnalysis
             return new LexicalAnalyzerResult(_outputTokensHandler.OutputTokens, _symbolTableManager.RootSymbolTable);
         }
 
-
-
-        // PRIVATE //
-        // DATA //
-        private string _input;
-        private int _inputIndexer = 0;
-        private int _currentRowNumber = 1;
-        private bool _programStartTokenFound = false;
-        private LexicalAnalyzerState _state = LexicalAnalyzerState.Initial;
-        private readonly SymbolTableManager _symbolTableManager;
-        private readonly OutputTokenListHandler _outputTokensHandler;
-        private char CurrentChar => _input[_inputIndexer];
-        private char NextChar => _input[_inputIndexer + 1];
-        private bool InputEndReached => _inputIndexer >= _input.Length;
-
-        // Used at non whitespace analysis:
-        private int _lastCorrectCode;
-        private int _lastCorrectLength;
-        private int _currentCode;
-        private int _currentLookaheadLength;
-        private int _offset;
-        private string _currentSubstring;
-        // -------------------------------
-
-
-        // METHODS //
         private void DoLexicalAnalysis()
         {
             _state = SelectNextState();
