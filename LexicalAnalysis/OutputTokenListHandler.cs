@@ -30,7 +30,7 @@ namespace LexicalAnalysis
         }
         internal bool IsLastTokenNotNewLine()
         {
-            return !IsEmpty && Last().Id != LexicalElementCodeProvider.GetCode("újsor");
+            return !IsEmpty && Last().Id != LexicalElementCodeDictionary.GetCode("újsor");
         }
         internal void AddProgramStart(int code, int currentRowNumber)
         {
@@ -45,11 +45,11 @@ namespace LexicalAnalysis
         }
         internal void AddKeyword(int code, int currentRowNumber)
         {
-            if (code == LexicalElementCodeProvider.GetCode("program_kezd"))
+            if (code == LexicalElementCodeDictionary.GetCode("program_kezd"))
             {
                 AddProgramStart(code, currentRowNumber);
             }
-            else if (code == LexicalElementCodeProvider.GetCode("program_vége"))
+            else if (code == LexicalElementCodeDictionary.GetCode("program_vége"))
             {
                 ProgramEndTokenAdded = true;
                 OutputTokens.Add(new KeywordToken(code, currentRowNumber));
@@ -76,7 +76,7 @@ namespace LexicalAnalysis
         private void AddNewIdentifierToken(string name, int currentRowNumber)
         {
             int code = OutputTokens.FindTypeOfLastIdentifier();
-            if (code == LexicalElementCodeProvider.ErrorCode)
+            if (code == LexicalElementCodeDictionary.ErrorCode)
             {
                 string errorMsg = $"A \"{name}\" nevű változó típusa nincs megadva.";
                 OutputTokens.Add(new ErrorToken(errorMsg, currentRowNumber));
@@ -84,20 +84,20 @@ namespace LexicalAnalysis
 
             _symbolTableHandler.InsertNewSymbolTableEntry(name, code, currentRowNumber);
             int insertedId = _symbolTableHandler.LastInsertedSymbolId.Value;
-            int identifierCode = LexicalElementCodeProvider.GetCode("azonosító");
+            int identifierCode = LexicalElementCodeDictionary.GetCode("azonosító");
             OutputTokens.Add(new IdentifierToken(identifierCode, insertedId, currentRowNumber));
         }
         private void AddExistingIdentifier(string symbolName, int symbolTableId, int currentRowNumber)
         {
             int type = OutputTokens.FindTypeOfLastIdentifier();
-            if (type != LexicalElementCodeProvider.ErrorCode)
+            if (type != LexicalElementCodeDictionary.ErrorCode)
             {
                 string errorMsg = $"Nem definiálhatod újra a(z) \"{symbolName}\" változót!";
                 OutputTokens.Add(new ErrorToken(errorMsg, currentRowNumber));
             }
             else
             {
-                int code = LexicalElementCodeProvider.GetCode("azonosító");
+                int code = LexicalElementCodeDictionary.GetCode("azonosító");
                 OutputTokens.Add(new IdentifierToken(code, symbolTableId, currentRowNumber));
             }
         }

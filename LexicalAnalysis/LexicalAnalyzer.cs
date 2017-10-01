@@ -36,7 +36,7 @@ namespace LexicalAnalysis
         public LexicalAnalyzerResult Analyze(string sourceCode)
         {
             if (string.IsNullOrWhiteSpace(sourceCode))
-                throw new ArgumentNullException(nameof(sourceCode), "The source code cannot be null or empty.");
+                throw new ArgumentException("The source code cannot be null, empty or whitespace.", nameof(sourceCode));
 
             _input = sourceCode.Replace("\r\n", "\n"); // Windows <=> Linux crlf changes
 
@@ -111,7 +111,7 @@ namespace LexicalAnalysis
             }
 
             _offset = 0;
-            _lastCorrectCode = LexicalElementCodeProvider.ErrorCode; // last correctly recognised lexical element
+            _lastCorrectCode = LexicalElementCodeDictionary.ErrorCode; // last correctly recognised lexical element
             _lastCorrectLength = -1; // last correctly recognised lexical element's length
             _currentCode = int.MaxValue; //current lexical element to recognise
             _currentLookaheadLength = 0;
@@ -119,7 +119,7 @@ namespace LexicalAnalysis
 
             RecognizeNonWhitespace();
 
-            if (_lastCorrectCode == LexicalElementCodeProvider.ErrorCode)
+            if (_lastCorrectCode == LexicalElementCodeDictionary.ErrorCode)
             {
                 string errorMsg = $"Nem tudom felismerni ezt a szöveget: \"{_currentSubstring}\"";
                 _outputTokensHandler.AddToken(new ErrorToken(errorMsg, _currentRowNumber));
@@ -136,11 +136,11 @@ namespace LexicalAnalysis
         {
             while (_inputIndexer + _offset < _input.Length &&
                 !IsWhitespace(_input[_inputIndexer + _offset]) &&
-                _currentCode != LexicalElementCodeProvider.ErrorCode)
+                _currentCode != LexicalElementCodeDictionary.ErrorCode)
             {
                 _currentSubstring = _input.Substring(_inputIndexer, _offset + 1);
                 _currentCode = LexicalElementIdentifier.IdentifyLexicalElement(_currentSubstring);
-                if (_currentCode != LexicalElementCodeProvider.ErrorCode)
+                if (_currentCode != LexicalElementCodeDictionary.ErrorCode)
                 {
                     _lastCorrectCode = _currentCode;
                     _lastCorrectLength = _offset + 1;
@@ -153,16 +153,16 @@ namespace LexicalAnalysis
         }
         private void HandleConflict()
         {
-            if (_currentCode != LexicalElementCodeProvider.ErrorCode)
+            if (_currentCode != LexicalElementCodeDictionary.ErrorCode)
             {
                 return;
             }
 
-            if (_lastCorrectCode == LexicalElementCodeProvider.GetCode("egész literál") && _input[_inputIndexer + _offset] == ',')
+            if (_lastCorrectCode == LexicalElementCodeDictionary.GetCode("egész literál") && _input[_inputIndexer + _offset] == ',')
             {   // Conflict handling between integer and fractional literals
                 _currentCode = int.MaxValue;
             }
-            else if (LexicalElementCodeProvider.IsOperator(_lastCorrectCode) && _input[_inputIndexer + _offset - 1] == '-')
+            else if (LexicalElementCodeDictionary.IsOperator(_lastCorrectCode) && _input[_inputIndexer + _offset - 1] == '-')
             {   // Conflict handling between the '-' operator and the following reserved words: "-tól", "-től", "-ig"
                 _currentCode = int.MaxValue;
                 _currentLookaheadLength = 2;
@@ -211,7 +211,7 @@ namespace LexicalAnalysis
             }
             _inputIndexer++; //   skip closing "
 
-            int code = LexicalElementCodeProvider.GetCode("szöveg literál");
+            int code = LexicalElementCodeDictionary.GetCode("szöveg literál");
             _outputTokensHandler.AddToken(new LiteralToken(code, currentLiteral.ToString(), _currentRowNumber));
         }
 
@@ -221,13 +221,13 @@ namespace LexicalAnalysis
             _currentRowNumber++;
             if (_outputTokensHandler.IsLastTokenNotNewLine()) // prevents adding mutiple newline tokens.
             {
-                int code = LexicalElementCodeProvider.GetCode("újsor");
+                int code = LexicalElementCodeDictionary.GetCode("újsor");
                 _outputTokensHandler.AddToken(new KeywordToken(code, _currentRowNumber));
             }
         }
         private void AddNonWhitespaceToken(string recognizedSubString, int code)
         {
-            if (code == LexicalElementCodeProvider.GetCode("program_kezd"))
+            if (code == LexicalElementCodeDictionary.GetCode("program_kezd"))
             {
                 _programStartTokenFound = true;
             }
@@ -236,7 +236,7 @@ namespace LexicalAnalysis
                 return;
             }
 
-            switch (LexicalElementCodeProvider.GetCodeType(code))
+            switch (LexicalElementCodeDictionary.GetCodeType(code))
             {
                 case LexicalElementCodeType.Operator:
                     _outputTokensHandler.AddToken(new KeywordToken(code, _currentRowNumber));

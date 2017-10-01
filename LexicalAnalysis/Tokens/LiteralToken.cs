@@ -12,6 +12,6 @@ namespace LexicalAnalysis.Tokens
             LiteralValue = literalValue;
         }
 
-        public override string ToString() => $"LiteralToken ID={Id} ({LexicalElementCodeProvider.GetCodeType(Id)}) \"{LiteralValue}\" ";
+        public override string ToString() => $"LiteralToken ID={Id} ({LexicalElementCodeDictionary.GetCodeType(Id)}) \"{LiteralValue}\" ";
     }
 }

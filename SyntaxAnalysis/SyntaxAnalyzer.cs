@@ -57,7 +57,7 @@ namespace SyntaxAnalysis
 
             _currentRowNumber = CurrentToken.RowNumber;
             _tree.StartNode(CurrentToken);
-            bool isSuccessful = CurrentToken.Id == LexicalElementCodeProvider.GetCode(tokenName);
+            bool isSuccessful = CurrentToken.Id == LexicalElementCodeDictionary.GetCode(tokenName);
             _tree.EndNode();
 
             if (isSuccessful)

@@ -14,32 +14,32 @@ namespace LexicalAnalysis
         {
             word = word.ToLower();
 
-            return IsReservedWord(word) ? LexicalElementCodeProvider.GetCode(word) : TryGetOtherLexElementCode(word);
+            return IsReservedWord(word) ? LexicalElementCodeDictionary.GetCode(word) : TryGetOtherLexElementCode(word);
         }
 
 
         private static bool IsReservedWord(string word)
         {
-            int code = LexicalElementCodeProvider.GetCode(word);
-            return code != LexicalElementCodeProvider.ErrorCode;
+            int code = LexicalElementCodeDictionary.GetCode(word);
+            return code != LexicalElementCodeDictionary.ErrorCode;
         }
         private static int TryGetOtherLexElementCode(string input)
         {
             if (IsIntegerLiteral(input))
             {
-                return LexicalElementCodeProvider.GetCode("egész literál");
+                return LexicalElementCodeDictionary.GetCode("egész literál");
             }
             else if (IsDecimalLiteral(input))
             {
-                return LexicalElementCodeProvider.GetCode("tört literál");
+                return LexicalElementCodeDictionary.GetCode("tört literál");
             }
             else if (IsIdentifier(input))
             {
-                return LexicalElementCodeProvider.GetCode("azonosító");
+                return LexicalElementCodeDictionary.GetCode("azonosító");
             }
             else
             {
-                return LexicalElementCodeProvider.ErrorCode;
+                return LexicalElementCodeDictionary.ErrorCode;
             }
         }
         private static bool IsIntegerLiteral(string input) => Regex.Match(input, IntegerLiteralPattern).Success;

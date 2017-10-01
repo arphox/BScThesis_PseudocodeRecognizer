@@ -13,7 +13,7 @@ namespace LexicalAnalysis.Tokens
         internal static int FindTypeOfLastIdentifier(this List<Token> outputTokens)
         {
             if (outputTokens.Count == 0)
-                return LexicalElementCodeProvider.ErrorCode;
+                return LexicalElementCodeDictionary.ErrorCode;
 
             int lastIndex = outputTokens.Count - 1;
             int lastTokenId = outputTokens[lastIndex].Id;
@@ -34,7 +34,7 @@ namespace LexicalAnalysis.Tokens
             }
             else
             {
-                return LexicalElementCodeProvider.ErrorCode;
+                return LexicalElementCodeDictionary.ErrorCode;
             }
         }
 

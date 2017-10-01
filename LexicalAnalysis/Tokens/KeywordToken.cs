@@ -6,6 +6,6 @@ namespace LexicalAnalysis.Tokens
     {
         internal KeywordToken(int id, int rowNumber) : base(id, rowNumber) { }
 
-        public override string ToString() => $"KeywordToken ID={Id} {LexicalElementCodeProvider.GetCodeType(Id)}";
+        public override string ToString() => $"KeywordToken ID={Id} {LexicalElementCodeDictionary.GetCodeType(Id)}";
     }
 }

@@ -15,32 +15,32 @@ namespace LexicalAnalysis
             RootSymbolTable = new SymbolTable(this, null);
         }
 
-        private void IncreaseSymbolTableIndent()
-        {
-            SymbolTable newTable = new SymbolTable(this, RootSymbolTable);
-            RootSymbolTable.InsertNewEntry(new SubTableEntry(newTable));
-            RootSymbolTable = newTable;
-        }
-        private void DecreaseSymbolTableIndent()
-        {
-            RootSymbolTable = RootSymbolTable.ParentTable;
-        }
-
         internal void InsertNewSymbolTableEntry(string name, int tokenType, int currentRowNumber)
         {
-            SingleEntry entry = new SingleEntry(name, (SingleEntryType)(tokenType), currentRowNumber);
+            SingleEntry entry = new SingleEntry(name, (SingleEntryType)tokenType, currentRowNumber);
             RootSymbolTable.InsertNewEntry(entry);
             LastInsertedSymbolId = entry.Id;
         }
         internal void ChangeSymbolTableIndentIfNeeded(int code)
         {
-            if (LexicalElementCodeProvider.IsStartingBlock(code))
+            if (LexicalElementCodeDictionary.IsStartingBlock(code))
             {
                 IncreaseSymbolTableIndent();
             }
-            else if (LexicalElementCodeProvider.IsEndingBlock(code))
+            else if (LexicalElementCodeDictionary.IsEndingBlock(code))
             {
                 DecreaseSymbolTableIndent();
+            }
+
+            void IncreaseSymbolTableIndent()
+            {
+                SymbolTable newTable = new SymbolTable(this, RootSymbolTable);
+                RootSymbolTable.InsertNewEntry(new SubTableEntry(newTable));
+                RootSymbolTable = newTable;
+            }
+            void DecreaseSymbolTableIndent()
+            {
+                RootSymbolTable = RootSymbolTable.ParentTable;
             }
         }
         internal int FindIdByName(string name)

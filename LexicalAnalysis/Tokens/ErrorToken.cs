@@ -6,7 +6,7 @@ namespace LexicalAnalysis.Tokens
     {
         internal readonly string Message;
 
-        internal ErrorToken(string message, int rowNumber) : base(LexicalElementCodeProvider.ErrorCode, rowNumber)
+        internal ErrorToken(string message, int rowNumber) : base(LexicalElementCodeDictionary.ErrorCode, rowNumber)
         {
             Message = message;
         }

@@ -8,6 +8,6 @@ namespace LexicalAnalysis.Tokens
             : base(id, rowNumber)
         { }
 
-        public override string ToString() => $"InternalFunctionToken ID={Id} {LexicalElementCodeProvider.GetCodeType(Id)} ";
+        public override string ToString() => $"InternalFunctionToken ID={Id} {LexicalElementCodeDictionary.GetCodeType(Id)} ";
     }
 }
