@@ -1,15 +1,15 @@
-<program>:
+<program>:  # method-body
   program_kezd újsor <állítások> program_vége
-<állítások>:
+<állítások>:  # statement-list
   <egysorosÁllítás> <állítások>
   <egysorosÁllítás>
-<egysorosÁllítás>:
+<egysorosÁllítás>:  # statement&empty-statement
   <állítás> újsor
   újsor
-<állítás>:
+<állítás>:  # statement
   <lokálisVáltozóDeklaráció>
   <beágyazottÁllítás>
-<lokálisVáltozóDeklaráció>:
+<lokálisVáltozóDeklaráció>: #local-variable-declaration
   <típus> azonosító = <kifejezés>
   <típus> azonosító
 <típus>:
@@ -58,7 +58,7 @@
   létrehoz ( <alapTípus> ) [ <elsődlegesNemTömbLétrehozóKifejezés> ]
 <logikaiKifejezés>:
   <kifejezés>
-<kifejezés>: #csak nem-értékadó kifejezés lehet
+<kifejezés>: #non-assignment-expression / conditional-expression
   <feltételesVagyKifejezés>
 <feltételesVagyKifejezés>:
   <feltételesÉsKifejezés>
