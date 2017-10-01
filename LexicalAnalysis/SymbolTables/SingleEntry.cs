@@ -2,15 +2,15 @@
 {
     internal class SingleEntry : SymbolTableEntry
     {
-        internal readonly string Name;
-        internal readonly int DefinitionRowNumber;
-        internal readonly SingleEntryType EntryType;
+        internal string Name { get; }
+        internal int DefinitionRowNumber { get; }
+        internal SingleEntryType EntryType { get; }
 
-        internal SingleEntry(string Name, SingleEntryType EntryType, int DefinitionRowNumber)
+        internal SingleEntry(string name, SingleEntryType entryType, int definitionRowNumber)
         {
-            this.Name = Name;
-            this.EntryType = EntryType;
-            this.DefinitionRowNumber = DefinitionRowNumber;
+            Name = name;
+            EntryType = entryType;
+            DefinitionRowNumber = definitionRowNumber;
         }
 
         public override string ToString()
