@@ -1,0 +1,32 @@
+Generált kimenet a '..\..\..\_input\09_for.opl' fájlhoz:
+
+Token lista:
+
+KeywordToken ID=1003 szöveg 
+IdentifierToken SymbolID=19, név=x
+KeywordToken ID=208 = 
+LiteralToken ID=130 (szöveg literál) "alma" 
+KeywordToken ID=0 újsor 
+KeywordToken ID=8 ciklus 
+KeywordToken ID=1001 egész 
+IdentifierToken SymbolID=21, név=i
+KeywordToken ID=208 = 
+LiteralToken ID=110 (egész literál) "1" 
+KeywordToken ID=10 -tól 
+IdentifierToken SymbolID=21, név=i
+KeywordToken ID=213 < 
+LiteralToken ID=110 (egész literál) "10" 
+KeywordToken ID=11 -ig 
+KeywordToken ID=0 újsor 
+KeywordToken ID=14 kiír 
+IdentifierToken SymbolID=19, név=x
+KeywordToken ID=0 újsor 
+KeywordToken ID=12 ciklus_vége 
+KeywordToken ID=0 újsor 
+
+Szimbólumtábla:
+ID = 19, név=x, típus=Szoveg, def=2.sor
+AT
+	ID = 21, név=i, típus=Egesz, def=3.sor
+/AT
+

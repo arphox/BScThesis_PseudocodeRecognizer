@@ -1,0 +1,34 @@
+﻿program_kezd
+
+egész[] tömb = létrehoz(egész)[10]
+
+egész a = 2
+ciklus egész aa = 0-tól aa < 9-ig
+	tört aaa = 2,4
+ciklus_vége
+
+
+egész b = 0
+ciklus egész bb = 0-tól bb < 9-ig
+	szöveg bbb = "alma"
+	ha bb mod 2 == 0 akkor
+		szöveg bbbb = "asd"
+	elágazás_vége
+ciklus_vége
+
+egész c = 0
+ciklus_amíg c < 2
+	egész ccc = 2
+	ha ccc == 3 akkor
+		ciklus egész cccc = 1-től cccc < 10-ig
+			tört ccccc = 3,14
+			ciklus_amíg ccc > 2
+				ccc = ccc - 2
+			ciklus_vége
+			egész ccccc2
+		ciklus_vége
+		logikai l = hamis
+	elágazás_vége
+	szöveg sz = "haha"
+ciklus_vége
+program_vége

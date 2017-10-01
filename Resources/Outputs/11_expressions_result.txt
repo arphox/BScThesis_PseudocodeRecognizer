@@ -1,0 +1,65 @@
+Generált kimenet a '..\..\..\_input\11_expressions.opl' fájlhoz:
+
+Token lista:
+
+KeywordToken ID=1004 logikai 
+IdentifierToken SymbolID=37, név=éhes
+KeywordToken ID=208 = 
+LiteralToken ID=141 (igaz) "igaz" 
+KeywordToken ID=0 újsor 
+KeywordToken ID=4 ha 
+IdentifierToken SymbolID=37, név=éhes
+KeywordToken ID=209 == 
+LiteralToken ID=141 (igaz) "igaz" 
+KeywordToken ID=216 vagy 
+LiteralToken ID=142 (hamis) "hamis" 
+KeywordToken ID=5 akkor 
+KeywordToken ID=0 újsor 
+KeywordToken ID=14 kiír 
+LiteralToken ID=130 (szöveg literál) "menj enni!" 
+KeywordToken ID=0 újsor 
+KeywordToken ID=7 elágazás_vége 
+KeywordToken ID=0 újsor 
+KeywordToken ID=1003 szöveg 
+IdentifierToken SymbolID=39, név=konkatenált
+KeywordToken ID=208 = 
+LiteralToken ID=130 (szöveg literál) "valami" 
+KeywordToken ID=220 . 
+LiteralToken ID=130 (szöveg literál) "mégvalami" 
+KeywordToken ID=220 . 
+LiteralToken ID=130 (szöveg literál) " " 
+KeywordToken ID=220 . 
+LiteralToken ID=130 (szöveg literál) "még valami" 
+KeywordToken ID=0 újsor 
+KeywordToken ID=1002 tört 
+IdentifierToken SymbolID=40, név=törtpélda
+KeywordToken ID=208 = 
+KeywordToken ID=206 ( 
+KeywordToken ID=203 + 
+LiteralToken ID=120 (tört literál) "-6,0" 
+KeywordToken ID=217 * 
+KeywordToken ID=203 + 
+KeywordToken ID=203 + 
+LiteralToken ID=110 (egész literál) "+10" 
+KeywordToken ID=204 - 
+KeywordToken ID=206 ( 
+KeywordToken ID=204 - 
+LiteralToken ID=120 (tört literál) "-0,3" 
+KeywordToken ID=217 * 
+LiteralToken ID=120 (tört literál) "+4,1" 
+KeywordToken ID=207 ) 
+KeywordToken ID=218 / 
+KeywordToken ID=204 - 
+LiteralToken ID=120 (tört literál) "-28,3" 
+LiteralToken ID=110 (egész literál) "-4" 
+KeywordToken ID=207 ) 
+KeywordToken ID=0 újsor 
+KeywordToken ID=14 kiír 
+IdentifierToken SymbolID=40, név=törtpélda
+KeywordToken ID=0 újsor 
+
+Szimbólumtábla:
+ID = 37, név=éhes, típus=Logikai, def=2.sor
+ID = 39, név=konkatenált, típus=Szoveg, def=6.sor
+ID = 40, név=törtpélda, típus=Tort, def=7.sor
+

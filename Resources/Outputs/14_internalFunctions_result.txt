@@ -1,0 +1,116 @@
+Generált kimenet a '..\..\..\_input\14_internalFunctions.opl' fájlhoz:
+
+Token lista:
+
+KeywordToken ID=1001 egész 
+KeywordToken ID=201 [ 
+KeywordToken ID=202 ] 
+IdentifierToken SymbolID=75, név=tömb
+KeywordToken ID=208 = 
+KeywordToken ID=15 létrehoz 
+KeywordToken ID=206 ( 
+KeywordToken ID=1001 egész 
+KeywordToken ID=207 ) 
+KeywordToken ID=201 [ 
+LiteralToken ID=110 (egész literál) "10" 
+KeywordToken ID=202 ] 
+KeywordToken ID=0 újsor 
+KeywordToken ID=1001 egész 
+IdentifierToken SymbolID=76, név=a
+KeywordToken ID=208 = 
+InternalFunctionToken ID=402 törtből_egészbe 
+KeywordToken ID=206 ( 
+IdentifierToken SymbolID=75, név=tömb
+KeywordToken ID=201 [ 
+LiteralToken ID=110 (egész literál) "0" 
+KeywordToken ID=202 ] 
+KeywordToken ID=217 * 
+LiteralToken ID=120 (tört literál) "2,5" 
+KeywordToken ID=207 ) 
+KeywordToken ID=203 + 
+InternalFunctionToken ID=404 logikaiból_egészbe 
+KeywordToken ID=206 ( 
+LiteralToken ID=141 (igaz) "igaz" 
+KeywordToken ID=207 ) 
+KeywordToken ID=0 újsor 
+KeywordToken ID=1003 szöveg 
+IdentifierToken SymbolID=77, név=sz
+KeywordToken ID=208 = 
+InternalFunctionToken ID=406 szövegből_egészbe 
+KeywordToken ID=206 ( 
+IdentifierToken SymbolID=76, név=a
+KeywordToken ID=207 ) 
+KeywordToken ID=0 újsor 
+KeywordToken ID=1004 logikai 
+IdentifierToken SymbolID=78, név=log
+KeywordToken ID=208 = 
+LiteralToken ID=141 (igaz) "igaz" 
+KeywordToken ID=0 újsor 
+KeywordToken ID=1002 tört 
+IdentifierToken SymbolID=79, név=tttt
+KeywordToken ID=208 = 
+InternalFunctionToken ID=405 logikaiból_törtbe 
+KeywordToken ID=206 ( 
+IdentifierToken SymbolID=78, név=log
+KeywordToken ID=207 ) 
+KeywordToken ID=0 újsor 
+IdentifierToken SymbolID=79, név=tttt
+KeywordToken ID=208 = 
+InternalFunctionToken ID=407 szövegből_törtbe 
+KeywordToken ID=206 ( 
+IdentifierToken SymbolID=77, név=sz
+KeywordToken ID=207 ) 
+KeywordToken ID=0 újsor 
+IdentifierToken SymbolID=78, név=log
+KeywordToken ID=208 = 
+InternalFunctionToken ID=401 egészből_logikaiba 
+KeywordToken ID=206 ( 
+LiteralToken ID=110 (egész literál) "123231" 
+KeywordToken ID=207 ) 
+KeywordToken ID=0 újsor 
+KeywordToken ID=8 ciklus 
+KeywordToken ID=1001 egész 
+IdentifierToken SymbolID=81, név=b
+KeywordToken ID=208 = 
+LiteralToken ID=110 (egész literál) "0" 
+KeywordToken ID=10 -tól 
+IdentifierToken SymbolID=81, név=b
+KeywordToken ID=213 < 
+LiteralToken ID=110 (egész literál) "9" 
+KeywordToken ID=11 -ig 
+KeywordToken ID=0 újsor 
+KeywordToken ID=1004 logikai 
+IdentifierToken SymbolID=82, név=xxxxxxxx
+KeywordToken ID=208 = 
+InternalFunctionToken ID=403 törtből_logikaiba 
+KeywordToken ID=206 ( 
+LiteralToken ID=120 (tört literál) "0,0" 
+KeywordToken ID=207 ) 
+KeywordToken ID=0 újsor 
+KeywordToken ID=12 ciklus_vége 
+KeywordToken ID=0 újsor 
+KeywordToken ID=1003 szöveg 
+IdentifierToken SymbolID=83, név=sx
+KeywordToken ID=208 = 
+LiteralToken ID=130 (szöveg literál) "hamis" 
+KeywordToken ID=0 újsor 
+IdentifierToken SymbolID=78, név=log
+KeywordToken ID=208 = 
+InternalFunctionToken ID=408 szövegből_logikaiba 
+KeywordToken ID=206 ( 
+IdentifierToken SymbolID=83, név=sx
+KeywordToken ID=207 ) 
+KeywordToken ID=0 újsor 
+
+Szimbólumtábla:
+ID = 75, név=tömb, típus=EgeszTomb, def=3.sor
+ID = 76, név=a, típus=Egesz, def=4.sor
+ID = 77, név=sz, típus=Szoveg, def=5.sor
+ID = 78, név=log, típus=Logikai, def=6.sor
+ID = 79, név=tttt, típus=Tort, def=7.sor
+AT
+	ID = 81, név=b, típus=Egesz, def=10.sor
+	ID = 82, név=xxxxxxxx, típus=Logikai, def=11.sor
+/AT
+ID = 83, név=sx, típus=Szoveg, def=13.sor
+

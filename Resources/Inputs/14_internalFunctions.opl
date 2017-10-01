@@ -1,0 +1,15 @@
+﻿program_kezd
+
+egész[] tömb = létrehoz(egész)[10]
+egész a = törtből_egészbe(tömb[0] * 2,5) + logikaiból_egészbe(igaz)
+szöveg sz = szövegből_egészbe(a)
+logikai log = igaz
+tört tttt = logikaiból_törtbe(log)
+tttt = szövegből_törtbe(sz)
+log = egészből_logikaiba(123231)
+ciklus egész b = 0-tól b < 9-ig
+	logikai xxxxxxxx = törtből_logikaiba(0,0)
+ciklus_vége
+szöveg sx = "hamis"
+log = szövegből_logikaiba(sx)
+program_vége

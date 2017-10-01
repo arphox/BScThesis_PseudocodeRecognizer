@@ -1,0 +1,9 @@
+﻿program_kezd
+egész x = 5
+egész[] y
+tört z
+logikai c
+szöveg[] szövi = "alma"
+szöveg szövi2 = "alma"
+x = 2
+program_vége

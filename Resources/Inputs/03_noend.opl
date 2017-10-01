@@ -1,0 +1,3 @@
+﻿program_kezd
+egész x = 2
+x = x + 1

@@ -1,0 +1,18 @@
+Generált kimenet a '..\..\..\_input\03_noend.opl' fájlhoz:
+
+Token lista:
+
+KeywordToken ID=1001 egész 
+IdentifierToken SymbolID=1, név=x
+KeywordToken ID=208 = 
+LiteralToken ID=110 (egész literál) "2" 
+KeywordToken ID=0 újsor 
+IdentifierToken SymbolID=1, név=x
+KeywordToken ID=208 = 
+IdentifierToken SymbolID=1, név=x
+KeywordToken ID=203 + 
+LiteralToken ID=110 (egész literál) "1" 
+
+Szimbólumtábla:
+ID = 1, név=x, típus=Egesz, def=2.sor
+
