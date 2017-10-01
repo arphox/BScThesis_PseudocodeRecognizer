@@ -1,7 +1,8 @@
-﻿using System.Collections.Generic;
-using System.Text;
+﻿using LexicalAnalysis.SymbolTables;
 using LexicalAnalysis.Tokens;
-using LexicalAnalysis.SymbolTables;
+using System;
+using System.Collections.Generic;
+using System.Text;
 
 namespace LexicalAnalysis
 {
@@ -11,18 +12,15 @@ namespace LexicalAnalysis
         public LexicalAnalyzer()
         {
             SymbolTable.ResetEverything();
-            symbolTableHandler = new SymbolTableHandler();
             outputTokensHandler = new OutputTokenListHandler(symbolTableHandler);
         }
 
         public List<Token> PerformLexicalAnalysis(string sourceCode)
         {
             if (string.IsNullOrWhiteSpace(sourceCode))
-            {
-                return new List<Token>() { new ErrorToken("A forráskód nem lehet üres!", 0) };
-            }
+                throw new ArgumentNullException(nameof(sourceCode), "The source code cannot be null or empty.");
 
-            input = sourceCode.Replace("\r\n", "\n"); // Linux <=> Windows
+            input = sourceCode.Replace("\r\n", "\n"); // Windows <=> Linux crlf changes
 
             DoLexicalAnalysis();
 
@@ -40,11 +38,11 @@ namespace LexicalAnalysis
         private int currentRowNumber = 1;
         private bool programStartTokenFound = false;
         private LexicalAnalyzerState state = LexicalAnalyzerState.Initial;
-        private SymbolTableHandler symbolTableHandler;
+        private SymbolTableHandler symbolTableHandler = new SymbolTableHandler();
         private OutputTokenListHandler outputTokensHandler;
-        private char CurrentChar { get { return input[inputIndexer]; } }
-        private char NextChar { get { return input[inputIndexer + 1]; } }
-        private bool InputEndReached { get { return inputIndexer >= input.Length; } }
+        private char CurrentChar => input[inputIndexer];
+        private char NextChar => input[inputIndexer + 1];
+        private bool InputEndReached => inputIndexer >= input.Length;
 
         // Used at non whitespace analysis:
         private int lastCorrectCode;
