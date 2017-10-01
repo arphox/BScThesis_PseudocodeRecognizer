@@ -35,13 +35,11 @@ namespace VisualParseTree
             Main();
         }
 
-        const string _inputFolderPath = @"..\..\..\_input\";
-        const string _outputFolderPath = @"..\..\..\_output\";
         private SyntaxTree<Token> syntaxTree;
 
         void Main()
         {
-            string path = _inputFolderPath + "08_masodfoku.opl";
+            string path = "08_masodfoku.opl";
 
             List<Token> tokenList = new LexicalAnalyzer().PerformLexicalAnalysis(ReadUTF8File(path));
 
