@@ -76,5 +76,36 @@ namespace LexicalAnalysisTests
             Assert.That(result.Tokens.Count, Is.EqualTo(0));
             Assert.That(result.SymbolTable.IsEmpty, Is.True);
         }
+
+        [Test]
+        public void NotOnlyCode()
+        {
+            LexicalAnalyzerResult result = new LexicalAnalyzer().Analyze(Properties.Inputs.NotOnlyCode);
+            /*
+            egész x = 2
+            x = x + 1
+            program_kezd
+            egész x = 2
+            x = x + 1
+            egész a = 2
+            ciklus egész b = 0-tól b < 9-ig
+                egész c = törtből_egészbe(2,4)
+            ciklus_vége
+            program_vége
+            egész x = 2
+            x = x + 1
+            ciklus_vége
+            program_vége
+            program_kezd
+            program_vége
+            */
+
+#warning NotOnlyCode still not completed!
+
+
+
+            Assert.That(result.Tokens.Count, Is.EqualTo(40));
+            Assert.That(result.SymbolTable.IsEmpty, Is.False);
+        }
     }
 }
