@@ -9,7 +9,6 @@ namespace LexicalAnalysisTests
         [Test]
         public void TestMethod1()
         {
-
         }
     }
 }
