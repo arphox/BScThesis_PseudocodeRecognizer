@@ -4,7 +4,7 @@ using System.Text;
 
 namespace LexicalAnalysis.SymbolTables
 {
-    public class SymbolTable
+    public sealed class SymbolTable
     {
         private const int NOT_FOUND_ID = -1;
 

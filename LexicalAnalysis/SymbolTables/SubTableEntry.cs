@@ -2,16 +2,13 @@
 {
     internal sealed class SubTableEntry : SymbolTableEntry
     {
-        internal readonly SymbolTable Table;
+        internal SymbolTable Table { get; }
 
-        internal SubTableEntry(SymbolTable Table)
+        internal SubTableEntry(SymbolTable table)
         {
-            this.Table = Table;
+            Table = table;
         }
 
-        public override string ToString()
-        {
-            return base.ToString() + "<<< SymbolTableEntrySubTable >>>";
-        }
+        public override string ToString() => base.ToString() + "<<< SymbolTableEntrySubTable >>>";
     }
 }

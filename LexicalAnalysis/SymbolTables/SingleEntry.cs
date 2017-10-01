@@ -1,6 +1,6 @@
 ﻿namespace LexicalAnalysis.SymbolTables
 {
-    internal class SingleEntry : SymbolTableEntry
+    internal sealed class SingleEntry : SymbolTableEntry
     {
         internal string Name { get; }
         internal int DefinitionRowNumber { get; }
