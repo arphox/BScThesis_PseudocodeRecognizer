@@ -36,7 +36,7 @@ namespace LexicalAnalysis
         public LexicalAnalyzerResult Analyze(string sourceCode)
         {
             if (string.IsNullOrWhiteSpace(sourceCode))
-                throw new ArgumentException("The source code cannot be null, empty or whitespace.", nameof(sourceCode));
+                throw new ArgumentException("The source code cannot be null, empty or contain only whitespaces.", nameof(sourceCode));
 
             _input = sourceCode.Replace("\r\n", "\n"); // Windows <=> Linux crlf changes
 
@@ -218,12 +218,12 @@ namespace LexicalAnalysis
 
         private void AddNewLine()
         {
-            _currentRowNumber++;
             if (_outputTokensHandler.IsLastTokenNotNewLine()) // prevents adding mutiple newline tokens.
             {
                 int code = LexicalElementCodeDictionary.GetCode("újsor");
                 _outputTokensHandler.AddToken(new KeywordToken(code, _currentRowNumber));
             }
+            _currentRowNumber++;
         }
         private void AddNonWhitespaceToken(string recognizedSubString, int code)
         {

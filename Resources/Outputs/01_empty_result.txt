@@ -1,8 +1,0 @@
-Generált kimenet a '..\..\..\_input\01_empty.opl' fájlhoz:
-
-Token lista:
-
->>> ErrorToken a 0.sorban: A forráskód nem lehet üres!<<<
-
-Szimbólumtábla:
-

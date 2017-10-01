@@ -1,6 +1,6 @@
 ﻿namespace LexicalAnalysis.SymbolTables
 {
-    internal enum SingleEntryType
+    public enum SingleEntryType
     {
         Egesz = 1001,
         Tort = 1002,

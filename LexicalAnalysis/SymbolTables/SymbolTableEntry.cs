@@ -1,6 +1,6 @@
 ﻿namespace LexicalAnalysis.SymbolTables
 {
-    internal abstract class SymbolTableEntry
+    public abstract class SymbolTableEntry
     {
         private static int _currentSymbolId = 1;
 

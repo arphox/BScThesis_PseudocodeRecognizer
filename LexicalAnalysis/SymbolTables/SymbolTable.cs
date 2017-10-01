@@ -9,9 +9,10 @@ namespace LexicalAnalysis.SymbolTables
         private const int NotFoundId = -1;
 
         private readonly SymbolTableManager _parentManager;
-        private List<SymbolTableEntry> Entries { get; } = new List<SymbolTableEntry>();
-        internal SymbolTable ParentTable { get; set; }
-        internal bool IsEmpty => Entries.Count == 0;
+
+        public List<SymbolTableEntry> Entries { get; } = new List<SymbolTableEntry>();
+        public SymbolTable ParentTable { get; }
+        public bool IsEmpty => Entries.Count == 0;
 
         /// <summary>
         /// Searches the given symbol table for the given symbol name and returns the ID, if found; otherwise <see cref="NotFoundId"/>.

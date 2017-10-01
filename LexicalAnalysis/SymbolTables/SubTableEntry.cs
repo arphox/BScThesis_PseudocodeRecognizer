@@ -1,8 +1,8 @@
 ﻿namespace LexicalAnalysis.SymbolTables
 {
-    internal sealed class SubTableEntry : SymbolTableEntry
+    public sealed class SubTableEntry : SymbolTableEntry
     {
-        internal SymbolTable Table { get; }
+        public SymbolTable Table { get; }
 
         internal SubTableEntry(SymbolTable table)
         {
