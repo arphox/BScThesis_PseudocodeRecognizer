@@ -9,7 +9,7 @@ namespace LexicalAnalysisTests
     public class LexicalAnalyzerTests
     {
         [Test]
-        public void ArgumentTests()
+        public void Empty()
         {
             Assert.Throws<ArgumentException>(() => new LexicalAnalyzer().Analyze(null));
             Assert.Throws<ArgumentException>(() => new LexicalAnalyzer().Analyze(string.Empty));
@@ -63,6 +63,18 @@ namespace LexicalAnalysisTests
             Assert.That(result.SymbolTable.Entries.Count, Is.EqualTo(1));
         }
 
+        [Test]
+        public void NoStart()
+        {
+            LexicalAnalyzerResult result = new LexicalAnalyzer().Analyze(Properties.Inputs.NoStart);
+            /*
+            egész x = 2
+            x = x + 1
+            program_vége
+            */
 
+            Assert.That(result.Tokens.Count, Is.EqualTo(0));
+            Assert.That(result.SymbolTable.IsEmpty, Is.True);
+        }
     }
 }
