@@ -1,7 +1,5 @@
 ﻿using LexicalAnalysis;
 using LexicalAnalysis.SymbolTables;
-using SyntaxAnalysis;
-using SyntaxAnalysis.ST;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
@@ -13,22 +11,23 @@ namespace Tester
 {
     class Program
     {
-        const string _inputFolderPath = @"..\..\..\_input\";
-        const string _outputFolderPath = @"..\..\..\_output\";
+        const string _inputFolderPath = @"..\..\_input\";
+        const string _outputFolderPath = @"..\..\_output\";
         static void Main(string[] args)
         {
-            string path = _inputFolderPath + "syntaxtest.opl";
-            List<Token> tokenList = new LexicalAnalyzer().PerformLexicalAnalysisOnFile(path);
-            Tuple<SyntaxTree<Token>, bool> result = new SyntaxAnalyzer(tokenList).Start();
-            Console.WriteLine(result);
+            LexerTests.TestAllFiles();
             Console.ReadLine();
         }
 
+        private static string ReadUTF8File(string path)
+        {
+            return File.ReadAllText(path);
+        }
 
 
         private static class LexerTests
         {
-            static readonly bool MEASURE_TIME = false;
+            private static readonly bool MEASURE_TIME = false;
             internal static void TestOneFile(string path)
             {
                 List<string> output = CreateOutputList(path);
@@ -50,7 +49,7 @@ namespace Tester
             {
                 Stopwatch stopper = Stopwatch.StartNew();
                 List<Token> tokenList = new LexicalAnalyzer()
-                    .PerformLexicalAnalysisOnFile(testFilePath);
+                    .PerformLexicalAnalysis(ReadUTF8File(testFilePath));
                 stopper.Stop();
                 if (MEASURE_TIME)
                 {

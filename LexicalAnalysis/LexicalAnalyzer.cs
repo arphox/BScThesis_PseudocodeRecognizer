@@ -14,12 +14,8 @@ namespace LexicalAnalysis
             symbolTableHandler = new SymbolTableHandler();
             outputTokensHandler = new OutputTokenListHandler(symbolTableHandler);
         }
-        public List<Token> PerformLexicalAnalysisOnFile(string path)
-        {
-            input = FileHandler.ReadUTF8File(path);
-            return PerformLexicalAnalysisOnString(input);
-        }
-        public List<Token> PerformLexicalAnalysisOnString(string sourceCode)
+
+        public List<Token> PerformLexicalAnalysis(string sourceCode)
         {
             if (string.IsNullOrWhiteSpace(sourceCode))
             {
