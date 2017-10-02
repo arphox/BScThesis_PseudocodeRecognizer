@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Linq;
 using NUnit.Framework;
 using LexicalAnalysis;
 using LexicalAnalysis.SymbolTables;
@@ -60,6 +61,7 @@ namespace LexicalAnalysisTests
             AssertHelper.Literal(result.Tokens[11], "egész literál", "1", 3);
 
             Assert.That(result.Tokens.Count, Is.EqualTo(12));
+
             Assert.That(result.SymbolTable.Entries.Count, Is.EqualTo(1));
         }
 
@@ -100,12 +102,23 @@ namespace LexicalAnalysisTests
             program_vége
             */
 
-#warning NotOnlyCode still not completed!
+            // program_kezd
+            AssertHelper.Keyword(result.Tokens[0], "program_kezd", 3);
+            AssertHelper.NewLine(result.Tokens[1], 3);
+
+            // egész x = 2
+            AssertHelper.Keyword(result.Tokens[2], "egész", 4);
 
 
+
+
+            System.IO.File.WriteAllLines(@"C:\temp\log.txt", result.Tokens.Select(t => t.ToString()));
 
             Assert.That(result.Tokens.Count, Is.EqualTo(40));
             Assert.That(result.SymbolTable.IsEmpty, Is.False);
         }
+
+
+        //System.IO.File.WriteAllLines(@"C:\temp\log.txt", result.Tokens.Select(t => t.ToString()));
     }
 }
