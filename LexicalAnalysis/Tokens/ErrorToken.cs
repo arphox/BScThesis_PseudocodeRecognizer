@@ -4,16 +4,14 @@ namespace LexicalAnalysis.Tokens
 {
     public class ErrorToken : TerminalToken
     {
-        internal readonly string Message;
+        public string Message { get; }
 
-        internal ErrorToken(string message, int rowNumber) : base(LexicalElementCodeDictionary.ErrorCode, rowNumber)
+        internal ErrorToken(string message, int rowNumber)
+            : base(LexicalElementCodeDictionary.ErrorCode, rowNumber)
         {
             Message = message;
         }
 
-        public override string ToString()
-        {
-            return $">>> ErrorToken a {RowNumber}.sorban: {Message}<<<";
-        }
+        public override string ToString() => base.ToString() + $", {nameof(Message)}={Message}";
     }
 }

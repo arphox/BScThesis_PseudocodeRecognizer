@@ -1,4 +1,6 @@
-﻿namespace LexicalAnalysis.Tokens
+﻿using LexicalAnalysis.LexicalElementCodes;
+
+namespace LexicalAnalysis.Tokens
 {
     public abstract class Token
     {
@@ -10,5 +12,7 @@
             Id = id;
             RowNumber = rowNumber;
         }
+
+        public override string ToString() => $"[{GetType().Name}] {nameof(Id)}={Id} ({LexicalElementCodeDictionary.GetWord(Id)}) @ Line #{RowNumber}";
     }
 }

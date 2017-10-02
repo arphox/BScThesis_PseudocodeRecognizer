@@ -11,6 +11,6 @@ namespace SyntaxAnalysis
             Value = value;
         }
 
-        public override string ToString() => Value;
+        public override string ToString() => base.ToString() + $", {nameof(Value)}={Value}";
     }
 }
