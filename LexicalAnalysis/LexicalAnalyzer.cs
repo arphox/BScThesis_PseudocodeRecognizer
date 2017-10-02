@@ -222,8 +222,12 @@ namespace LexicalAnalysis
             {
                 int code = LexicalElementCodeDictionary.GetCode("újsor");
                 _outputTokensHandler.AddToken(new KeywordToken(code, _currentRowNumber));
+                _currentRowNumber++;
             }
-            _currentRowNumber++;
+            else if (_outputTokensHandler.IsEmpty)
+            {   // rows are increasing even if there wasn't program start code yet
+                _currentRowNumber++;
+            }
         }
         private void AddNonWhitespaceToken(string recognizedSubString, int code)
         {
