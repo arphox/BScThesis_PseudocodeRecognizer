@@ -134,6 +134,8 @@ namespace LexicalAnalysis.SymbolTables
         {
             StringBuilder output = new StringBuilder();
 
+            output.Append("SymbolTable:" + Environment.NewLine);
+
             foreach (SymbolTableEntry currentEntry in Entries)
             {
                 if (currentEntry is SingleEntry single)

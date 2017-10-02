@@ -51,7 +51,8 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Inputs.resx</DependentUpon>
     </Compile>
-    <Compile Include="AssertHelper.cs" />
+    <Compile Include="SymbolTableHelper.cs" />
+    <Compile Include="TokenTester.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
