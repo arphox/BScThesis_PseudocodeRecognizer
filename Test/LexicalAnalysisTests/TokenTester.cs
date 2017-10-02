@@ -47,8 +47,8 @@ namespace LexicalAnalysisTests
         private void Generic(Token token, Type expectedType, string word)
         {
             Assert.That(token, Is.TypeOf(expectedType));
-            Assert.That(token.Id, Is.EqualTo(CodeFor(word)));
-            Assert.That(token.RowNumber, Is.EqualTo(CurrentRow));
+            Assert.That(token.Id, Is.EqualTo(CodeFor(word)), $"The token's id ({token.Id}) doesn't matches the code for the word ({word})");
+            Assert.That(token.RowNumber, Is.EqualTo(CurrentRow), $"Expected row number {CurrentRow}, but was {token.RowNumber}");
         }
 
         private static int CodeFor(string word)

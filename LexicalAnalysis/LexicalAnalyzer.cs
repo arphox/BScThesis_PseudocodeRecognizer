@@ -181,7 +181,7 @@ namespace LexicalAnalysis
                 _inputIndexer++;
             }
             _inputIndexer++; //   skip "\n"
-            _currentRowNumber++;
+            AddNewLine();
         }
         private void HandleState_MultiRowComment()
         {
@@ -218,16 +218,12 @@ namespace LexicalAnalysis
 
         private void AddNewLine()
         {
-            if (_outputTokensHandler.IsLastTokenNotNewLine()) // prevents adding mutiple newline tokens.
+            if (_outputTokensHandler.IsLastTokenNotNewLine())
             {
                 int code = LexicalElementCodeDictionary.GetCode("újsor");
                 _outputTokensHandler.AddToken(new KeywordToken(code, _currentRowNumber));
-                _currentRowNumber++;
             }
-            else if (_outputTokensHandler.IsEmpty)
-            {   // rows are increasing even if there wasn't program start code yet
-                _currentRowNumber++;
-            }
+            _currentRowNumber++;
         }
         private void AddNonWhitespaceToken(string recognizedSubString, int code)
         {

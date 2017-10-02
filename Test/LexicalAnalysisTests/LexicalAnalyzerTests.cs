@@ -198,7 +198,45 @@ namespace LexicalAnalysisTests
             TestContext.Write(result.SymbolTable.ToStringNice());
         }
 
+        [Test]
+        public void Comments()
+        {
+            LexicalAnalyzerResult result = new LexicalAnalyzer().Analyze(Properties.Inputs.Comments);
 
+            TokenTester tt = new TokenTester(result.Tokens)
+            {
+                CurrentRow = 2
+            };
+
+            // 1.   //komment
+            // 2.   program_kezd
+            tt.ExpectKeyword("program_kezd");
+            tt.NewLine();
+
+            // 3.   (newline)
+            tt.CurrentRow++;
+            // 4.   kiír     "H//ello világ!" //Ez egy egysoros komment
+            tt.ExpectKeyword("kiír");
+            tt.ExpectLiteral("szöveg literál", "H//ello világ!");
+            tt.NewLine();
+
+            //      (commented lines through 5 to 9)
+            tt.CurrentRow = 10;
+            // 10.  szöveg alma="almavagyok"
+            tt.ExpectKeyword("szöveg");
+            tt.ExpectIdentifier();
+            tt.ExpectKeyword("=");
+            tt.ExpectLiteral("szöveg literál", "almavagyok");
+            tt.NewLine();
+
+            // 11. program_vége
+            tt.ExpectKeyword("program_vége");
+
+            tt.ExpectNoMore();
+
+            // Symbol table
+            SymbolTableHelper.SimpleSymbolTableEntry(result.SymbolTable.Entries.Single(), "alma", SingleEntryType.Szoveg, 10);
+        }
         //System.IO.File.WriteAllLines(@"C:\temp\log.txt", result.Tokens.Select(t => t.ToString()));
     }
 }

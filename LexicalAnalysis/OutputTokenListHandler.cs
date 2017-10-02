@@ -13,6 +13,7 @@ namespace LexicalAnalysis
 
         internal bool IsEmpty => OutputTokens.Count == 0;
         internal bool ProgramEndTokenAdded { get; private set; }
+        internal bool ProgramStartTokenAdded { get; private set; }
 
         internal OutputTokenListHandler(SymbolTableManager symbolTableHandler)
         {
@@ -34,6 +35,7 @@ namespace LexicalAnalysis
         }
         internal void AddProgramStart(int code, int currentRowNumber)
         {
+            ProgramStartTokenAdded = true;
             if (OutputTokens.Count > 0)
             {
                 OutputTokens.Add(new ErrorToken("Csak egy darab program kezdetét jelző kulcsszó engedélyezett!", currentRowNumber));
