@@ -16,7 +16,7 @@ namespace LexicalAnalysisTests.LexicalAnalyzer
                 1.  alma körte barack
                 2.  nincs is értelmes
                 3.  kód a fájlban!
-                4.  Jaj.    
+                4.  Jaj.
             */
 
             // Tokens
