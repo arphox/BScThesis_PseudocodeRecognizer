@@ -111,6 +111,95 @@ namespace LexicalAnalysisTests.LexicalAnalyzer
             Assert.That(result.SymbolTable.IsEmpty);
         }
 
+        [Test]
+        public void IfThenElse()
+        {
+            const string code = "program_kezd\n" +
+                                "ha igaz akkor\n" +
+                                "\tkilép\n" +
+                                "különben\n" +
+                                "\tkilép\n" +
+                                "elágazás_vége\n" +
+                                "program_vége";
+
+            LexicalAnalyzerResult result = new LexicalAnalysis.LexicalAnalyzer().Analyze(code);
+
+            TokenTester tt = new TokenTester(result);
+
+            tt.ExpectStart();
+            tt.NewLine();
+
+            tt.ExpectKeyword("ha");
+            tt.ExpectLiteral("igaz", "igaz");
+            tt.ExpectKeyword("akkor");
+            tt.NewLine();
+
+            tt.ExpectKeyword("kilép");
+            tt.NewLine();
+
+            tt.ExpectKeyword("különben");
+            tt.NewLine();
+
+            tt.ExpectKeyword("kilép");
+            tt.NewLine();
+
+            tt.ExpectKeyword("elágazás_vége");
+            tt.NewLine();
+
+            tt.ExpectEnd();
+            tt.ExpectNoMore();
+
+            // Symbol table
+            Assert.That(result.SymbolTable.IsEmpty);
+        }
+
+        [TestCase("ciklus egész i=1-től i<9-ig\n")]
+        [TestCase("ciklus egész i = 1-től i < 9-ig\n")]
+        [TestCase("ciklus egész i = 1 -től i < 9 -ig\n")]
+        public void For(string secondRow)
+        {
+            string code = "program_kezd\n" +
+                          secondRow +
+                          "\tkilép\n" +
+                          "ciklus_vége\n" +
+                          "program_vége";
+
+            LexicalAnalyzerResult result = new LexicalAnalysis.LexicalAnalyzer().Analyze(code);
+
+            TokenTester tt = new TokenTester(result);
+
+            tt.ExpectStart();
+            tt.NewLine();
+
+            tt.ExpectKeyword("ciklus");
+            tt.ExpectKeyword("egész");
+            tt.ExpectIdentifier("i");
+            tt.ExpectKeyword("=");
+            tt.ExpectLiteral("egész literál", "1");
+            tt.ExpectKeyword("-tól");
+            tt.ExpectIdentifier("i");
+            tt.ExpectKeyword("<");
+            tt.ExpectLiteral("egész literál", "9");
+            tt.ExpectKeyword("-ig");
+            tt.NewLine();
+
+            tt.ExpectKeyword("kilép");
+            tt.NewLine();
+
+            tt.ExpectKeyword("ciklus_vége");
+            tt.NewLine();
+
+            tt.ExpectEnd();
+            tt.ExpectNoMore();
+
+            // Symbol table
+            Assert.That(result.SymbolTable.Entries, Has.Count.EqualTo(1));
+            Assert.That(result.SymbolTable.Entries[0], Is.TypeOf<SubTableEntry>());
+            SymbolTable subTable = (result.SymbolTable.Entries[0] as SubTableEntry).Table;
+            Assert.That(subTable.Entries, Has.Count.EqualTo(1));
+            SymbolTableTester.SimpleSymbolTableEntry(subTable.Entries[0], "i", SingleEntryType.Egesz, 2);
+        }
+
         [TestCaseSource(nameof(SimpleTypeNames))]
         public void SimpleTypeDefinition(string type)
         {
