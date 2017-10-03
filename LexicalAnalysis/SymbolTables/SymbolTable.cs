@@ -90,7 +90,7 @@ namespace LexicalAnalysis.SymbolTables
             return NotFoundId;
         }
 
-        internal int FindIdByNameInFullTable(string nameToFind)
+        public int FindIdByNameInFullTable(string nameToFind)
         {
             if (Entries.Count == 0)
                 return NotFoundId;

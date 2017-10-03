@@ -69,7 +69,7 @@ namespace LexicalAnalysisTests
                 3.  x = x + 1
             */
 
-            TokenTester tt = new TokenTester(result.Tokens);
+            TokenTester tt = new TokenTester(result);
 
             // program_kezd
             tt.ExpectStart();
@@ -77,15 +77,15 @@ namespace LexicalAnalysisTests
 
             // egész x = 2
             tt.ExpectKeyword("egész");
-            tt.ExpectIdentifier();
+            tt.ExpectIdentifier("x");
             tt.ExpectKeyword("=");
             tt.ExpectLiteral("egész literál", "2");
             tt.NewLine();
 
             // x = x + 1
-            tt.ExpectIdentifier();
+            tt.ExpectIdentifier("x");
             tt.ExpectKeyword("=");
-            tt.ExpectIdentifier();
+            tt.ExpectIdentifier("x");
             tt.ExpectKeyword("+");
             tt.ExpectLiteral("egész literál", "1");
 
@@ -121,7 +121,7 @@ namespace LexicalAnalysisTests
                 16.   program_vége
             */
 
-            TokenTester tt = new TokenTester(result.Tokens)
+            TokenTester tt = new TokenTester(result)
             {
                 CurrentRow = 3
             };
@@ -132,22 +132,22 @@ namespace LexicalAnalysisTests
 
             // 4.    egész x = 2
             tt.ExpectKeyword("egész");
-            tt.ExpectIdentifier();
+            tt.ExpectIdentifier("x");
             tt.ExpectKeyword("=");
             tt.ExpectLiteral("egész literál", "2");
             tt.NewLine();
 
             // 5.    x = x + 1
-            tt.ExpectIdentifier();
+            tt.ExpectIdentifier("x");
             tt.ExpectKeyword("=");
-            tt.ExpectIdentifier();
+            tt.ExpectIdentifier("x");
             tt.ExpectKeyword("+");
             tt.ExpectLiteral("egész literál", "1");
             tt.NewLine();
 
             // 6.    egész a = 2
             tt.ExpectKeyword("egész");
-            tt.ExpectIdentifier();
+            tt.ExpectIdentifier("a");
             tt.ExpectKeyword("=");
             tt.ExpectLiteral("egész literál", "2");
             tt.NewLine();
@@ -155,11 +155,11 @@ namespace LexicalAnalysisTests
             // 7.    ciklus egész b = 0-tól b < 9-ig
             tt.ExpectKeyword("ciklus");
             tt.ExpectKeyword("egész");
-            tt.ExpectIdentifier();
+            tt.ExpectIdentifier("b");
             tt.ExpectKeyword("=");
             tt.ExpectLiteral("egész literál", "0");
             tt.ExpectKeyword("-tól");
-            tt.ExpectIdentifier();
+            tt.ExpectIdentifier("b");
             tt.ExpectKeyword("<");
             tt.ExpectLiteral("egész literál", "9");
             tt.ExpectKeyword("-ig");
@@ -167,7 +167,7 @@ namespace LexicalAnalysisTests
 
             // 8.        egész c = törtből_egészbe(2,4)
             tt.ExpectKeyword("egész");
-            tt.ExpectIdentifier();
+            tt.ExpectIdentifier("c");
             tt.ExpectKeyword("=");
             tt.ExpectInternalFunction("törtből_egészbe");
             tt.ExpectKeyword("(");
@@ -203,7 +203,7 @@ namespace LexicalAnalysisTests
         {
             LexicalAnalyzerResult result = new LexicalAnalyzer().Analyze(Properties.Inputs.Comments);
 
-            TokenTester tt = new TokenTester(result.Tokens)
+            TokenTester tt = new TokenTester(result)
             {
                 CurrentRow = 2
             };
@@ -224,7 +224,7 @@ namespace LexicalAnalysisTests
             tt.CurrentRow = 10;
             // 10.  szöveg alma="almavagyok"
             tt.ExpectKeyword("szöveg");
-            tt.ExpectIdentifier();
+            tt.ExpectIdentifier("alma");
             tt.ExpectKeyword("=");
             tt.ExpectLiteral("szöveg literál", "almavagyok");
             tt.NewLine();
@@ -253,7 +253,7 @@ namespace LexicalAnalysisTests
                 8.  program_vége 
             */
 
-            TokenTester tt = new TokenTester(result.Tokens);
+            TokenTester tt = new TokenTester(result);
 
             // 1.  program_kezd
             tt.ExpectStart();
@@ -261,7 +261,7 @@ namespace LexicalAnalysisTests
 
             // 2.  egész a
             tt.ExpectKeyword("egész");
-            tt.ExpectIdentifier();
+            tt.ExpectIdentifier("a");
 
 #warning Declarations() not completed yet
         }

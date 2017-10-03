@@ -2,19 +2,23 @@
 using NUnit.Framework;
 using System;
 using System.Collections.Generic;
+using LexicalAnalysis;
+using LexicalAnalysis.SymbolTables;
 
 namespace LexicalAnalysisTests
 {
     internal sealed class TokenTester
     {
         private readonly List<Token> _tokens;
+        private readonly SymbolTable _symbolTable;
         private int _indexer;
         internal int CurrentRow { get; set; } = 1;
         private Token NextToken => _tokens[_indexer++];
 
-        internal TokenTester(List<Token> tokens)
+        internal TokenTester(LexicalAnalyzerResult result)
         {
-            _tokens = tokens;
+            _tokens = result.Tokens;
+            _symbolTable = result.SymbolTable;
         }
 
         internal void NewLine()
@@ -29,9 +33,6 @@ namespace LexicalAnalysisTests
         internal void ExpectKeyword(string word)
             => Generic(NextToken, typeof(KeywordToken), word);
 
-        internal void ExpectIdentifier()
-            => Generic(NextToken, typeof(IdentifierToken), "azonosító");
-
         internal void ExpectInternalFunction(string word)
             => Generic(NextToken, typeof(InternalFunctionToken), word);
 
@@ -39,7 +40,17 @@ namespace LexicalAnalysisTests
         {
             Token token = NextToken;
             Generic(token, typeof(LiteralToken), word);
-            Assert.That((token as LiteralToken).LiteralValue, Is.EqualTo(expectedValue));
+            string value = (token as LiteralToken).LiteralValue;
+            Assert.That(value, Is.EqualTo(expectedValue), $"Expected literal value {expectedValue}, but was {value}.");
+        }
+
+        internal void ExpectIdentifier(string name)
+        {
+            Token token = NextToken;
+            Generic(token, typeof(IdentifierToken), "azonosító");
+            int symbolIdInTable = _symbolTable.FindIdByNameInFullTable(name);
+            int tokenSymbolId = (token as IdentifierToken).SymbolId;
+            Assert.That(tokenSymbolId, Is.EqualTo(symbolIdInTable), $"Expected Symbol id {symbolIdInTable}, but was {tokenSymbolId}.");
         }
 
         internal void ExpectNoMore()
@@ -49,14 +60,19 @@ namespace LexicalAnalysisTests
 
         private void Generic(Token token, Type expectedType, string word)
         {
-            Assert.That(token, Is.TypeOf(expectedType));
-            Assert.That(token.Id, Is.EqualTo(CodeFor(word)), $"The token's id ({token.Id}) doesn't matches the code for the word ({word})");
-            Assert.That(token.RowNumber, Is.EqualTo(CurrentRow), $"Expected row number {CurrentRow}, but was {token.RowNumber}");
+            Assert.That(token, Is.TypeOf(expectedType), $"Expected token type {expectedType.Name}, but was {token.GetType().Name}");
+            Assert.That(token.Id, Is.EqualTo(CodeFor(word)), $"Expected {word}, but was {WordFor(token.Id)}.");
+            Assert.That(token.RowNumber, Is.EqualTo(CurrentRow), $"Expected row {CurrentRow}, but was {token.RowNumber}.");
         }
 
         private static int CodeFor(string word)
         {
             return LexicalAnalysis.LexicalElementCodes.LexicalElementCodeDictionary.GetCode(word);
+        }
+
+        private static string WordFor(int code)
+        {
+            return LexicalAnalysis.LexicalElementCodes.LexicalElementCodeDictionary.GetWord(code);
         }
     }
 }
