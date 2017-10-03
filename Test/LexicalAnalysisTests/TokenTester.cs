@@ -39,13 +39,26 @@ namespace LexicalAnalysisTests
         internal void ExpectInternalFunction(string word)
             => Generic(NextToken, typeof(InternalFunctionToken), word);
 
-        internal void ExpectLiteral(string word, string expectedValue)
+        internal void ExpectEgeszLiteral(int expectedValue)
+            => ExpectLiteralBase("egész literál", expectedValue.ToString());
+
+        internal void ExpectTortLiteral(string expectedValue)
+            => ExpectLiteralBase("tört literál", expectedValue);
+
+        internal void ExpectSzovegLiteral(string expectedValue)
+            => ExpectLiteralBase("szöveg literál", expectedValue);
+
+        internal void ExpectLogikaiLiteral(string expectedValue)
+            => ExpectLiteralBase(expectedValue, expectedValue);
+
+        private void ExpectLiteralBase(string type, string expectedValue)
         {
             Token token = NextToken;
-            Generic(token, typeof(LiteralToken), word);
+            Generic(token, typeof(LiteralToken), type);
             string value = (token as LiteralToken).LiteralValue;
             Assert.That(value, Is.EqualTo(expectedValue), $"Expected literal value {expectedValue}, but was {value}.");
         }
+
 
         internal void ExpectIdentifier(string name)
         {

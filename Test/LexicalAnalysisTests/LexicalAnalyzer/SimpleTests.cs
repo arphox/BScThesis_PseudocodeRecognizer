@@ -130,7 +130,7 @@ namespace LexicalAnalysisTests.LexicalAnalyzer
             tt.NewLine();
 
             tt.ExpectKeyword("ha");
-            tt.ExpectLiteral("igaz", "igaz");
+            tt.ExpectLogikaiLiteral("igaz");
             tt.ExpectKeyword("akkor");
             tt.NewLine();
 
@@ -175,11 +175,11 @@ namespace LexicalAnalysisTests.LexicalAnalyzer
             tt.ExpectKeyword("egész");
             tt.ExpectIdentifier("i");
             tt.ExpectKeyword("=");
-            tt.ExpectLiteral("egész literál", "1");
+            tt.ExpectEgeszLiteral(1);
             tt.ExpectKeyword("-tól");
             tt.ExpectIdentifier("i");
             tt.ExpectKeyword("<");
-            tt.ExpectLiteral("egész literál", "9");
+            tt.ExpectEgeszLiteral(9);
             tt.ExpectKeyword("-ig");
             tt.NewLine();
 
@@ -256,7 +256,7 @@ namespace LexicalAnalysisTests.LexicalAnalyzer
         public void SimpleDeclaration()
         {
             const string code = "program_kezd\n" +
-                                "tört s = 3,1111\n" +
+                                "tört s = -3,1111\n" +
                                 "program_vége";
 
             LexicalAnalyzerResult result = new LexicalAnalysis.LexicalAnalyzer().Analyze(code);
@@ -269,7 +269,7 @@ namespace LexicalAnalysisTests.LexicalAnalyzer
             tt.ExpectKeyword("tört");
             tt.ExpectIdentifier("s");
             tt.ExpectKeyword("=");
-            tt.ExpectLiteral("tört literál", "3,1111");
+            tt.ExpectTortLiteral("-3,1111");
             tt.NewLine();
 
             tt.ExpectEnd();
@@ -302,7 +302,7 @@ namespace LexicalAnalysisTests.LexicalAnalyzer
             tt.ExpectKeyword("szöveg");
             tt.ExpectKeyword(")");
             tt.ExpectKeyword("[");
-            tt.ExpectLiteral("egész literál", "97");
+            tt.ExpectEgeszLiteral(97);
             tt.ExpectKeyword("]");
             tt.NewLine();
 
