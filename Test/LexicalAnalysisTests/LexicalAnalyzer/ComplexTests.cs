@@ -1,29 +1,18 @@
 ﻿using System;
 using System.Linq;
-using NUnit.Framework;
 using LexicalAnalysis;
 using LexicalAnalysis.SymbolTables;
+using NUnit.Framework;
 
-namespace LexicalAnalysisTests
+namespace LexicalAnalysisTests.LexicalAnalyzer
 {
     [TestFixture]
-    public class LexicalAnalyzerTests
+    public class ComplexTests
     {
-        [Test]
-        public void Empty()
-        {
-            Assert.Throws<ArgumentException>(() => new LexicalAnalyzer().Analyze(null));
-            Assert.Throws<ArgumentException>(() => new LexicalAnalyzer().Analyze(string.Empty));
-            Assert.Throws<ArgumentException>(() => new LexicalAnalyzer().Analyze(" "));
-            Assert.Throws<ArgumentException>(() => new LexicalAnalyzer().Analyze("\t"));
-            Assert.Throws<ArgumentException>(() => new LexicalAnalyzer().Analyze("\n"));
-            Assert.Throws<ArgumentException>(() => new LexicalAnalyzer().Analyze("   \t    \n"));
-        }
-
         [Test]
         public void NoStartEnd()
         {
-            LexicalAnalyzerResult result = new LexicalAnalyzer().Analyze(Properties.Inputs.NoStartEnd);
+            LexicalAnalyzerResult result = new LexicalAnalysis.LexicalAnalyzer().Analyze(Properties.Inputs.NoStartEnd);
             /*
                 1.  alma körte barack
                 2.  nincs is értelmes
@@ -43,7 +32,7 @@ namespace LexicalAnalysisTests
         [Test]
         public void NoStart()
         {
-            LexicalAnalyzerResult result = new LexicalAnalyzer().Analyze(Properties.Inputs.NoStart);
+            LexicalAnalyzerResult result = new LexicalAnalysis.LexicalAnalyzer().Analyze(Properties.Inputs.NoStart);
             /*
                 1.  egész x = 2
                 2.  x = x + 1
@@ -62,7 +51,7 @@ namespace LexicalAnalysisTests
         [Test]
         public void NoEnd()
         {
-            LexicalAnalyzerResult result = new LexicalAnalyzer().Analyze(Properties.Inputs.NoEnd);
+            LexicalAnalyzerResult result = new LexicalAnalysis.LexicalAnalyzer().Analyze(Properties.Inputs.NoEnd);
             /*
                 1.  program_kezd
                 2.  egész x = 2
@@ -101,7 +90,7 @@ namespace LexicalAnalysisTests
         [Test]
         public void NotOnlyCode()
         {
-            LexicalAnalyzerResult result = new LexicalAnalyzer().Analyze(Properties.Inputs.NotOnlyCode);
+            LexicalAnalyzerResult result = new LexicalAnalysis.LexicalAnalyzer().Analyze(Properties.Inputs.NotOnlyCode);
             /*
                 1.    egész x = 2
                 2.    x = x + 1
@@ -201,7 +190,7 @@ namespace LexicalAnalysisTests
         [Test]
         public void Comments()
         {
-            LexicalAnalyzerResult result = new LexicalAnalyzer().Analyze(Properties.Inputs.Comments);
+            LexicalAnalyzerResult result = new LexicalAnalysis.LexicalAnalyzer().Analyze(Properties.Inputs.Comments);
 
             TokenTester tt = new TokenTester(result)
             {
@@ -241,7 +230,7 @@ namespace LexicalAnalysisTests
         [Test]
         public void Declarations()
         {
-            LexicalAnalyzerResult result = new LexicalAnalyzer().Analyze(Properties.Inputs.Declarations);
+            LexicalAnalyzerResult result = new LexicalAnalysis.LexicalAnalyzer().Analyze(Properties.Inputs.Declarations);
             /*
                 1.  program_kezd
                 2.  egész a
@@ -315,7 +304,31 @@ namespace LexicalAnalysisTests
             Assert.That(rootTable.Entries.Count, Is.EqualTo(6));
         }
 
+        // masodfoku
 
+        // for
+
+        // arrayForIf
+
+        // expressions
+
+        // simpleTheorems
+
+        // deepBlocks
+
+        // internal functions
+
+        // loadtest 1k
+
+        // loadtest 10k
+
+        // redeclaration
+
+        // multipleStart
+
+        // notype
+
+        // unknownsymbol
 
 
 
