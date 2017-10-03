@@ -169,7 +169,7 @@ namespace LexicalAnalysisTests.LexicalAnalyzer
             tt.NewLine();
 
             // 10.   program_vége
-            tt.ExpectKeyword("program_vége");
+            tt.ExpectEnd();
             
             tt.ExpectNoMore();
 
@@ -219,7 +219,7 @@ namespace LexicalAnalysisTests.LexicalAnalyzer
             tt.NewLine();
 
             // 11. program_vége
-            tt.ExpectKeyword("program_vége");
+            tt.ExpectEnd();
 
             tt.ExpectNoMore();
 
@@ -289,7 +289,7 @@ namespace LexicalAnalysisTests.LexicalAnalyzer
             tt.NewLine();
 
             // 8.  program_vége 
-            tt.ExpectKeyword("program_vége");
+            tt.ExpectEnd();
             tt.ExpectNoMore();
 
 

@@ -50,7 +50,7 @@ namespace LexicalAnalysisTests.LexicalAnalyzer
 
             tt.ExpectStart();
             tt.NewLine();
-            tt.ExpectKeyword("program_vége");
+            tt.ExpectEnd();
             tt.ExpectNoMore();
 
             // Symbol table
@@ -75,7 +75,36 @@ namespace LexicalAnalysisTests.LexicalAnalyzer
             tt.ExpectStart();
             tt.NewLine();
             tt.CurrentRow = 7;
-            tt.ExpectKeyword("program_vége");
+            tt.ExpectEnd();
+            tt.ExpectNoMore();
+
+            // Symbol table
+            Assert.That(result.SymbolTable.IsEmpty);
+        }
+
+        [Test]
+        public void Exit()
+        {
+            const string code = "program_kezd\n" +
+                                "kilép\n" +
+                                "kilépés\n" +
+                                "program_vége";
+
+            LexicalAnalyzerResult result = new LexicalAnalysis.LexicalAnalyzer().Analyze(code);
+
+            TokenTester tt = new TokenTester(result);
+
+            tt.ExpectStart();
+            tt.NewLine();
+
+            tt.ExpectKeyword("kilép");
+            tt.NewLine();
+
+            tt.ExpectKeyword("kilép");
+            tt.NewLine();
+
+            tt.ExpectEnd();
+
             tt.ExpectNoMore();
 
             // Symbol table
@@ -100,7 +129,7 @@ namespace LexicalAnalysisTests.LexicalAnalyzer
             tt.ExpectIdentifier("óóüöúőűáéí");
             tt.NewLine();
 
-            tt.ExpectKeyword("program_vége");
+            tt.ExpectEnd();
 
             tt.ExpectNoMore();
 
@@ -126,7 +155,7 @@ namespace LexicalAnalysisTests.LexicalAnalyzer
             tt.ExpectIdentifier("alma_körte");
             tt.NewLine();
 
-            tt.ExpectKeyword("program_vége");
+            tt.ExpectEnd();
 
             tt.ExpectNoMore();
 
@@ -154,7 +183,7 @@ namespace LexicalAnalysisTests.LexicalAnalyzer
             tt.ExpectLiteral("tört literál", "3,1111");
             tt.NewLine();
 
-            tt.ExpectKeyword("program_vége");
+            tt.ExpectEnd();
 
             tt.ExpectNoMore();
 
@@ -188,7 +217,7 @@ namespace LexicalAnalysisTests.LexicalAnalyzer
             tt.ExpectKeyword("]");
             tt.NewLine();
 
-            tt.ExpectKeyword("program_vége");
+            tt.ExpectEnd();
 
             tt.ExpectNoMore();
 
