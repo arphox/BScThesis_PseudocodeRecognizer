@@ -23,6 +23,9 @@ namespace LexicalAnalysisTests
             CurrentRow++;
         }
 
+        internal void ExpectStart()
+            => Generic(NextToken, typeof(KeywordToken), "program_kezd");
+
         internal void ExpectKeyword(string word)
             => Generic(NextToken, typeof(KeywordToken), word);
 

@@ -72,7 +72,7 @@ namespace LexicalAnalysisTests
             TokenTester tt = new TokenTester(result.Tokens);
 
             // program_kezd
-            tt.ExpectKeyword("program_kezd");
+            tt.ExpectStart();
             tt.NewLine();
 
             // egész x = 2
@@ -127,7 +127,7 @@ namespace LexicalAnalysisTests
             };
 
             // 3.    program_kezd
-            tt.ExpectKeyword("program_kezd");
+            tt.ExpectStart();
             tt.NewLine();
 
             // 4.    egész x = 2
@@ -210,7 +210,7 @@ namespace LexicalAnalysisTests
 
             // 1.   //komment
             // 2.   program_kezd
-            tt.ExpectKeyword("program_kezd");
+            tt.ExpectStart();
             tt.NewLine();
 
             // 3.   (newline)
@@ -237,6 +237,44 @@ namespace LexicalAnalysisTests
             // Symbol table
             SymbolTableHelper.SimpleSymbolTableEntry(result.SymbolTable.Entries.Single(), "alma", SingleEntryType.Szoveg, 10);
         }
+
+        [Test]
+        public void Declarations()
+        {
+            LexicalAnalyzerResult result = new LexicalAnalyzer().Analyze(Properties.Inputs.Declarations);
+            /*
+                1.  program_kezd
+                2.  egész a
+                3.  egész b
+                4.  egész[] tömb = létrehoz(egész)[10]
+                5.  szöveg error
+                6.  logikai lenniVAGYnemLENNI
+                7.  tört burgonya = 2,3
+                8.  program_vége 
+            */
+
+            TokenTester tt = new TokenTester(result.Tokens);
+
+            // 1.  program_kezd
+            tt.ExpectStart();
+            tt.NewLine();
+
+            // 2.  egész a
+            tt.ExpectKeyword("egész");
+            tt.ExpectIdentifier();
+
+#warning Declarations() not completed yet
+        }
+
+
+
+
+
+
+
+
+
+
         //System.IO.File.WriteAllLines(@"C:\temp\log.txt", result.Tokens.Select(t => t.ToString()));
     }
 }
