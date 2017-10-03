@@ -80,7 +80,7 @@ namespace LexicalAnalysis
             int code = OutputTokens.FindTypeOfLastIdentifier();
             if (code == LexicalElementCodeDictionary.ErrorCode)
             {
-                string errorMsg = $"A \"{name}\" nevű változó típusa nincs megadva.";
+                string errorMsg = $"The variable \"{name}\"'s type is not determined.";
                 OutputTokens.Add(new ErrorToken(errorMsg, currentRowNumber));
             }
 

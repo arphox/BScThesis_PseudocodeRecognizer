@@ -92,7 +92,7 @@ namespace LexicalAnalysisTests
             tt.ExpectNoMore();
 
             // Symbol table
-            SymbolTableHelper.SimpleSymbolTableEntry(result.SymbolTable.Entries[0], "x", SingleEntryType.Egesz, 2);
+            SymbolTableTester.SimpleSymbolTableEntry(result.SymbolTable.Entries[0], "x", SingleEntryType.Egesz, 2);
             Assert.That(result.SymbolTable.Entries.Count, Is.EqualTo(1));
 
             TestContext.Write(result.SymbolTable.ToStringNice());
@@ -185,12 +185,12 @@ namespace LexicalAnalysisTests
             tt.ExpectNoMore();
 
             // Symbol table
-            SymbolTableHelper.SimpleSymbolTableEntry(result.SymbolTable.Entries[0], "x", SingleEntryType.Egesz, 4);
-            SymbolTableHelper.SimpleSymbolTableEntry(result.SymbolTable.Entries[1], "a", SingleEntryType.Egesz, 6);
+            SymbolTableTester.SimpleSymbolTableEntry(result.SymbolTable.Entries[0], "x", SingleEntryType.Egesz, 4);
+            SymbolTableTester.SimpleSymbolTableEntry(result.SymbolTable.Entries[1], "a", SingleEntryType.Egesz, 6);
 
             SymbolTable innerTable = (result.SymbolTable.Entries[2] as SubTableEntry).Table;
-            SymbolTableHelper.SimpleSymbolTableEntry(innerTable.Entries[0], "b", SingleEntryType.Egesz, 7);
-            SymbolTableHelper.SimpleSymbolTableEntry(innerTable.Entries[1], "c", SingleEntryType.Egesz, 8);
+            SymbolTableTester.SimpleSymbolTableEntry(innerTable.Entries[0], "b", SingleEntryType.Egesz, 7);
+            SymbolTableTester.SimpleSymbolTableEntry(innerTable.Entries[1], "c", SingleEntryType.Egesz, 8);
 
             Assert.That(result.SymbolTable.Entries.Count, Is.EqualTo(3));
             Assert.That(innerTable.Entries.Count, Is.EqualTo(2));
@@ -235,7 +235,7 @@ namespace LexicalAnalysisTests
             tt.ExpectNoMore();
 
             // Symbol table
-            SymbolTableHelper.SimpleSymbolTableEntry(result.SymbolTable.Entries.Single(), "alma", SingleEntryType.Szoveg, 10);
+            SymbolTableTester.SimpleSymbolTableEntry(result.SymbolTable.Entries.Single(), "alma", SingleEntryType.Szoveg, 10);
         }
 
         [Test]
@@ -262,8 +262,57 @@ namespace LexicalAnalysisTests
             // 2.  egész a
             tt.ExpectKeyword("egész");
             tt.ExpectIdentifier("a");
+            tt.NewLine();
 
-#warning Declarations() not completed yet
+            // 3.  egész b
+            tt.ExpectKeyword("egész");
+            tt.ExpectIdentifier("b");
+            tt.NewLine();
+
+            // 4.  egész[] tömb = létrehoz(egész)[10]
+            tt.ExpectKeyword("egész tömb");
+            tt.ExpectIdentifier("tömb");
+            tt.ExpectKeyword("=");
+            tt.ExpectKeyword("létrehoz");
+            tt.ExpectKeyword("(");
+            tt.ExpectKeyword("egész");
+            tt.ExpectKeyword(")");
+            tt.ExpectKeyword("[");
+            tt.ExpectLiteral("egész literál", "10");
+            tt.ExpectKeyword("]");
+            tt.NewLine();
+
+            // 5.  szöveg error
+            tt.ExpectKeyword("szöveg");
+            tt.ExpectIdentifier("error");
+            tt.NewLine();
+
+            // 6.  logikai lenniVAGYnemLENNI
+            tt.ExpectKeyword("logikai");
+            tt.ExpectIdentifier("lenniVAGYnemLENNI");
+            tt.NewLine();
+
+            // 7.  tört burgonya = 2,3
+            tt.ExpectKeyword("tört");
+            tt.ExpectIdentifier("burgonya");
+            tt.ExpectKeyword("=");
+            tt.ExpectLiteral("tört literál", "2,3");
+            tt.NewLine();
+
+            // 8.  program_vége 
+            tt.ExpectKeyword("program_vége");
+            tt.ExpectNoMore();
+
+
+            // Symbol table
+            SymbolTable rootTable = result.SymbolTable;
+            SymbolTableTester.SimpleSymbolTableEntry(rootTable.Entries[0], "a", SingleEntryType.Egesz, 2);
+            SymbolTableTester.SimpleSymbolTableEntry(rootTable.Entries[1], "b", SingleEntryType.Egesz, 3);
+            SymbolTableTester.SimpleSymbolTableEntry(rootTable.Entries[2], "tömb", SingleEntryType.EgeszTomb, 4);
+            SymbolTableTester.SimpleSymbolTableEntry(rootTable.Entries[3], "error", SingleEntryType.Szoveg, 5);
+            SymbolTableTester.SimpleSymbolTableEntry(rootTable.Entries[4], "lenniVAGYnemLENNI", SingleEntryType.Logikai, 6);
+            SymbolTableTester.SimpleSymbolTableEntry(rootTable.Entries[5], "burgonya", SingleEntryType.Tort, 7);
+            Assert.That(rootTable.Entries.Count, Is.EqualTo(6));
         }
 
 

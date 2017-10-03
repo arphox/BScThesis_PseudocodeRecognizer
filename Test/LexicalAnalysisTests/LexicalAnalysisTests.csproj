@@ -51,7 +51,7 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Inputs.resx</DependentUpon>
     </Compile>
-    <Compile Include="SymbolTableHelper.cs" />
+    <Compile Include="SymbolTableTester.cs" />
     <Compile Include="TokenTester.cs" />
   </ItemGroup>
   <ItemGroup>

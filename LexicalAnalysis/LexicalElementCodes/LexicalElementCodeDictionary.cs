@@ -166,5 +166,15 @@ namespace LexicalAnalysis.LexicalElementCodes
         {
             return code >= 200 && code < 300;
         }
+
+        internal static bool IsType(int code)
+        {
+            return code >= 1000 && code < 1100;
+        }
+
+        internal static int GetArrayCodeFromSimpleTypeCode(int code)
+        {
+            return code + 50;
+        }
     }
 }

@@ -5,7 +5,7 @@ using NUnit.Framework;
 
 namespace LexicalAnalysisTests
 {
-    internal class SymbolTableHelper
+    internal class SymbolTableTester
     {
         internal static void SimpleSymbolTableEntry(SymbolTableEntry entry, string name, SingleEntryType entryType, int lineNumber)
         {
