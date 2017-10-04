@@ -82,6 +82,7 @@ namespace LexicalAnalysis
             {
                 string errorMsg = $"The variable \"{name}\"'s type is not determined.";
                 OutputTokens.Add(new ErrorToken(errorMsg, currentRowNumber));
+                return;
             }
 
             _symbolTableHandler.InsertNewSymbolTableEntry(name, code, currentRowNumber);
