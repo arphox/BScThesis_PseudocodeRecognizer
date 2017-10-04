@@ -40,7 +40,10 @@ namespace LexicalAnalysis
             }
             void DecreaseSymbolTableIndent()
             {
-                RootSymbolTable = RootSymbolTable.ParentTable;
+                if (RootSymbolTable.ParentTable != null)
+                {
+                    RootSymbolTable = RootSymbolTable.ParentTable;
+                }
             }
         }
         internal int FindIdByName(string name)

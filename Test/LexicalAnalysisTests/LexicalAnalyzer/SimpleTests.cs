@@ -11,6 +11,12 @@ namespace LexicalAnalysisTests.LexicalAnalyzer
     {
         private static readonly string[] SimpleTypeNames = { "egész", "tört", "szöveg", "logikai" };
 
+        private static readonly string[] SimpleKeywords =
+        {
+            "ha", "akkor", "különben", "elágazás_vége", "ciklus", "ciklus_amíg", "ciklus_vége", "-tól", "-től", "-ig", "beolvas", "beolvas:",
+            "kiír", "kiír:", "létrehoz", "egész", "tört", "szöveg", "logikai"
+        };
+
         [Test]
         public void Empty()
         {
@@ -23,7 +29,7 @@ namespace LexicalAnalysisTests.LexicalAnalyzer
         }
 
         [Test]
-        public void ProgramStart()
+        public void CanRecognizeProgramStart()
         {
             const string code = "program_kezd";
 
@@ -39,7 +45,7 @@ namespace LexicalAnalysisTests.LexicalAnalyzer
         }
 
         [Test]
-        public void ProgramStartAndEnd()
+        public void CanRecognizeProgramStartAndEnd()
         {
             const string code = "program_kezd\n" +
                                 "program_vége\n";
@@ -58,7 +64,7 @@ namespace LexicalAnalysisTests.LexicalAnalyzer
         }
 
         [Test]
-        public void WhitespacesAndNewLines()
+        public void CanRecognizeAndFilterWhitespacesAndNewLines()
         {
             const string code = "program_kezd\n\t        \t    \t" +
                                 "        \r\n" +
@@ -82,13 +88,12 @@ namespace LexicalAnalysisTests.LexicalAnalyzer
             Assert.That(result.SymbolTable.IsEmpty);
         }
 
-        [Test]
-        public void Exit()
+        [TestCaseSource(nameof(SimpleKeywords))]
+        public void CanRecognizeKeyword(string keyword)
         {
-            const string code = "program_kezd\n" +
-                                "kilép\n" +
-                                "kilépés\n" +
-                                "program_vége";
+            string code = "program_kezd\n" +
+                           keyword + "\n" +
+                          "program_vége";
 
             LexicalAnalyzerResult result = new LexicalAnalysis.LexicalAnalyzer().Analyze(code);
 
@@ -97,10 +102,7 @@ namespace LexicalAnalysisTests.LexicalAnalyzer
             tt.ExpectStart();
             tt.NewLine();
 
-            tt.ExpectKeyword("kilép");
-            tt.NewLine();
-
-            tt.ExpectKeyword("kilép");
+            tt.ExpectKeyword(keyword);
             tt.NewLine();
 
             tt.ExpectEnd();
@@ -112,7 +114,36 @@ namespace LexicalAnalysisTests.LexicalAnalyzer
         }
 
         [Test]
-        public void IfThenElse()
+        public void CanRecognizeLogicalLiterals()
+        {
+            const string code = "program_kezd\n" +
+                                "igaz\n" +
+                                "hamis\n" +
+                                "program_vége";
+
+            LexicalAnalyzerResult result = new LexicalAnalysis.LexicalAnalyzer().Analyze(code);
+
+            TokenTester tt = new TokenTester(result);
+
+            tt.ExpectStart();
+            tt.NewLine();
+
+            tt.ExpectLogikaiLiteral("igaz");
+            tt.NewLine();
+
+            tt.ExpectLogikaiLiteral("hamis");
+            tt.NewLine();
+
+            tt.ExpectEnd();
+
+            tt.ExpectNoMore();
+
+            // Symbol table
+            Assert.That(result.SymbolTable.IsEmpty);
+        }
+
+        [Test]
+        public void CanRecognizeIfThenElse()
         {
             const string code = "program_kezd\n" +
                                 "ha igaz akkor\n" +
@@ -154,9 +185,9 @@ namespace LexicalAnalysisTests.LexicalAnalyzer
         }
 
         [TestCase("ciklus egész i=1-től i<9-ig\n")]
-        [TestCase("ciklus egész i = 1-től i < 9-ig\n")]
+        [TestCase("ciklus egész i = 1-tól i < 9-ig\n")]
         [TestCase("ciklus egész i = 1 -től i < 9 -ig\n")]
-        public void For(string secondRow)
+        public void CanRecognizeFor(string secondRow)
         {
             string code = "program_kezd\n" +
                           secondRow +
@@ -201,7 +232,7 @@ namespace LexicalAnalysisTests.LexicalAnalyzer
         }
 
         [Test]
-        public void While()
+        public void CanRecognizeWhile()
         {
             const string code = "program_kezd\n" +
                                 "ciklus_amíg hamis\n" +
@@ -234,7 +265,7 @@ namespace LexicalAnalysisTests.LexicalAnalyzer
         }
 
         [TestCaseSource(nameof(SimpleTypeNames))]
-        public void SimpleTypeDefinition(string type)
+        public void CanRecognizeSimpleTypeDefinition(string type)
         {
             string code = "program_kezd\n" +
                            type + " óóüöúőűáéí\n" +
@@ -260,7 +291,7 @@ namespace LexicalAnalysisTests.LexicalAnalyzer
         }
 
         [TestCaseSource(nameof(SimpleTypeNames))]
-        public void ArrayTypeDefinition(string type)
+        public void CanRecognizeArrayTypeDefinition(string type)
         {
             string code = "program_kezd\n" +
                           type + "[] alma_körte\n" +
@@ -286,7 +317,7 @@ namespace LexicalAnalysisTests.LexicalAnalyzer
         }
 
         [Test]
-        public void SimpleDeclaration()
+        public void CanRecognizeSimpleDeclaration()
         {
             const string code = "program_kezd\n" +
                                 "tört s = -3,1111\n" +
@@ -314,7 +345,7 @@ namespace LexicalAnalysisTests.LexicalAnalyzer
         }
 
         [Test]
-        public void ArrayDeclaration()
+        public void CanRecognizeArrayDeclaration()
         {
             const string code = "program_kezd\n" +
                                 "szöveg[] sorok = létrehoz(szöveg)[97]\n" +
