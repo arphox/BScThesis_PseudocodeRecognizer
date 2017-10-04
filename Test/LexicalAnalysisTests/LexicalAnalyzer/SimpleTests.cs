@@ -13,6 +13,11 @@ namespace LexicalAnalysisTests.LexicalAnalyzer
             "ha", "akkor", "különben", "elágazás_vége", "ciklus", "ciklus_amíg", "ciklus_vége", "-tól", "-től", "-ig", "beolvas", "beolvas:",
             "kiír", "kiír:", "létrehoz", "egész", "tört", "szöveg", "logikai"
         };
+        private static readonly string[] InternalFunctions =
+        {
+            "egészből_logikaiba", "törtből_egészbe", "törtből_logikaiba", "logikaiból_egészbe",
+            "logikaiból_törtbe", "szövegből_egészbe", "szövegből_törtbe", "szövegből_logikaiba"
+        };
 
         [Test]
         public void Empty()
@@ -100,6 +105,31 @@ namespace LexicalAnalysisTests.LexicalAnalyzer
             tt.NewLine();
 
             tt.ExpectKeyword(keyword);
+            tt.NewLine();
+
+            tt.ExpectEnd();
+
+            tt.ExpectNoMore();
+
+            // Symbol table
+            Assert.That(result.SymbolTable.IsEmpty);
+        }
+
+        [TestCaseSource(nameof(InternalFunctions))]
+        public void CanRecognizeInternalFunctions(string functionName)
+        {
+            string code = "program_kezd\n" +
+                          functionName + "\n" +
+                          "program_vége";
+
+            LexicalAnalyzerResult result = new LexicalAnalysis.LexicalAnalyzer().Analyze(code);
+
+            TokenTester tt = new TokenTester(result);
+
+            tt.ExpectStart();
+            tt.NewLine();
+
+            tt.ExpectInternalFunction(functionName);
             tt.NewLine();
 
             tt.ExpectEnd();
