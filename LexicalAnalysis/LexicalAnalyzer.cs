@@ -199,10 +199,15 @@ namespace LexicalAnalysis
         private void HandleState_StringLiteral()
         {
             _inputIndexer++; //   skip opening "
-            StringBuilder currentLiteral = new StringBuilder();
+            StringBuilder currentLiteral = new StringBuilder("\""); // add opening "
             bool endOfLiteral = false;
             while (_inputIndexer < _input.Length && !endOfLiteral)
             {
+                if (CurrentChar == '"')
+                {
+                    break;
+                }
+
                 currentLiteral.Append(CurrentChar);
                 _inputIndexer++;
 
@@ -210,6 +215,7 @@ namespace LexicalAnalysis
                     endOfLiteral = true;
             }
             _inputIndexer++; //   skip closing "
+            currentLiteral.Append("\""); // add closing "
 
             int code = LexicalElementCodeDictionary.GetCode("szöveg literál");
             _outputTokensHandler.AddToken(new LiteralToken(code, currentLiteral.ToString(), _currentRowNumber));
