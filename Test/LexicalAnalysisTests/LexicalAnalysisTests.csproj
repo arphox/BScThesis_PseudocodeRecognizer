@@ -45,6 +45,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="LexicalAnalyzer\ComplexTests.cs" />
+    <Compile Include="LexicalAnalyzer\DefinitionAndDeclarationTests.cs" />
     <Compile Include="LexicalAnalyzer\LiteralTests.cs" />
     <Compile Include="LexicalAnalyzer\SimpleTests.cs" />
     <Compile Include="LexicalElementCodeDictionaryTests.cs" />
