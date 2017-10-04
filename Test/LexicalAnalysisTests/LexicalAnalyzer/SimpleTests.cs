@@ -9,7 +9,7 @@ namespace LexicalAnalysisTests.LexicalAnalyzer
     public sealed class SimpleTests
     {
         private static readonly string[] SimpleKeywords =
-                {
+        {
             "ha", "akkor", "különben", "elágazás_vége", "ciklus", "ciklus_amíg", "ciklus_vége", "-tól", "-től", "-ig", "beolvas", "beolvas:",
             "kiír", "kiír:", "létrehoz", "egész", "tört", "szöveg", "logikai"
         };
