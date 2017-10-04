@@ -202,7 +202,11 @@ namespace LexicalAnalysis
             StringBuilder currentLiteral = new StringBuilder("\""); // add opening "
             while (_inputIndexer < _input.Length)
             {
-                if (_inputIndexer > 0 && CurrentChar == '"' && _input[_inputIndexer - 1] != '\\')
+                if (CurrentChar == '"' &&
+                        (_inputIndexer > 0 && _input[_inputIndexer - 1] != '\\' ||      // not an escaped quotation mark
+                        _inputIndexer > 1 && _input[_inputIndexer - 1] == '\\' && _input[_inputIndexer - 2] == '\\' // not an escaped backslash
+                        )
+                   )
                 {
                     break;
                 }

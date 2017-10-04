@@ -6,9 +6,29 @@ namespace LexicalAnalysisTests.LexicalAnalyzer
     [TestFixture]
     public sealed class LiteralTests
     {
-        [TestCaseSource(nameof(GenerateLiterals), new object[] { "egész literál", new []{ "0", "+0", "-0", "1", "5", "13273211", "-8908001" } })]
+        #region [ Tested string literals ]
+
+        private const string EmptyString = "\"\"";
+        private const string Newline = @"""\n""";
+        private const string OneDot = @""".""";
+        private const string OneSpace = @""" """;
+        private const string EscapedQuotationMark = "\"\\\"\"";
+        private const string EscapedBackslash = "\"\\\\\"";
+        private const string EscapedNewline = "\"\\n\"";
+        private const string EscapedTab = "\"\\t\"";
+        private const string SimpleWord = "\"word\"";
+        private const string Sentence = "\"This is a complete sentence in the English language.\"";
+        private const string HungarianCharacters = @"""árvíztűrő tükörfúrógép alapon nyugvó elnyűhetetlen hóbelebanc.""";
+        private const string SpecialCharacters = "\",?;.:>-_*<§'+!%/=()~ˇ^˘°˛`˙´˝¨¸|Ä€÷×äđĐ[]łŁ$ß¤#&@{}\"";
+        private const string EverySimpleKeyOnHungarianKeyboard = "\"0123456789öüóqwertzuiopőúasdfghjkléáűíyxcvbnmÖÜÓQWERTZUIOPŐÚASDFGHJKLÉÁŰÍYXCVBNM\"";
+        private const string Complex = @"""Dear Emily,\nThank you \\n \\t for your interest of my wonderful \""compiler\""!\n\n\t\t\\Karoly\\""";
+
+        #endregion
+
+        [TestCaseSource(nameof(GenerateLiterals), new object[] { "egész literál", new[] { "0", "+0", "-0", "1", "5", "13273211", "-8908001" } })]
         [TestCaseSource(nameof(GenerateLiterals), new object[] { "tört literál", new[] { "0,1", "+1,2", "-3,4", "123,45", "-3123,78895", "132,73211", "-8,908001" } })]
-        [TestCaseSource(nameof(GenerateLiterals), new object[] { "szöveg literál", new[] { "\"\"", "\"asd\"" } })]
+        [TestCaseSource(nameof(GenerateLiterals), new object[] { "szöveg literál", new[] { EmptyString, Newline, EscapedQuotationMark, EscapedBackslash,
+            EscapedNewline, EscapedTab, OneDot, OneSpace, SimpleWord, Sentence, HungarianCharacters, SpecialCharacters, EverySimpleKeyOnHungarianKeyboard, Complex } })]
         public void CanRecognizeLiterals(string type, string value)
         {
             string code = "program_kezd\n" +
@@ -63,12 +83,12 @@ namespace LexicalAnalysisTests.LexicalAnalyzer
         }
 
 
-        private static string[][] GenerateLiterals(string type, string[] array)
+        private static string[][] GenerateLiterals(string type, string[] arrayOfValues)
         {
-            string[][] result = new string[array.Length][];
+            string[][] result = new string[arrayOfValues.Length][];
             for (int i = 0; i < result.Length; i++)
             {
-                result[i] = new[] { type, array[i] };
+                result[i] = new[] { type, arrayOfValues[i] };
             }
             return result;
         }
