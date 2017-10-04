@@ -6,7 +6,7 @@ using System.Linq;
 namespace LexicalAnalysisTests.LexicalAnalyzer
 {
     [TestFixture]
-    public class ComplexTests
+    public sealed class ComplexTests
     {
         [Test]
         public void NoStartEnd()
@@ -67,7 +67,7 @@ namespace LexicalAnalysisTests.LexicalAnalyzer
             tt.ExpectKeyword("egész");
             tt.ExpectIdentifier("x");
             tt.ExpectKeyword("=");
-            tt.ExpectEgeszLiteral(2);
+            tt.ExpectEgeszLiteral("2");
             tt.NewLine();
 
             // x = x + 1
@@ -75,7 +75,7 @@ namespace LexicalAnalysisTests.LexicalAnalyzer
             tt.ExpectKeyword("=");
             tt.ExpectIdentifier("x");
             tt.ExpectKeyword("+");
-            tt.ExpectEgeszLiteral(1);
+            tt.ExpectEgeszLiteral("1");
 
             tt.ExpectNoMore();
 
@@ -122,7 +122,7 @@ namespace LexicalAnalysisTests.LexicalAnalyzer
             tt.ExpectKeyword("egész");
             tt.ExpectIdentifier("x");
             tt.ExpectKeyword("=");
-            tt.ExpectEgeszLiteral(2);
+            tt.ExpectEgeszLiteral("2");
             tt.NewLine();
 
             // 5.    x = x + 1
@@ -130,14 +130,14 @@ namespace LexicalAnalysisTests.LexicalAnalyzer
             tt.ExpectKeyword("=");
             tt.ExpectIdentifier("x");
             tt.ExpectKeyword("+");
-            tt.ExpectEgeszLiteral(1);
+            tt.ExpectEgeszLiteral("1");
             tt.NewLine();
 
             // 6.    egész a = 2
             tt.ExpectKeyword("egész");
             tt.ExpectIdentifier("a");
             tt.ExpectKeyword("=");
-            tt.ExpectEgeszLiteral(2);
+            tt.ExpectEgeszLiteral("2");
             tt.NewLine();
 
             // 7.    ciklus egész b = 0-tól b < 9-ig
@@ -145,11 +145,11 @@ namespace LexicalAnalysisTests.LexicalAnalyzer
             tt.ExpectKeyword("egész");
             tt.ExpectIdentifier("b");
             tt.ExpectKeyword("=");
-            tt.ExpectEgeszLiteral(0);
+            tt.ExpectEgeszLiteral("0");
             tt.ExpectKeyword("-tól");
             tt.ExpectIdentifier("b");
             tt.ExpectKeyword("<");
-            tt.ExpectEgeszLiteral(9);
+            tt.ExpectEgeszLiteral("9");
             tt.ExpectKeyword("-ig");
             tt.NewLine();
 
@@ -205,7 +205,7 @@ namespace LexicalAnalysisTests.LexicalAnalyzer
             tt.CurrentRow++;
             // 4.   kiír     "H//ello világ!" //Ez egy egysoros komment
             tt.ExpectKeyword("kiír");
-            tt.ExpectSzovegLiteral("H//ello világ!");
+            tt.ExpectSzovegLiteral("\"H//ello világ!\"");
             tt.NewLine();
 
             //      (commented lines through 5 to 9)
@@ -214,7 +214,7 @@ namespace LexicalAnalysisTests.LexicalAnalyzer
             tt.ExpectKeyword("szöveg");
             tt.ExpectIdentifier("alma");
             tt.ExpectKeyword("=");
-            tt.ExpectSzovegLiteral("almavagyok");
+            tt.ExpectSzovegLiteral("\"almavagyok\"");
             tt.NewLine();
 
             // 11. program_vége
@@ -266,7 +266,7 @@ namespace LexicalAnalysisTests.LexicalAnalyzer
             tt.ExpectKeyword("egész");
             tt.ExpectKeyword(")");
             tt.ExpectKeyword("[");
-            tt.ExpectEgeszLiteral(10);
+            tt.ExpectEgeszLiteral("10");
             tt.ExpectKeyword("]");
             tt.NewLine();
 

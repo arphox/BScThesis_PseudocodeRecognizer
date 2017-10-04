@@ -7,7 +7,7 @@ using System.Linq;
 namespace LexicalAnalysisTests.LexicalAnalyzer
 {
     [TestFixture]
-    public class SimpleTests
+    public sealed class SimpleTests
     {
         private static readonly string[] SimpleTypeNames = { "egész", "tört", "szöveg", "logikai" };
 
@@ -114,35 +114,6 @@ namespace LexicalAnalysisTests.LexicalAnalyzer
         }
 
         [Test]
-        public void CanRecognizeLogicalLiterals()
-        {
-            const string code = "program_kezd\n" +
-                                "igaz\n" +
-                                "hamis\n" +
-                                "program_vége";
-
-            LexicalAnalyzerResult result = new LexicalAnalysis.LexicalAnalyzer().Analyze(code);
-
-            TokenTester tt = new TokenTester(result);
-
-            tt.ExpectStart();
-            tt.NewLine();
-
-            tt.ExpectLogikaiLiteral("igaz");
-            tt.NewLine();
-
-            tt.ExpectLogikaiLiteral("hamis");
-            tt.NewLine();
-
-            tt.ExpectEnd();
-
-            tt.ExpectNoMore();
-
-            // Symbol table
-            Assert.That(result.SymbolTable.IsEmpty);
-        }
-
-        [Test]
         public void CanRecognizeIfThenElse()
         {
             const string code = "program_kezd\n" +
@@ -206,11 +177,11 @@ namespace LexicalAnalysisTests.LexicalAnalyzer
             tt.ExpectKeyword("egész");
             tt.ExpectIdentifier("i");
             tt.ExpectKeyword("=");
-            tt.ExpectEgeszLiteral(1);
+            tt.ExpectEgeszLiteral("1");
             tt.ExpectKeyword("-tól");
             tt.ExpectIdentifier("i");
             tt.ExpectKeyword("<");
-            tt.ExpectEgeszLiteral(9);
+            tt.ExpectEgeszLiteral("9");
             tt.ExpectKeyword("-ig");
             tt.NewLine();
 
@@ -366,7 +337,7 @@ namespace LexicalAnalysisTests.LexicalAnalyzer
             tt.ExpectKeyword("szöveg");
             tt.ExpectKeyword(")");
             tt.ExpectKeyword("[");
-            tt.ExpectEgeszLiteral(97);
+            tt.ExpectEgeszLiteral("97");
             tt.ExpectKeyword("]");
             tt.NewLine();
 
