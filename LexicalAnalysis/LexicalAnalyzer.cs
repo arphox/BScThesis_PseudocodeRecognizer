@@ -200,19 +200,15 @@ namespace LexicalAnalysis
         {
             _inputIndexer++; //   skip opening "
             StringBuilder currentLiteral = new StringBuilder("\""); // add opening "
-            bool endOfLiteral = false;
-            while (_inputIndexer < _input.Length && !endOfLiteral)
+            while (_inputIndexer < _input.Length)
             {
-                if (CurrentChar == '"')
+                if (_inputIndexer > 0 && CurrentChar == '"' && _input[_inputIndexer - 1] != '\\')
                 {
                     break;
                 }
-
                 currentLiteral.Append(CurrentChar);
                 _inputIndexer++;
 
-                if (CurrentChar == '"' && _inputIndexer > 0 && _input[_inputIndexer - 1] != '\\')
-                    endOfLiteral = true;
             }
             _inputIndexer++; //   skip closing "
             currentLiteral.Append("\""); // add closing "
