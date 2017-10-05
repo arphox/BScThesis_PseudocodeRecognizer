@@ -305,8 +305,6 @@ namespace LexicalAnalysisTests.LexicalAnalyzer
 
         // masodfoku
 
-        // for
-
         // arrayForIf
 
         // expressions
@@ -314,8 +312,6 @@ namespace LexicalAnalysisTests.LexicalAnalyzer
         // simpleTheorems
 
         // deepBlocks
-
-        // internal functions
 
         // loadtest 1k
 

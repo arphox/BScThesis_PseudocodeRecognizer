@@ -81,8 +81,7 @@ namespace LexicalAnalysisTests.LexicalAnalyzer
             // Symbol table
             Assert.That(result.SymbolTable.IsEmpty);
         }
-
-
+        
         private static string[][] GenerateLiterals(string type, string[] arrayOfValues)
         {
             string[][] result = new string[arrayOfValues.Length][];
