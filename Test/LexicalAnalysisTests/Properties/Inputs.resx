@@ -147,17 +147,6 @@ szöveg alma="almavagyok"
 program_vége</value>
     <comment>főleg kommenteket tartalmazó kód</comment>
   </data>
-  <data name="Declarations" xml:space="preserve">
-    <value>program_kezd
-egész a
-egész b
-egész[] tömb = létrehoz(egész)[10]
-szöveg error
-logikai lenniVAGYnemLENNI
-tört burgonya = 2,3
-program_vége</value>
-    <comment>deklarációkat tartalmazó kód</comment>
-  </data>
   <data name="DeepBlocks" xml:space="preserve">
     <value>program_kezd
 

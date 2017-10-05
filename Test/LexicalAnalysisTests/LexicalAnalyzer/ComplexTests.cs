@@ -229,17 +229,18 @@ namespace LexicalAnalysisTests.LexicalAnalyzer
         [Test]
         public void Declarations()
         {
-            LexicalAnalyzerResult result = new LexicalAnalysis.LexicalAnalyzer().Analyze(Properties.Inputs.Declarations);
-            /*
-                1.  program_kezd
-                2.  egész a
-                3.  egész b
-                4.  egész[] tömb = létrehoz(egész)[10]
-                5.  szöveg error
-                6.  logikai lenniVAGYnemLENNI
-                7.  tört burgonya = 2,3
-                8.  program_vége 
-            */
+            const string code = "program_kezd\n" +
+                                "egész a = 10\n" +
+                                "tört b = -20,3677\n" +
+                                "szöveg c = \"alma\"\n" +
+                                "logikai d = hamis\n" +
+                                "egész[] e = létrehoz(egész)[10]\n" +
+                                "tört[] f = létrehoz(tört)[22]\n" +
+                                "szöveg[] g = létrehoz(szöveg)[36]\n" +
+                                "logikai[] h = létrehoz(logikai)[47]\n" +
+                                "program_vége";
+
+            LexicalAnalyzerResult result = new LexicalAnalysis.LexicalAnalyzer().Analyze(code);
 
             TokenTester tt = new TokenTester(result);
 
@@ -247,19 +248,37 @@ namespace LexicalAnalysisTests.LexicalAnalyzer
             tt.ExpectStart();
             tt.NewLine();
 
-            // 2.  egész a
+            // 2.  egész a = 10
             tt.ExpectKeyword("egész");
             tt.ExpectIdentifier("a");
+            tt.ExpectKeyword("=");
+            tt.ExpectEgeszLiteral("10");
             tt.NewLine();
 
-            // 3.  egész b
-            tt.ExpectKeyword("egész");
+            // 3.  tört b = -20,3677
+            tt.ExpectKeyword("tört");
             tt.ExpectIdentifier("b");
+            tt.ExpectKeyword("=");
+            tt.ExpectTortLiteral("-20,3677");
             tt.NewLine();
 
-            // 4.  egész[] tömb = létrehoz(egész)[10]
+            // 4.  szöveg c = "alma"
+            tt.ExpectKeyword("szöveg");
+            tt.ExpectIdentifier("c");
+            tt.ExpectKeyword("=");
+            tt.ExpectSzovegLiteral("\"alma\"");
+            tt.NewLine();
+
+            // 5.  logikai d = hamis
+            tt.ExpectKeyword("logikai");
+            tt.ExpectIdentifier("d");
+            tt.ExpectKeyword("=");
+            tt.ExpectLogikaiLiteral("hamis");
+            tt.NewLine();
+
+            // 6.  egész[] e = létrehoz(egész)[10]
             tt.ExpectKeyword("egész tömb");
-            tt.ExpectIdentifier("tömb");
+            tt.ExpectIdentifier("e");
             tt.ExpectKeyword("=");
             tt.ExpectKeyword("létrehoz");
             tt.ExpectKeyword("(");
@@ -270,24 +289,46 @@ namespace LexicalAnalysisTests.LexicalAnalyzer
             tt.ExpectKeyword("]");
             tt.NewLine();
 
-            // 5.  szöveg error
-            tt.ExpectKeyword("szöveg");
-            tt.ExpectIdentifier("error");
-            tt.NewLine();
-
-            // 6.  logikai lenniVAGYnemLENNI
-            tt.ExpectKeyword("logikai");
-            tt.ExpectIdentifier("lenniVAGYnemLENNI");
-            tt.NewLine();
-
-            // 7.  tört burgonya = 2,3
-            tt.ExpectKeyword("tört");
-            tt.ExpectIdentifier("burgonya");
+            // 7.  tört[] f = létrehoz(tört)[22]
+            tt.ExpectKeyword("tört tömb");
+            tt.ExpectIdentifier("f");
             tt.ExpectKeyword("=");
-            tt.ExpectTortLiteral("2,3");
+            tt.ExpectKeyword("létrehoz");
+            tt.ExpectKeyword("(");
+            tt.ExpectKeyword("tört");
+            tt.ExpectKeyword(")");
+            tt.ExpectKeyword("[");
+            tt.ExpectEgeszLiteral("22");
+            tt.ExpectKeyword("]");
             tt.NewLine();
 
-            // 8.  program_vége 
+            // 8.  szöveg[] g = létrehoz(szöveg)[36]
+            tt.ExpectKeyword("szöveg tömb");
+            tt.ExpectIdentifier("g");
+            tt.ExpectKeyword("=");
+            tt.ExpectKeyword("létrehoz");
+            tt.ExpectKeyword("(");
+            tt.ExpectKeyword("szöveg");
+            tt.ExpectKeyword(")");
+            tt.ExpectKeyword("[");
+            tt.ExpectEgeszLiteral("36");
+            tt.ExpectKeyword("]");
+            tt.NewLine();
+
+            // 9.  logikai[] h = létrehoz(logikai)[47]
+            tt.ExpectKeyword("logikai tömb");
+            tt.ExpectIdentifier("h");
+            tt.ExpectKeyword("=");
+            tt.ExpectKeyword("létrehoz");
+            tt.ExpectKeyword("(");
+            tt.ExpectKeyword("logikai");
+            tt.ExpectKeyword(")");
+            tt.ExpectKeyword("[");
+            tt.ExpectEgeszLiteral("47");
+            tt.ExpectKeyword("]");
+            tt.NewLine();
+
+            // 10. program_vége 
             tt.ExpectEnd();
             tt.ExpectNoMore();
 
@@ -295,12 +336,14 @@ namespace LexicalAnalysisTests.LexicalAnalyzer
             // Symbol table
             SymbolTable rootTable = result.SymbolTable;
             SymbolTableTester.SimpleSymbolTableEntry(rootTable.Entries[0], "a", SingleEntryType.Egesz, 2);
-            SymbolTableTester.SimpleSymbolTableEntry(rootTable.Entries[1], "b", SingleEntryType.Egesz, 3);
-            SymbolTableTester.SimpleSymbolTableEntry(rootTable.Entries[2], "tömb", SingleEntryType.EgeszTomb, 4);
-            SymbolTableTester.SimpleSymbolTableEntry(rootTable.Entries[3], "error", SingleEntryType.Szoveg, 5);
-            SymbolTableTester.SimpleSymbolTableEntry(rootTable.Entries[4], "lenniVAGYnemLENNI", SingleEntryType.Logikai, 6);
-            SymbolTableTester.SimpleSymbolTableEntry(rootTable.Entries[5], "burgonya", SingleEntryType.Tort, 7);
-            Assert.That(rootTable.Entries.Count, Is.EqualTo(6));
+            SymbolTableTester.SimpleSymbolTableEntry(rootTable.Entries[1], "b", SingleEntryType.Tort, 3);
+            SymbolTableTester.SimpleSymbolTableEntry(rootTable.Entries[2], "c", SingleEntryType.Szoveg, 4);
+            SymbolTableTester.SimpleSymbolTableEntry(rootTable.Entries[3], "d", SingleEntryType.Logikai, 5);
+            SymbolTableTester.SimpleSymbolTableEntry(rootTable.Entries[4], "e", SingleEntryType.EgeszTomb, 6);
+            SymbolTableTester.SimpleSymbolTableEntry(rootTable.Entries[5], "f", SingleEntryType.TortTomb, 7);
+            SymbolTableTester.SimpleSymbolTableEntry(rootTable.Entries[6], "g", SingleEntryType.SzovegTomb, 8);
+            SymbolTableTester.SimpleSymbolTableEntry(rootTable.Entries[7], "h", SingleEntryType.LogikaiTomb, 9);
+            Assert.That(rootTable.Entries.Count, Is.EqualTo(8));
         }
 
         // masodfoku

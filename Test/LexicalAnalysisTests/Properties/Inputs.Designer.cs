@@ -102,22 +102,6 @@ namespace LexicalAnalysisTests.Properties {
         
         /// <summary>
         ///   Looks up a localized string similar to program_kezd
-        ///egész a
-        ///egész b
-        ///egész[] tömb = létrehoz(egész)[10]
-        ///szöveg error
-        ///logikai lenniVAGYnemLENNI
-        ///tört burgonya = 2,3
-        ///program_vége.
-        /// </summary>
-        internal static string Declarations {
-            get {
-                return ResourceManager.GetString("Declarations", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to program_kezd
         ///
         ///egész[] tömb = létrehoz(egész)[10]
         ///
