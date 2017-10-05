@@ -354,15 +354,148 @@ namespace LexicalAnalysisTests.LexicalAnalyzer
             Assert.That(rootTable.Entries.Count, Is.EqualTo(8));
         }
 
-        // masodfoku
+        [Test, Ignore("Not done yet")]
+        public void Masodfoku()
+        {
+            const string code = "program_kezd\r\n" +
+                                "   egész a\r\n" +
+                                "   beolvas a\r\n" +
+                                "   egész b\r\n" +
+                                "   beolvas b\r\n" +
+                                "   egész c\r\n" +
+                                "   beolvas c\r\n" +
+                                "   tört diszkrimináns=b*b-(4*a*c)\r\n" +
+                                "   ha diszkrimináns<0,0 akkor\r\n" +
+                                "      kiír \"Nincs valós gyöke!\"\r\n" +
+                                "   különben\r\n" +
+                                "      kiír \"Van legalább egy valós gyöke!\"\r\n" +
+                                "   elágazás_vége\r\n" +
+                                "program_vége";
+        }
 
-        // arrayForIf
+        [Test, Ignore("Not done yet")]
+        public void ArrayForIf()
+        {
+            const string code = "program_kezd\r\n" +
+                                "egész x=2\r\n" +
+                                "ha x>=2 akkor\r\n" +
+                                "   kiír \"x nem kisebb kettőnél...\"\r\n" +
+                                "különben\r\n" +
+                                "   kiír \"x kisebb, mint kettő!\"\r\n" +
+                                "elágazás_vége\r\n" +
+                                "egész[] y = létrehoz(egész)[10]\r\n" +
+                                "ciklus egész i=0-tól 9-ig\r\n" +
+                                "   y[i]=i\r\n" +
+                                "   kiír y[i]\r\n" +
+                                "ciklus_vége\r\n" +
+                                "program_vége";
+        }
 
-        // expressions
+        [Test, Ignore("Not done yet")]
+        public void Expressions()
+        {
+            const string code = "program_kezd\r\n" +
+                                "logikai éhes = igaz\r\n" +
+                                "ha éhes == igaz vagy hamis akkor\r\n" +
+                                "   kiír \"menj enni!\"\r\n" +
+                                "elágazás_vége\r\n" +
+                                "szöveg konkatenált = \"valami\".\"mégvalami\".\" \".\"még valami\"\r\n" +
+                                "tört törtpélda=(+-6,0*+++10-(--0,3*+4,1)/--28,3-4)\r\n" +
+                                "kiír törtpélda\r\n" +
+                                "program_vége";
+        }
 
-        // simpleTheorems
+        [Test, Ignore("Not done yet")]
+        public void SimpleTheorems()
+        {
+            const string code = "program_kezd\r\n" +
+                                "\r\n" +
+                                "egész[] tömb = létrehoz(egész)[10]\r\n" +
+                                "\r\n" +
+                                "ciklus egész i=0-tól i<9-ig\r\n" +
+                                "   tömb[i] = i*10\r\n" +
+                                "   kiír tömb[i]\r\n" +
+                                "ciklus_vége\r\n" +
+                                "\r\n" +
+                                "\r\n" +
+                                "\r\n" +
+                                "egész db=0\r\n" +
+                                "ciklus egész i=0-tól i<9-ig\r\n" +
+                                "   ha tömb[i]mod 2==0 akkor\r\n" +
+                                "      db=db+1\r\n" +
+                                "   elágazás_vége\r\n" +
+                                "ciklus_vége\r\n" +
+                                "kiír \"Ennyi darab páros \\\"szám van: \".db\r\n" +
+                                "\r\n" +
+                                "egész maxi=0\r\n" +
+                                "ciklus egész i=0-tól i<9-ig\r\n" +
+                                "   ha tömb[i]>tömb[maxi]\r\n" +
+                                "      maxi=i\r\n" +
+                                "   elágazás_vége\r\n" +
+                                "ciklus_vége\r\n" +
+                                "kiír \"A maximális elem: tömb[\".maxi.\"]=\".tömb[maxi]\r\n" +
+                                "egész xxx = szövegből_egészbe(\"10\")\r\n" +
+                                "program_vége";
+        }
 
-        // deepBlocks
+        [Test, Ignore("Not done yet")]
+        public void DeepBlocks()
+        {
+            const string code = "program_kezd\r\n" +
+                                "\r\n" +
+                                "egész[] tömb = létrehoz(egész)[10]\r\n" +
+                                "\r\n" +
+                                "egész a = 2\r\n" +
+                                "ciklus egész aa = 0-tól aa < 9-ig\r\n" +
+                                "   tört aaa = 2,4\r\n" +
+                                "ciklus_vége\r\n" +
+                                "\r\n" +
+                                "\r\n" +
+                                "egész b = 0\r\n" +
+                                "ciklus egész bb = 0-tól bb < 9-ig\r\n" +
+                                "   szöveg bbb = \"alma\"\r\n" +
+                                "   ha bb mod 2 == 0 akkor\r\n" +
+                                "      szöveg bbbb = \"asd\"\r\n" +
+                                "   elágazás_vége\r\n" +
+                                "ciklus_vége\r\n" +
+                                "\r\n" +
+                                "egész c = 0\r\n" +
+                                "ciklus_amíg c < 2\r\n" +
+                                "   egész ccc = 2\r\n" +
+                                "   ha ccc == 3 akkor\r\n" +
+                                "      ciklus egész cccc = 1-től cccc < 10-ig\r\n" +
+                                "         tört ccccc = 3,14\r\n" +
+                                "         ciklus_amíg ccc > 2\r\n" +
+                                "            ccc = ccc - 2\r\n" +
+                                "         ciklus_vége\r\n" +
+                                "         egész ccccc2\r\n" +
+                                "      ciklus_vége\r\n" +
+                                "      logikai l = hamis\r\n" +
+                                "   elágazás_vége\r\n" +
+                                "   szöveg sz = \"haha\"\r\n" +
+                                "ciklus_vége\r\n" +
+                                "program_vége";
+        }
+
+        [Test, Ignore("Not done yet")]
+        public void InternalFunctions()
+        {
+            const string code = "program_kezd\r\n" +
+                                "\r\n" +
+                                "egész[] tömb = létrehoz(egész)[10]\r\n" +
+                                "egész a = törtből_egészbe(tömb[0] * 2,5) + logikaiból_egészbe(igaz)\r\n" +
+                                "szöveg sz = szövegből_egészbe(a)\r\n" +
+                                "logikai log = igaz\r\n" +
+                                "tört tttt = logikaiból_törtbe(log)\r\n" +
+                                "tttt = szövegből_törtbe(sz)\r\n" +
+                                "log = egészből_logikaiba(123231)\r\n" +
+                                "ciklus egész b = 0-tól b < 9-ig\r\n" +
+                                "   logikai xxxxxxxx = törtből_logikaiba(0,0)\r\n" +
+                                "ciklus_vége\r\n" +
+                                "szöveg sx = \"hamis\"\r\n" +
+                                "log = szövegből_logikaiba(sx)\r\n" +
+                                "program_vége";
+        }
 
         // loadtest 1k
 
