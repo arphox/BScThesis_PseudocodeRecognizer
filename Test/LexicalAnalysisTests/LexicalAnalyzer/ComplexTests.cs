@@ -11,13 +11,12 @@ namespace LexicalAnalysisTests.LexicalAnalyzer
         [Test]
         public void NoStartEnd()
         {
-            LexicalAnalyzerResult result = new LexicalAnalysis.LexicalAnalyzer().Analyze(Properties.Inputs.NoStartEnd);
-            /*
-                1.  alma körte barack
-                2.  nincs is értelmes
-                3.  kód a fájlban!
-                4.  Jaj.
-            */
+            const string code = "alma körte barack\r\n" +
+                                "nincs is értelmes\r\n" +
+                                "kód a fájlban!\r\n" +
+                                "Jaj.\r\n";
+
+            LexicalAnalyzerResult result = new LexicalAnalysis.LexicalAnalyzer().Analyze(code);
 
             // Tokens
             Assert.That(result.Tokens.Count, Is.EqualTo(0));
@@ -31,12 +30,11 @@ namespace LexicalAnalysisTests.LexicalAnalyzer
         [Test]
         public void NoStart()
         {
-            LexicalAnalyzerResult result = new LexicalAnalysis.LexicalAnalyzer().Analyze(Properties.Inputs.NoStart);
-            /*
-                1.  egész x = 2
-                2.  x = x + 1
-                3.  program_vége
-            */
+            const string code = "egész x = 2\r\n" +
+                                "x = x + 1\r\n" +
+                                "program_vége";
+
+            LexicalAnalyzerResult result = new LexicalAnalysis.LexicalAnalyzer().Analyze(code);
 
             // Tokens
             Assert.That(result.Tokens.Count, Is.EqualTo(0));
@@ -50,12 +48,11 @@ namespace LexicalAnalysisTests.LexicalAnalyzer
         [Test]
         public void NoEnd()
         {
-            LexicalAnalyzerResult result = new LexicalAnalysis.LexicalAnalyzer().Analyze(Properties.Inputs.NoEnd);
-            /*
-                1.  program_kezd
-                2.  egész x = 2
-                3.  x = x + 1
-            */
+            const string code = "program_kezd\r\n" +
+                                "egész x = 2\r\n" +
+                                "x = x + 1";
+
+            LexicalAnalyzerResult result = new LexicalAnalysis.LexicalAnalyzer().Analyze(code);
 
             TokenTester tt = new TokenTester(result);
 
@@ -89,25 +86,24 @@ namespace LexicalAnalysisTests.LexicalAnalyzer
         [Test]
         public void NotOnlyCode()
         {
-            LexicalAnalyzerResult result = new LexicalAnalysis.LexicalAnalyzer().Analyze(Properties.Inputs.NotOnlyCode);
-            /*
-                1.    egész x = 2
-                2.    x = x + 1
-                3.    program_kezd
-                4.    egész x = 2
-                5.    x = x + 1
-                6.    egész a = 2
-                7.    ciklus egész b = 0-tól b < 9-ig
-                8.        egész c = törtből_egészbe(2,4)
-                9.    ciklus_vége
-                10.   program_vége
-                11.   egész x = 2
-                12.   x = x + 1
-                13.   ciklus_vége
-                14.   program_vége
-                15.   program_kezd
-                16.   program_vége
-            */
+            const string code = "egész x = 2\r\n" +
+                                "x = x + 1\r\n" +
+                                "program_kezd\r\n" +
+                                "egész x = 2\r\n" +
+                                "x = x + 1\r\n" +
+                                "egész a = 2\r\n" +
+                                "ciklus egész b = 0-tól b < 9-ig\r\n" +
+                                "   egész c = törtből_egészbe(2,4)\r\n" +
+                                "ciklus_vége\r\n" +
+                                "program_vége\r\n" +
+                                "egész x = 2\r\n" +
+                                "x = x + 1\r\n" +
+                                "ciklus_vége\r\n" +
+                                "program_vége\r\n" +
+                                "program_kezd\r\n" +
+                                "program_vége";
+
+            LexicalAnalyzerResult result = new LexicalAnalysis.LexicalAnalyzer().Analyze(code);
 
             TokenTester tt = new TokenTester(result)
             {
@@ -169,7 +165,7 @@ namespace LexicalAnalysisTests.LexicalAnalyzer
 
             // 10.   program_vége
             tt.ExpectEnd();
-            
+
             tt.ExpectNoMore();
 
             // Symbol table
@@ -189,7 +185,19 @@ namespace LexicalAnalysisTests.LexicalAnalyzer
         [Test]
         public void Comments()
         {
-            LexicalAnalyzerResult result = new LexicalAnalysis.LexicalAnalyzer().Analyze(Properties.Inputs.Comments);
+            const string code = "//komment\r\n" +
+                                "program_kezd\r\n" +
+                                "\r\n" +
+                                "kiír     \"H//ello világ!\" //Ez egy egysoros komment\r\n" +
+                                "//kiír    \"Hello világ!\" //Ez egy egysoros komment\r\n" +
+                                "/*\r\n" +
+                                "Elvileg működnie kellene. :P\r\n" +
+                                "//\r\n" +
+                                "*/\r\n" +
+                                "szöveg alma=\"almavagyok\"\r\n" +
+                                "program_vége";
+
+            LexicalAnalyzerResult result = new LexicalAnalysis.LexicalAnalyzer().Analyze(code);
 
             TokenTester tt = new TokenTester(result)
             {

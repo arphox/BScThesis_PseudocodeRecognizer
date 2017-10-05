@@ -133,20 +133,6 @@ ciklus_vége
 program_vége</value>
     <comment>deklarációt, szelekciót, számlálós ciklust, tömbkezelést tartalmazó kód</comment>
   </data>
-  <data name="Comments" xml:space="preserve">
-    <value>//komment
-program_kezd
-
-kiír     "H//ello világ!" //Ez egy egysoros komment
-//kiír    "Hello világ!" //Ez egy egysoros komment
-/*
-Elvileg működnie kellene. :P
-//
-*/
-szöveg alma="almavagyok"
-program_vége</value>
-    <comment>főleg kommenteket tartalmazó kód</comment>
-  </data>
   <data name="DeepBlocks" xml:space="preserve">
     <value>program_kezd
 
@@ -247,44 +233,6 @@ program_kezd
 x = x + 1
 program_vége</value>
     <comment>többszörös program_kezd sorokat egymás után tartalmazó kód</comment>
-  </data>
-  <data name="NoEnd" xml:space="preserve">
-    <value>program_kezd
-egész x = 2
-x = x + 1</value>
-    <comment>program_vége utasítást nem tartalmazó kód</comment>
-  </data>
-  <data name="NoStart" xml:space="preserve">
-    <value>egész x = 2
-x = x + 1
-program_vége</value>
-    <comment>program_kezd utasítást nem tartalmazó kód</comment>
-  </data>
-  <data name="NoStartEnd" xml:space="preserve">
-    <value>alma körte barack
-nincs is értelmes
-kód a fájlban!
-Jaj.</value>
-    <comment>program_kezd és program_vége utasításokat nem tartalmazó kód</comment>
-  </data>
-  <data name="NotOnlyCode" xml:space="preserve">
-    <value>egész x = 2
-x = x + 1
-program_kezd
-egész x = 2
-x = x + 1
-egész a = 2
-ciklus egész b = 0-tól b &lt; 9-ig
-	egész c = törtből_egészbe(2,4)
-ciklus_vége
-program_vége
-egész x = 2
-x = x + 1
-ciklus_vége
-program_vége
-program_kezd
-program_vége</value>
-    <comment>a program_kezd és program_vége sorok előtt és után egyéb karaktereket is tartalmazó kód</comment>
   </data>
   <data name="NoType" xml:space="preserve">
     <value>program_kezd

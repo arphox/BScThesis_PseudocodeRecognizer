@@ -82,25 +82,6 @@ namespace LexicalAnalysisTests.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to //komment
-        ///program_kezd
-        ///
-        ///kiír     &quot;H//ello világ!&quot; //Ez egy egysoros komment
-        /////kiír    &quot;Hello világ!&quot; //Ez egy egysoros komment
-        ////*
-        ///Elvileg működnie kellene. :P
-        /////
-        ///*/
-        ///szöveg alma=&quot;almavagyok&quot;
-        ///program_vége.
-        /// </summary>
-        internal static string Comments {
-            get {
-                return ResourceManager.GetString("Comments", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to program_kezd
         ///
         ///egész[] tömb = létrehoz(egész)[10]
@@ -224,64 +205,6 @@ namespace LexicalAnalysisTests.Properties {
         internal static string MultipleStart {
             get {
                 return ResourceManager.GetString("MultipleStart", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to program_kezd
-        ///egész x = 2
-        ///x = x + 1.
-        /// </summary>
-        internal static string NoEnd {
-            get {
-                return ResourceManager.GetString("NoEnd", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to egész x = 2
-        ///x = x + 1
-        ///program_vége.
-        /// </summary>
-        internal static string NoStart {
-            get {
-                return ResourceManager.GetString("NoStart", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to alma körte barack
-        ///nincs is értelmes
-        ///kód a fájlban!
-        ///Jaj..
-        /// </summary>
-        internal static string NoStartEnd {
-            get {
-                return ResourceManager.GetString("NoStartEnd", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to egész x = 2
-        ///x = x + 1
-        ///program_kezd
-        ///egész x = 2
-        ///x = x + 1
-        ///egész a = 2
-        ///ciklus egész b = 0-tól b &lt; 9-ig
-        ///	egész c = törtből_egészbe(2,4)
-        ///ciklus_vége
-        ///program_vége
-        ///egész x = 2
-        ///x = x + 1
-        ///ciklus_vége
-        ///program_vége
-        ///program_kezd
-        ///program_vége.
-        /// </summary>
-        internal static string NotOnlyCode {
-            get {
-                return ResourceManager.GetString("NotOnlyCode", resourceCulture);
             }
         }
         
