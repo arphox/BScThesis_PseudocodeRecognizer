@@ -247,6 +247,9 @@ namespace LexicalAnalysisTests.LexicalAnalyzer
 
             tt.ExpectEnd();
             tt.ExpectNoMore();
+
+            // Symbol table
+            Assert.That(result.SymbolTable.IsEmpty);
         }
 
         [Test]
@@ -275,17 +278,41 @@ namespace LexicalAnalysisTests.LexicalAnalyzer
 
             tt.ExpectKeyword("logikai");
             tt.ExpectError(ErrorTokenType.CannotRedefineVariable, "a");
+
+            // Symbol table
+            Assert.That(result.SymbolTable.Entries, Has.Count.EqualTo(2));
+            SymbolTableTester.SimpleSymbolTableEntry(result.SymbolTable.Entries[0], "a", SingleEntryType.Egesz, 2);
+            SymbolTableTester.SimpleSymbolTableEntry(result.SymbolTable.Entries[1], "b", SingleEntryType.Tort, 3);
         }
 
-        [Test, Ignore("Not done yet")]
+        [Test]
         public void UnknownSymbol()
         {
             const string code = "program_kezd\r\n" +
-                                "egész x = 2;\r\n" +
-                                "egész y = 3;\r\n" +
-                                "y = x + y;\r\n" +
-                                "x = x + 1;\r\n" +
+                                "szöveg y = 3;\r\n" +
                                 "program_vége";
+
+            LexicalAnalyzerResult result = new LexicalAnalysis.LexicalAnalyzer().Analyze(code);
+
+            TokenTester tt = new TokenTester(result);
+
+            tt.ExpectStart();
+            tt.NewLine();
+
+            tt.ExpectKeyword("szöveg");
+            tt.ExpectIdentifier("y");
+            tt.ExpectKeyword("=");
+            tt.ExpectEgeszLiteral("3");
+
+            tt.ExpectError(ErrorTokenType.CannotRecognizeElement, ";");
+            tt.NewLine();
+
+            tt.ExpectEnd();
+            tt.ExpectNoMore();
+
+            // Symbol table
+            Assert.That(result.SymbolTable.Entries, Has.Count.EqualTo(1));
+            SymbolTableTester.SimpleSymbolTableEntry(result.SymbolTable.Entries[0], "y", SingleEntryType.Szoveg, 2);
         }
     }
 }
