@@ -1,6 +1,7 @@
 ﻿using System;
 using LexicalAnalysis;
 using LexicalAnalysis.SymbolTables;
+using LexicalAnalysis.Tokens;
 using NUnit.Framework;
 
 namespace LexicalAnalysisTests.LexicalAnalyzer
@@ -204,7 +205,7 @@ namespace LexicalAnalysisTests.LexicalAnalyzer
             tt.ExpectEgeszLiteral("2");
             tt.NewLine();
 
-            tt.ExpectError("Only one 'program_kezd' is allowed.");
+            tt.ExpectError(ErrorTokenType.OnlyOneProgramStartAllowed);
             tt.NewLine();
 
             tt.ExpectIdentifier("x");
@@ -237,9 +238,9 @@ namespace LexicalAnalysisTests.LexicalAnalyzer
             tt.ExpectStart();
             tt.NewLine();
 
-            tt.ExpectError("The variable \"x\"\'s type is not determined.");
+            tt.ExpectError(ErrorTokenType.VariableTypeNotSpecified, "x");
             tt.ExpectKeyword("=");
-            tt.ExpectError("The variable \"x\"\'s type is not determined.");
+            tt.ExpectError(ErrorTokenType.VariableTypeNotSpecified, "x");
             tt.ExpectKeyword("+");
             tt.ExpectEgeszLiteral("1");
             tt.NewLine();
@@ -248,18 +249,32 @@ namespace LexicalAnalysisTests.LexicalAnalyzer
             tt.ExpectNoMore();
         }
 
-        [Test, Ignore("Not done yet")]
+        [Test]
         public void Redeclaration()
         {
             const string code = "program_kezd\r\n" +
                                 "egész a\r\n" +
-                                "egész b\r\n" +
+                                "tört b\r\n" +
                                 "logikai a\r\n" +
-                                "egész[] tömb = létrehoz(egész)[10]\r\n" +
-                                "szöveg error\r\n" +
-                                "logikai lenniVAGYnemLENNI\r\n" +
-                                "tört burgonya = 2,3\r\n" +
                                 "program_vége";
+
+            LexicalAnalyzerResult result = new LexicalAnalysis.LexicalAnalyzer().Analyze(code);
+
+            TokenTester tt = new TokenTester(result);
+
+            tt.ExpectStart();
+            tt.NewLine();
+
+            tt.ExpectKeyword("egész");
+            tt.ExpectIdentifier("a");
+            tt.NewLine();
+
+            tt.ExpectKeyword("tört");
+            tt.ExpectIdentifier("b");
+            tt.NewLine();
+
+            tt.ExpectKeyword("logikai");
+            tt.ExpectError(ErrorTokenType.CannotRedefineVariable, "a");
         }
 
         [Test, Ignore("Not done yet")]

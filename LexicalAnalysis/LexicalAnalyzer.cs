@@ -121,8 +121,8 @@ namespace LexicalAnalysis
 
             if (_lastCorrectCode == LexicalElementCodeDictionary.ErrorCode)
             {
-                string errorMsg = $"Nem tudom felismerni ezt a szöveget: \"{_currentSubstring}\"";
-                _outputTokensHandler.AddToken(new ErrorToken(errorMsg, _currentRowNumber));
+                _outputTokensHandler.AddToken(
+                    new ErrorToken(ErrorTokenType.CannotRecognizeElement, _currentRowNumber, $"Unrecognized string: '{_currentSubstring}'"));
                 _inputIndexer += _currentSubstring.Length;
             }
             else // Correct lexical element

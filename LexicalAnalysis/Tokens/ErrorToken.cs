@@ -1,4 +1,5 @@
-﻿using LexicalAnalysis.LexicalElementCodes;
+﻿using System;
+using LexicalAnalysis.LexicalElementCodes;
 
 namespace LexicalAnalysis.Tokens
 {
@@ -6,12 +7,15 @@ namespace LexicalAnalysis.Tokens
     {
         public string Message { get; }
 
-        internal ErrorToken(string message, int rowNumber)
+        public ErrorTokenType ErrorType { get; }
+
+        internal ErrorToken(ErrorTokenType errorType, int rowNumber, string message = "")
             : base(LexicalElementCodeDictionary.ErrorCode, rowNumber)
         {
-            Message = message;
+            ErrorType = errorType;
+            Message = message ?? throw new ArgumentNullException(nameof(message));
         }
 
-        public override string ToString() => base.ToString() + $", {nameof(Message)}={Message}";
+        public override string ToString() => base.ToString() + $", {nameof(ErrorType)}={ErrorType}, {nameof(Message)}={Message}";
     }
 }

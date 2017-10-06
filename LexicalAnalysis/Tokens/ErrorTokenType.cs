@@ -1,10 +1,9 @@
 ﻿namespace LexicalAnalysis.Tokens
 {
-    internal enum ErrorTokenType
+    public enum ErrorTokenType
     {
-        SourceCodeCannotBeEmpty = 0,
-        CannotRecognizeElement = 1,
-        CanBeOnlyOneProgramStart = 2,
+        OnlyOneProgramStartAllowed = 1,
+        CannotRecognizeElement = 2,
         CannotRedefineVariable = 3,
         VariableTypeNotSpecified = 4
     }

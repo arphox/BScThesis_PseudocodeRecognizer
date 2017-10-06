@@ -38,7 +38,7 @@ namespace LexicalAnalysis
             ProgramStartTokenAdded = true;
             if (OutputTokens.Count > 0)
             {
-                OutputTokens.Add(new ErrorToken("Only one 'program_kezd' is allowed.", currentRowNumber));
+                OutputTokens.Add(new ErrorToken(ErrorTokenType.OnlyOneProgramStartAllowed, currentRowNumber));
             }
             else
             {
@@ -80,8 +80,7 @@ namespace LexicalAnalysis
             int code = OutputTokens.FindTypeOfLastIdentifier();
             if (code == LexicalElementCodeDictionary.ErrorCode)
             {
-                string errorMsg = $"The variable \"{name}\"'s type is not determined.";
-                OutputTokens.Add(new ErrorToken(errorMsg, currentRowNumber));
+                OutputTokens.Add(new ErrorToken(ErrorTokenType.VariableTypeNotSpecified, currentRowNumber, $"Variable name: {name}"));
                 return;
             }
 
@@ -95,8 +94,7 @@ namespace LexicalAnalysis
             int type = OutputTokens.FindTypeOfLastIdentifier();
             if (type != LexicalElementCodeDictionary.ErrorCode)
             {
-                string errorMsg = $"Variable redefinition is not allowed. Variable name=\"{symbolName}\".";
-                OutputTokens.Add(new ErrorToken(errorMsg, currentRowNumber));
+                OutputTokens.Add(new ErrorToken(ErrorTokenType.CannotRedefineVariable, currentRowNumber, $"Variable name: {symbolName}"));
             }
             else
             {
