@@ -496,26 +496,5 @@ namespace LexicalAnalysisTests.LexicalAnalyzer
                                 "log = szövegből_logikaiba(sx)\r\n" +
                                 "program_vége";
         }
-
-        // loadtest 1k
-
-        // loadtest 10k
-
-        // redeclaration
-
-        // multipleStart
-
-        // notype
-
-        // unknownsymbol
-
-
-
-
-
-
-
-
-        //System.IO.File.WriteAllLines(@"C:\temp\log.txt", result.Tokens.Select(t => t.ToString()));
     }
 }
