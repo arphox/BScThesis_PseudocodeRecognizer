@@ -1,15 +1,59 @@
-﻿using LexicalAnalysis.SymbolTables;
+﻿using System.Collections.Generic;
+using LexicalAnalysis.SymbolTables;
 using NUnit.Framework;
-
-// ReSharper disable PossibleNullReferenceException
 
 namespace LexicalAnalysisTests
 {
-    internal class SymbolTableTester
+    internal sealed class SymbolTableTester
     {
+        private readonly SymbolTable _rootTable;
+        private SymbolTable _currentTable;
+        private int _indexer = 0;
+        private Stack<int> _indexerStack = new Stack<int>();
+        private SymbolTableEntry CurrentEntry => _currentTable.Entries[_indexer];
+
+        internal SymbolTableTester(SymbolTable symbolTable)
+        {
+            _rootTable = symbolTable;
+            _currentTable = _rootTable;
+        }
+
+        internal void ExpectSimpleEntry(string name, SingleEntryType entryType, int lineNumber)
+        {
+            SingleEntry entry = CurrentEntry as SingleEntry;
+            Assert.That(entry, Is.Not.Null, $"Expected a {nameof(SingleEntry)}, but was {CurrentEntry.GetType().Name}.");
+            Assert.That(entry.Name, Is.EqualTo(name), $"Expected entry name {name}, but was {entry.Name}");
+            Assert.That(entry.DefinitionRowNumber, Is.EqualTo(lineNumber), $"Expected row definition number {lineNumber}, but was {entry.DefinitionRowNumber}");
+            Assert.That(entry.EntryType, Is.EqualTo(entryType), $"Expected {nameof(SingleEntryType)} {entryType}, but was {entry.EntryType}");
+            _indexer++;
+        }
+
+        internal void IncreaseIndent()
+        {
+            _indexerStack.Push(_indexer);
+            SymbolTable table = CurrentEntry as SymbolTable;
+            Assert.That(table, Is.Not.Null, $"Expected a {nameof(SymbolTable)}, but was {CurrentEntry.GetType().Name}.");
+            _currentTable = table;
+            Assert.That(table.IsEmpty, Is.False, "The symbol table is empty, but it should not be.");
+            _indexer = 0;
+        }
+
+        internal void DecreaseIndent()
+        {
+            int previousIndexer = _indexerStack.Pop();
+            _indexer = previousIndexer + 1;
+            _currentTable = _currentTable.ParentTable;
+            Assert.That(_currentTable, Is.Not.Null);
+        }
+
+        internal void ExpectNoMore()
+        {
+            Assert.That(_currentTable.Entries, Has.Count.EqualTo(_indexer));
+        }
+
         internal static void SimpleSymbolTableEntry(SymbolTableEntry entry, string name, SingleEntryType entryType, int lineNumber)
         {
-            var x = entry as SingleEntry;
+            SingleEntry x = entry as SingleEntry;
             Assert.That(x, Is.Not.Null);
             Assert.That(x.Name, Is.EqualTo(name));
             Assert.That(x.DefinitionRowNumber, Is.EqualTo(lineNumber));

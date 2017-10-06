@@ -4,7 +4,7 @@
     {
         private static int _currentSymbolId = 1;
 
-        internal int Id { get; }
+        public int Id { get; }
 
         internal SymbolTableEntry()
         {

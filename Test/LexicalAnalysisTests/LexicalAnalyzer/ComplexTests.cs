@@ -399,13 +399,13 @@ namespace LexicalAnalysisTests.LexicalAnalyzer
             tt.ExpectNoMore();
 
             // Symbol table
-            Assert.That(result.SymbolTable.Entries, Has.Count.EqualTo(3));
-            SymbolTableTester.SimpleSymbolTableEntry(result.SymbolTable.Entries[0], "x", SingleEntryType.Egesz, 2);
-            SymbolTableTester.SimpleSymbolTableEntry(result.SymbolTable.Entries[1], "y", SingleEntryType.EgeszTomb, 8);
-            Assert.That(result.SymbolTable.Entries[2], Is.TypeOf<SymbolTable>());
-            SymbolTable subTable = result.SymbolTable.Entries[2] as SymbolTable;
-            Assert.That(subTable.Entries, Has.Count.EqualTo(1));
-            SymbolTableTester.SimpleSymbolTableEntry(subTable.Entries[0], "i", SingleEntryType.Egesz, 9);
+            SymbolTableTester st = new SymbolTableTester(result.SymbolTable);
+            st.ExpectSimpleEntry("x", SingleEntryType.Egesz, 2);
+            st.ExpectSimpleEntry("y", SingleEntryType.EgeszTomb, 8);
+            st.IncreaseIndent();
+            st.ExpectSimpleEntry("i", SingleEntryType.Egesz, 9);
+            st.DecreaseIndent();
+            st.ExpectNoMore();
         }
 
         [Test, Ignore("Not done yet")]

@@ -14,6 +14,8 @@ namespace LexicalAnalysis.SymbolTables
         public SymbolTable ParentTable { get; }
         public bool IsEmpty => Entries.Count == 0;
 
+        public SymbolTableEntry this[int index] => Entries[index];
+
         /// <summary>
         /// Searches the given symbol table for the given symbol name and returns the ID, if found; otherwise <see cref="NotFoundId"/>.
         /// </summary>
