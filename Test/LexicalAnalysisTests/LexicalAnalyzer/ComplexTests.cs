@@ -180,7 +180,7 @@ namespace LexicalAnalysisTests.LexicalAnalyzer
             Assert.That(rootTable.Entries.Count, Is.EqualTo(8));
         }
 
-        [Test, Ignore("Not done yet")]
+        [Test]
         public void Masodfoku()
         {
             const string code = "program_kezd\r\n" +
@@ -197,6 +197,99 @@ namespace LexicalAnalysisTests.LexicalAnalyzer
                                 "      kiír \"Van legalább egy valós gyöke!\"\r\n" +
                                 "   elágazás_vége\r\n" +
                                 "program_vége";
+
+            LexicalAnalyzerResult result = new LexicalAnalysis.LexicalAnalyzer().Analyze(code);
+
+            TokenTester tt = new TokenTester(result);
+
+            // program_kezd\r\n
+            tt.ExpectStart();
+            tt.NewLine();
+
+            //    egész a\r\n
+            tt.ExpectKeyword("egész");
+            tt.ExpectIdentifier("a");
+            tt.NewLine();
+
+            //    beolvas a\r\n
+            tt.ExpectKeyword("beolvas");
+            tt.ExpectIdentifier("a");
+            tt.NewLine();
+
+            //    egész b\r\n
+            tt.ExpectKeyword("egész");
+            tt.ExpectIdentifier("b");
+            tt.NewLine();
+
+            //    beolvas b\r\n
+            tt.ExpectKeyword("beolvas");
+            tt.ExpectIdentifier("b");
+            tt.NewLine();
+
+            //    egész c\r\n
+            tt.ExpectKeyword("egész");
+            tt.ExpectIdentifier("c");
+            tt.NewLine();
+
+            //    beolvas c\r\n
+            tt.ExpectKeyword("beolvas");
+            tt.ExpectIdentifier("c");
+            tt.NewLine();
+
+            //    tört diszkrimináns=b*b-(4*a*c)\r\n
+            tt.ExpectKeyword("tört");
+            tt.ExpectIdentifier("diszkrimináns");
+            tt.ExpectKeyword("=");
+            tt.ExpectIdentifier("b");
+            tt.ExpectKeyword("*");
+            tt.ExpectIdentifier("b");
+            tt.ExpectKeyword("-");
+            tt.ExpectKeyword("(");
+            tt.ExpectEgeszLiteral("4");
+            tt.ExpectKeyword("*");
+            tt.ExpectIdentifier("a");
+            tt.ExpectKeyword("*");
+            tt.ExpectIdentifier("c");
+            tt.ExpectKeyword(")");
+            tt.NewLine();
+
+            //    ha diszkrimináns<0,0 akkor\r\n
+            tt.ExpectKeyword("ha");
+            tt.ExpectIdentifier("diszkrimináns");
+            tt.ExpectKeyword("<");
+            tt.ExpectTortLiteral("0,0");
+            tt.ExpectKeyword("akkor");
+            tt.NewLine();
+
+            //       kiír "Nincs valós gyöke!"\r\n
+            tt.ExpectKeyword("kiír");
+            tt.ExpectSzovegLiteral("\"Nincs valós gyöke!\"");
+            tt.NewLine();
+
+            //    különben\r\n
+            tt.ExpectKeyword("különben");
+            tt.NewLine();
+
+            //       kiír "Van legalább egy valós gyöke!"\r\n
+            tt.ExpectKeyword("kiír");
+            tt.ExpectSzovegLiteral("\"Van legalább egy valós gyöke!\"");
+            tt.NewLine();
+
+            //    elágazás_vége\r\n
+            tt.ExpectKeyword("elágazás_vége");
+            tt.NewLine();
+
+            // program_vége
+            tt.ExpectEnd();
+            tt.ExpectNoMore();
+
+            // Symbol table
+            SymbolTable table = result.SymbolTable;
+            Assert.That(table.Entries, Has.Count.EqualTo(4));
+            SymbolTableTester.SimpleSymbolTableEntry(table.Entries[0], "a", SingleEntryType.Egesz, 2);
+            SymbolTableTester.SimpleSymbolTableEntry(table.Entries[1], "b", SingleEntryType.Egesz, 4);
+            SymbolTableTester.SimpleSymbolTableEntry(table.Entries[2], "c", SingleEntryType.Egesz, 6);
+            SymbolTableTester.SimpleSymbolTableEntry(table.Entries[3], "diszkrimináns", SingleEntryType.Tort, 8);
         }
 
         [Test, Ignore("Not done yet")]
