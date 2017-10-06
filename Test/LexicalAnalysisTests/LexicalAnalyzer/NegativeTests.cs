@@ -172,7 +172,7 @@ namespace LexicalAnalysisTests.LexicalAnalyzer
             SymbolTableTester.SimpleSymbolTableEntry(result.SymbolTable.Entries[0], "x", SingleEntryType.Egesz, 4);
             SymbolTableTester.SimpleSymbolTableEntry(result.SymbolTable.Entries[1], "a", SingleEntryType.Egesz, 6);
 
-            SymbolTable innerTable = (result.SymbolTable.Entries[2] as SubTableEntry).Table;
+            SymbolTable innerTable = result.SymbolTable.Entries[2] as SymbolTable;
             SymbolTableTester.SimpleSymbolTableEntry(innerTable.Entries[0], "b", SingleEntryType.Egesz, 7);
             SymbolTableTester.SimpleSymbolTableEntry(innerTable.Entries[1], "c", SingleEntryType.Egesz, 8);
 

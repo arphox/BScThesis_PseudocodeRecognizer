@@ -52,7 +52,6 @@
     <Compile Include="SymbolTableManager.cs" />
     <Compile Include="SymbolTables\SingleEntryType.cs" />
     <Compile Include="SymbolTables\SymbolTable.cs" />
-    <Compile Include="SymbolTables\SubTableEntry.cs" />
     <Compile Include="SymbolTables\SymbolTableEntry.cs" />
     <Compile Include="SymbolTables\SingleEntry.cs" />
     <Compile Include="Tokens\ErrorTokenType.cs" />

@@ -402,8 +402,8 @@ namespace LexicalAnalysisTests.LexicalAnalyzer
             Assert.That(result.SymbolTable.Entries, Has.Count.EqualTo(3));
             SymbolTableTester.SimpleSymbolTableEntry(result.SymbolTable.Entries[0], "x", SingleEntryType.Egesz, 2);
             SymbolTableTester.SimpleSymbolTableEntry(result.SymbolTable.Entries[1], "y", SingleEntryType.EgeszTomb, 8);
-            Assert.That(result.SymbolTable.Entries[2], Is.TypeOf<SubTableEntry>());
-            SymbolTable subTable = (result.SymbolTable.Entries[2] as SubTableEntry).Table;
+            Assert.That(result.SymbolTable.Entries[2], Is.TypeOf<SymbolTable>());
+            SymbolTable subTable = result.SymbolTable.Entries[2] as SymbolTable;
             Assert.That(subTable.Entries, Has.Count.EqualTo(1));
             SymbolTableTester.SimpleSymbolTableEntry(subTable.Entries[0], "i", SingleEntryType.Egesz, 9);
         }

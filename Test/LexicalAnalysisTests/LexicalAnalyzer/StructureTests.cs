@@ -90,8 +90,8 @@ namespace LexicalAnalysisTests.LexicalAnalyzer
 
             // Symbol table
             Assert.That(result.SymbolTable.Entries, Has.Count.EqualTo(1));
-            Assert.That(result.SymbolTable.Entries[0], Is.TypeOf<SubTableEntry>());
-            SymbolTable subTable = (result.SymbolTable.Entries[0] as SubTableEntry).Table;
+            Assert.That(result.SymbolTable.Entries[0], Is.TypeOf<SymbolTable>());
+            SymbolTable subTable = result.SymbolTable.Entries[0] as SymbolTable;
             Assert.That(subTable.Entries, Has.Count.EqualTo(1));
             SymbolTableTester.SimpleSymbolTableEntry(subTable.Entries[0], "i", SingleEntryType.Egesz, 2);
         }

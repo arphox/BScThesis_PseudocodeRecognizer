@@ -4,7 +4,7 @@ using System.Text;
 
 namespace LexicalAnalysis.SymbolTables
 {
-    public sealed class SymbolTable
+    public sealed class SymbolTable : SymbolTableEntry
     {
         private const int NotFoundId = -1;
 
@@ -42,18 +42,15 @@ namespace LexicalAnalysis.SymbolTables
                     continue;
                 }
 
-                SubTableEntry subTable = Entries[i] as SubTableEntry;
-                if (subTable.Table.IsEmpty)
+                SymbolTable subTable = Entries[i] as SymbolTable;
+                if (subTable.IsEmpty)
                 {
                     Entries.RemoveAt(i);
                     cleanCount++;
                 }
                 else
                 {
-                    if (subTable.Table != null)
-                    {
-                        cleanCount += subTable.Table.RemoveEmptySymbolTables();
-                    }
+                    cleanCount += subTable.RemoveEmptySymbolTables();
                 }
             }
             return cleanCount;
@@ -97,20 +94,19 @@ namespace LexicalAnalysis.SymbolTables
 
             foreach (SymbolTableEntry currentEntry in Entries)
             {
-                if (currentEntry is SingleEntry entry)
+                switch (currentEntry)
                 {
-                    if (entry.Name == nameToFind)
-                    {
-                        return entry.Id;
-                    }
-                }
-                else // SubTableEntry
-                {
-                    int id = (currentEntry as SubTableEntry).Table.FindIdByName(nameToFind);
-                    if (id != NotFoundId)
-                    {
-                        return id;
-                    }
+                    case SingleEntry single:
+                        if (single.Name == nameToFind)
+                            return single.Id;
+                        break;
+                    case SymbolTable table:
+                        int id = table.FindIdByName(nameToFind);
+                        if (id != NotFoundId)
+                            return id;
+                        break;
+                    default:
+                        throw new InvalidOperationException($"Unexpected {nameof(SymbolTableEntry)}; the type was: {currentEntry.GetType().Name}");
                 }
             }
             return NotFoundId;
@@ -138,16 +134,19 @@ namespace LexicalAnalysis.SymbolTables
 
             foreach (SymbolTableEntry currentEntry in Entries)
             {
-                if (currentEntry is SingleEntry single)
+                switch (currentEntry)
                 {
-                    output.Append(prefix);
-                    output.Append(single);
-                }
-                else // SubTableEntry
-                {
-                    output.Append(prefix + "AT" + Environment.NewLine);
-                    output.Append((currentEntry as SubTableEntry).Table.ToStringNice(prefix + "\t"));
-                    output.Append(prefix + "/AT");
+                    case SingleEntry single:
+                        output.Append(prefix);
+                        output.Append(single);
+                        break;
+                    case SymbolTable table:
+                        output.Append(prefix + "AT" + Environment.NewLine);
+                        output.Append(table.ToStringNice(prefix + "\t"));
+                        output.Append(prefix + "/AT");
+                        break;
+                    default:
+                        throw new InvalidOperationException($"Unexpected {nameof(SymbolTableEntry)}; the type was: {currentEntry.GetType().Name}");
                 }
                 output.Append(Environment.NewLine);
             }

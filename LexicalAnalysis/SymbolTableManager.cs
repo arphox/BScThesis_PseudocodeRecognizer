@@ -35,7 +35,7 @@ namespace LexicalAnalysis
             void IncreaseSymbolTableIndent()
             {
                 SymbolTable newTable = new SymbolTable(this, RootSymbolTable);
-                RootSymbolTable.InsertNewEntry(new SubTableEntry(newTable));
+                RootSymbolTable.InsertNewEntry(newTable);
                 RootSymbolTable = newTable;
             }
             void DecreaseSymbolTableIndent()
