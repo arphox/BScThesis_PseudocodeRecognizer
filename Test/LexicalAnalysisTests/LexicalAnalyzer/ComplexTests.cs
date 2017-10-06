@@ -412,7 +412,7 @@ namespace LexicalAnalysisTests.LexicalAnalyzer
             TestContext.Write(result.SymbolTable.ToStringNice());
         }
 
-        [Test, Ignore("Not done yet")]
+        [Test]
         public void Expressions()
         {
             const string code = "program_kezd\r\n" +
@@ -424,6 +424,95 @@ namespace LexicalAnalysisTests.LexicalAnalyzer
                                 "tört törtpélda=(+-6,0*+++10-(--0,3*+4,1)/--28,3-4)\r\n" +
                                 "kiír törtpélda\r\n" +
                                 "program_vége";
+
+            LexicalAnalyzerResult result = new LexicalAnalysis.LexicalAnalyzer().Analyze(code);
+
+            TokenTester tt = new TokenTester(result);
+
+            // program_kezd\r\n
+            tt.ExpectKeyword("program_kezd");
+            tt.NewLine();
+
+            // logikai éhes = igaz\r\n
+            tt.ExpectKeyword("logikai");
+            tt.ExpectIdentifier("éhes");
+            tt.ExpectKeyword("=");
+            tt.ExpectLogikaiLiteral("igaz");
+            tt.NewLine();
+
+            // ha éhes == igaz vagy hamis akkor\r\n
+            tt.ExpectKeyword("ha");
+            tt.ExpectIdentifier("éhes");
+            tt.ExpectKeyword("==");
+            tt.ExpectLogikaiLiteral("igaz");
+            tt.ExpectKeyword("vagy");
+            tt.ExpectLogikaiLiteral("hamis");
+            tt.ExpectKeyword("akkor");
+            tt.NewLine();
+
+            //    kiír \"menj enni!\"\r\n
+            tt.ExpectKeyword("kiír");
+            tt.ExpectSzovegLiteral("menj enni!");
+            tt.NewLine();
+
+            // elágazás_vége\r\n
+            tt.ExpectKeyword("elágazás_vége");
+            tt.NewLine();
+
+            // szöveg konkatenált = \"valami\".\"mégvalami\".\" \".\"még valami\"\r\n
+            tt.ExpectKeyword("szöveg");
+            tt.ExpectIdentifier("konkatenált");
+            tt.ExpectKeyword("=");
+            tt.ExpectSzovegLiteral("valami");
+            tt.ExpectKeyword(".");
+            tt.ExpectSzovegLiteral("mégvalami");
+            tt.ExpectKeyword(".");
+            tt.ExpectSzovegLiteral(" ");
+            tt.ExpectKeyword(".");
+            tt.ExpectSzovegLiteral("még valami");
+            tt.NewLine();
+
+            // tört törtpélda=(+-6,0*+++10-(--0,3*+4,1)/--28,3-4)\r\n
+            tt.ExpectKeyword("tört");
+            tt.ExpectIdentifier("törtpélda");
+            tt.ExpectKeyword("=");
+            tt.ExpectKeyword("(");
+            tt.ExpectKeyword("+");
+            tt.ExpectTortLiteral("-6,0");
+            tt.ExpectKeyword("*");
+            tt.ExpectKeyword("+");
+            tt.ExpectKeyword("+");
+            tt.ExpectEgeszLiteral("+10");
+            tt.ExpectKeyword("-");
+            tt.ExpectKeyword("(");
+            tt.ExpectKeyword("-");
+            tt.ExpectTortLiteral("-0,3");
+            tt.ExpectKeyword("*");
+            tt.ExpectTortLiteral("+4,1");
+            tt.ExpectKeyword(")");
+            tt.ExpectKeyword("/");
+            tt.ExpectKeyword("-");
+            tt.ExpectTortLiteral("-28,3");
+            tt.ExpectEgeszLiteral("-4");
+            tt.ExpectKeyword(")");
+            tt.NewLine();
+
+            // kiír törtpélda\r\n
+            tt.ExpectKeyword("kiír");
+            tt.ExpectIdentifier("törtpélda");
+            tt.NewLine();
+
+            // program_vége
+            tt.ExpectEnd();
+            tt.ExpectNoMore();
+
+            // Symbol table
+            SymbolTableTester st = new SymbolTableTester(result.SymbolTable);
+            st.ExpectSimpleEntry("éhes", SingleEntryType.Logikai, 2);
+            st.ExpectSimpleEntry("konkatenált", SingleEntryType.Szoveg, 6);
+            st.ExpectSimpleEntry("törtpélda", SingleEntryType.Tort, 7);
+            st.ExpectNoMore();
+            TestContext.Write(result.SymbolTable.ToStringNice());
         }
 
         [Test, Ignore("Not done yet")]
