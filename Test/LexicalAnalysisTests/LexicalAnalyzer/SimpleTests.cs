@@ -1,5 +1,4 @@
 ﻿using LexicalAnalysis;
-using LexicalAnalysis.SymbolTables;
 using NUnit.Framework;
 using System;
 

@@ -48,6 +48,7 @@
     <Compile Include="LexicalAnalyzer\ComplexTests.cs" />
     <Compile Include="LexicalAnalyzer\DefinitionAndDeclarationTests.cs" />
     <Compile Include="LexicalAnalyzer\LiteralTests.cs" />
+    <Compile Include="LexicalAnalyzer\LoadTests.cs" />
     <Compile Include="LexicalAnalyzer\NegativeTests.cs" />
     <Compile Include="LexicalAnalyzer\SimpleTests.cs" />
     <Compile Include="LexicalAnalyzer\IdentifierNamingTests.cs" />
