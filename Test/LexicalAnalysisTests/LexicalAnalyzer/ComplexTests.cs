@@ -308,6 +308,48 @@ namespace LexicalAnalysisTests.LexicalAnalyzer
                                 "   kiír y[i]\r\n" +
                                 "ciklus_vége\r\n" +
                                 "program_vége";
+
+            LexicalAnalyzerResult result = new LexicalAnalysis.LexicalAnalyzer().Analyze(code);
+
+            TokenTester tt = new TokenTester(result);
+
+            // program_kezd\r\n
+            tt.ExpectKeyword("program_kezd");
+            tt.NewLine();
+
+            // egész x=2\r\n
+            tt.ExpectKeyword("egész");
+            tt.ExpectIdentifier("x");
+            tt.ExpectKeyword("=");
+            tt.ExpectEgeszLiteral("2");
+            tt.NewLine();
+
+            // ha x>=2 akkor\r\n
+            tt.ExpectKeyword("ha");
+            tt.ExpectKeyword(">=");
+            tt.ExpectEgeszLiteral("2");
+            tt.ExpectKeyword("akkor");
+            tt.NewLine();
+
+            //    kiír \"x nem kisebb kettőnél...\"\r\n
+            tt.ExpectKeyword("kiír");
+            tt.ExpectSzovegLiteral("\"x nem kisebb kettőnél...\"");
+            tt.NewLine();
+
+            // különben\r\n
+            tt.ExpectKeyword("különben");
+            tt.NewLine();
+
+            //    kiír \"x kisebb, mint kettő!\"\r\n
+            tt.ExpectKeyword("kiír");
+            tt.ExpectSzovegLiteral("\"x kisebb, mint kettő!\"");
+
+
+
+
+
+
+
         }
 
         [Test, Ignore("Not done yet")]
