@@ -58,6 +58,7 @@ namespace LexicalAnalysisTests.LexicalAnalyzer
 
             // Symbol table
             SymbolTableTester.SimpleSymbolTableEntry(result.SymbolTable.Entries.Single(), "alma", SingleEntryType.Szoveg, 10);
+            TestContext.Write(result.SymbolTable.ToStringNice());
         }
 
         [Test]
@@ -168,16 +169,17 @@ namespace LexicalAnalysisTests.LexicalAnalyzer
 
 
             // Symbol table
-            SymbolTable rootTable = result.SymbolTable;
-            SymbolTableTester.SimpleSymbolTableEntry(rootTable.Entries[0], "a", SingleEntryType.Egesz, 2);
-            SymbolTableTester.SimpleSymbolTableEntry(rootTable.Entries[1], "b", SingleEntryType.Tort, 3);
-            SymbolTableTester.SimpleSymbolTableEntry(rootTable.Entries[2], "c", SingleEntryType.Szoveg, 4);
-            SymbolTableTester.SimpleSymbolTableEntry(rootTable.Entries[3], "d", SingleEntryType.Logikai, 5);
-            SymbolTableTester.SimpleSymbolTableEntry(rootTable.Entries[4], "e", SingleEntryType.EgeszTomb, 6);
-            SymbolTableTester.SimpleSymbolTableEntry(rootTable.Entries[5], "f", SingleEntryType.TortTomb, 7);
-            SymbolTableTester.SimpleSymbolTableEntry(rootTable.Entries[6], "g", SingleEntryType.SzovegTomb, 8);
-            SymbolTableTester.SimpleSymbolTableEntry(rootTable.Entries[7], "h", SingleEntryType.LogikaiTomb, 9);
-            Assert.That(rootTable.Entries.Count, Is.EqualTo(8));
+            SymbolTableTester st = new SymbolTableTester(result.SymbolTable);
+            st.ExpectSimpleEntry("a", SingleEntryType.Egesz, 2);
+            st.ExpectSimpleEntry("b", SingleEntryType.Tort, 3);
+            st.ExpectSimpleEntry("c", SingleEntryType.Szoveg, 4);
+            st.ExpectSimpleEntry("d", SingleEntryType.Logikai, 5);
+            st.ExpectSimpleEntry("e", SingleEntryType.EgeszTomb, 6);
+            st.ExpectSimpleEntry("f", SingleEntryType.TortTomb, 7);
+            st.ExpectSimpleEntry("g", SingleEntryType.SzovegTomb, 8);
+            st.ExpectSimpleEntry("h", SingleEntryType.LogikaiTomb, 9);
+            st.ExpectNoMore();
+            TestContext.Write(result.SymbolTable.ToStringNice());
         }
 
         [Test]
@@ -284,12 +286,13 @@ namespace LexicalAnalysisTests.LexicalAnalyzer
             tt.ExpectNoMore();
 
             // Symbol table
-            SymbolTable table = result.SymbolTable;
-            Assert.That(table.Entries, Has.Count.EqualTo(4));
-            SymbolTableTester.SimpleSymbolTableEntry(table.Entries[0], "a", SingleEntryType.Egesz, 2);
-            SymbolTableTester.SimpleSymbolTableEntry(table.Entries[1], "b", SingleEntryType.Egesz, 4);
-            SymbolTableTester.SimpleSymbolTableEntry(table.Entries[2], "c", SingleEntryType.Egesz, 6);
-            SymbolTableTester.SimpleSymbolTableEntry(table.Entries[3], "diszkrimináns", SingleEntryType.Tort, 8);
+            SymbolTableTester st = new SymbolTableTester(result.SymbolTable);
+            st.ExpectSimpleEntry("a", SingleEntryType.Egesz, 2);
+            st.ExpectSimpleEntry("b", SingleEntryType.Egesz, 4);
+            st.ExpectSimpleEntry("c", SingleEntryType.Egesz, 6);
+            st.ExpectSimpleEntry("diszkrimináns", SingleEntryType.Tort, 8);
+            st.ExpectNoMore();
+            TestContext.Write(result.SymbolTable.ToStringNice());
         }
 
         [Test]
@@ -406,6 +409,7 @@ namespace LexicalAnalysisTests.LexicalAnalyzer
             st.ExpectSimpleEntry("i", SingleEntryType.Egesz, 9);
             st.DecreaseIndent();
             st.ExpectNoMore();
+            TestContext.Write(result.SymbolTable.ToStringNice());
         }
 
         [Test, Ignore("Not done yet")]

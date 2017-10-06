@@ -6,16 +6,14 @@ namespace LexicalAnalysisTests
 {
     internal sealed class SymbolTableTester
     {
-        private readonly SymbolTable _rootTable;
+        private readonly Stack<int> _indexerStack = new Stack<int>();
         private SymbolTable _currentTable;
         private int _indexer = 0;
-        private Stack<int> _indexerStack = new Stack<int>();
         private SymbolTableEntry CurrentEntry => _currentTable.Entries[_indexer];
 
         internal SymbolTableTester(SymbolTable symbolTable)
         {
-            _rootTable = symbolTable;
-            _currentTable = _rootTable;
+            _currentTable = symbolTable;
         }
 
         internal void ExpectSimpleEntry(string name, SingleEntryType entryType, int lineNumber)

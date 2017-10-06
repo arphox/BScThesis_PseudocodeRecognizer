@@ -89,11 +89,11 @@ namespace LexicalAnalysisTests.LexicalAnalyzer
             tt.ExpectNoMore();
 
             // Symbol table
-            Assert.That(result.SymbolTable.Entries, Has.Count.EqualTo(1));
-            Assert.That(result.SymbolTable.Entries[0], Is.TypeOf<SymbolTable>());
-            SymbolTable subTable = result.SymbolTable.Entries[0] as SymbolTable;
-            Assert.That(subTable.Entries, Has.Count.EqualTo(1));
-            SymbolTableTester.SimpleSymbolTableEntry(subTable.Entries[0], "i", SingleEntryType.Egesz, 2);
+            SymbolTableTester st = new SymbolTableTester(result.SymbolTable);
+            st.IncreaseIndent();
+            st.ExpectSimpleEntry("i", SingleEntryType.Egesz, 2);
+            tt.ExpectNoMore();
+            TestContext.Write(result.SymbolTable.ToStringNice());
         }
 
         [Test]

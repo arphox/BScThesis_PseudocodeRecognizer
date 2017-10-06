@@ -79,7 +79,6 @@ namespace LexicalAnalysisTests.LexicalAnalyzer
             // Symbol table
             SymbolTableTester.SimpleSymbolTableEntry(result.SymbolTable.Entries[0], "x", SingleEntryType.Egesz, 2);
             Assert.That(result.SymbolTable.Entries.Count, Is.EqualTo(1));
-
             TestContext.Write(result.SymbolTable.ToStringNice());
         }
 
@@ -169,16 +168,13 @@ namespace LexicalAnalysisTests.LexicalAnalyzer
             tt.ExpectNoMore();
 
             // Symbol table
-            SymbolTableTester.SimpleSymbolTableEntry(result.SymbolTable.Entries[0], "x", SingleEntryType.Egesz, 4);
-            SymbolTableTester.SimpleSymbolTableEntry(result.SymbolTable.Entries[1], "a", SingleEntryType.Egesz, 6);
-
-            SymbolTable innerTable = result.SymbolTable.Entries[2] as SymbolTable;
-            SymbolTableTester.SimpleSymbolTableEntry(innerTable.Entries[0], "b", SingleEntryType.Egesz, 7);
-            SymbolTableTester.SimpleSymbolTableEntry(innerTable.Entries[1], "c", SingleEntryType.Egesz, 8);
-
-            Assert.That(result.SymbolTable.Entries.Count, Is.EqualTo(3));
-            Assert.That(innerTable.Entries.Count, Is.EqualTo(2));
-
+            SymbolTableTester st = new SymbolTableTester(result.SymbolTable);
+            st.ExpectSimpleEntry("x", SingleEntryType.Egesz, 4);
+            st.ExpectSimpleEntry("a", SingleEntryType.Egesz, 6);
+            st.IncreaseIndent();
+            st.ExpectSimpleEntry("b", SingleEntryType.Egesz, 7);
+            st.ExpectSimpleEntry("c", SingleEntryType.Egesz, 8);
+            st.ExpectNoMore();
             TestContext.Write(result.SymbolTable.ToStringNice());
         }
 
@@ -192,7 +188,7 @@ namespace LexicalAnalysisTests.LexicalAnalyzer
                                 "program_vége";
 
             LexicalAnalyzerResult result = new LexicalAnalysis.LexicalAnalyzer().Analyze(code);
-            
+
             TokenTester tt = new TokenTester(result);
 
             tt.ExpectStart();
@@ -221,6 +217,7 @@ namespace LexicalAnalysisTests.LexicalAnalyzer
             // Symbol table
             Assert.That(result.SymbolTable.Entries, Has.Count.EqualTo(1));
             SymbolTableTester.SimpleSymbolTableEntry(result.SymbolTable.Entries[0], "x", SingleEntryType.Egesz, 2);
+            TestContext.Write(result.SymbolTable.ToStringNice());
         }
 
         [Test]
@@ -279,9 +276,11 @@ namespace LexicalAnalysisTests.LexicalAnalyzer
             tt.ExpectError(ErrorTokenType.CannotRedefineVariable, "a");
 
             // Symbol table
-            Assert.That(result.SymbolTable.Entries, Has.Count.EqualTo(2));
-            SymbolTableTester.SimpleSymbolTableEntry(result.SymbolTable.Entries[0], "a", SingleEntryType.Egesz, 2);
-            SymbolTableTester.SimpleSymbolTableEntry(result.SymbolTable.Entries[1], "b", SingleEntryType.Tort, 3);
+            SymbolTableTester st = new SymbolTableTester(result.SymbolTable);
+            st.ExpectSimpleEntry("a", SingleEntryType.Egesz, 2);
+            st.ExpectSimpleEntry("b", SingleEntryType.Tort, 3);
+            st.ExpectNoMore();
+            TestContext.Write(result.SymbolTable.ToStringNice());
         }
 
         [Test]
@@ -312,6 +311,7 @@ namespace LexicalAnalysisTests.LexicalAnalyzer
             // Symbol table
             Assert.That(result.SymbolTable.Entries, Has.Count.EqualTo(1));
             SymbolTableTester.SimpleSymbolTableEntry(result.SymbolTable.Entries[0], "y", SingleEntryType.Szoveg, 2);
+            TestContext.Write(result.SymbolTable.ToStringNice());
         }
     }
 }

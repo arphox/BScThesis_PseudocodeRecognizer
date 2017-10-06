@@ -34,6 +34,7 @@ namespace LexicalAnalysisTests.LexicalAnalyzer
 
             // Symbol table
             SymbolTableTester.SimpleSymbolTableEntry(result.SymbolTable.Entries.Single(), "óóüöúőűáéí", ResolveEntryTypeName(type), 2);
+            TestContext.Write(result.SymbolTable.ToStringNice());
         }
 
         [TestCaseSource(nameof(SimpleTypeNames))]
@@ -60,6 +61,7 @@ namespace LexicalAnalysisTests.LexicalAnalyzer
 
             // Symbol table
             SymbolTableTester.SimpleSymbolTableEntry(result.SymbolTable.Entries.Single(), "alma_körte", ResolveEntryTypeName(type + " tömb"), 2);
+            TestContext.Write(result.SymbolTable.ToStringNice());
         }
 
         [Test]
@@ -88,6 +90,7 @@ namespace LexicalAnalysisTests.LexicalAnalyzer
 
             // Symbol table
             SymbolTableTester.SimpleSymbolTableEntry(result.SymbolTable.Entries.Single(), "s", SingleEntryType.Tort, 2);
+            TestContext.Write(result.SymbolTable.ToStringNice());
         }
 
         [Test]
@@ -122,6 +125,7 @@ namespace LexicalAnalysisTests.LexicalAnalyzer
 
             // Symbol table
             SymbolTableTester.SimpleSymbolTableEntry(result.SymbolTable.Entries.Single(), "sorok", SingleEntryType.SzovegTomb, 2);
+            TestContext.Write(result.SymbolTable.ToStringNice());
         }
 
         private static SingleEntryType ResolveEntryTypeName(string type)
