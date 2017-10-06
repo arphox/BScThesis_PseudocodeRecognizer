@@ -1,4 +1,5 @@
-﻿using LexicalAnalysis;
+﻿using System;
+using LexicalAnalysis;
 using LexicalAnalysis.SymbolTables;
 using NUnit.Framework;
 
@@ -222,12 +223,29 @@ namespace LexicalAnalysisTests.LexicalAnalyzer
             SymbolTableTester.SimpleSymbolTableEntry(result.SymbolTable.Entries[0], "x", SingleEntryType.Egesz, 2);
         }
 
-        [Test, Ignore("Not done yet")]
+        [Test]
         public void NoType()
         {
             const string code = "program_kezd\r\n" +
                                 "x = x + 1\r\n" +
                                 "program_vége";
+
+            LexicalAnalyzerResult result = new LexicalAnalysis.LexicalAnalyzer().Analyze(code);
+
+            TokenTester tt = new TokenTester(result);
+
+            tt.ExpectStart();
+            tt.NewLine();
+
+            tt.ExpectError("The variable \"x\"\'s type is not determined.");
+            tt.ExpectKeyword("=");
+            tt.ExpectError("The variable \"x\"\'s type is not determined.");
+            tt.ExpectKeyword("+");
+            tt.ExpectEgeszLiteral("1");
+            tt.NewLine();
+
+            tt.ExpectEnd();
+            tt.ExpectNoMore();
         }
 
         [Test, Ignore("Not done yet")]
