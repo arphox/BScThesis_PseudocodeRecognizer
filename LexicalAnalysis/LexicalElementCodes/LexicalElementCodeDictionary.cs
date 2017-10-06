@@ -8,7 +8,7 @@ namespace LexicalAnalysis.LexicalElementCodes
     /// </summary>
     public static class LexicalElementCodeDictionary
     {
-        internal const int ErrorCode = -1;
+        public const int ErrorCode = -1;
 
         private static readonly Dictionary<string, int> WordsToCodes = new Dictionary<string, int>();
         private static readonly Dictionary<int, string> CodesToWords = new Dictionary<int, string>();

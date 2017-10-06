@@ -25,7 +25,7 @@ namespace LexicalAnalysis
         {
             OutputTokens.Add(token);
         }
-        internal Token Last()
+        private Token Last()
         {
             return OutputTokens.LastOrDefault();
         }
@@ -33,12 +33,12 @@ namespace LexicalAnalysis
         {
             return !IsEmpty && Last().Id != LexicalElementCodeDictionary.GetCode("újsor");
         }
-        internal void AddProgramStart(int code, int currentRowNumber)
+        private void AddProgramStart(int code, int currentRowNumber)
         {
             ProgramStartTokenAdded = true;
             if (OutputTokens.Count > 0)
             {
-                OutputTokens.Add(new ErrorToken("Csak egy darab program kezdetét jelző kulcsszó engedélyezett!", currentRowNumber));
+                OutputTokens.Add(new ErrorToken("Only one 'program_kezd' is allowed.", currentRowNumber));
             }
             else
             {
@@ -95,7 +95,7 @@ namespace LexicalAnalysis
             int type = OutputTokens.FindTypeOfLastIdentifier();
             if (type != LexicalElementCodeDictionary.ErrorCode)
             {
-                string errorMsg = $"Nem definiálhatod újra a(z) \"{symbolName}\" változót!";
+                string errorMsg = $"Variable redefinition is not allowed. Variable name=\"{symbolName}\".";
                 OutputTokens.Add(new ErrorToken(errorMsg, currentRowNumber));
             }
             else

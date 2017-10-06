@@ -181,7 +181,7 @@ namespace LexicalAnalysisTests.LexicalAnalyzer
             TestContext.Write(result.SymbolTable.ToStringNice());
         }
 
-        [Test, Ignore("Not done yet")]
+        [Test]
         public void MultipleStarts()
         {
             const string code = "program_kezd\r\n" +
@@ -189,6 +189,37 @@ namespace LexicalAnalysisTests.LexicalAnalyzer
                                 "program_kezd\r\n" +
                                 "x = x + 1\r\n" +
                                 "program_vége";
+
+            LexicalAnalyzerResult result = new LexicalAnalysis.LexicalAnalyzer().Analyze(code);
+            
+            TokenTester tt = new TokenTester(result);
+
+            tt.ExpectStart();
+            tt.NewLine();
+
+            tt.ExpectKeyword("egész");
+            tt.ExpectIdentifier("x");
+            tt.ExpectKeyword("=");
+            tt.ExpectEgeszLiteral("2");
+            tt.NewLine();
+
+            tt.ExpectError("Only one 'program_kezd' is allowed.");
+            tt.NewLine();
+
+            tt.ExpectIdentifier("x");
+            tt.ExpectKeyword("=");
+            tt.ExpectIdentifier("x");
+            tt.ExpectKeyword("+");
+            tt.ExpectEgeszLiteral("1");
+            tt.NewLine();
+
+            tt.ExpectEnd();
+
+            tt.ExpectNoMore();
+
+            // Symbol table
+            Assert.That(result.SymbolTable.Entries, Has.Count.EqualTo(1));
+            SymbolTableTester.SimpleSymbolTableEntry(result.SymbolTable.Entries[0], "x", SingleEntryType.Egesz, 2);
         }
 
         [Test, Ignore("Not done yet")]

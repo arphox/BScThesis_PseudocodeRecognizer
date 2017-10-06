@@ -3,6 +3,7 @@ using NUnit.Framework;
 using System;
 using System.Collections.Generic;
 using LexicalAnalysis;
+using LexicalAnalysis.LexicalElementCodes;
 using LexicalAnalysis.SymbolTables;
 
 namespace LexicalAnalysisTests
@@ -59,15 +60,27 @@ namespace LexicalAnalysisTests
             Assert.That(value, Is.EqualTo(expectedValue), $"Expected literal value {expectedValue}, but was {value}.");
         }
 
-
         internal void ExpectIdentifier(string name)
         {
             Token token = NextToken;
             Generic(token, typeof(IdentifierToken), "azonosító");
             int symbolIdInTable = _symbolTable.FindIdByNameInFullTable(name);
-            int tokenSymbolId = (token as IdentifierToken).SymbolId;
+            int tokenSymbolId = ((IdentifierToken)token).SymbolId;
             Assert.That(tokenSymbolId, Is.EqualTo(symbolIdInTable), $"Expected Symbol id {symbolIdInTable}, but was {tokenSymbolId}.");
         }
+
+        internal void ExpectError(string message)
+        {
+            Token token = NextToken;
+            Assert.That(token, Is.TypeOf<ErrorToken>(), $"Expected an {nameof(ErrorToken)}, but was a(n) {token.GetType().Name} with a ToString() of: {token}.");
+            const int errorCode = LexicalElementCodeDictionary.ErrorCode;
+            Assert.That(token.Id, Is.EqualTo(errorCode), $"The {nameof(ErrorToken)}'s Id should be {errorCode}, but was {token.Id}");
+            Assert.That(token.RowNumber, Is.EqualTo(CurrentRow), $"Expected row {CurrentRow}, but was {token.RowNumber}.");
+
+            ErrorToken errorToken = (ErrorToken) token;
+            Assert.That(errorToken.Message.Contains(message), $"Expected message part {message} in the error message, but it was: '{errorToken.Message}'");
+        }
+
 
         internal void ExpectNoMore()
         {
