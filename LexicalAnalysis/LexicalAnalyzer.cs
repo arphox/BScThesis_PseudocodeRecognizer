@@ -199,7 +199,7 @@ namespace LexicalAnalysis
         private void HandleState_StringLiteral()
         {
             _inputIndexer++; //   skip opening "
-            StringBuilder currentLiteral = new StringBuilder("\""); // add opening "
+            StringBuilder currentLiteral = new StringBuilder();
             while (_inputIndexer < _input.Length)
             {
                 if (CurrentChar == '"' &&
@@ -215,7 +215,6 @@ namespace LexicalAnalysis
 
             }
             _inputIndexer++; //   skip closing "
-            currentLiteral.Append("\""); // add closing "
 
             int code = LexicalElementCodeDictionary.GetCode("szöveg literál");
             _outputTokensHandler.AddToken(new LiteralToken(code, currentLiteral.ToString(), _currentRowNumber));

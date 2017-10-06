@@ -39,7 +39,7 @@ namespace LexicalAnalysisTests.LexicalAnalyzer
             tt.CurrentRow++;
             // 4.   kiír     "H//ello világ!" //Ez egy egysoros komment
             tt.ExpectKeyword("kiír");
-            tt.ExpectSzovegLiteral("\"H//ello világ!\"");
+            tt.ExpectSzovegLiteral("H//ello világ!");
             tt.NewLine();
 
             //      (commented lines through 5 to 9)
@@ -48,7 +48,7 @@ namespace LexicalAnalysisTests.LexicalAnalyzer
             tt.ExpectKeyword("szöveg");
             tt.ExpectIdentifier("alma");
             tt.ExpectKeyword("=");
-            tt.ExpectSzovegLiteral("\"almavagyok\"");
+            tt.ExpectSzovegLiteral("almavagyok");
             tt.NewLine();
 
             // 11. program_vége
@@ -100,7 +100,7 @@ namespace LexicalAnalysisTests.LexicalAnalyzer
             tt.ExpectKeyword("szöveg");
             tt.ExpectIdentifier("c");
             tt.ExpectKeyword("=");
-            tt.ExpectSzovegLiteral("\"alma\"");
+            tt.ExpectSzovegLiteral("alma");
             tt.NewLine();
 
             // 5.  logikai d = hamis
@@ -263,7 +263,7 @@ namespace LexicalAnalysisTests.LexicalAnalyzer
 
             //       kiír "Nincs valós gyöke!"\r\n
             tt.ExpectKeyword("kiír");
-            tt.ExpectSzovegLiteral("\"Nincs valós gyöke!\"");
+            tt.ExpectSzovegLiteral("Nincs valós gyöke!");
             tt.NewLine();
 
             //    különben\r\n
@@ -272,7 +272,7 @@ namespace LexicalAnalysisTests.LexicalAnalyzer
 
             //       kiír "Van legalább egy valós gyöke!"\r\n
             tt.ExpectKeyword("kiír");
-            tt.ExpectSzovegLiteral("\"Van legalább egy valós gyöke!\"");
+            tt.ExpectSzovegLiteral("Van legalább egy valós gyöke!");
             tt.NewLine();
 
             //    elágazás_vége\r\n

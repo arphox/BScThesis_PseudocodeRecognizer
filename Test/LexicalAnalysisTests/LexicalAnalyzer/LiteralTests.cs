@@ -23,12 +23,16 @@ namespace LexicalAnalysisTests.LexicalAnalyzer
         private const string EverySimpleKeyOnHungarianKeyboard = "\"0123456789öüóqwertzuiopőúasdfghjkléáűíyxcvbnmÖÜÓQWERTZUIOPŐÚASDFGHJKLÉÁŰÍYXCVBNM\"";
         private const string Complex = @"""Dear Emily,\nThank you \\n \\t for your interest of my wonderful \""compiler\""!\n\n\t\t\\Karoly\\""";
 
+        private static readonly string[] StringLiterals =
+        {
+            EmptyString, Newline, EscapedQuotationMark, EscapedBackslash,
+            EscapedNewline, EscapedTab, OneDot, OneSpace, SimpleWord, Sentence, HungarianCharacters, SpecialCharacters, EverySimpleKeyOnHungarianKeyboard, Complex
+        };
+
         #endregion
 
         [TestCaseSource(nameof(GenerateLiterals), new object[] { "egész literál", new[] { "0", "+0", "-0", "1", "5", "13273211", "-8908001" } })]
         [TestCaseSource(nameof(GenerateLiterals), new object[] { "tört literál", new[] { "0,1", "+1,2", "-3,4", "123,45", "-3123,78895", "132,73211", "-8,908001" } })]
-        [TestCaseSource(nameof(GenerateLiterals), new object[] { "szöveg literál", new[] { EmptyString, Newline, EscapedQuotationMark, EscapedBackslash,
-            EscapedNewline, EscapedTab, OneDot, OneSpace, SimpleWord, Sentence, HungarianCharacters, SpecialCharacters, EverySimpleKeyOnHungarianKeyboard, Complex } })]
         public void CanRecognizeLiterals(string type, string value)
         {
             string code = "program_kezd\n" +
@@ -43,6 +47,31 @@ namespace LexicalAnalysisTests.LexicalAnalyzer
             tt.NewLine();
 
             tt.ExpectLiteral(type, value);
+            tt.NewLine();
+
+            tt.ExpectEnd();
+
+            tt.ExpectNoMore();
+
+            // Symbol table
+            Assert.That(result.SymbolTable.IsEmpty);
+        }
+
+        [TestCaseSource(nameof(StringLiterals))]
+        public void CanRecognizeSzovegLiterals(string value)
+        {
+            string code = "program_kezd\n" +
+                           value + "\n" +
+                          "program_vége";
+
+            LexicalAnalyzerResult result = new LexicalAnalysis.LexicalAnalyzer().Analyze(code);
+
+            TokenTester tt = new TokenTester(result);
+
+            tt.ExpectStart();
+            tt.NewLine();
+
+            tt.ExpectSzovegLiteral(value.Substring(1, value.Length - 2));
             tt.NewLine();
 
             tt.ExpectEnd();

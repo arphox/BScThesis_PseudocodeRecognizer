@@ -1,6 +1,7 @@
 ﻿using LexicalAnalysis.Tokens;
 using NUnit.Framework;
 using System;
+using System.CodeDom;
 using System.Collections.Generic;
 using LexicalAnalysis;
 using LexicalAnalysis.LexicalElementCodes;
