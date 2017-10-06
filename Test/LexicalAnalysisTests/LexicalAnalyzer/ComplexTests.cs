@@ -292,7 +292,7 @@ namespace LexicalAnalysisTests.LexicalAnalyzer
             SymbolTableTester.SimpleSymbolTableEntry(table.Entries[3], "diszkrimináns", SingleEntryType.Tort, 8);
         }
 
-        [Test, Ignore("Not done yet")]
+        [Test]
         public void ArrayForIf()
         {
             const string code = "program_kezd\r\n" +
@@ -326,6 +326,7 @@ namespace LexicalAnalysisTests.LexicalAnalyzer
 
             // ha x>=2 akkor\r\n
             tt.ExpectKeyword("ha");
+            tt.ExpectIdentifier("x");
             tt.ExpectKeyword(">=");
             tt.ExpectEgeszLiteral("2");
             tt.ExpectKeyword("akkor");
@@ -333,7 +334,7 @@ namespace LexicalAnalysisTests.LexicalAnalyzer
 
             //    kiír \"x nem kisebb kettőnél...\"\r\n
             tt.ExpectKeyword("kiír");
-            tt.ExpectSzovegLiteral("\"x nem kisebb kettőnél...\"");
+            tt.ExpectSzovegLiteral("x nem kisebb kettőnél...");
             tt.NewLine();
 
             // különben\r\n
@@ -342,14 +343,69 @@ namespace LexicalAnalysisTests.LexicalAnalyzer
 
             //    kiír \"x kisebb, mint kettő!\"\r\n
             tt.ExpectKeyword("kiír");
-            tt.ExpectSzovegLiteral("\"x kisebb, mint kettő!\"");
+            tt.ExpectSzovegLiteral("x kisebb, mint kettő!");
+            tt.NewLine();
 
+            // elágazás_vége\r\n
+            tt.ExpectKeyword("elágazás_vége");
+            tt.NewLine();
 
+            // egész[] y = létrehoz(egész)[10]\r\n
+            tt.ExpectKeyword("egész tömb");
+            tt.ExpectIdentifier("y");
+            tt.ExpectKeyword("=");
+            tt.ExpectKeyword("létrehoz");
+            tt.ExpectKeyword("(");
+            tt.ExpectKeyword("egész");
+            tt.ExpectKeyword(")");
+            tt.ExpectKeyword("[");
+            tt.ExpectEgeszLiteral("10");
+            tt.ExpectKeyword("]");
+            tt.NewLine();
 
+            // ciklus egész i=0-tól 9-ig\r\n
+            tt.ExpectKeyword("ciklus");
+            tt.ExpectKeyword("egész");
+            tt.ExpectIdentifier("i");
+            tt.ExpectKeyword("=");
+            tt.ExpectEgeszLiteral("0");
+            tt.ExpectKeyword("-tól");
+            tt.ExpectEgeszLiteral("9");
+            tt.ExpectKeyword("-ig");
+            tt.NewLine();
 
+            //    y[i]=i\r\n
+            tt.ExpectIdentifier("y");
+            tt.ExpectKeyword("[");
+            tt.ExpectIdentifier("i");
+            tt.ExpectKeyword("]");
+            tt.ExpectKeyword("=");
+            tt.ExpectIdentifier("i");
+            tt.NewLine();
 
+            //    kiír y[i]\r\n
+            tt.ExpectKeyword("kiír");
+            tt.ExpectIdentifier("y");
+            tt.ExpectKeyword("[");
+            tt.ExpectIdentifier("i");
+            tt.ExpectKeyword("]");
+            tt.NewLine();
 
+            // ciklus_vége\r\n
+            tt.ExpectKeyword("ciklus_vége");
+            tt.NewLine();
 
+            tt.ExpectEnd();
+            tt.ExpectNoMore();
+
+            // Symbol table
+            Assert.That(result.SymbolTable.Entries, Has.Count.EqualTo(3));
+            SymbolTableTester.SimpleSymbolTableEntry(result.SymbolTable.Entries[0], "x", SingleEntryType.Egesz, 2);
+            SymbolTableTester.SimpleSymbolTableEntry(result.SymbolTable.Entries[1], "y", SingleEntryType.EgeszTomb, 8);
+            Assert.That(result.SymbolTable.Entries[2], Is.TypeOf<SubTableEntry>());
+            SymbolTable subTable = (result.SymbolTable.Entries[2] as SubTableEntry).Table;
+            Assert.That(subTable.Entries, Has.Count.EqualTo(1));
+            SymbolTableTester.SimpleSymbolTableEntry(subTable.Entries[0], "i", SingleEntryType.Egesz, 9);
         }
 
         [Test, Ignore("Not done yet")]
