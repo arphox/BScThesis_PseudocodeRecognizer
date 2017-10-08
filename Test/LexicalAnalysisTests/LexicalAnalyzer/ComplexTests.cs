@@ -916,7 +916,7 @@ namespace LexicalAnalysisTests.LexicalAnalyzer
             tt.ExpectEgeszLiteral("0");
             tt.ExpectKeyword("akkor");
             tt.NewLine();
-            Assert.Inconclusive("");
+
             // 15.       szöveg bbbb = \"asd\"\r\n
             tt.ExpectKeyword("szöveg");
             tt.ExpectIdentifier("bbbb");
@@ -932,35 +932,59 @@ namespace LexicalAnalysisTests.LexicalAnalyzer
 
             // 17. ciklus_vége\r\n
             tt.ExpectKeyword("ciklus_vége");
+            st.DecreaseIndent();
             tt.NewLine();
 
+            // 18. \r\n
+            tt.CurrentRow++;
 
+            // 19. egész c = 0\r\n
+            tt.ExpectKeyword("egész");
+            tt.ExpectIdentifier("c");
+            st.ExpectSimpleEntry(SingleEntryType.Egesz, "c", 19);
+            tt.ExpectKeyword("=");
+            tt.ExpectEgeszLiteral("0");
+            tt.NewLine();
 
+            // 20. ciklus_amíg c < 2\r\n
+            tt.ExpectKeyword("ciklus_amíg");
+            st.IncreaseIndent();
+            tt.ExpectIdentifier("c");
+            tt.ExpectKeyword("<");
+            tt.ExpectEgeszLiteral("2");
+            tt.NewLine();
 
+            // 21.    egész ccc = 2\r\n
+            tt.ExpectKeyword("egész");
+            tt.ExpectIdentifier("ccc");
+            tt.ExpectKeyword("=");
+            tt.ExpectEgeszLiteral("2");
+            tt.NewLine();
 
+            Assert.Inconclusive();
+            // 22.    ha ccc == 3 akkor\r\n
+            tt.ExpectKeyword("ha");
+            st.IncreaseIndent();
+            tt.ExpectIdentifier("ccc");
+            tt.ExpectKeyword("==");
+            tt.ExpectEgeszLiteral("3");
+            tt.ExpectKeyword("akkor");
+            tt.NewLine();
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+            // 23.       ciklus egész cccc = 1-től cccc < 10-ig\r\n
+            tt.ExpectKeyword("ciklus");
+            st.IncreaseIndent();
+            tt.ExpectKeyword("egész");
+            tt.ExpectKeyword("cccc");
+            st.ExpectSimpleEntry(SingleEntryType.Egesz, "cccc", 23);
+            tt.ExpectKeyword("=");
+            tt.ExpectEgeszLiteral("1");
+            tt.ExpectKeyword("-től");
+            tt.ExpectIdentifier("cccc");
+            tt.ExpectKeyword("<");
+            tt.ExpectEgeszLiteral("10");
+            tt.ExpectKeyword("-ig");
+            tt.NewLine();
 
 
 
