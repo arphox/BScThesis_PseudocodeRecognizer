@@ -65,7 +65,7 @@ namespace LexicalAnalysisTests
         {
             Token token = NextToken;
             Generic(token, typeof(IdentifierToken), "azonosító");
-            int symbolIdInTable = _symbolTable.FindIdByNameInFullTable(name);
+            int symbolIdInTable = _symbolTable.FindIdByNameInFullTableRecursive(name);
             Assert.That(symbolIdInTable, Is.Not.EqualTo(SymbolTable.NotFoundId), $"Identifier {name} not found in the symbol table.");
         }
 

@@ -74,9 +74,15 @@ namespace LexicalAnalysis.SymbolTables
             Entries.Add(entry);
         }
 
-        internal int FindIdByName(string nameToFind)
+        /// <summary>
+        /// Recursively searches for the identifier in a symbol table by name.
+        /// </summary>
+        /// <param name="symbolTable">The symbol table.</param>
+        /// <param name="nameToFind">The name to find.</param>
+        /// <returns></returns>
+        internal static int FindIdByNameRecursive(SymbolTable symbolTable, string nameToFind)
         {
-            SymbolTable currentTable = this;
+            SymbolTable currentTable = symbolTable;
             while (currentTable != null)
             {
                 int id = currentTable.FindId(nameToFind);
@@ -84,12 +90,12 @@ namespace LexicalAnalysis.SymbolTables
                 {
                     return id;
                 }
-                currentTable = currentTable.ParentTable; // Try in parent.
+                currentTable = currentTable.ParentTable;
             }
             return NotFoundId;
         }
 
-        public int FindIdByNameInFullTable(string nameToFind)
+        public int FindIdByNameInFullTableRecursive(string nameToFind)
         {
             if (Entries.Count == 0)
                 return NotFoundId;
@@ -103,7 +109,7 @@ namespace LexicalAnalysis.SymbolTables
                             return single.Id;
                         break;
                     case SymbolTable table:
-                        int id = table.FindIdByName(nameToFind);
+                        int id = FindIdByNameRecursive(table, nameToFind);
                         if (id != NotFoundId)
                             return id;
                         break;

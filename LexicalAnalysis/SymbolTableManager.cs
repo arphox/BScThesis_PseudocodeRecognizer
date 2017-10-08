@@ -48,7 +48,7 @@ namespace LexicalAnalysis
         }
         internal int FindIdByName(string name)
         {
-            return RootSymbolTable.FindIdByName(name);
+            return SymbolTable.FindIdByNameRecursive(RootSymbolTable, name);
         }
         internal void CleanUpIfNeeded() => RootSymbolTable.CleanUpIfNeeded();
 

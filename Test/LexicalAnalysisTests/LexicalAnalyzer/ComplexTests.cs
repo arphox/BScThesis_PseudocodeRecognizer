@@ -766,43 +766,206 @@ namespace LexicalAnalysisTests.LexicalAnalyzer
             TestContext.Write(result.SymbolTable.ToStringNice());
         }
 
-        [Test, Ignore("Not done yet")]
+        [Test]
         public void DeepBlocks()
         {
             const string code = "program_kezd\r\n" +
-                                "\r\n" +
-                                "egész[] tömb = létrehoz(egész)[10]\r\n" +
-                                "\r\n" +
-                                "egész a = 2\r\n" +
-                                "ciklus egész aa = 0-tól aa < 9-ig\r\n" +
-                                "   tört aaa = 2,4\r\n" +
-                                "ciklus_vége\r\n" +
-                                "\r\n" +
-                                "\r\n" +
-                                "egész b = 0\r\n" +
-                                "ciklus egész bb = 0-tól bb < 9-ig\r\n" +
-                                "   szöveg bbb = \"alma\"\r\n" +
-                                "   ha bb mod 2 == 0 akkor\r\n" +
-                                "      szöveg bbbb = \"asd\"\r\n" +
-                                "   elágazás_vége\r\n" +
-                                "ciklus_vége\r\n" +
-                                "\r\n" +
-                                "egész c = 0\r\n" +
-                                "ciklus_amíg c < 2\r\n" +
-                                "   egész ccc = 2\r\n" +
-                                "   ha ccc == 3 akkor\r\n" +
-                                "      ciklus egész cccc = 1-től cccc < 10-ig\r\n" +
-                                "         tört ccccc = 3,14\r\n" +
-                                "         ciklus_amíg ccc > 2\r\n" +
-                                "            ccc = ccc - 2\r\n" +
-                                "         ciklus_vége\r\n" +
-                                "         egész ccccc2\r\n" +
-                                "      ciklus_vége\r\n" +
-                                "      logikai l = hamis\r\n" +
-                                "   elágazás_vége\r\n" +
-                                "   szöveg sz = \"haha\"\r\n" +
-                                "ciklus_vége\r\n" +
-                                "program_vége";
+                         /*2*/  "\r\n" +
+                         /*3*/  "egész[] tömb = létrehoz(egész)[10]\r\n" +
+                         /*4*/  "\r\n" +
+                         /*5*/  "egész a = 2\r\n" +
+                         /*6*/  "ciklus egész aa = 0-tól aa < 9-ig\r\n" +
+                         /*7*/  "   tört aaa = 2,4\r\n" +
+                         /*8*/  "ciklus_vége\r\n" +
+                         /*9*/  "\r\n" +
+                        /*10*/  "\r\n" +
+                        /*11*/  "egész b = 0\r\n" +
+                        /*12*/  "ciklus egész bb = 0-tól bb < 9-ig\r\n" +
+                        /*13*/  "   szöveg bbb = \"alma\"\r\n" +
+                        /*14*/  "   ha bb mod 2 == 0 akkor\r\n" +
+                        /*15*/  "      szöveg bbbb = \"asd\"\r\n" +
+                        /*16*/  "   elágazás_vége\r\n" +
+                        /*17*/  "ciklus_vége\r\n" +
+                        /*18*/  "\r\n" +
+                        /*19*/  "egész c = 0\r\n" +
+                        /*20*/  "ciklus_amíg c < 2\r\n" +
+                        /*21*/  "   egész ccc = 2\r\n" +
+                        /*22*/  "   ha ccc == 3 akkor\r\n" +
+                        /*23*/  "      ciklus egész cccc = 1-től cccc < 10-ig\r\n" +
+                        /*24*/  "         tört ccccc = 3,14\r\n" +
+                        /*25*/  "         ciklus_amíg ccc > 2\r\n" +
+                        /*26*/  "            ccc = ccc - 2\r\n" +
+                        /*27*/  "         ciklus_vége\r\n" +
+                        /*28*/  "         egész ccccc2\r\n" +
+                        /*29*/  "      ciklus_vége\r\n" +
+                        /*30*/  "      logikai l = hamis\r\n" +
+                        /*31*/  "   elágazás_vége\r\n" +
+                        /*32*/  "   szöveg sz = \"haha\"\r\n" +
+                        /*33*/  "ciklus_vége\r\n" +
+                        /*34*/  "program_vége";
+
+            LexicalAnalyzerResult result = new LexicalAnalysis.LexicalAnalyzer().Analyze(code);
+
+            TokenTester tt = new TokenTester(result);
+            SymbolTableTester st = new SymbolTableTester(result.SymbolTable);
+
+            // 1. program_kezd\r\n
+            tt.ExpectKeyword("program_kezd");
+            tt.NewLine();
+
+            // 2. \r\n
+            tt.CurrentRow++;
+
+            // 3. egész[] tömb = létrehoz(egész)[10]\r\n
+            tt.ExpectKeyword("egész tömb");
+            tt.ExpectIdentifier("tömb");
+            st.ExpectSimpleEntry(SingleEntryType.EgeszTomb, "tömb", 3);
+            tt.ExpectKeyword("=");
+            tt.ExpectKeyword("létrehoz");
+            tt.ExpectKeyword("(");
+            tt.ExpectKeyword("egész");
+            tt.ExpectKeyword(")");
+            tt.ExpectKeyword("[");
+            tt.ExpectEgeszLiteral("10");
+            tt.ExpectKeyword("]");
+            tt.NewLine();
+
+            // 4. \r\n
+            tt.CurrentRow++;
+
+            // 5. egész a = 2\r\n
+            tt.ExpectKeyword("egész");
+            tt.ExpectIdentifier("a");
+            st.ExpectSimpleEntry(SingleEntryType.Egesz, "a", 5);
+            tt.ExpectKeyword("=");
+            tt.ExpectEgeszLiteral("2");
+            tt.NewLine();
+
+            // 6. ciklus egész aa = 0-tól aa < 9-ig\r\n
+            tt.ExpectKeyword("ciklus");
+            tt.ExpectKeyword("egész");
+            tt.ExpectIdentifier("aa");
+            st.IncreaseIndent();
+            st.ExpectSimpleEntry(SingleEntryType.Egesz, "aa", 6);
+            tt.ExpectKeyword("=");
+            tt.ExpectEgeszLiteral("0");
+            tt.ExpectKeyword("-tól");
+            tt.ExpectIdentifier("aa");
+            tt.ExpectKeyword("<");
+            tt.ExpectEgeszLiteral("9");
+            tt.ExpectKeyword("-ig");
+            tt.NewLine();
+
+            // 7.    tört aaa = 2,4\r\n
+            tt.ExpectKeyword("tört");
+            tt.ExpectIdentifier("aaa");
+            st.ExpectSimpleEntry(SingleEntryType.Tort, "aaa", 7);
+            tt.ExpectKeyword("=");
+            tt.ExpectTortLiteral("2,4");
+            tt.NewLine();
+
+            // 8. ciklus_vége\r\n
+            tt.ExpectKeyword("ciklus_vége");
+            st.DecreaseIndent();
+            tt.NewLine();
+
+            // 9. \r\n
+            tt.CurrentRow++;
+
+            // 10. \r\n
+            tt.CurrentRow++;
+
+            // 11. egész b = 0\r\n
+            tt.ExpectKeyword("egész");
+            tt.ExpectIdentifier("b");
+            st.ExpectSimpleEntry(SingleEntryType.Egesz, "b", 11);
+            tt.ExpectKeyword("=");
+            tt.ExpectEgeszLiteral("0");
+            tt.NewLine();
+
+            // 12. ciklus egész bb = 0-tól bb < 9-ig\r\n
+            tt.ExpectKeyword("ciklus");
+            tt.ExpectKeyword("egész");
+            tt.ExpectIdentifier("bb");
+            st.IncreaseIndent();
+            st.ExpectSimpleEntry(SingleEntryType.Egesz, "bb", 12);
+            tt.ExpectKeyword("=");
+            tt.ExpectEgeszLiteral("0");
+            tt.ExpectKeyword("-tól");
+            tt.ExpectIdentifier("bb");
+            tt.ExpectKeyword("<");
+            tt.ExpectEgeszLiteral("9");
+            tt.ExpectKeyword("-ig");
+            tt.NewLine();
+
+            // 13.    szöveg bbb = \"alma\"\r\n
+            tt.ExpectKeyword("szöveg");
+            tt.ExpectIdentifier("bbb");
+            st.ExpectSimpleEntry(SingleEntryType.Szoveg, "bbb", 13);
+            tt.ExpectKeyword("=");
+            tt.ExpectSzovegLiteral("alma");
+            tt.NewLine();
+
+            // 14.    ha bb mod 2 == 0 akkor\r\n
+            tt.ExpectKeyword("ha");
+            tt.ExpectIdentifier("bb");
+            st.IncreaseIndent();
+            tt.ExpectKeyword("mod");
+            tt.ExpectEgeszLiteral("2");
+            tt.ExpectKeyword("==");
+            tt.ExpectEgeszLiteral("0");
+            tt.ExpectKeyword("akkor");
+            tt.NewLine();
+            Assert.Inconclusive("");
+            // 15.       szöveg bbbb = \"asd\"\r\n
+            tt.ExpectKeyword("szöveg");
+            tt.ExpectIdentifier("bbbb");
+            st.ExpectSimpleEntry(SingleEntryType.Szoveg, "bbbb", 15);
+            tt.ExpectKeyword("=");
+            tt.ExpectSzovegLiteral("asd");
+            tt.NewLine();
+
+            // 16.    elágazás_vége\r\n
+            tt.ExpectKeyword("elágazás_vége");
+            st.DecreaseIndent();
+            tt.NewLine();
+
+            // 17. ciklus_vége\r\n
+            tt.ExpectKeyword("ciklus_vége");
+            tt.NewLine();
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
         }
 
         [Test, Ignore("Not done yet")]
@@ -814,11 +977,11 @@ namespace LexicalAnalysisTests.LexicalAnalyzer
                                 "egész a = törtből_egészbe(tömb[0] * 2,5) + logikaiból_egészbe(igaz)\r\n" +
                                 "szöveg sz = szövegből_egészbe(a)\r\n" +
                                 "logikai log = igaz\r\n" +
-                                "tört tttt = logikaiból_törtbe(log)\r\n" +
-                                "tttt = szövegből_törtbe(sz)\r\n" +
+                                "tört trx = logikaiból_törtbe(log)\r\n" +
+                                "trx = szövegből_törtbe(sz)\r\n" +
                                 "log = egészből_logikaiba(123231)\r\n" +
                                 "ciklus egész b = 0-tól b < 9-ig\r\n" +
-                                "   logikai xxxxxxxx = törtből_logikaiba(0,0)\r\n" +
+                                "   logikai dell = törtből_logikaiba(0,0)\r\n" +
                                 "ciklus_vége\r\n" +
                                 "szöveg sx = \"hamis\"\r\n" +
                                 "log = szövegből_logikaiba(sx)\r\n" +
