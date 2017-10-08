@@ -169,11 +169,11 @@ namespace LexicalAnalysisTests.LexicalAnalyzer
 
             // Symbol table
             SymbolTableTester st = new SymbolTableTester(result.SymbolTable);
-            st.ExpectSimpleEntry("x", SingleEntryType.Egesz, 4);
-            st.ExpectSimpleEntry("a", SingleEntryType.Egesz, 6);
+            st.ExpectSimpleEntry(SingleEntryType.Egesz, "x", 4);
+            st.ExpectSimpleEntry(SingleEntryType.Egesz, "a", 6);
             st.IncreaseIndent();
-            st.ExpectSimpleEntry("b", SingleEntryType.Egesz, 7);
-            st.ExpectSimpleEntry("c", SingleEntryType.Egesz, 8);
+            st.ExpectSimpleEntry(SingleEntryType.Egesz, "b", 7);
+            st.ExpectSimpleEntry(SingleEntryType.Egesz, "c", 8);
             st.ExpectNoMore();
             TestContext.Write(result.SymbolTable.ToStringNice());
         }
@@ -277,8 +277,8 @@ namespace LexicalAnalysisTests.LexicalAnalyzer
 
             // Symbol table
             SymbolTableTester st = new SymbolTableTester(result.SymbolTable);
-            st.ExpectSimpleEntry("a", SingleEntryType.Egesz, 2);
-            st.ExpectSimpleEntry("b", SingleEntryType.Tort, 3);
+            st.ExpectSimpleEntry(SingleEntryType.Egesz, "a", 2);
+            st.ExpectSimpleEntry(SingleEntryType.Tort, "b", 3);
             st.ExpectNoMore();
             TestContext.Write(result.SymbolTable.ToStringNice());
         }

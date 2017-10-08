@@ -91,7 +91,7 @@ namespace LexicalAnalysisTests.LexicalAnalyzer
             // Symbol table
             SymbolTableTester st = new SymbolTableTester(result.SymbolTable);
             st.IncreaseIndent();
-            st.ExpectSimpleEntry("i", SingleEntryType.Egesz, 2);
+            st.ExpectSimpleEntry(SingleEntryType.Egesz, "i", 2);
             tt.ExpectNoMore();
             TestContext.Write(result.SymbolTable.ToStringNice());
         }

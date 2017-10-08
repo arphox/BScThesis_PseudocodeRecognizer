@@ -6,7 +6,7 @@ namespace LexicalAnalysis.SymbolTables
 {
     public sealed class SymbolTable : SymbolTableEntry
     {
-        private const int NotFoundId = -1;
+        public const int NotFoundId = -1;
 
         private readonly SymbolTableManager _parentManager;
 

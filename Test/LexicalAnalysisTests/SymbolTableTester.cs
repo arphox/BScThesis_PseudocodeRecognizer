@@ -16,7 +16,7 @@ namespace LexicalAnalysisTests
             _currentTable = symbolTable;
         }
 
-        internal void ExpectSimpleEntry(string name, SingleEntryType entryType, int lineNumber)
+        internal void ExpectSimpleEntry(SingleEntryType entryType, string name, int lineNumber)
         {
             SingleEntry entry = CurrentEntry as SingleEntry;
             Assert.That(entry, Is.Not.Null, $"Expected a {nameof(SingleEntry)}, but was {CurrentEntry.GetType().Name}.");
