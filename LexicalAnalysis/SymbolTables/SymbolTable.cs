@@ -75,12 +75,13 @@ namespace LexicalAnalysis.SymbolTables
         }
 
         /// <summary>
-        /// Recursively searches for the identifier in a symbol table by name.
+        /// Upward-Recursively searches for the identifier in a symbol table by name.
+        /// Upward recursive means that the self and parent tables are traversed, not the children.
         /// </summary>
         /// <param name="symbolTable">The symbol table.</param>
         /// <param name="nameToFind">The name to find.</param>
         /// <returns></returns>
-        internal static int FindIdByNameRecursive(SymbolTable symbolTable, string nameToFind)
+        internal static int FindIdByNameRecursiveUpwards(SymbolTable symbolTable, string nameToFind)
         {
             SymbolTable currentTable = symbolTable;
             while (currentTable != null)
@@ -95,29 +96,29 @@ namespace LexicalAnalysis.SymbolTables
             return NotFoundId;
         }
 
-        public int FindIdByNameInFullTableRecursive(string nameToFind)
+        /// <summary>
+        /// Recursively searches for an identifier in a symbol table and it's children.
+        /// </summary>
+        /// <param name="entry">The symbol table.</param>
+        /// <param name="nameToFind">The name to find.</param>
+        /// <returns>The Id of the identifier found, or <see cref="NotFoundId"/> if not found.</returns>
+        public static int FindIdByNameInFullTable(SymbolTableEntry entry, string nameToFind)
         {
-            if (Entries.Count == 0)
-                return NotFoundId;
-
-            foreach (SymbolTableEntry currentEntry in Entries)
+            switch (entry)
             {
-                switch (currentEntry)
-                {
-                    case SingleEntry single:
-                        if (single.Name == nameToFind)
-                            return single.Id;
-                        break;
-                    case SymbolTable table:
-                        int id = FindIdByNameRecursive(table, nameToFind);
-                        if (id != NotFoundId)
-                            return id;
-                        break;
-                    default:
-                        throw new InvalidOperationException($"Unexpected {nameof(SymbolTableEntry)}; the type was: {currentEntry.GetType().Name}");
-                }
+                case SingleEntry single:
+                    return single.Name == nameToFind ? single.Id : NotFoundId;
+                case SymbolTable subTable:
+                    foreach (SymbolTableEntry e in subTable.Entries)
+                    {
+                        int res = FindIdByNameInFullTable(e, nameToFind);
+                        if (res != NotFoundId)
+                            return res;
+                    }
+                    return NotFoundId;
+                default:
+                    throw new InvalidOperationException($"Unexpected {nameof(SymbolTableEntry)}; the type was: {entry.GetType().Name}");
             }
-            return NotFoundId;
         }
 
         internal void CleanUpIfNeeded()
