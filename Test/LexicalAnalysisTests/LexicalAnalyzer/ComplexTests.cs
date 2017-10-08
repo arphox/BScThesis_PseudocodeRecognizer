@@ -957,11 +957,11 @@ namespace LexicalAnalysisTests.LexicalAnalyzer
             // 21.    egész ccc = 2\r\n
             tt.ExpectKeyword("egész");
             tt.ExpectIdentifier("ccc");
+            st.ExpectSimpleEntry(SingleEntryType.Egesz, "ccc", 21);
             tt.ExpectKeyword("=");
             tt.ExpectEgeszLiteral("2");
             tt.NewLine();
 
-            Assert.Inconclusive();
             // 22.    ha ccc == 3 akkor\r\n
             tt.ExpectKeyword("ha");
             st.IncreaseIndent();
@@ -975,7 +975,7 @@ namespace LexicalAnalysisTests.LexicalAnalyzer
             tt.ExpectKeyword("ciklus");
             st.IncreaseIndent();
             tt.ExpectKeyword("egész");
-            tt.ExpectKeyword("cccc");
+            tt.ExpectIdentifier("cccc");
             st.ExpectSimpleEntry(SingleEntryType.Egesz, "cccc", 23);
             tt.ExpectKeyword("=");
             tt.ExpectEgeszLiteral("1");
