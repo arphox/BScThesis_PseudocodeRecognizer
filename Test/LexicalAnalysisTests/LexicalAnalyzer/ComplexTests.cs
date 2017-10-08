@@ -986,10 +986,75 @@ namespace LexicalAnalysisTests.LexicalAnalyzer
             tt.ExpectKeyword("-ig");
             tt.NewLine();
 
+            // 24.          tört ccccc = 3,14\r\n
+            tt.ExpectKeyword("tört");
+            tt.ExpectIdentifier("ccccc");
+            st.ExpectSimpleEntry(SingleEntryType.Tort, "ccccc", 24);
+            tt.ExpectKeyword("=");
+            tt.ExpectTortLiteral("3,14");
+            tt.NewLine();
 
+            // 25.          ciklus_amíg ccc > 2\r\n
+            tt.ExpectKeyword("ciklus_amíg");
+            tt.ExpectIdentifier("ccc");
+            tt.ExpectKeyword(">");
+            tt.ExpectEgeszLiteral("2");
+            tt.NewLine();
 
+            // 26.             ccc = ccc - 2\r\n
+            tt.ExpectIdentifier("ccc");
+            tt.ExpectKeyword("=");
+            tt.ExpectIdentifier("ccc");
+            tt.ExpectKeyword("-");
+            tt.ExpectEgeszLiteral("2");
+            tt.NewLine();
 
+            // 27.          ciklus_vége\r\n
+            tt.ExpectKeyword("ciklus_vége");
+            tt.NewLine();
 
+            // 28.          egész ccccc2\r\n
+            tt.ExpectKeyword("egész");
+            tt.ExpectIdentifier("ccccc2");
+            st.ExpectSimpleEntry(SingleEntryType.Egesz, "ccccc2", 28);
+            tt.NewLine();
+
+            // 29.       ciklus_vége\r\n
+            tt.ExpectKeyword("ciklus_vége");
+            st.DecreaseIndent();
+            tt.NewLine();
+
+            // 30.       logikai l = hamis\r\n
+            tt.ExpectKeyword("logikai");
+            tt.ExpectIdentifier("l");
+            st.ExpectSimpleEntry(SingleEntryType.Logikai, "l", 30);
+            tt.ExpectKeyword("=");
+            tt.ExpectLogikaiLiteral("hamis");
+            tt.NewLine();
+
+            // 31.    elágazás_vége\r\n
+            tt.ExpectKeyword("elágazás_vége");
+            st.DecreaseIndent();
+            tt.NewLine();
+
+            // 32.    szöveg sz = \"haha\"\r\n
+            tt.ExpectKeyword("szöveg");
+            tt.ExpectIdentifier("sz");
+            st.ExpectSimpleEntry(SingleEntryType.Szoveg, "sz", 32);
+            tt.ExpectKeyword("=");
+            tt.ExpectSzovegLiteral("haha");
+            tt.NewLine();
+
+            // 33. ciklus_vége\r\n
+            tt.ExpectKeyword("ciklus_vége");
+            tt.NewLine();
+
+            // 34 program_vége
+            tt.ExpectKeyword("program_vége");
+
+            tt.ExpectNoMore();
+            st.ExpectNoMore();
+            TestContext.Write(result.SymbolTable.ToStringNice());
         }
 
         [Test, Ignore("Not done yet")]
