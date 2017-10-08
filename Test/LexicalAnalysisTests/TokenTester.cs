@@ -1,7 +1,6 @@
 ﻿using LexicalAnalysis.Tokens;
 using NUnit.Framework;
 using System;
-using System.CodeDom;
 using System.Collections.Generic;
 using LexicalAnalysis;
 using LexicalAnalysis.LexicalElementCodes;
@@ -100,12 +99,12 @@ namespace LexicalAnalysisTests
 
         private static int CodeFor(string word)
         {
-            return LexicalAnalysis.LexicalElementCodes.LexicalElementCodeDictionary.GetCode(word);
+            return LexicalElementCodeDictionary.GetCode(word);
         }
 
         private static string WordFor(int code)
         {
-            return LexicalAnalysis.LexicalElementCodes.LexicalElementCodeDictionary.GetWord(code);
+            return LexicalElementCodeDictionary.GetWord(code);
         }
     }
 }

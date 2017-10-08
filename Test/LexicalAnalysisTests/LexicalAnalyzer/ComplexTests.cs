@@ -1060,6 +1060,7 @@ namespace LexicalAnalysisTests.LexicalAnalyzer
         [Test, Ignore("Not done yet")]
         public void InternalFunctions()
         {
+            // ReSharper disable once UnusedVariable
             const string code = "program_kezd\r\n" +
                                 "\r\n" +
                                 "egész[] tömb = létrehoz(egész)[10]\r\n" +
