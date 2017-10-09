@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Text;
 using LexicalAnalysis.LexicalElementIdentification;
-using LexicalAnalysis.SymbolTables;
+using LexicalAnalysis.SymbolTableManagement;
 using LexicalAnalysis.Tokens;
 
 namespace LexicalAnalysis.LexicalAnalyzer

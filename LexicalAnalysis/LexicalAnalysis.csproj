@@ -49,11 +49,11 @@
     <Compile Include="LexicalAnalyzer\LexicalAnalyzer.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="LexicalElementIdentification\LexicalElementCodeType.cs" />
-    <Compile Include="SymbolTables\SymbolTableManager.cs" />
-    <Compile Include="SymbolTables\SingleEntryType.cs" />
-    <Compile Include="SymbolTables\SymbolTable.cs" />
-    <Compile Include="SymbolTables\SymbolTableEntry.cs" />
-    <Compile Include="SymbolTables\SingleEntry.cs" />
+    <Compile Include="SymbolTableManagement\SymbolTableManager.cs" />
+    <Compile Include="SymbolTableManagement\SingleEntryType.cs" />
+    <Compile Include="SymbolTableManagement\SymbolTable.cs" />
+    <Compile Include="SymbolTableManagement\SymbolTableEntry.cs" />
+    <Compile Include="SymbolTableManagement\SingleEntry.cs" />
     <Compile Include="Tokens\ErrorTokenType.cs" />
     <Compile Include="Tokens\IdentifierToken.cs" />
     <Compile Include="Tokens\InternalFunctionToken.cs" />

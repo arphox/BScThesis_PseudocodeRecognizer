@@ -5,7 +5,7 @@ using System.Collections.Generic;
 using LexicalAnalysis;
 using LexicalAnalysis.LexicalAnalyzer;
 using LexicalAnalysis.LexicalElementIdentification;
-using LexicalAnalysis.SymbolTables;
+using LexicalAnalysis.SymbolTableManagement;
 
 namespace LexicalAnalysisTests
 {

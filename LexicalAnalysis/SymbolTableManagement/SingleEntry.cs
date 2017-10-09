@@ -1,4 +1,4 @@
-﻿namespace LexicalAnalysis.SymbolTables
+﻿namespace LexicalAnalysis.SymbolTableManagement
 {
     public sealed class SingleEntry : SymbolTableEntry
     {

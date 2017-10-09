@@ -1,5 +1,5 @@
 ﻿using System.Collections.Generic;
-using LexicalAnalysis.SymbolTables;
+using LexicalAnalysis.SymbolTableManagement;
 using LexicalAnalysis.Tokens;
 
 namespace LexicalAnalysis.LexicalAnalyzer

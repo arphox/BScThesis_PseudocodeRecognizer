@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace LexicalAnalysis.SymbolTables
+namespace LexicalAnalysis.SymbolTableManagement
 {
     public sealed class SymbolTable : SymbolTableEntry
     {

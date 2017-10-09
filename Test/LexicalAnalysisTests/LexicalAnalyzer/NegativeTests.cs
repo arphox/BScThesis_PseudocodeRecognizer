@@ -1,6 +1,6 @@
 ﻿using LexicalAnalysis;
 using LexicalAnalysis.LexicalAnalyzer;
-using LexicalAnalysis.SymbolTables;
+using LexicalAnalysis.SymbolTableManagement;
 using LexicalAnalysis.Tokens;
 using NUnit.Framework;
 

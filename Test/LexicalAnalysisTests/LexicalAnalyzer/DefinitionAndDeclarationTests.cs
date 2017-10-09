@@ -1,8 +1,8 @@
 ﻿using LexicalAnalysis;
-using LexicalAnalysis.SymbolTables;
 using NUnit.Framework;
 using System.Linq;
 using LexicalAnalysis.LexicalAnalyzer;
+using LexicalAnalysis.SymbolTableManagement;
 
 namespace LexicalAnalysisTests.LexicalAnalyzer
 {

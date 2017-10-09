@@ -1,7 +1,7 @@
 using System;
 using LexicalAnalysis.LexicalElementIdentification;
 
-namespace LexicalAnalysis.SymbolTables
+namespace LexicalAnalysis.SymbolTableManagement
 {
     public class SymbolTableManager
     {
@@ -61,7 +61,7 @@ namespace LexicalAnalysis.SymbolTables
         /// </summary>
         /// <param name="entry">The symbol table.</param>
         /// <param name="nameToFind">The name to find.</param>
-        /// <returns>The Id of the identifier found, or <see cref="SymbolTables.SymbolTable.NotFoundId"/> if not found.</returns>
+        /// <returns>The Id of the identifier found, or <see cref="SymbolTableManagement.SymbolTable.NotFoundId"/> if not found.</returns>
         public static int FindIdByNameInFullTable(SymbolTableEntry entry, string nameToFind)
         {
             switch (entry)
