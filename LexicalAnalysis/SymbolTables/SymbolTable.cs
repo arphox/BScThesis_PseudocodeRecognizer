@@ -8,20 +8,23 @@ namespace LexicalAnalysis.SymbolTables
     {
         public const int NotFoundId = -1;
 
-        private readonly SymbolTableManager _parentManager;
+        private readonly List<SymbolTableEntry> _entries = new List<SymbolTableEntry>();
 
-        public List<SymbolTableEntry> Entries { get; } = new List<SymbolTableEntry>();
+        public IReadOnlyList<SymbolTableEntry> Entries => _entries.AsReadOnly();
         public SymbolTable ParentTable { get; }
-        public bool IsEmpty => Entries.Count == 0;
+        public bool IsEmpty => _entries.Count == 0;
 
-        public SymbolTableEntry this[int index] => Entries[index];
+        internal SymbolTable(SymbolTable parentTable)
+        {
+            ParentTable = parentTable;
+        }
 
         /// <summary>
         /// Searches the given symbol table for the given symbol name and returns the ID, if found; otherwise <see cref="NotFoundId"/>.
         /// </summary>
         private int FindId(string nameToFind)
         {
-            foreach (SymbolTableEntry currentEntry in Entries)
+            foreach (SymbolTableEntry currentEntry in _entries)
             {
                 if (currentEntry is SingleEntry single && single.Name == nameToFind)
                 {
@@ -37,17 +40,17 @@ namespace LexicalAnalysis.SymbolTables
             if (IsEmpty)
                 return 0;
 
-            for (int i = Entries.Count - 1; i >= 0; i--)
+            for (int i = _entries.Count - 1; i >= 0; i--)
             {
-                if (Entries[i] is SingleEntry)
+                if (_entries[i] is SingleEntry)
                 {
                     continue;
                 }
 
-                SymbolTable subTable = Entries[i] as SymbolTable;
+                SymbolTable subTable = _entries[i] as SymbolTable;
                 if (subTable.IsEmpty)
                 {
-                    Entries.RemoveAt(i);
+                    _entries.RemoveAt(i);
                     cleanCount++;
                 }
                 else
@@ -58,20 +61,9 @@ namespace LexicalAnalysis.SymbolTables
             return cleanCount;
         }
 
-
-        internal SymbolTable(SymbolTableManager symbolTableManager, SymbolTable parentTable)
-        {
-            _parentManager = symbolTableManager;
-            ParentTable = parentTable;
-        }
-
         internal void InsertNewEntry(SymbolTableEntry entry)
         {
-            if (entry is SingleEntry single)
-            {
-                _parentManager.SymbolIdToName.Add(single.Id, single.Name);
-            }
-            Entries.Add(entry);
+            _entries.Add(entry);
         }
 
         /// <summary>
@@ -109,7 +101,7 @@ namespace LexicalAnalysis.SymbolTables
                 case SingleEntry single:
                     return single.Name == nameToFind ? single.Id : NotFoundId;
                 case SymbolTable subTable:
-                    foreach (SymbolTableEntry e in subTable.Entries)
+                    foreach (SymbolTableEntry e in subTable._entries)
                     {
                         int res = FindIdByNameInFullTable(e, nameToFind);
                         if (res != NotFoundId)
@@ -135,11 +127,12 @@ namespace LexicalAnalysis.SymbolTables
         }
 
 
+        public override string ToString() => $"<<< {nameof(SymbolTable)} ({nameof(Id)}:{Id}) >>>";
         public string ToStringNice(string prefix = "")
         {
             StringBuilder output = new StringBuilder();
 
-            foreach (SymbolTableEntry currentEntry in Entries)
+            foreach (SymbolTableEntry currentEntry in _entries)
             {
                 switch (currentEntry)
                 {

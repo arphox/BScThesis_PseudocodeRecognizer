@@ -1,18 +1,18 @@
-﻿using LexicalAnalysis.SymbolTables;
-using System.Collections.Generic;
+﻿using System;
+using LexicalAnalysis.SymbolTables;
 using LexicalAnalysis.LexicalElementCodes;
 
 namespace LexicalAnalysis
 {
-    internal class SymbolTableManager
+    public class SymbolTableManager
     {
         internal SymbolTable RootSymbolTable { get; private set; }
 
-        internal int? LastInsertedSymbolId { get; private set; }
+        internal int LastInsertedSymbolId { get; private set; }
 
         internal SymbolTableManager()
         {
-            RootSymbolTable = new SymbolTable(this, null);
+            RootSymbolTable = new SymbolTable(null);
         }
 
         internal void InsertNewSymbolTableEntry(string name, int tokenType, int currentRowNumber)
@@ -34,7 +34,7 @@ namespace LexicalAnalysis
 
             void IncreaseSymbolTableIndent()
             {
-                SymbolTable newTable = new SymbolTable(this, RootSymbolTable);
+                SymbolTable newTable = new SymbolTable(RootSymbolTable);
                 RootSymbolTable.InsertNewEntry(newTable);
                 RootSymbolTable = newTable;
             }
@@ -52,6 +52,29 @@ namespace LexicalAnalysis
         }
         internal void CleanUpIfNeeded() => RootSymbolTable.CleanUpIfNeeded();
 
-        internal Dictionary<int, string> SymbolIdToName { get; } = new Dictionary<int, string>();
+        /// <summary>
+        /// Recursively searches for an identifier in a symbol table and it's children.
+        /// </summary>
+        /// <param name="entry">The symbol table.</param>
+        /// <param name="nameToFind">The name to find.</param>
+        /// <returns>The Id of the identifier found, or <see cref="SymbolTable.NotFoundId"/> if not found.</returns>
+        public static int FindIdByNameInFullTable(SymbolTableEntry entry, string nameToFind)
+        {
+            switch (entry)
+            {
+                case SingleEntry single:
+                    return single.Name == nameToFind ? single.Id : SymbolTable.NotFoundId;
+                case SymbolTable subTable:
+                    foreach (SymbolTableEntry e in subTable.Entries)
+                    {
+                        int res = FindIdByNameInFullTable(e, nameToFind);
+                        if (res != SymbolTable.NotFoundId)
+                            return res;
+                    }
+                    return SymbolTable.NotFoundId;
+                default:
+                    throw new InvalidOperationException($"Unexpected {nameof(SymbolTableEntry)}; the type was: {entry.GetType().Name}");
+            }
+        }
     }
 }

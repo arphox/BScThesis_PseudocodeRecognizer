@@ -85,7 +85,7 @@ namespace LexicalAnalysis
             }
 
             _symbolTableHandler.InsertNewSymbolTableEntry(name, code, currentRowNumber);
-            int insertedId = _symbolTableHandler.LastInsertedSymbolId.Value;
+            int insertedId = _symbolTableHandler.LastInsertedSymbolId;
             int identifierCode = LexicalElementCodeDictionary.GetCode("azonosító");
             OutputTokens.Add(new IdentifierToken(identifierCode, insertedId, currentRowNumber));
         }
