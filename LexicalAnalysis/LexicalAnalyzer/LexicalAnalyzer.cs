@@ -9,17 +9,19 @@ namespace LexicalAnalysis.LexicalAnalyzer
 {
     public class LexicalAnalyzer
     {
-        private string _input;
-        private int _inputIndexer = 0;
-        private int _currentRowNumber = 1;
-        private bool _programStartTokenFound = false;
-        private LexicalAnalyzerState _state = LexicalAnalyzerState.Initial;
+        private readonly string _input;
         private readonly SymbolTableManager _symbolTableManager = new SymbolTableManager();
         private readonly OutputTokenListHandler _outputTokensHandler;
+
+        private bool _isAnalyzeCalled;
+        private bool _isProgramStartTokenFound;
+        private int _inputIndexer;
+        private int _currentRowNumber = 1;
+        private LexicalAnalyzerState _state = LexicalAnalyzerState.Initial;
+
         private char CurrentChar => _input[_inputIndexer];
         private char NextChar => _input[_inputIndexer + 1];
         private bool InputEndReached => _inputIndexer >= _input.Length;
-        private bool IsAnalyzeCalled = false;
 
         // Used at non whitespace analysis:
         private int _lastCorrectCode;
@@ -42,9 +44,9 @@ namespace LexicalAnalysis.LexicalAnalyzer
 
         public LexicalAnalyzerResult Analyze()
         {
-            if (IsAnalyzeCalled)
+            if (_isAnalyzeCalled)
                 throw new InvalidOperationException("Sorry, this object is not reusable!");
-            IsAnalyzeCalled = true;
+            _isAnalyzeCalled = true;
 
             DoLexicalAnalysis();
             _symbolTableManager.CleanUpIfNeeded();
@@ -239,9 +241,9 @@ namespace LexicalAnalysis.LexicalAnalyzer
         {
             if (code == LexicalElementCodeDictionary.GetCode("program_kezd"))
             {
-                _programStartTokenFound = true;
+                _isProgramStartTokenFound = true;
             }
-            if (_programStartTokenFound == false)
+            if (_isProgramStartTokenFound == false)
             {
                 return;
             }
@@ -279,7 +281,7 @@ namespace LexicalAnalysis.LexicalAnalyzer
         }
 
 
-        // STATIC //
-        private static bool IsWhitespace(char c) => (c == ' ' || c == '\t' || c == '\n');
+        private static bool IsWhitespace(char c)
+            => c == ' ' || c == '\t' || c == '\n';
     }
 }
