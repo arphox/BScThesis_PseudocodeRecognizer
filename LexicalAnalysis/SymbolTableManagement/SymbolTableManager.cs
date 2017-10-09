@@ -1,5 +1,7 @@
 using System;
+using System.Collections.Generic;
 using LexicalAnalysis.LexicalElementIdentification;
+using LexicalAnalysis.Properties;
 
 namespace LexicalAnalysis.SymbolTableManagement
 {
@@ -37,15 +39,15 @@ namespace LexicalAnalysis.SymbolTableManagement
         }
         internal int GetIdByName(string name)
         {
-            return SymbolTable.FindIdByNameRecursiveUpwards(SymbolTable, name);
+            return FindIdByNameRecursiveUpwards(SymbolTable, name);
         }
         internal bool IdentifierExistsInScope(string name)
         {
-            return SymbolTable.FindIdByNameRecursiveUpwards(SymbolTable, name) != SymbolTable.NotFoundId;
+            return FindIdByNameRecursiveUpwards(SymbolTable, name) != SymbolTable.NotFoundId;
         }
         internal void CleanUpIfNeeded()
         {
-            if (Properties.Settings.Default.Cleanup_SymbolTable)
+            if (Settings.Default.Cleanup_SymbolTable)
             {
                 int cleanCount;
                 do
@@ -53,6 +55,42 @@ namespace LexicalAnalysis.SymbolTableManagement
                     cleanCount = SymbolTable.CleanUp();
                 }
                 while (cleanCount > 0);
+            }
+        }
+
+
+        /// <summary>
+        /// Upward-Recursively searches for the identifier in a symbol table by name.
+        /// Upward recursive means that the self and parent tables are traversed, not the children.
+        /// </summary>
+        /// <param name="symbolTable">The symbol table.</param>
+        /// <param name="name">The name to find.</param>
+        /// <returns></returns>
+        private static int FindIdByNameRecursiveUpwards(SymbolTable symbolTable, string name)
+        {
+            SymbolTable currentTable = symbolTable;
+            while (currentTable != null)
+            {
+                int id = FindIdNonRecursive(currentTable.Entries, name);
+                if (id != SymbolTable.NotFoundId)
+                {
+                    return id;
+                }
+                currentTable = currentTable.ParentTable;
+            }
+            return SymbolTable.NotFoundId;
+
+            // -----------------------------------------------------------------------------
+            int FindIdNonRecursive(IEnumerable<SymbolTableEntry> entries, string nameToFind)
+            {
+                foreach (SymbolTableEntry currentEntry in entries)
+                {
+                    if (currentEntry is SingleEntry single && single.Name == nameToFind)
+                    {
+                        return single.Id;
+                    }
+                }
+                return SymbolTable.NotFoundId;
             }
         }
 

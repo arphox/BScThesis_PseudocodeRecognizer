@@ -21,94 +21,25 @@ namespace LexicalAnalysis.SymbolTableManagement
 
         internal void InsertNewEntry(SymbolTableEntry entry) => _entries.Add(entry);
 
-        /// <summary>
-        /// Upward-Recursively searches for the identifier in a symbol table by name.
-        /// Upward recursive means that the self and parent tables are traversed, not the children.
-        /// </summary>
-        /// <param name="symbolTable">The symbol table.</param>
-        /// <param name="nameToFind">The name to find.</param>
-        /// <returns></returns>
-        internal static int FindIdByNameRecursiveUpwards(SymbolTable symbolTable, string nameToFind)
-        {
-            SymbolTable currentTable = symbolTable;
-            while (currentTable != null)
-            {
-                int id = currentTable.FindIdNonRecursive(nameToFind);
-                if (id != NotFoundId)
-                {
-                    return id;
-                }
-                currentTable = currentTable.ParentTable;
-            }
-            return NotFoundId;
-        }
-
-        /// <summary>
-        /// Searches the given symbol table for the given symbol name and returns the ID, if found; otherwise <see cref="NotFoundId"/>.
-        /// </summary>
-        private int FindIdNonRecursive(string nameToFind)
-        {
-            foreach (SymbolTableEntry currentEntry in _entries)
-            {
-                if (currentEntry is SingleEntry single && single.Name == nameToFind)
-                {
-                    return single.Id;
-                }
-            }
-            return NotFoundId;
-        }
-
-        /// <summary>
-        /// Recursively searches for an identifier in a symbol table and it's children.
-        /// </summary>
-        /// <param name="entry">The symbol table.</param>
-        /// <param name="nameToFind">The name to find.</param>
-        /// <returns>The Id of the identifier found, or <see cref="NotFoundId"/> if not found.</returns>
-        public static int FindIdByNameInFullTable(SymbolTableEntry entry, string nameToFind)
-        {
-            switch (entry)
-            {
-                case SingleEntry single:
-                    return single.Name == nameToFind ? single.Id : NotFoundId;
-                case SymbolTable subTable:
-                    foreach (SymbolTableEntry e in subTable._entries)
-                    {
-                        int res = FindIdByNameInFullTable(e, nameToFind);
-                        if (res != NotFoundId)
-                            return res;
-                    }
-                    return NotFoundId;
-                default:
-                    throw new InvalidOperationException($"Unexpected {nameof(SymbolTableEntry)}; the type was: {entry.GetType().Name}");
-            }
-        }
-
         internal int CleanUp()
         {
-            int cleanCount = 0;
             if (IsEmpty)
                 return 0;
 
+            int cleanCount = 0;
             for (int i = _entries.Count - 1; i >= 0; i--)
             {
-                switch (_entries[i])
+                if (_entries[i] is SymbolTable subTable)
                 {
-                    case SingleEntry _: continue;
-                    case SymbolTable subTable:
+                    if (subTable.IsEmpty)
                     {
-                        if (subTable.IsEmpty)
-                        {
-                            _entries.RemoveAt(i);
-                            cleanCount++;
-                        }
-                        else
-                        {
-                            cleanCount += subTable.CleanUp();
-                        }
-                        break;
+                        _entries.RemoveAt(i);
+                        cleanCount++;
                     }
-                    default:
-                        throw new InvalidOperationException($"Unexpected {nameof(SymbolTableEntry)}; the type was: {_entries[i].GetType().Name}");
+                    else
+                    {
+                        cleanCount += subTable.CleanUp();
+                    }
                 }
             }
             return cleanCount;
@@ -132,8 +63,6 @@ namespace LexicalAnalysis.SymbolTableManagement
                         output.Append(table.ToStringNice(prefix + "\t"));
                         output.Append(prefix + "/AT");
                         break;
-                    default:
-                        throw new InvalidOperationException($"Unexpected {nameof(SymbolTableEntry)}; the type was: {currentEntry.GetType().Name}");
                 }
                 output.Append(Environment.NewLine);
             }
