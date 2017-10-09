@@ -24,12 +24,12 @@ namespace LexicalAnalysisTests.LexicalAnalyzer
         [Test]
         public void Empty()
         {
-            Assert.Throws<ArgumentException>(() => new LexicalAnalysis.LexicalAnalyzer.LexicalAnalyzer().Analyze(null));
-            Assert.Throws<ArgumentException>(() => new LexicalAnalysis.LexicalAnalyzer.LexicalAnalyzer().Analyze(string.Empty));
-            Assert.Throws<ArgumentException>(() => new LexicalAnalysis.LexicalAnalyzer.LexicalAnalyzer().Analyze(" "));
-            Assert.Throws<ArgumentException>(() => new LexicalAnalysis.LexicalAnalyzer.LexicalAnalyzer().Analyze("\t"));
-            Assert.Throws<ArgumentException>(() => new LexicalAnalysis.LexicalAnalyzer.LexicalAnalyzer().Analyze("\n"));
-            Assert.Throws<ArgumentException>(() => new LexicalAnalysis.LexicalAnalyzer.LexicalAnalyzer().Analyze("   \t    \n"));
+            Assert.Throws<ArgumentException>(() => new LexicalAnalysis.LexicalAnalyzer.LexicalAnalyzer(null).Analyze());
+            Assert.Throws<ArgumentException>(() => new LexicalAnalysis.LexicalAnalyzer.LexicalAnalyzer(string.Empty).Analyze());
+            Assert.Throws<ArgumentException>(() => new LexicalAnalysis.LexicalAnalyzer.LexicalAnalyzer(" ").Analyze());
+            Assert.Throws<ArgumentException>(() => new LexicalAnalysis.LexicalAnalyzer.LexicalAnalyzer("\t").Analyze());
+            Assert.Throws<ArgumentException>(() => new LexicalAnalysis.LexicalAnalyzer.LexicalAnalyzer("\n").Analyze());
+            Assert.Throws<ArgumentException>(() => new LexicalAnalysis.LexicalAnalyzer.LexicalAnalyzer("   \t    \n").Analyze());
         }
 
         [Test]
@@ -37,7 +37,7 @@ namespace LexicalAnalysisTests.LexicalAnalyzer
         {
             const string code = "program_kezd";
 
-            LexicalAnalyzerResult result = new LexicalAnalysis.LexicalAnalyzer.LexicalAnalyzer().Analyze(code);
+            LexicalAnalyzerResult result = new LexicalAnalysis.LexicalAnalyzer.LexicalAnalyzer(code).Analyze();
 
             TokenTester tt = new TokenTester(result);
 
@@ -54,7 +54,7 @@ namespace LexicalAnalysisTests.LexicalAnalyzer
             const string code = "program_kezd\n" +
                                 "program_vége\n";
 
-            LexicalAnalyzerResult result = new LexicalAnalysis.LexicalAnalyzer.LexicalAnalyzer().Analyze(code);
+            LexicalAnalyzerResult result = new LexicalAnalysis.LexicalAnalyzer.LexicalAnalyzer(code).Analyze();
 
             TokenTester tt = new TokenTester(result);
 
@@ -78,7 +78,7 @@ namespace LexicalAnalysisTests.LexicalAnalyzer
                                 "  \n      " +
                                 "program_vége";
 
-            LexicalAnalyzerResult result = new LexicalAnalysis.LexicalAnalyzer.LexicalAnalyzer().Analyze(code);
+            LexicalAnalyzerResult result = new LexicalAnalysis.LexicalAnalyzer.LexicalAnalyzer(code).Analyze();
 
             TokenTester tt = new TokenTester(result);
 
@@ -99,7 +99,7 @@ namespace LexicalAnalysisTests.LexicalAnalyzer
                            keyword + "\n" +
                           "program_vége";
 
-            LexicalAnalyzerResult result = new LexicalAnalysis.LexicalAnalyzer.LexicalAnalyzer().Analyze(code);
+            LexicalAnalyzerResult result = new LexicalAnalysis.LexicalAnalyzer.LexicalAnalyzer(code).Analyze();
 
             TokenTester tt = new TokenTester(result);
 
@@ -124,7 +124,7 @@ namespace LexicalAnalysisTests.LexicalAnalyzer
                           functionName + "\n" +
                           "program_vége";
 
-            LexicalAnalyzerResult result = new LexicalAnalysis.LexicalAnalyzer.LexicalAnalyzer().Analyze(code);
+            LexicalAnalyzerResult result = new LexicalAnalysis.LexicalAnalyzer.LexicalAnalyzer(code).Analyze();
 
             TokenTester tt = new TokenTester(result);
 
@@ -140,6 +140,22 @@ namespace LexicalAnalysisTests.LexicalAnalyzer
 
             // Symbol table
             Assert.That(result.SymbolTable.IsEmpty);
+        }
+
+        [Test]
+        public void CanReuseAnalyzerObject()
+        {
+            var analyzer = new LexicalAnalysis.LexicalAnalyzer.LexicalAnalyzer("program_kezd\nprogram_vége");
+
+            LexicalAnalyzerResult result = analyzer.Analyze();
+            TokenTester tt = new TokenTester(result);
+            tt.ExpectStart();
+            tt.NewLine();
+            tt.ExpectEnd();
+            tt.ExpectNoMore();
+            Assert.That(result.SymbolTable.IsEmpty);
+
+            Assert.Throws<InvalidOperationException>(() => analyzer.Analyze());
         }
     }
 }

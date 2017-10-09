@@ -31,7 +31,7 @@ namespace VisualParseTree
         {
             string path = "08_masodfoku.opl";
 
-            List<Token> tokenList = new LexicalAnalyzer().Analyze(ReadUtf8File(path)).Tokens;
+            List<Token> tokenList = new LexicalAnalyzer(ReadUtf8File(path)).Analyze().Tokens;
 
             Tuple<SyntaxTree<Token>, bool> result = new SyntaxAnalyzer(tokenList).Start();
             _syntaxTree = result.Item1;

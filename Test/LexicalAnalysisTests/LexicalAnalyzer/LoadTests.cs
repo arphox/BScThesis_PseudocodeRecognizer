@@ -16,7 +16,7 @@ namespace LexicalAnalysisTests.LexicalAnalyzer
 
         private static void DoLoadTest(string code)
         {
-            LexicalAnalyzerResult result = new LexicalAnalysis.LexicalAnalyzer.LexicalAnalyzer().Analyze(code);
+            LexicalAnalyzerResult result = new LexicalAnalysis.LexicalAnalyzer.LexicalAnalyzer(code).Analyze();
             Assert.That(result.Tokens.Any(t => t is ErrorToken), Is.False);
         }
     }

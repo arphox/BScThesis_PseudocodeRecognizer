@@ -19,6 +19,7 @@ namespace LexicalAnalysis.LexicalAnalyzer
         private char CurrentChar => _input[_inputIndexer];
         private char NextChar => _input[_inputIndexer + 1];
         private bool InputEndReached => _inputIndexer >= _input.Length;
+        private bool IsAnalyzeCalled = false;
 
         // Used at non whitespace analysis:
         private int _lastCorrectCode;
@@ -30,20 +31,22 @@ namespace LexicalAnalysis.LexicalAnalyzer
         // -------------------------------
 
 
-        public LexicalAnalyzer()
-        {
-            _outputTokensHandler = new OutputTokenListHandler(_symbolTableManager);
-        }
-
-        public LexicalAnalyzerResult Analyze(string sourceCode)
+        public LexicalAnalyzer(string sourceCode)
         {
             if (string.IsNullOrWhiteSpace(sourceCode))
                 throw new ArgumentException("The source code cannot be null, empty or contain only whitespaces.", nameof(sourceCode));
 
             _input = sourceCode.Replace("\r\n", "\n"); // Windows <=> Linux crlf changes
+            _outputTokensHandler = new OutputTokenListHandler(_symbolTableManager);
+        }
+
+        public LexicalAnalyzerResult Analyze()
+        {
+            if (IsAnalyzeCalled)
+                throw new InvalidOperationException("Sorry, this object is not reusable!");
+            IsAnalyzeCalled = true;
 
             DoLexicalAnalysis();
-
             _symbolTableManager.CleanUpIfNeeded();
             return new LexicalAnalyzerResult(_outputTokensHandler.OutputTokens.ToList(), _symbolTableManager.SymbolTable);
         }
