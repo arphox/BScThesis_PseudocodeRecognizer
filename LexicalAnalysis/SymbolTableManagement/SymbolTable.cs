@@ -21,7 +21,7 @@ namespace LexicalAnalysis.SymbolTableManagement
 
         internal void InsertNewEntry(SymbolTableEntry entry) => _entries.Add(entry);
 
-        internal int CleanUp()
+        private int CleanUpOneCycle()
         {
             if (IsEmpty)
                 return 0;
@@ -38,11 +38,20 @@ namespace LexicalAnalysis.SymbolTableManagement
                     }
                     else
                     {
-                        cleanCount += subTable.CleanUp();
+                        cleanCount += subTable.CleanUpOneCycle();
                     }
                 }
             }
             return cleanCount;
+        }
+        internal void CleanUpEmptySymbolTables()
+        {
+            int cleanCount;
+            do
+            {
+                cleanCount = CleanUpOneCycle();
+            }
+            while (cleanCount > 0);
         }
 
         public override string ToString() => $"<<< {nameof(SymbolTable)} ({nameof(Id)}:{Id}) >>>";

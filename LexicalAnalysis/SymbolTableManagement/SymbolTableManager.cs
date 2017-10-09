@@ -22,6 +22,7 @@ namespace LexicalAnalysis.SymbolTableManagement
             SymbolTable.InsertNewEntry(entry);
             LastInsertedSymbolId = entry.Id;
         }
+
         internal void ChangeSymbolTableIndentIfNeeded(int code)
         {
             if (LexicalElementCodeDictionary.IsStartingBlock(code))
@@ -37,25 +38,14 @@ namespace LexicalAnalysis.SymbolTableManagement
                 SymbolTable = SymbolTable.ParentTable;
             }
         }
-        internal int GetIdByName(string name)
-        {
-            return FindIdByNameRecursiveUpwards(SymbolTable, name);
-        }
-        internal bool IdentifierExistsInScope(string name)
-        {
-            return FindIdByNameRecursiveUpwards(SymbolTable, name) != SymbolTable.NotFoundId;
-        }
+        internal int GetIdByName(string name) => FindIdByNameRecursiveUpwards(SymbolTable, name);
+
+        internal bool IdentifierExistsInScope(string name) => FindIdByNameRecursiveUpwards(SymbolTable, name) != SymbolTable.NotFoundId;
+
         internal void CleanUpIfNeeded()
         {
             if (Settings.Default.Cleanup_SymbolTable)
-            {
-                int cleanCount;
-                do
-                {
-                    cleanCount = SymbolTable.CleanUp();
-                }
-                while (cleanCount > 0);
-            }
+                SymbolTable.CleanUpEmptySymbolTables();
         }
 
 
