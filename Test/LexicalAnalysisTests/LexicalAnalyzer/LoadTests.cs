@@ -1,5 +1,4 @@
-﻿using LexicalAnalysis;
-using LexicalAnalysis.Tokens;
+﻿using LexicalAnalysis.Tokens;
 using NUnit.Framework;
 using System.Linq;
 using LexicalAnalysis.LexicalAnalyzer;

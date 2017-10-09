@@ -1,5 +1,4 @@
-﻿using LexicalAnalysis;
-using LexicalAnalysis.Tokens;
+﻿using LexicalAnalysis.Tokens;
 using SyntaxAnalysis;
 using SyntaxAnalysis.ST;
 using System;

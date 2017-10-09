@@ -1,5 +1,4 @@
-﻿using LexicalAnalysis;
-using LexicalAnalysis.LexicalAnalyzer;
+﻿using LexicalAnalysis.LexicalAnalyzer;
 using NUnit.Framework;
 
 namespace LexicalAnalysisTests.LexicalAnalyzer
