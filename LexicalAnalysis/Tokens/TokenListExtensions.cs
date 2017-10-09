@@ -10,7 +10,7 @@ namespace LexicalAnalysis.Tokens
         /// Supposing that in the actual position we want to add a new identifier,
         /// it discovers it's type based on the token list. The return value is the type descriptor number.
         /// </summary>
-        internal static int FindTypeOfLastIdentifier(this List<Token> outputTokens)
+        internal static int FindTypeOfIdentifierAtLastPosition(this List<Token> outputTokens)
         {
             if (outputTokens.Count == 0)
                 return LexicalElementCodeDictionary.ErrorCode;
@@ -38,7 +38,7 @@ namespace LexicalAnalysis.Tokens
             return LexicalElementCodeDictionary.ErrorCode;
         }
 
-        private static void AdjustLastThreeOutputTokensForArrayType(List<Token> outputTokens)
+        private static void AdjustLastThreeOutputTokensForArrayType(IList<Token> outputTokens)
         {
             outputTokens.RemoveAt(outputTokens.Count - 1);
             outputTokens.RemoveAt(outputTokens.Count - 1);

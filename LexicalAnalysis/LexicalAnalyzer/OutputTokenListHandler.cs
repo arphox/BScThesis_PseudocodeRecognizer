@@ -9,43 +9,23 @@ namespace LexicalAnalysis.LexicalAnalyzer
     internal class OutputTokenListHandler
     {
         private readonly SymbolTableManager _symbolTableHandler;
+        private readonly List<Token> _outputTokens = new List<Token>();
 
-        internal List<Token> OutputTokens { get; } = new List<Token>();
-
-        internal bool IsEmpty => OutputTokens.Count == 0;
         internal bool ProgramEndTokenAdded { get; private set; }
-        internal bool ProgramStartTokenAdded { get; private set; }
+
+        internal IReadOnlyList<Token> OutputTokens => _outputTokens.AsReadOnly();
 
         internal OutputTokenListHandler(SymbolTableManager symbolTableHandler)
         {
             _symbolTableHandler = symbolTableHandler;
         }
 
-
         internal void AddToken(Token token)
-        {
-            OutputTokens.Add(token);
-        }
-        private Token Last()
-        {
-            return OutputTokens.LastOrDefault();
-        }
+            => _outputTokens.Add(token);
+
         internal bool IsLastTokenNotNewLine()
-        {
-            return !IsEmpty && Last().Id != LexicalElementCodeDictionary.GetCode("újsor");
-        }
-        private void AddProgramStart(int code, int currentRowNumber)
-        {
-            ProgramStartTokenAdded = true;
-            if (OutputTokens.Count > 0)
-            {
-                OutputTokens.Add(new ErrorToken(ErrorTokenType.OnlyOneProgramStartAllowed, currentRowNumber));
-            }
-            else
-            {
-                OutputTokens.Add(new KeywordToken(code, currentRowNumber));
-            }
-        }
+            => OutputTokens.Any() && OutputTokens.Last().Id != LexicalElementCodeDictionary.GetCode("újsor");
+
         internal void AddKeyword(int code, int currentRowNumber)
         {
             if (code == LexicalElementCodeDictionary.GetCode("program_kezd"))
@@ -55,13 +35,14 @@ namespace LexicalAnalysis.LexicalAnalyzer
             else if (code == LexicalElementCodeDictionary.GetCode("program_vége"))
             {
                 ProgramEndTokenAdded = true;
-                OutputTokens.Add(new KeywordToken(code, currentRowNumber));
+                _outputTokens.Add(new KeywordToken(code, currentRowNumber));
             }
             else
             {
-                OutputTokens.Add(new KeywordToken(code, currentRowNumber));
+                _outputTokens.Add(new KeywordToken(code, currentRowNumber));
             }
         }
+
         internal void AddIdentifierToken(string symbolName, int currentRowNumber)
         {
             if (_symbolTableHandler.IdentifierExistsInScope(symbolName))
@@ -71,31 +52,40 @@ namespace LexicalAnalysis.LexicalAnalyzer
         }
 
 
+        private void AddProgramStart(int code, int currentRowNumber)
+        {
+            if (OutputTokens.Any())
+                _outputTokens.Add(new ErrorToken(ErrorTokenType.OnlyOneProgramStartAllowed, currentRowNumber));
+            else
+                _outputTokens.Add(new KeywordToken(code, currentRowNumber));
+        }
+
         private void AddNewIdentifierToken(string name, int currentRowNumber)
         {
-            int code = OutputTokens.FindTypeOfLastIdentifier();
+            int code = _outputTokens.FindTypeOfIdentifierAtLastPosition();
             if (code == LexicalElementCodeDictionary.ErrorCode)
             {
-                OutputTokens.Add(new ErrorToken(ErrorTokenType.VariableTypeNotSpecified, currentRowNumber, $"Variable name: {name}"));
+                _outputTokens.Add(new ErrorToken(ErrorTokenType.VariableTypeNotSpecified, currentRowNumber, $"Variable name: {name}"));
                 return;
             }
 
             _symbolTableHandler.InsertNewSymbolTableEntry(name, code, currentRowNumber);
             int insertedId = _symbolTableHandler.LastInsertedSymbolId;
             int identifierCode = LexicalElementCodeDictionary.GetCode("azonosító");
-            OutputTokens.Add(new IdentifierToken(identifierCode, insertedId, currentRowNumber));
+            _outputTokens.Add(new IdentifierToken(identifierCode, insertedId, currentRowNumber));
         }
+
         private void AddExistingIdentifier(string symbolName, int symbolTableId, int currentRowNumber)
         {
-            int type = OutputTokens.FindTypeOfLastIdentifier();
+            int type = _outputTokens.FindTypeOfIdentifierAtLastPosition();
             if (type != LexicalElementCodeDictionary.ErrorCode)
             {
-                OutputTokens.Add(new ErrorToken(ErrorTokenType.CannotRedefineVariable, currentRowNumber, $"Variable name: {symbolName}"));
+                _outputTokens.Add(new ErrorToken(ErrorTokenType.CannotRedefineVariable, currentRowNumber, $"Variable name: {symbolName}"));
             }
             else
             {
                 int code = LexicalElementCodeDictionary.GetCode("azonosító");
-                OutputTokens.Add(new IdentifierToken(code, symbolTableId, currentRowNumber));
+                _outputTokens.Add(new IdentifierToken(code, symbolTableId, currentRowNumber));
             }
         }
     }

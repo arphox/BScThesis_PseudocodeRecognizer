@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Linq;
 using System.Text;
 using LexicalAnalysis.LexicalElementIdentification;
 using LexicalAnalysis.SymbolTableManagement;
@@ -44,7 +45,7 @@ namespace LexicalAnalysis.LexicalAnalyzer
             DoLexicalAnalysis();
 
             _symbolTableManager.CleanUpIfNeeded();
-            return new LexicalAnalyzerResult(_outputTokensHandler.OutputTokens, _symbolTableManager.SymbolTable);
+            return new LexicalAnalyzerResult(_outputTokensHandler.OutputTokens.ToList(), _symbolTableManager.SymbolTable);
         }
 
         private void DoLexicalAnalysis()

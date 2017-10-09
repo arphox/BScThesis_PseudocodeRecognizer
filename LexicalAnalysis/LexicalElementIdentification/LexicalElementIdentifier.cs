@@ -8,38 +8,25 @@ namespace LexicalAnalysis.LexicalElementIdentification
         private const string DecimalLiteralPattern = @"^[+-]?[0-9]+,[0-9]+$";
         private const string IdentifierPattern = @"^[a-záéíóöőúüű]+[0-9a-z_áéíóöőúüű]*$";
 
-
         internal static int IdentifyLexicalElement(string word)
         {
             word = word.ToLower();
-
             return IsReservedWord(word) ? LexicalElementCodeDictionary.GetCode(word) : TryGetOtherLexElementCode(word);
         }
 
-
         private static bool IsReservedWord(string word)
-        {
-            int code = LexicalElementCodeDictionary.GetCode(word);
-            return code != LexicalElementCodeDictionary.ErrorCode;
-        }
+            => LexicalElementCodeDictionary.GetCode(word) != LexicalElementCodeDictionary.ErrorCode;
+
         private static int TryGetOtherLexElementCode(string input)
         {
             if (IsIntegerLiteral(input))
-            {
                 return LexicalElementCodeDictionary.GetCode("egész literál");
-            }
             else if (IsDecimalLiteral(input))
-            {
                 return LexicalElementCodeDictionary.GetCode("tört literál");
-            }
             else if (IsIdentifier(input))
-            {
                 return LexicalElementCodeDictionary.GetCode("azonosító");
-            }
             else
-            {
                 return LexicalElementCodeDictionary.ErrorCode;
-            }
         }
         private static bool IsIntegerLiteral(string input) => Regex.Match(input, IntegerLiteralPattern).Success;
 
