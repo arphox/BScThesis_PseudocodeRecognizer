@@ -6,58 +6,63 @@ namespace LexicalAnalysis
 {
     public class SymbolTableManager
     {
-        internal SymbolTable RootSymbolTable { get; private set; }
+        internal SymbolTable SymbolTable { get; private set; }
 
         internal int LastInsertedSymbolId { get; private set; }
 
         internal SymbolTableManager()
         {
-            RootSymbolTable = new SymbolTable(null);
+            SymbolTable = new SymbolTable(null);
         }
 
         internal void InsertNewSymbolTableEntry(string name, int tokenType, int currentRowNumber)
         {
             SingleEntry entry = new SingleEntry(name, (SingleEntryType)tokenType, currentRowNumber);
-            RootSymbolTable.InsertNewEntry(entry);
+            SymbolTable.InsertNewEntry(entry);
             LastInsertedSymbolId = entry.Id;
         }
         internal void ChangeSymbolTableIndentIfNeeded(int code)
         {
             if (LexicalElementCodeDictionary.IsStartingBlock(code))
             {
-                IncreaseSymbolTableIndent();
+                // Increase indent
+                SymbolTable newTable = new SymbolTable(SymbolTable);
+                SymbolTable.InsertNewEntry(newTable);
+                SymbolTable = newTable;
             }
-            else if (LexicalElementCodeDictionary.IsEndingBlock(code))
+            else if (LexicalElementCodeDictionary.IsEndingBlock(code) && SymbolTable.ParentTable != null)
             {
-                DecreaseSymbolTableIndent();
-            }
-
-            void IncreaseSymbolTableIndent()
-            {
-                SymbolTable newTable = new SymbolTable(RootSymbolTable);
-                RootSymbolTable.InsertNewEntry(newTable);
-                RootSymbolTable = newTable;
-            }
-            void DecreaseSymbolTableIndent()
-            {
-                if (RootSymbolTable.ParentTable != null)
-                {
-                    RootSymbolTable = RootSymbolTable.ParentTable;
-                }
+                // Decrease indent
+                SymbolTable = SymbolTable.ParentTable;
             }
         }
-        internal int FindIdByName(string name)
+        internal int GetIdByName(string name)
         {
-            return SymbolTable.FindIdByNameRecursiveUpwards(RootSymbolTable, name);
+            return SymbolTable.FindIdByNameRecursiveUpwards(SymbolTable, name);
         }
-        internal void CleanUpIfNeeded() => RootSymbolTable.CleanUpIfNeeded();
+        internal bool IdentifierExistsInScope(string name)
+        {
+            return SymbolTable.FindIdByNameRecursiveUpwards(SymbolTable, name) != SymbolTable.NotFoundId;
+        }
+        internal void CleanUpIfNeeded()
+        {
+            if (Properties.Settings.Default.Cleanup_SymbolTable)
+            {
+                int cleanCount;
+                do
+                {
+                    cleanCount = SymbolTable.CleanUp();
+                }
+                while (cleanCount > 0);
+            }
+        }
 
         /// <summary>
         /// Recursively searches for an identifier in a symbol table and it's children.
         /// </summary>
         /// <param name="entry">The symbol table.</param>
         /// <param name="nameToFind">The name to find.</param>
-        /// <returns>The Id of the identifier found, or <see cref="SymbolTable.NotFoundId"/> if not found.</returns>
+        /// <returns>The Id of the identifier found, or <see cref="SymbolTables.SymbolTable.NotFoundId"/> if not found.</returns>
         public static int FindIdByNameInFullTable(SymbolTableEntry entry, string nameToFind)
         {
             switch (entry)

@@ -43,7 +43,7 @@ namespace LexicalAnalysis
             DoLexicalAnalysis();
 
             _symbolTableManager.CleanUpIfNeeded();
-            return new LexicalAnalyzerResult(_outputTokensHandler.OutputTokens, _symbolTableManager.RootSymbolTable);
+            return new LexicalAnalyzerResult(_outputTokensHandler.OutputTokens, _symbolTableManager.SymbolTable);
         }
 
         private void DoLexicalAnalysis()

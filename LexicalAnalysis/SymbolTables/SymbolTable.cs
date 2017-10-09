@@ -34,32 +34,7 @@ namespace LexicalAnalysis.SymbolTables
             return NotFoundId;
         }
 
-        private int RemoveEmptySymbolTables()
-        {
-            int cleanCount = 0;
-            if (IsEmpty)
-                return 0;
-
-            for (int i = _entries.Count - 1; i >= 0; i--)
-            {
-                if (_entries[i] is SingleEntry)
-                {
-                    continue;
-                }
-
-                SymbolTable subTable = _entries[i] as SymbolTable;
-                if (subTable.IsEmpty)
-                {
-                    _entries.RemoveAt(i);
-                    cleanCount++;
-                }
-                else
-                {
-                    cleanCount += subTable.RemoveEmptySymbolTables();
-                }
-            }
-            return cleanCount;
-        }
+      
 
         internal void InsertNewEntry(SymbolTableEntry entry)
         {
@@ -113,19 +88,32 @@ namespace LexicalAnalysis.SymbolTables
             }
         }
 
-        internal void CleanUpIfNeeded()
+        internal int CleanUp()
         {
-            if (Properties.Settings.Default.Cleanup_SymbolTable)
-            {
-                int cleanCount;
-                do
-                {
-                    cleanCount = RemoveEmptySymbolTables();
-                }
-                while (cleanCount > 0);
-            }
-        }
+            int cleanCount = 0;
+            if (IsEmpty)
+                return 0;
 
+            for (int i = _entries.Count - 1; i >= 0; i--)
+            {
+                if (_entries[i] is SingleEntry)
+                {
+                    continue;
+                }
+
+                SymbolTable subTable = _entries[i] as SymbolTable;
+                if (subTable.IsEmpty)
+                {
+                    _entries.RemoveAt(i);
+                    cleanCount++;
+                }
+                else
+                {
+                    cleanCount += subTable.CleanUp();
+                }
+            }
+            return cleanCount;
+        }
 
         public override string ToString() => $"<<< {nameof(SymbolTable)} ({nameof(Id)}:{Id}) >>>";
         public string ToStringNice(string prefix = "")

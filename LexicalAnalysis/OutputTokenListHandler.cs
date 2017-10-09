@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using LexicalAnalysis.LexicalElementCodes;
+using LexicalAnalysis.SymbolTables;
 
 namespace LexicalAnalysis
 {
@@ -63,15 +64,10 @@ namespace LexicalAnalysis
         }
         internal void AddIdentifierToken(string symbolName, int currentRowNumber)
         {
-            int symbolTableId = _symbolTableHandler.FindIdByName(symbolName);
-            if (symbolTableId >= 0)
-            {
-                AddExistingIdentifier(symbolName, symbolTableId, currentRowNumber);
-            }
+            if (_symbolTableHandler.IdentifierExistsInScope(symbolName))
+                AddExistingIdentifier(symbolName, _symbolTableHandler.GetIdByName(symbolName), currentRowNumber);
             else
-            {
                 AddNewIdentifierToken(symbolName, currentRowNumber);
-            }
         }
 
 
