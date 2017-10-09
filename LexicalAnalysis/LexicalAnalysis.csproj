@@ -36,20 +36,20 @@
     <Reference Include="Microsoft.CSharp" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="LexicalAnalyzerResult.cs" />
-    <Compile Include="LexicalAnalyzerState.cs" />
-    <Compile Include="LexicalElementIdentifier.cs" />
-    <Compile Include="OutputTokenListHandler.cs" />
+    <Compile Include="LexicalAnalyzer\LexicalAnalyzerResult.cs" />
+    <Compile Include="LexicalAnalyzer\LexicalAnalyzerState.cs" />
+    <Compile Include="LexicalElementIdentification\LexicalElementIdentifier.cs" />
+    <Compile Include="LexicalAnalyzer\OutputTokenListHandler.cs" />
     <Compile Include="Properties\Settings.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
       <DependentUpon>Settings.settings</DependentUpon>
     </Compile>
-    <Compile Include="LexicalElementCodes\LexicalElementCodeDictionary.cs" />
-    <Compile Include="LexicalAnalyzer.cs" />
+    <Compile Include="LexicalElementIdentification\LexicalElementCodeDictionary.cs" />
+    <Compile Include="LexicalAnalyzer\LexicalAnalyzer.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="LexicalElementCodes\LexicalElementCodeType.cs" />
-    <Compile Include="SymbolTableManager.cs" />
+    <Compile Include="LexicalElementIdentification\LexicalElementCodeType.cs" />
+    <Compile Include="SymbolTables\SymbolTableManager.cs" />
     <Compile Include="SymbolTables\SingleEntryType.cs" />
     <Compile Include="SymbolTables\SymbolTable.cs" />
     <Compile Include="SymbolTables\SymbolTableEntry.cs" />

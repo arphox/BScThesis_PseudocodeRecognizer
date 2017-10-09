@@ -1,8 +1,7 @@
-﻿using System;
-using LexicalAnalysis.SymbolTables;
-using LexicalAnalysis.LexicalElementCodes;
+using System;
+using LexicalAnalysis.LexicalElementIdentification;
 
-namespace LexicalAnalysis
+namespace LexicalAnalysis.SymbolTables
 {
     public class SymbolTableManager
     {

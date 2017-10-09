@@ -1,6 +1,6 @@
-﻿using LexicalAnalysis.LexicalElementCodes;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
+using LexicalAnalysis.LexicalElementIdentification;
 
 namespace LexicalAnalysis.Tokens
 {

@@ -3,7 +3,8 @@ using NUnit.Framework;
 using System;
 using System.Collections.Generic;
 using LexicalAnalysis;
-using LexicalAnalysis.LexicalElementCodes;
+using LexicalAnalysis.LexicalAnalyzer;
+using LexicalAnalysis.LexicalElementIdentification;
 using LexicalAnalysis.SymbolTables;
 
 namespace LexicalAnalysisTests

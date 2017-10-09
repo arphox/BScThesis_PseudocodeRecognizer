@@ -1,4 +1,5 @@
 ﻿using LexicalAnalysis;
+using LexicalAnalysis.LexicalAnalyzer;
 using NUnit.Framework;
 
 namespace LexicalAnalysisTests.LexicalAnalyzer
@@ -16,7 +17,7 @@ namespace LexicalAnalysisTests.LexicalAnalyzer
                           "egész " + identifierName + "\n" +
                           "program_vége";
 
-            LexicalAnalyzerResult result = new LexicalAnalysis.LexicalAnalyzer().Analyze(code);
+            LexicalAnalyzerResult result = new LexicalAnalysis.LexicalAnalyzer.LexicalAnalyzer().Analyze(code);
 
             TokenTester tt = new TokenTester(result);
 
@@ -42,7 +43,7 @@ namespace LexicalAnalysisTests.LexicalAnalyzer
                           "egész " + identifierName + "\n" +
                           "program_vége";
 
-            LexicalAnalyzerResult result = new LexicalAnalysis.LexicalAnalyzer().Analyze(code);
+            LexicalAnalyzerResult result = new LexicalAnalysis.LexicalAnalyzer.LexicalAnalyzer().Analyze(code);
 
             TokenTester tt = new TokenTester(result);
 

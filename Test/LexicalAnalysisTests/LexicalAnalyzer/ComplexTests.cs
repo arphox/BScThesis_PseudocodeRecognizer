@@ -2,6 +2,7 @@
 using LexicalAnalysis.SymbolTables;
 using NUnit.Framework;
 using System.Linq;
+using LexicalAnalysis.LexicalAnalyzer;
 
 namespace LexicalAnalysisTests.LexicalAnalyzer
 {
@@ -23,7 +24,7 @@ namespace LexicalAnalysisTests.LexicalAnalyzer
                                 "szöveg alma=\"almavagyok\"\r\n" +
                                 "program_vége";
 
-            LexicalAnalyzerResult result = new LexicalAnalysis.LexicalAnalyzer().Analyze(code);
+            LexicalAnalyzerResult result = new LexicalAnalysis.LexicalAnalyzer.LexicalAnalyzer().Analyze(code);
 
             TokenTester tt = new TokenTester(result)
             {
@@ -75,7 +76,7 @@ namespace LexicalAnalysisTests.LexicalAnalyzer
                                 "logikai[] h = létrehoz(logikai)[47]\n" +
                                 "program_vége";
 
-            LexicalAnalyzerResult result = new LexicalAnalysis.LexicalAnalyzer().Analyze(code);
+            LexicalAnalyzerResult result = new LexicalAnalysis.LexicalAnalyzer.LexicalAnalyzer().Analyze(code);
 
             TokenTester tt = new TokenTester(result);
 
@@ -200,7 +201,7 @@ namespace LexicalAnalysisTests.LexicalAnalyzer
                                 "   elágazás_vége\r\n" +
                                 "program_vége";
 
-            LexicalAnalyzerResult result = new LexicalAnalysis.LexicalAnalyzer().Analyze(code);
+            LexicalAnalyzerResult result = new LexicalAnalysis.LexicalAnalyzer.LexicalAnalyzer().Analyze(code);
 
             TokenTester tt = new TokenTester(result);
 
@@ -312,7 +313,7 @@ namespace LexicalAnalysisTests.LexicalAnalyzer
                                 "ciklus_vége\r\n" +
                                 "program_vége";
 
-            LexicalAnalyzerResult result = new LexicalAnalysis.LexicalAnalyzer().Analyze(code);
+            LexicalAnalyzerResult result = new LexicalAnalysis.LexicalAnalyzer.LexicalAnalyzer().Analyze(code);
 
             TokenTester tt = new TokenTester(result);
 
@@ -425,7 +426,7 @@ namespace LexicalAnalysisTests.LexicalAnalyzer
                                 "kiír törtpélda\r\n" +
                                 "program_vége";
 
-            LexicalAnalyzerResult result = new LexicalAnalysis.LexicalAnalyzer().Analyze(code);
+            LexicalAnalyzerResult result = new LexicalAnalysis.LexicalAnalyzer.LexicalAnalyzer().Analyze(code);
 
             TokenTester tt = new TokenTester(result);
 
@@ -547,7 +548,7 @@ namespace LexicalAnalysisTests.LexicalAnalyzer
                          /*27*/ "egész xxx = szövegből_egészbe(\"10\")\r\n" +
                          /*28*/ "program_vége";
 
-            LexicalAnalyzerResult result = new LexicalAnalysis.LexicalAnalyzer().Analyze(code);
+            LexicalAnalyzerResult result = new LexicalAnalysis.LexicalAnalyzer.LexicalAnalyzer().Analyze(code);
 
             TokenTester tt = new TokenTester(result);
             SymbolTableTester st = new SymbolTableTester(result.SymbolTable);
@@ -804,7 +805,7 @@ namespace LexicalAnalysisTests.LexicalAnalyzer
                         /*33*/  "ciklus_vége\r\n" +
                         /*34*/  "program_vége";
 
-            LexicalAnalyzerResult result = new LexicalAnalysis.LexicalAnalyzer().Analyze(code);
+            LexicalAnalyzerResult result = new LexicalAnalysis.LexicalAnalyzer.LexicalAnalyzer().Analyze(code);
 
             TokenTester tt = new TokenTester(result);
             SymbolTableTester st = new SymbolTableTester(result.SymbolTable);
@@ -1076,7 +1077,7 @@ namespace LexicalAnalysisTests.LexicalAnalyzer
                         /*14*/  "log = szövegből_logikaiba(sx)\r\n" +
                         /*15*/  "program_vége";
 
-            LexicalAnalyzerResult result = new LexicalAnalysis.LexicalAnalyzer().Analyze(code);
+            LexicalAnalyzerResult result = new LexicalAnalysis.LexicalAnalyzer.LexicalAnalyzer().Analyze(code);
 
             TokenTester tt = new TokenTester(result);
             SymbolTableTester st = new SymbolTableTester(result.SymbolTable);

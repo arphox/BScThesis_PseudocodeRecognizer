@@ -7,13 +7,13 @@ esetén magát csak az első 'b'-t már helyes kifejezésnek ismeri fel, aztán 
 */
 
 
-using LexicalAnalysis.LexicalElementCodes;
 using LexicalAnalysis.Tokens;
 using SyntaxAnalysis.ST;
 using SyntaxAnalysis.Utilities;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using LexicalAnalysis.LexicalElementIdentification;
 
 namespace SyntaxAnalysis
 {

@@ -1,8 +1,8 @@
-﻿using LexicalAnalysis.SymbolTables;
+﻿using System.Collections.Generic;
+using LexicalAnalysis.SymbolTables;
 using LexicalAnalysis.Tokens;
-using System.Collections.Generic;
 
-namespace LexicalAnalysis
+namespace LexicalAnalysis.LexicalAnalyzer
 {
     public class LexicalAnalyzerResult
     {

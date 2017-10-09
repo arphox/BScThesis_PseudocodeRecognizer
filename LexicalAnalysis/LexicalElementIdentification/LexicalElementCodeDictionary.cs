@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace LexicalAnalysis.LexicalElementCodes
+namespace LexicalAnalysis.LexicalElementIdentification
 {
     /// <summary>
     /// Contains codes, names, and methods lexical elements

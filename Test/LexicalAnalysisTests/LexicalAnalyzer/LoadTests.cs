@@ -2,6 +2,7 @@
 using LexicalAnalysis.Tokens;
 using NUnit.Framework;
 using System.Linq;
+using LexicalAnalysis.LexicalAnalyzer;
 
 namespace LexicalAnalysisTests.LexicalAnalyzer
 {
@@ -16,7 +17,7 @@ namespace LexicalAnalysisTests.LexicalAnalyzer
 
         private static void DoLoadTest(string code)
         {
-            LexicalAnalyzerResult result = new LexicalAnalysis.LexicalAnalyzer().Analyze(code);
+            LexicalAnalyzerResult result = new LexicalAnalysis.LexicalAnalyzer.LexicalAnalyzer().Analyze(code);
             Assert.That(result.Tokens.Any(t => t is ErrorToken), Is.False);
         }
     }

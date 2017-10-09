@@ -1,4 +1,4 @@
-﻿namespace LexicalAnalysis.LexicalElementCodes
+﻿namespace LexicalAnalysis.LexicalElementIdentification
 {
     internal enum LexicalElementCodeType
     {

@@ -8,6 +8,7 @@ using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
 using System.IO;
+using LexicalAnalysis.LexicalAnalyzer;
 
 namespace VisualParseTree
 {

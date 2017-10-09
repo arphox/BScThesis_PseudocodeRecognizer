@@ -1,4 +1,4 @@
-﻿namespace LexicalAnalysis
+﻿namespace LexicalAnalysis.LexicalAnalyzer
 {
     internal enum LexicalAnalyzerState
     {

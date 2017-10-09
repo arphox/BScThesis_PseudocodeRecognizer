@@ -1,9 +1,10 @@
-﻿using LexicalAnalysis.LexicalElementCodes;
-using LexicalAnalysis.Tokens;
-using System;
+﻿using System;
 using System.Text;
+using LexicalAnalysis.LexicalElementIdentification;
+using LexicalAnalysis.SymbolTables;
+using LexicalAnalysis.Tokens;
 
-namespace LexicalAnalysis
+namespace LexicalAnalysis.LexicalAnalyzer
 {
     public class LexicalAnalyzer
     {

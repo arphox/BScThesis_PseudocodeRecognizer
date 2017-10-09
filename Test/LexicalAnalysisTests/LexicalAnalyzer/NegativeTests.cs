@@ -1,4 +1,5 @@
 ﻿using LexicalAnalysis;
+using LexicalAnalysis.LexicalAnalyzer;
 using LexicalAnalysis.SymbolTables;
 using LexicalAnalysis.Tokens;
 using NUnit.Framework;
@@ -16,7 +17,7 @@ namespace LexicalAnalysisTests.LexicalAnalyzer
                                 "kód a fájlban!\r\n" +
                                 "Jaj.\r\n";
 
-            LexicalAnalyzerResult result = new LexicalAnalysis.LexicalAnalyzer().Analyze(code);
+            LexicalAnalyzerResult result = new LexicalAnalysis.LexicalAnalyzer.LexicalAnalyzer().Analyze(code);
 
             // Tokens
             Assert.That(result.Tokens.Count, Is.EqualTo(0));
@@ -34,7 +35,7 @@ namespace LexicalAnalysisTests.LexicalAnalyzer
                                 "x = x + 1\r\n" +
                                 "program_vége";
 
-            LexicalAnalyzerResult result = new LexicalAnalysis.LexicalAnalyzer().Analyze(code);
+            LexicalAnalyzerResult result = new LexicalAnalysis.LexicalAnalyzer.LexicalAnalyzer().Analyze(code);
 
             // Tokens
             Assert.That(result.Tokens.Count, Is.EqualTo(0));
@@ -52,7 +53,7 @@ namespace LexicalAnalysisTests.LexicalAnalyzer
                                 "egész x = 2\r\n" +
                                 "x = x + 1";
 
-            LexicalAnalyzerResult result = new LexicalAnalysis.LexicalAnalyzer().Analyze(code);
+            LexicalAnalyzerResult result = new LexicalAnalysis.LexicalAnalyzer.LexicalAnalyzer().Analyze(code);
 
             TokenTester tt = new TokenTester(result);
 
@@ -102,7 +103,7 @@ namespace LexicalAnalysisTests.LexicalAnalyzer
                                 "program_kezd\r\n" +
                                 "program_vége";
 
-            LexicalAnalyzerResult result = new LexicalAnalysis.LexicalAnalyzer().Analyze(code);
+            LexicalAnalyzerResult result = new LexicalAnalysis.LexicalAnalyzer.LexicalAnalyzer().Analyze(code);
 
             TokenTester tt = new TokenTester(result)
             {
@@ -187,7 +188,7 @@ namespace LexicalAnalysisTests.LexicalAnalyzer
                                 "x = x + 1\r\n" +
                                 "program_vége";
 
-            LexicalAnalyzerResult result = new LexicalAnalysis.LexicalAnalyzer().Analyze(code);
+            LexicalAnalyzerResult result = new LexicalAnalysis.LexicalAnalyzer.LexicalAnalyzer().Analyze(code);
 
             TokenTester tt = new TokenTester(result);
 
@@ -227,7 +228,7 @@ namespace LexicalAnalysisTests.LexicalAnalyzer
                                 "x = x + 1\r\n" +
                                 "program_vége";
 
-            LexicalAnalyzerResult result = new LexicalAnalysis.LexicalAnalyzer().Analyze(code);
+            LexicalAnalyzerResult result = new LexicalAnalysis.LexicalAnalyzer.LexicalAnalyzer().Analyze(code);
 
             TokenTester tt = new TokenTester(result);
 
@@ -257,7 +258,7 @@ namespace LexicalAnalysisTests.LexicalAnalyzer
                                 "logikai a\r\n" +
                                 "program_vége";
 
-            LexicalAnalyzerResult result = new LexicalAnalysis.LexicalAnalyzer().Analyze(code);
+            LexicalAnalyzerResult result = new LexicalAnalysis.LexicalAnalyzer.LexicalAnalyzer().Analyze(code);
 
             TokenTester tt = new TokenTester(result);
 
@@ -290,7 +291,7 @@ namespace LexicalAnalysisTests.LexicalAnalyzer
                                 "szöveg y = 3;\r\n" +
                                 "program_vége";
 
-            LexicalAnalyzerResult result = new LexicalAnalysis.LexicalAnalyzer().Analyze(code);
+            LexicalAnalyzerResult result = new LexicalAnalysis.LexicalAnalyzer.LexicalAnalyzer().Analyze(code);
 
             TokenTester tt = new TokenTester(result);
 

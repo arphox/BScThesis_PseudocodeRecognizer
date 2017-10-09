@@ -1,4 +1,4 @@
-﻿using LexicalAnalysis.LexicalElementCodes;
+﻿using LexicalAnalysis.LexicalElementIdentification;
 
 namespace LexicalAnalysis.Tokens
 {

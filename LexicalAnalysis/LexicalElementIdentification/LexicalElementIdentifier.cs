@@ -1,7 +1,6 @@
 ﻿using System.Text.RegularExpressions;
-using LexicalAnalysis.LexicalElementCodes;
 
-namespace LexicalAnalysis
+namespace LexicalAnalysis.LexicalElementIdentification
 {
     internal static class LexicalElementIdentifier
     {

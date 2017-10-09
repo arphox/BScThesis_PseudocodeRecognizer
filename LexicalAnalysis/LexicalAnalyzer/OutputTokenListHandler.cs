@@ -1,10 +1,10 @@
-﻿using LexicalAnalysis.Tokens;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
-using LexicalAnalysis.LexicalElementCodes;
+using LexicalAnalysis.LexicalElementIdentification;
 using LexicalAnalysis.SymbolTables;
+using LexicalAnalysis.Tokens;
 
-namespace LexicalAnalysis
+namespace LexicalAnalysis.LexicalAnalyzer
 {
     internal class OutputTokenListHandler
     {

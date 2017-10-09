@@ -1,5 +1,5 @@
 ﻿using NUnit.Framework;
-using Dict = LexicalAnalysis.LexicalElementCodes.LexicalElementCodeDictionary;
+using Dict = LexicalAnalysis.LexicalElementIdentification.LexicalElementCodeDictionary;
 
 namespace LexicalAnalysisTests
 {

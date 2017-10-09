@@ -19,27 +19,7 @@ namespace LexicalAnalysis.SymbolTables
             ParentTable = parentTable;
         }
 
-        /// <summary>
-        /// Searches the given symbol table for the given symbol name and returns the ID, if found; otherwise <see cref="NotFoundId"/>.
-        /// </summary>
-        private int FindId(string nameToFind)
-        {
-            foreach (SymbolTableEntry currentEntry in _entries)
-            {
-                if (currentEntry is SingleEntry single && single.Name == nameToFind)
-                {
-                    return single.Id;
-                }
-            }
-            return NotFoundId;
-        }
-
-      
-
-        internal void InsertNewEntry(SymbolTableEntry entry)
-        {
-            _entries.Add(entry);
-        }
+        internal void InsertNewEntry(SymbolTableEntry entry) => _entries.Add(entry);
 
         /// <summary>
         /// Upward-Recursively searches for the identifier in a symbol table by name.
@@ -53,12 +33,27 @@ namespace LexicalAnalysis.SymbolTables
             SymbolTable currentTable = symbolTable;
             while (currentTable != null)
             {
-                int id = currentTable.FindId(nameToFind);
+                int id = currentTable.FindIdNonRecursive(nameToFind);
                 if (id != NotFoundId)
                 {
                     return id;
                 }
                 currentTable = currentTable.ParentTable;
+            }
+            return NotFoundId;
+        }
+
+        /// <summary>
+        /// Searches the given symbol table for the given symbol name and returns the ID, if found; otherwise <see cref="NotFoundId"/>.
+        /// </summary>
+        private int FindIdNonRecursive(string nameToFind)
+        {
+            foreach (SymbolTableEntry currentEntry in _entries)
+            {
+                if (currentEntry is SingleEntry single && single.Name == nameToFind)
+                {
+                    return single.Id;
+                }
             }
             return NotFoundId;
         }
@@ -96,20 +91,24 @@ namespace LexicalAnalysis.SymbolTables
 
             for (int i = _entries.Count - 1; i >= 0; i--)
             {
-                if (_entries[i] is SingleEntry)
+                switch (_entries[i])
                 {
-                    continue;
-                }
-
-                SymbolTable subTable = _entries[i] as SymbolTable;
-                if (subTable.IsEmpty)
-                {
-                    _entries.RemoveAt(i);
-                    cleanCount++;
-                }
-                else
-                {
-                    cleanCount += subTable.CleanUp();
+                    case SingleEntry _: continue;
+                    case SymbolTable subTable:
+                    {
+                        if (subTable.IsEmpty)
+                        {
+                            _entries.RemoveAt(i);
+                            cleanCount++;
+                        }
+                        else
+                        {
+                            cleanCount += subTable.CleanUp();
+                        }
+                        break;
+                    }
+                    default:
+                        throw new InvalidOperationException($"Unexpected {nameof(SymbolTableEntry)}; the type was: {_entries[i].GetType().Name}");
                 }
             }
             return cleanCount;

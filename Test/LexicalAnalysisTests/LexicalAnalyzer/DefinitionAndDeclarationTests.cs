@@ -2,6 +2,7 @@
 using LexicalAnalysis.SymbolTables;
 using NUnit.Framework;
 using System.Linq;
+using LexicalAnalysis.LexicalAnalyzer;
 
 namespace LexicalAnalysisTests.LexicalAnalyzer
 {
@@ -17,7 +18,7 @@ namespace LexicalAnalysisTests.LexicalAnalyzer
                           type + " óóüöúőűáéí\n" +
                           "program_vége";
 
-            LexicalAnalyzerResult result = new LexicalAnalysis.LexicalAnalyzer().Analyze(code);
+            LexicalAnalyzerResult result = new LexicalAnalysis.LexicalAnalyzer.LexicalAnalyzer().Analyze(code);
 
             TokenTester tt = new TokenTester(result);
 
@@ -44,7 +45,7 @@ namespace LexicalAnalysisTests.LexicalAnalyzer
                           type + "[] alma_körte\n" +
                           "program_vége";
 
-            LexicalAnalyzerResult result = new LexicalAnalysis.LexicalAnalyzer().Analyze(code);
+            LexicalAnalyzerResult result = new LexicalAnalysis.LexicalAnalyzer.LexicalAnalyzer().Analyze(code);
 
             TokenTester tt = new TokenTester(result);
 
@@ -71,7 +72,7 @@ namespace LexicalAnalysisTests.LexicalAnalyzer
                                 "tört s = -3,1111\n" +
                                 "program_vége";
 
-            LexicalAnalyzerResult result = new LexicalAnalysis.LexicalAnalyzer().Analyze(code);
+            LexicalAnalyzerResult result = new LexicalAnalysis.LexicalAnalyzer.LexicalAnalyzer().Analyze(code);
 
             TokenTester tt = new TokenTester(result);
 
@@ -100,7 +101,7 @@ namespace LexicalAnalysisTests.LexicalAnalyzer
                                 "szöveg[] sorok = létrehoz(szöveg)[97]\n" +
                                 "program_vége";
 
-            LexicalAnalyzerResult result = new LexicalAnalysis.LexicalAnalyzer().Analyze(code);
+            LexicalAnalyzerResult result = new LexicalAnalysis.LexicalAnalyzer.LexicalAnalyzer().Analyze(code);
 
             TokenTester tt = new TokenTester(result);
 
