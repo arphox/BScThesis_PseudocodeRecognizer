@@ -156,14 +156,11 @@ namespace LexicalAnalysis.LexicalAnalyzer
                 return;
             }
 
-            int _offset = 0;
             int _lastCorrectCode = LexicalElementCodeDictionary.ErrorCode; // last correctly recognised lexical element
             int _lastCorrectLength = -1; // last correctly recognised lexical element's length
-            int _currentCode = int.MaxValue; //current lexical element to recognise
-            int _currentLookaheadLength = 0;
             string _currentSubstring = "";
 
-            RecognizeNonWhitespace(ref _currentSubstring, ref _currentCode, ref _lastCorrectCode, ref _lastCorrectLength, ref _offset, ref _currentLookaheadLength, _input, _inputIndexer);
+            RecognizeNonWhitespace(ref _currentSubstring, ref _lastCorrectCode, ref _lastCorrectLength, _input, _inputIndexer);
 
             if (_lastCorrectCode == LexicalElementCodeDictionary.ErrorCode)
             {
@@ -178,8 +175,12 @@ namespace LexicalAnalysis.LexicalAnalyzer
                 _inputIndexer += _lastCorrectLength;
             }
         }
-        private static void RecognizeNonWhitespace(ref string currentSubstring, ref int currentCode, ref int lastCorrectCode, ref int lastCorrectLength, ref int offset, ref int currentLookaheadLength, string input, int inputIndexer)
+        private static void RecognizeNonWhitespace(ref string currentSubstring, ref int lastCorrectCode, ref int lastCorrectLength, string input, int inputIndexer)
         {
+            int offset = 0;
+            int currentCode = int.MaxValue; //current lexical element to recognise
+            int currentLookaheadLength = 0;
+
             while (inputIndexer + offset < input.Length &&
                 !IsWhitespace(input[inputIndexer + offset]) &&
                 currentCode != LexicalElementCodeDictionary.ErrorCode)
