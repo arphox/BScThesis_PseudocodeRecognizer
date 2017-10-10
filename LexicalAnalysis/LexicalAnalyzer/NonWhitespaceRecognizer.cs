@@ -4,8 +4,10 @@ namespace LexicalAnalysis.LexicalAnalyzer
 {
     internal static class NonWhitespaceRecognizer
     {
-        internal static NonWhitespaceRecognitionResult RecognizeNonWhitespace(string input, int inputIndexer)
+        internal static NonWhitespaceRecognitionResult RecognizeNonWhitespace(InputHandler inputIterator)
         {
+            string input = inputIterator.Code;
+            int inputIndexer = inputIterator.Indexer;
             int offset = 0;
             int currentCode = int.MaxValue; //current lexical element to recognise
             int currentLookaheadLength = 0;

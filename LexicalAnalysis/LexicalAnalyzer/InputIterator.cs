@@ -1,22 +1,22 @@
 ﻿namespace LexicalAnalysis.LexicalAnalyzer
 {
-    internal sealed class InputIterator
+    internal sealed class InputHandler
     {
-        public string Input { get; }
-        internal int InputIndexer { get; set; }
+        public string Code { get; }
+        internal int Indexer { get; set; }
 
-        internal char CurrentChar => Input[InputIndexer];
+        internal char CurrentChar => Code[Indexer];
 
-        internal char NextChar => Input[InputIndexer + 1];
-        internal bool HasNextChar => InputIndexer + 1 < Input.Length;
+        internal char NextChar => Code[Indexer + 1];
+        internal bool HasNextChar => Indexer + 1 < Code.Length;
 
-        internal char PreviousChar => Input[InputIndexer - 1];
-        internal char BeforePreviousChar => Input[InputIndexer - 2];
-        internal bool InputEndReached => InputIndexer >= Input.Length;
+        internal char PreviousChar => Code[Indexer - 1];
+        internal char BeforePreviousChar => Code[Indexer - 2];
+        internal bool EndReached => Indexer >= Code.Length;
 
-        internal InputIterator(string input)
+        internal InputHandler(string input)
         {
-            Input = input.Replace("\r\n", "\n"); // Windows <=> Linux crlf changes;
+            Code = input.Replace("\r\n", "\n"); // Windows <=> Linux crlf changes;
         }
     }
 }
