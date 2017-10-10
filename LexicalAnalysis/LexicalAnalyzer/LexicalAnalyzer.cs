@@ -202,31 +202,31 @@ namespace LexicalAnalysis.LexicalAnalyzer
                     _lastCorrectLength = _offset + 1;
                 }
 
-                HandleConflict();
+                HandleConflict(_input, _inputIndexer, ref _currentCode, _lastCorrectCode, _offset, ref _currentLookaheadLength);
 
                 _offset++;
             }
         }
-        private void HandleConflict()
+        private static void HandleConflict(string input, int inputIndexer, ref int currentCode, int lastCorrectCode, int offset, ref int currentLookaheadLength)
         {
-            if (_currentCode != LexicalElementCodeDictionary.ErrorCode)
+            if (currentCode != LexicalElementCodeDictionary.ErrorCode)
             {
                 return;
             }
 
-            if (_lastCorrectCode == LexicalElementCodeDictionary.GetCode("egész literál") && _input[_inputIndexer + _offset] == ',')
+            if (lastCorrectCode == LexicalElementCodeDictionary.GetCode("egész literál") && input[inputIndexer + offset] == ',')
             {   // Conflict handling between integer and fractional literals
-                _currentCode = int.MaxValue;
+                currentCode = int.MaxValue;
             }
-            else if (LexicalElementCodeDictionary.IsOperator(_lastCorrectCode) && _input[_inputIndexer + _offset - 1] == '-')
+            else if (LexicalElementCodeDictionary.IsOperator(lastCorrectCode) && input[inputIndexer + offset - 1] == '-')
             {   // Conflict handling between the '-' operator and the following reserved words: "-tól", "-től", "-ig"
-                _currentCode = int.MaxValue;
-                _currentLookaheadLength = 2;
+                currentCode = int.MaxValue;
+                currentLookaheadLength = 2;
             }
-            else if (_currentLookaheadLength > 0)
+            else if (currentLookaheadLength > 0)
             {   // Checking and stepping allowed "lookahead" 
-                _currentCode = int.MaxValue;
-                _currentLookaheadLength--;
+                currentCode = int.MaxValue;
+                currentLookaheadLength--;
             }
         }
 
