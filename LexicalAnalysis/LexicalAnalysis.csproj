@@ -38,6 +38,7 @@
   <ItemGroup>
     <Compile Include="LexicalAnalyzer\LexicalAnalyzerResult.cs" />
     <Compile Include="LexicalAnalyzer\LexicalAnalyzerState.cs" />
+    <Compile Include="LexicalAnalyzer\NonWhitespaceRecognizer.cs" />
     <Compile Include="LexicalElementIdentification\LexicalElementIdentifier.cs" />
     <Compile Include="LexicalAnalyzer\OutputTokenListHandler.cs" />
     <Compile Include="Properties\Settings.Designer.cs">
