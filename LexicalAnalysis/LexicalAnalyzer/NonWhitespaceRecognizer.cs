@@ -28,7 +28,7 @@ namespace LexicalAnalysis.LexicalAnalyzer
                     lastCorrectLength = offset + 1;
                 }
 
-                #region [ Handle possible conflict ]
+                #region [ Handle possible conflicts ]
 
                 if (currentCode == LexicalElementCodeDictionary.ErrorCode)
                 {
