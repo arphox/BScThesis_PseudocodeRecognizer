@@ -156,23 +156,19 @@ namespace LexicalAnalysis.LexicalAnalyzer
                 return;
             }
 
-            int _lastCorrectCode = LexicalElementCodeDictionary.ErrorCode; // last correctly recognised lexical element
-            int _lastCorrectLength = -1; // last correctly recognised lexical element's length
-            string _currentSubstring = "";
+            NonWhitespaceRecognitionResult result = NonWhitespaceRecognizer.RecognizeNonWhitespace(_input, _inputIndexer);
 
-            NonWhitespaceRecognizer.RecognizeNonWhitespace(ref _currentSubstring, ref _lastCorrectCode, ref _lastCorrectLength, _input, _inputIndexer);
-
-            if (_lastCorrectCode == LexicalElementCodeDictionary.ErrorCode)
+            if (result.LastCorrectCode == LexicalElementCodeDictionary.ErrorCode)
             {
                 _outputTokensHandler.AddToken(
-                    new ErrorToken(ErrorTokenType.CannotRecognizeElement, _currentRowNumber, $"Unrecognized string: '{_currentSubstring}'"));
-                _inputIndexer += _currentSubstring.Length;
+                    new ErrorToken(ErrorTokenType.CannotRecognizeElement, _currentRowNumber, $"Unrecognized string: '{result.CurrentSubstring}'"));
+                _inputIndexer += result.CurrentSubstring.Length;
             }
             else // Correct lexical element
             {
-                string recognizedCorrectSubString = _input.Substring(_inputIndexer, _lastCorrectLength);
-                AddNonWhitespaceToken(recognizedCorrectSubString, _lastCorrectCode);
-                _inputIndexer += _lastCorrectLength;
+                string recognizedCorrectSubString = _input.Substring(_inputIndexer, result.LastCorrectLength);
+                AddNonWhitespaceToken(recognizedCorrectSubString, result.LastCorrectCode);
+                _inputIndexer += result.LastCorrectLength;
             }
         }
         #endregion
