@@ -23,16 +23,6 @@ namespace LexicalAnalysis.LexicalAnalyzer
         private char NextChar => _input[_inputIndexer + 1];
         private bool InputEndReached => _inputIndexer >= _input.Length;
 
-        // Used at non whitespace analysis:
-        private int _lastCorrectCode;
-        private int _lastCorrectLength;
-        private int _currentCode;
-        private int _currentLookaheadLength;
-        private int _offset;
-        private string _currentSubstring;
-        // -------------------------------
-
-
         public LexicalAnalyzer(string sourceCode)
         {
             if (string.IsNullOrWhiteSpace(sourceCode))
@@ -166,12 +156,12 @@ namespace LexicalAnalysis.LexicalAnalyzer
                 return;
             }
 
-            _offset = 0;
-            _lastCorrectCode = LexicalElementCodeDictionary.ErrorCode; // last correctly recognised lexical element
-            _lastCorrectLength = -1; // last correctly recognised lexical element's length
-            _currentCode = int.MaxValue; //current lexical element to recognise
-            _currentLookaheadLength = 0;
-            _currentSubstring = "";
+            int _offset = 0;
+            int _lastCorrectCode = LexicalElementCodeDictionary.ErrorCode; // last correctly recognised lexical element
+            int _lastCorrectLength = -1; // last correctly recognised lexical element's length
+            int _currentCode = int.MaxValue; //current lexical element to recognise
+            int _currentLookaheadLength = 0;
+            string _currentSubstring = "";
 
             RecognizeNonWhitespace(ref _currentSubstring, ref _currentCode, ref _lastCorrectCode, ref _lastCorrectLength, ref _offset, ref _currentLookaheadLength, _input, _inputIndexer);
 
