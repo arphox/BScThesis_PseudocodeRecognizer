@@ -173,7 +173,7 @@ namespace LexicalAnalysis.LexicalAnalyzer
             _currentLookaheadLength = 0;
             _currentSubstring = "";
 
-            RecognizeNonWhitespace();
+            RecognizeNonWhitespace(ref _currentSubstring, ref _currentCode, ref _lastCorrectCode, ref _lastCorrectLength, ref _offset, ref _currentLookaheadLength, _input, _inputIndexer);
 
             if (_lastCorrectCode == LexicalElementCodeDictionary.ErrorCode)
             {
@@ -188,23 +188,23 @@ namespace LexicalAnalysis.LexicalAnalyzer
                 _inputIndexer += _lastCorrectLength;
             }
         }
-        private void RecognizeNonWhitespace()
+        private static void RecognizeNonWhitespace(ref string currentSubstring, ref int currentCode, ref int lastCorrectCode, ref int lastCorrectLength, ref int offset, ref int currentLookaheadLength, string input, int inputIndexer)
         {
-            while (_inputIndexer + _offset < _input.Length &&
-                !IsWhitespace(_input[_inputIndexer + _offset]) &&
-                _currentCode != LexicalElementCodeDictionary.ErrorCode)
+            while (inputIndexer + offset < input.Length &&
+                !IsWhitespace(input[inputIndexer + offset]) &&
+                currentCode != LexicalElementCodeDictionary.ErrorCode)
             {
-                _currentSubstring = _input.Substring(_inputIndexer, _offset + 1);
-                _currentCode = LexicalElementIdentifier.IdentifyLexicalElement(_currentSubstring);
-                if (_currentCode != LexicalElementCodeDictionary.ErrorCode)
+                currentSubstring = input.Substring(inputIndexer, offset + 1);
+                currentCode = LexicalElementIdentifier.IdentifyLexicalElement(currentSubstring);
+                if (currentCode != LexicalElementCodeDictionary.ErrorCode)
                 {
-                    _lastCorrectCode = _currentCode;
-                    _lastCorrectLength = _offset + 1;
+                    lastCorrectCode = currentCode;
+                    lastCorrectLength = offset + 1;
                 }
 
-                HandleConflict(ref _currentCode, ref _currentLookaheadLength, _input, _inputIndexer, _lastCorrectCode, _offset);
+                HandleConflict(ref currentCode, ref currentLookaheadLength, input, inputIndexer, lastCorrectCode, offset);
 
-                _offset++;
+                offset++;
             }
         }
         private static void HandleConflict(ref int currentCode, ref int currentLookaheadLength, string input, int inputIndexer, int lastCorrectCode, int offset)
