@@ -150,17 +150,16 @@ namespace LexicalAnalysis.LexicalAnalyzer
 
             NonWhitespaceRecognitionResult result = NonWhitespaceRecognizer.RecognizeNonWhitespace(_inputHandler);
 
-            if (result.LastCorrectCode == LexicalElementCodeDictionary.ErrorCode)
-            {
-                _outputTokensHandler.AddToken(
-                    new ErrorToken(ErrorTokenType.CannotRecognizeElement, _currentRow, $"Unrecognized string: '{result.CurrentSubstring}'"));
-                _inputHandler.Indexer += result.CurrentSubstring.Length;
-            }
-            else // Correct lexical element
+            if (result.LastCorrectCode != LexicalElementCodeDictionary.ErrorCode)
             {
                 string recognizedCorrectSubString = _inputHandler.Code.Substring(_inputHandler.Indexer, result.LastCorrectLength);
                 AddNonWhitespaceToken(recognizedCorrectSubString, result.LastCorrectCode);
                 _inputHandler.Indexer += result.LastCorrectLength;
+            }
+            else
+            {
+                _outputTokensHandler.AddToken(new ErrorToken(ErrorTokenType.CannotRecognizeElement, _currentRow, $"Unrecognized string: '{result.CurrentSubstring}'"));
+                _inputHandler.Indexer += result.CurrentSubstring.Length;
             }
         }
 
