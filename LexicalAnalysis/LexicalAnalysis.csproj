@@ -36,6 +36,7 @@
     <Reference Include="Microsoft.CSharp" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="LexicalAnalyzer\InputIterator.cs" />
     <Compile Include="LexicalAnalyzer\LexicalAnalyzerResult.cs" />
     <Compile Include="LexicalAnalyzer\LexicalAnalyzerState.cs" />
     <Compile Include="LexicalAnalyzer\NonWhitespaceRecognitionResult.cs" />
