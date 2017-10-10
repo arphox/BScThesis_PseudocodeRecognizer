@@ -202,12 +202,12 @@ namespace LexicalAnalysis.LexicalAnalyzer
                     _lastCorrectLength = _offset + 1;
                 }
 
-                HandleConflict(_input, _inputIndexer, ref _currentCode, _lastCorrectCode, _offset, ref _currentLookaheadLength);
+                HandleConflict(ref _currentCode, ref _currentLookaheadLength, _input, _inputIndexer, _lastCorrectCode, _offset);
 
                 _offset++;
             }
         }
-        private static void HandleConflict(string input, int inputIndexer, ref int currentCode, int lastCorrectCode, int offset, ref int currentLookaheadLength)
+        private static void HandleConflict(ref int currentCode, ref int currentLookaheadLength, string input, int inputIndexer, int lastCorrectCode, int offset)
         {
             if (currentCode != LexicalElementCodeDictionary.ErrorCode)
             {
