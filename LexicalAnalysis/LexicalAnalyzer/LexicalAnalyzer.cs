@@ -147,8 +147,6 @@ namespace LexicalAnalysis.LexicalAnalyzer
             }
         }
 
-        #region [ Handle non whitespace state ]
-
         private void HandleState_NonWhitespace()
         {
             if (_inputIndexer >= _input.Length || _state == LexicalAnalyzerState.Final)
@@ -171,7 +169,6 @@ namespace LexicalAnalysis.LexicalAnalyzer
                 _inputIndexer += result.LastCorrectLength;
             }
         }
-        #endregion
 
         private void AddNewLine()
         {
