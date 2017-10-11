@@ -15,6 +15,17 @@ namespace SyntaxAnalysis.ST
             Value = value;
         }
 
+        /// <summary>
+        /// Adds a child to the node.
+        /// </summary>
+        /// <param name="value"></param>
+        internal TreeNode<T> AddChild(T value)
+        {
+            var newNode = new TreeNode<T>(this, value);
+            Children.Add(newNode);
+            return newNode;
+        }
+
         internal void PrintNode(string prefix, TreeNode<T> currentNode)
         {
             string op = currentNode == this ? "~" : "+";

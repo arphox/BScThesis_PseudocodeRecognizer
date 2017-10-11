@@ -15,6 +15,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tools", "Tools", "{CB8D196D
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LexicalAnalysisTests", "Test\LexicalAnalysisTests\LexicalAnalysisTests.csproj", "{74FDB26A-1071-401A-8A9C-A1AFE7772962}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SyntaxAnalysisTests", "Test\SyntaxAnalysisTests\SyntaxAnalysisTests\SyntaxAnalysisTests.csproj", "{97E18FB0-8246-49B6-B978-13A54EC018E0}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -37,6 +39,10 @@ Global
 		{74FDB26A-1071-401A-8A9C-A1AFE7772962}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{74FDB26A-1071-401A-8A9C-A1AFE7772962}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{74FDB26A-1071-401A-8A9C-A1AFE7772962}.Release|Any CPU.Build.0 = Release|Any CPU
+		{97E18FB0-8246-49B6-B978-13A54EC018E0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{97E18FB0-8246-49B6-B978-13A54EC018E0}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{97E18FB0-8246-49B6-B978-13A54EC018E0}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{97E18FB0-8246-49B6-B978-13A54EC018E0}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -44,6 +50,7 @@ Global
 	GlobalSection(NestedProjects) = preSolution
 		{AAE83F8A-F6C8-43ED-8C50-712F292C518E} = {CB8D196D-EAD1-4921-A87F-EAFEB658DC57}
 		{74FDB26A-1071-401A-8A9C-A1AFE7772962} = {F491CA7E-3982-461A-B500-1285B029D6B3}
+		{97E18FB0-8246-49B6-B978-13A54EC018E0} = {F491CA7E-3982-461A-B500-1285B029D6B3}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {26E9ED42-D1DB-43FE-9E4E-7084A53BB9DA}

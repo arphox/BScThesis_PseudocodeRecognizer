@@ -18,12 +18,11 @@ namespace SyntaxAnalysis.ST
         /// <summary>
         /// Starts a new node and sets the <see cref="CurrentNode"/> to the newly created node
         /// </summary>
-        /// <param name="value"></param>
-        internal void StartNode(T value)
+        internal TreeNode<T> StartNode(T value)
         {
-            TreeNode<T> newNode = new TreeNode<T>(CurrentNode, value);
-            CurrentNode.Children.Add(newNode);
-            CurrentNode = newNode;
+            TreeNode<T> child = CurrentNode.AddChild(value);
+            CurrentNode = child;
+            return child;
         }
 
         /// <summary>
@@ -45,8 +44,11 @@ namespace SyntaxAnalysis.ST
             }
             else
             {
+                if (CurrentNode.Parent == null)
+                    throw new InvalidOperationException("The root node cannot be removed!");
+
+                CurrentNode.Parent.Children.Remove(CurrentNode);
                 CurrentNode = CurrentNode.Parent;
-                CurrentNode.Children.Remove(CurrentNode);
             }
         }
 

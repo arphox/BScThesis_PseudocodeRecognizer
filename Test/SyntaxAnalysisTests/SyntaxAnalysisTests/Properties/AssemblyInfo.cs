@@ -2,21 +2,21 @@ using System.Reflection;
 using System.Runtime.InteropServices;
 using NUnit.Framework;
 
-[assembly: AssemblyTitle("LexicalAnalysisTests")]
+[assembly: AssemblyTitle("SyntaxAnalysisTests")]
 [assembly: AssemblyDescription("")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("")]
-[assembly: AssemblyProduct("LexicalAnalysisTests")]
+[assembly: AssemblyProduct("SyntaxAnalysisTests")]
 [assembly: AssemblyCopyright("Copyright ©  2017")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 
 [assembly: ComVisible(false)]
 
-[assembly: Guid("74fdb26a-1071-401a-8a9c-a1afe7772962")]
+[assembly: Guid("97e18fb0-8246-49b6-b978-13a54ec018e0")]
 
 // [assembly: AssemblyVersion("1.0.*")]
 [assembly: AssemblyVersion("1.0.0.0")]
 [assembly: AssemblyFileVersion("1.0.0.0")]
 
-[assembly: Parallelizable(ParallelScope.Children)] 
+[assembly: Parallelizable(ParallelScope.Children)]
