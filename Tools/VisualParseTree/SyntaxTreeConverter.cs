@@ -4,24 +4,20 @@ using System.Windows.Controls;
 
 namespace VisualParseTree
 {
-    class SyntaxTreeConverter
+    internal static class SyntaxTreeConverter
     {
-        private TreeView _visualTree;
-        private SyntaxTree<Token> _dataTree;
-
-        public SyntaxTreeConverter(TreeView treeView, SyntaxTree<Token> syntaxTree)
+        /// <summary>
+        /// Clears a TreeView and fills it with a <see cref="SyntaxTree{T}"/>'s content.
+        /// </summary>
+        /// <param name="treeView"></param>
+        /// <param name="syntaxTree"></param>
+        public static void FillTreeView(TreeView treeView, SyntaxTree<Token> syntaxTree)
         {
-            _visualTree = treeView;
-            _dataTree = syntaxTree;
+            treeView.Items.Clear();
+            treeView.Items.Add(TraverseNode(syntaxTree.Root));
         }
 
-
-        public void SetTreeView()
-        {
-            _visualTree.Items.Add(TraverseNode(_dataTree.Root));
-        }
-
-        private TreeViewItem TraverseNode(TreeNode<Token> node)
+        private static TreeViewItem TraverseNode(TreeNode<Token> node)
         {
             TreeViewItem item = new TreeViewItem()
             {

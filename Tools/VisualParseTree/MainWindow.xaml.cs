@@ -30,7 +30,7 @@ namespace VisualParseTree
             SyntaxAnalyzerResult result = new SyntaxAnalyzer(tokenList).Start();
             _syntaxTree = result.SyntaxTree;
 
-            new SyntaxTreeConverter(TreeView, _syntaxTree).SetTreeView();
+            SyntaxTreeConverter.FillTreeView(TreeView, _syntaxTree);
             Console.WriteLine("SUCCESS? : " + result.IsSuccessful);
         }
 
