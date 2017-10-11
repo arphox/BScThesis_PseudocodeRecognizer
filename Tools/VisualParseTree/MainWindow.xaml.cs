@@ -34,23 +34,18 @@ namespace VisualParseTree
             Console.WriteLine("SUCCESS? : " + result.IsSuccessful);
         }
 
+        private TreeViewItem SelectedItem
+            => (TreeView.SelectedItem ?? TreeView.Items[0]) as TreeViewItem;
+
         private void ButtonExpandAll_Click(object sender, RoutedEventArgs e)
-        {
-            (TreeView.Items[0] as TreeViewItem).ExpandAll();
-            TreeView.Items.Refresh();
-        }
+            => SelectedItem.ExpandAll();
 
         private void ButtonCollapseAll_Click(object sender, RoutedEventArgs e)
-        {
-            (TreeView.Items[0] as TreeViewItem).CollapseAll();
-            TreeView.Items.Refresh();
-        }
+            => SelectedItem.CollapseAll();
 
         private void ButtonPrintLeaves_Click(object sender, RoutedEventArgs e)
         {
-            IList<Token> leaves = _syntaxTree.GetLeaves();
-            string[] leaves2 = leaves.Select(s => s.ToString()).ToArray();
-            Console.WriteLine(string.Join("\n", leaves2));
+            Console.WriteLine(string.Join("\n", _syntaxTree.GetLeaves().Select(s => s.ToString())));
         }
 
     }
