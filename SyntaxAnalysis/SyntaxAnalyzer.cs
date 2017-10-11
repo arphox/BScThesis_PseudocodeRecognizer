@@ -33,8 +33,10 @@ namespace SyntaxAnalysis
                 throw new ArgumentNullException(nameof(tokens));
 
             _tokens = tokens.ToList();
+
             if (!_tokens.Any())
                 throw new ArgumentException($"{nameof(tokens)} cannot be an empty collection.", nameof(tokens));
+
             if (_tokens.Any(token => token is ErrorToken))
                 throw new SyntaxAnalysisException("The syntax analyzer only starts if there are no lexical error tokens.");
         }
@@ -53,10 +55,7 @@ namespace SyntaxAnalysis
             bool isSuccessful = CurrentToken.Id == LexicalElementCodeDictionary.GetCode(tokenName);
             _syntaxTree.EndNode();
 
-            if (isSuccessful)
-            {
-            }
-            else
+            if (!isSuccessful)
             {
                 _syntaxTree.RemoveLastNode();
             }
@@ -70,10 +69,7 @@ namespace SyntaxAnalysis
             bool isSuccessful = (CurrentToken.GetType() == tokenType);
             _syntaxTree.EndNode();
 
-            if (isSuccessful)
-            {
-            }
-            else
+            if (!isSuccessful)
             {
                 _syntaxTree.RemoveLastNode();
             }
