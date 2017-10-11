@@ -1,26 +1,19 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
 
 namespace SyntaxAnalysis.ST
 {
     public class TreeNode<T>
     {
-        public T Value { get; set; }
-        public List<TreeNode<T>> Children { get; } = new List<TreeNode<T>>();
-        internal TreeNode<T> Parent { get; }
+        public T Value { get; }
+        public IList<TreeNode<T>> Children { get; } = new List<TreeNode<T>>();
+        public TreeNode<T> Parent { get; }
 
-        internal TreeNode(TreeNode<T> parent)
+        internal TreeNode(TreeNode<T> parent, T value)
         {
             Parent = parent;
-        }
-        internal TreeNode(TreeNode<T> parent, T value) : this(parent)
-        {
             Value = value;
         }
-
-        public override string ToString() => Value.ToString();
-
 
         internal void PrintNode(string prefix, TreeNode<T> currentNode)
         {
@@ -39,21 +32,22 @@ namespace SyntaxAnalysis.ST
                 }
             }
         }
-        internal List<T> GetLeaves()
+
+        internal IList<T> GetLeaves()
         {
             if (Children.Count == 0)
             {
                 return new List<T>() { Value };
             }
-            else
+
+            List<T> leaves = new List<T>();
+            foreach (TreeNode<T> child in Children)
             {
-                IEnumerable<T> leaves = new List<T>();
-                foreach (TreeNode<T> child in Children)
-                {
-                    leaves = leaves.Concat(child.GetLeaves());
-                }
-                return leaves.ToList();
+                leaves.AddRange(child.GetLeaves());
             }
+            return leaves;
         }
+
+        public override string ToString() => Value.ToString();
     }
 }

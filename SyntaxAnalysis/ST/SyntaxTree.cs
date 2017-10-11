@@ -4,12 +4,10 @@ using System.Linq;
 
 namespace SyntaxAnalysis.ST
 {
-    public class SyntaxTree<T>
+    public sealed class SyntaxTree<T>
     {
-        private static readonly bool PrintprettyEnabled = false; // only not const because I don't want compiler warnings
-
         public TreeNode<T> Root { get; }
-        internal TreeNode<T> CurrentNode { get; private set; }
+        public TreeNode<T> CurrentNode { get; private set; }
 
         internal SyntaxTree(T rootValue)
         {
@@ -17,65 +15,44 @@ namespace SyntaxAnalysis.ST
             CurrentNode = Root;
         }
 
+        /// <summary>
+        /// Starts a new node and sets the <see cref="CurrentNode"/> to the newly created node
+        /// </summary>
+        /// <param name="value"></param>
         internal void StartNode(T value)
         {
             TreeNode<T> newNode = new TreeNode<T>(CurrentNode, value);
             CurrentNode.Children.Add(newNode);
             CurrentNode = newNode;
-
-            PrintPretty();
         }
+
+        /// <summary>
+        /// Ends the current node, setting the <see cref="CurrentNode"/> to the current node's parent node.
+        /// </summary>
         internal void EndNode()
         {
-            CurrentNode = CurrentNode.Parent;
-
-            PrintPretty();
+            CurrentNode = CurrentNode.Parent ?? throw new InvalidOperationException("This node does not have a parent set (probably the root of the tree).");
         }
+
+        /// <summary>
+        /// Removes the last added node.
+        /// </summary>
         internal void RemoveLastNode()
         {
-            if (CurrentNode.Children.Count == 0)
-            {
-                CurrentNode.Parent.Children.Remove(CurrentNode);
-                CurrentNode = CurrentNode.Parent;
-            }
-            else
+            if (CurrentNode.Children.Any())
             {
                 CurrentNode.Children.Remove(CurrentNode.Children.Last());
             }
-
-            PrintPretty();
-        }
-        public T GetLastToken()
-        {
-            if (CurrentNode == null)
-            {
-                return Root.Value;
-            }
-            if (CurrentNode.Children.Count == 0)
-            {
-                return CurrentNode.Value;
-            }
             else
             {
-                return CurrentNode.Children.Last().Value;
+                CurrentNode = CurrentNode.Parent;
+                CurrentNode.Children.Remove(CurrentNode);
             }
         }
 
-
-
-        public List<T> GetLeaves()
-        {
-            return Root.GetLeaves();
-        }
-        private void PrintPretty()
-        {
-            if (!PrintprettyEnabled)
-            {
-                return;
-            }
-
-            Console.WriteLine("\n\n\n\n\n");
-            Root.PrintNode("", CurrentNode);
-        }
+        /// <summary>
+        /// Gets the leaves of this <see cref="SyntaxTree{T}"/>.
+        /// </summary>
+        public IList<T> GetLeaves() => Root.GetLeaves();
     }
 }

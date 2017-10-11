@@ -6,11 +6,12 @@ namespace SyntaxAnalysis
     {
         public string Value { get; }
 
-        public NonTerminalToken(string value, int currentRowNumber) : base(-1, currentRowNumber)
+        public NonTerminalToken(string value, int currentRowNumber)
+            : base(int.MinValue, currentRowNumber)
         {
             Value = value;
         }
 
-        public override string ToString() => base.ToString() + $", {nameof(Value)}={Value}";
+        public override string ToString() => $"{Value} @Line{RowNumber}";
     }
 }

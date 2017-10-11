@@ -37,14 +37,14 @@ namespace SyntaxAnalysis
             _tokens = tokens;
         }
 
-        public Tuple<SyntaxTree<Token>, bool> Start()
+        public SyntaxAnalyzerResult Start()
         {
             bool success = Program();
             //if (!success)
             //{
             //    throw new SyntaxAnalysisException(tree.GetLastToken(), currentRowNumber, furthestRowNumber);
             //}
-            return new Tuple<SyntaxTree<Token>, bool>(_tree, success);
+            return new SyntaxAnalyzerResult(_tree, success);
         }
 
         // Terminal checkers

@@ -3,25 +3,23 @@
 using System;
 using System.Collections.Generic;
 using System.Reflection;
-using SyntaxAnalysis.Utilities.ArrayExtensions;
 
 namespace SyntaxAnalysis.Utilities
 {
     public static class ObjectExtensions
     {
-        private static readonly MethodInfo CloneMethod = typeof(Object).GetMethod("MemberwiseClone", BindingFlags.NonPublic | BindingFlags.Instance);
+        private static readonly MethodInfo CloneMethod = typeof(object).GetMethod("MemberwiseClone", BindingFlags.NonPublic | BindingFlags.Instance);
 
-        public static bool IsPrimitive(this Type type)
+        private static bool IsPrimitive(this Type type)
         {
-            if (type == typeof(String)) return true;
-            return (type.IsValueType & type.IsPrimitive);
+            if (type == typeof(string)) return true;
+            return type.IsValueType & type.IsPrimitive;
         }
-
-        public static Object Copy(this Object originalObject)
+        private static object Copy(this object originalObject)
         {
-            return InternalCopy(originalObject, new Dictionary<Object, Object>(new ReferenceEqualityComparer()));
+            return InternalCopy(originalObject, new Dictionary<object, object>(new ReferenceEqualityComparer()));
         }
-        private static Object InternalCopy(Object originalObject, IDictionary<Object, Object> visited)
+        private static object InternalCopy(object originalObject, IDictionary<object, object> visited)
         {
             if (originalObject == null) return null;
             var typeToReflect = originalObject.GetType();
@@ -69,6 +67,14 @@ namespace SyntaxAnalysis.Utilities
         {
             return (T)Copy((object)original);
         }
+
+        public static void ForEach(this Array array, Action<Array, int[]> action)
+        {
+            if (array.LongLength == 0) return;
+            ArrayTraverse walker = new ArrayTraverse(array);
+            do action(array, walker.Position);
+            while (walker.Step());
+        }
     }
 
     public class ReferenceEqualityComparer : EqualityComparer<object>
@@ -79,56 +85,40 @@ namespace SyntaxAnalysis.Utilities
         }
         public override int GetHashCode(object obj)
         {
-            if (obj == null) return 0;
-            return obj.GetHashCode();
+            return obj == null ? 0 : obj.GetHashCode();
         }
     }
-
-    namespace ArrayExtensions
+    
+    internal class ArrayTraverse
     {
-        public static class ArrayExtensions
+        public int[] Position;
+        private readonly int[] _maxLengths;
+
+        public ArrayTraverse(Array array)
         {
-            public static void ForEach(this Array array, Action<Array, int[]> action)
+            _maxLengths = new int[array.Rank];
+            for (int i = 0; i < array.Rank; ++i)
             {
-                if (array.LongLength == 0) return;
-                ArrayTraverse walker = new ArrayTraverse(array);
-                do action(array, walker.Position);
-                while (walker.Step());
+                _maxLengths[i] = array.GetLength(i) - 1;
             }
+            Position = new int[array.Rank];
         }
 
-        internal class ArrayTraverse
+        public bool Step()
         {
-            public int[] Position;
-            private readonly int[] _maxLengths;
-
-            public ArrayTraverse(Array array)
+            for (int i = 0; i < Position.Length; ++i)
             {
-                _maxLengths = new int[array.Rank];
-                for (int i = 0; i < array.Rank; ++i)
+                if (Position[i] < _maxLengths[i])
                 {
-                    _maxLengths[i] = array.GetLength(i) - 1;
-                }
-                Position = new int[array.Rank];
-            }
-
-            public bool Step()
-            {
-                for (int i = 0; i < Position.Length; ++i)
-                {
-                    if (Position[i] < _maxLengths[i])
+                    Position[i]++;
+                    for (int j = 0; j < i; j++)
                     {
-                        Position[i]++;
-                        for (int j = 0; j < i; j++)
-                        {
-                            Position[j] = 0;
-                        }
-                        return true;
+                        Position[j] = 0;
                     }
+                    return true;
                 }
-                return false;
             }
+            return false;
         }
     }
-
 }

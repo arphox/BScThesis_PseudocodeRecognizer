@@ -1,4 +1,5 @@
-﻿using LexicalAnalysis.Tokens;
+﻿using LexicalAnalysis.LexicalAnalyzer;
+using LexicalAnalysis.Tokens;
 using SyntaxAnalysis;
 using SyntaxAnalysis.ST;
 using System;
@@ -6,8 +7,6 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
-using System.IO;
-using LexicalAnalysis.LexicalAnalyzer;
 
 namespace VisualParseTree
 {
@@ -16,28 +15,23 @@ namespace VisualParseTree
     /// </summary>
     public partial class MainWindow : Window
     {
+        private const string Code = "program_kezd\r\n\tegész a\r\n\tbeolvas a\r\n\tegész b\r\n\tbeolvas b\r\n\tegész c\r\n\tbeolvas c\r\n\ttört diszkrimináns=b*b-(4*a*c)\r\n\tha diszkrimináns<0,0 akkor\r\n\t\tkiír \"Nincs valós gyöke!\"\r\n\tkülönben\r\n\t\tkiír \"Van legalább egy valós gyöke!\"\r\n\telágazás_vége\r\nprogram_vége";
+        private SyntaxTree<Token> _syntaxTree;
+
         public MainWindow()
         {
             InitializeComponent();
         }
+
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
-            Main();
-        }
+            List<Token> tokenList = new LexicalAnalyzer(Code).Analyze().Tokens;
 
-        private SyntaxTree<Token> _syntaxTree;
-
-        void Main()
-        {
-            string path = "08_masodfoku.opl";
-
-            List<Token> tokenList = new LexicalAnalyzer(ReadUtf8File(path)).Analyze().Tokens;
-
-            Tuple<SyntaxTree<Token>, bool> result = new SyntaxAnalyzer(tokenList).Start();
-            _syntaxTree = result.Item1;
+            SyntaxAnalyzerResult result = new SyntaxAnalyzer(tokenList).Start();
+            _syntaxTree = result.SyntaxTree;
 
             new SyntaxTreeConverter(TreeView, _syntaxTree).SetTreeView();
-            Console.WriteLine("SUCCESS? : " + result.Item2);
+            Console.WriteLine("SUCCESS? : " + result.IsSuccessful);
         }
 
         private void ButtonExpandAll_Click(object sender, RoutedEventArgs e)
@@ -54,14 +48,10 @@ namespace VisualParseTree
 
         private void ButtonPrintLeaves_Click(object sender, RoutedEventArgs e)
         {
-            List<Token> leaves = _syntaxTree.GetLeaves();
+            IList<Token> leaves = _syntaxTree.GetLeaves();
             string[] leaves2 = leaves.Select(s => s.ToString()).ToArray();
             Console.WriteLine(string.Join("\n", leaves2));
         }
 
-        internal static string ReadUtf8File(string path)
-        {
-            return File.ReadAllText(path);
-        }
     }
 }
