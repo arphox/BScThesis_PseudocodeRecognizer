@@ -1,4 +1,6 @@
-﻿/*
+﻿// A jelenlegi verzió az aktuálisNyelvtan.yml-et fedi
+
+/*
 A nyelvtannal van valami, a kifejezéseket nem jól viszi.
 Példa:
 
