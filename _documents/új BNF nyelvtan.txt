@@ -1,6 +1,7 @@
 Itt található az új nyelvtan BNF formában.
 Felsorolási szabály, hogy alulról felfelé olvasva a szabályokat
 mindig hamarabb történjen a definíció, mint a használat.
+A szabályok megadása során csak a jobbrekurzió engedett meg.
 --------------------------------------------------------------------------------------
 
 <program>							::=		"program_kezd" "újsor" <állítások> "program_vége"
