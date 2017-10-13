@@ -1,0 +1,61 @@
+Itt található az új nyelvtan BNF formában.
+Felsorolási szabály, hogy alulról felfelé olvasva a szabályokat
+mindig hamarabb történjen a definíció, mint a használat.
+--------------------------------------------------------------------------------------
+
+<program>							::=		"program_kezd" "újsor" <állítások> "program_vége"
+			
+<állítások>							::=		<egysorosÁllítás>
+										|	<állítások> <egysorosÁllítás>
+
+<egysorosÁllítás>					::=		<állítás>
+										|	<állítás> "újsor"
+										
+<állítás>							::=		<lokálisVáltozóDeklaráció>
+										|	<beágyazottÁllítás>
+
+<beágyazottÁllítás>					::=		<értékadás>
+										|	"ha" <logikaiKifejezés> "akkor" <beágyazottÁllítás> "különben" <beágyazottÁllítás> "elágazás_vége"
+										|	"ha" <logikaiKifejezés> "akkor" <beágyazottÁllítás> "elágazás_vége"
+										|	"ciklus_amíg" <logikaiKifejezés> <beágyazottÁllítás>
+										|	"ciklus" <számlálóCiklusInicializáló> "-tól" <logikaiKifejezés> "-ig" <beágyazottÁllítás>
+										|	<parancs> azonosító
+
+<számlálóCiklusInicializáló>		::=		<lokálisVáltozóDeklaráció>
+										|	<értékadás>
+
+<logikaiKifejezés>					::=		<kifejezés>
+
+<értékadás>							::=		"azonosító" "=" <kifejezés>
+
+<lokálisVáltozóDeklaráció>			::=		<típus> "azonosító" "=" <kifejezés>
+										|	<típus> "azonosító"
+
+<típus>								::=		<alapTípus>
+										|	<tömbTípus>
+
+<alapTípus>							::=		"egész"
+										|	"tört"
+										|	"szöveg"
+										|	"logikai"
+
+<tömbTípus>							::=		"egész tömb"
+										|	"tört tömb"
+										|	"szöveg tömb"
+										|	"logikai tömb"
+
+<parancs>							::=		"beolvas"
+										|	"kiír"
+
+<kifejezés>							::=		"azonosító"
+
+
+Nem hivatkozott, de később még kell:
+<belsőFüggvény>						::=		"egészből_logikaiba"
+										|	"törtből_egészbe"
+										|	"törtből_logikaiba"
+										|	"logikaiból_egészbe"
+										|	"logikaiból_törtbe"
+										|	"szövegből_egészbe"
+										|	"szövegből_törtbe"
+										|	"szövegből_logikaiba"
