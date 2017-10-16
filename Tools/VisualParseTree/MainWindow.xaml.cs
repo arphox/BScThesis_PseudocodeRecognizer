@@ -25,7 +25,7 @@ namespace VisualParseTree
 
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
-            List<Token> tokenList = new LexicalAnalyzer(Code).Analyze().Tokens;
+            List<TerminalToken> tokenList = new LexicalAnalyzer(Code).Analyze().Tokens;
 
             SyntaxAnalyzerResult result = new SyntaxAnalyzer(tokenList).Start();
             _syntaxTree = result.SyntaxTree;

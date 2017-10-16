@@ -10,7 +10,7 @@ namespace LexicalAnalysisTests
 {
     internal sealed class TokenTester
     {
-        private readonly List<Token> _tokens;
+        private readonly List<TerminalToken> _tokens;
         private readonly SymbolTable _symbolTable;
         private int _indexer;
         internal int CurrentRow { get; set; } = 1;

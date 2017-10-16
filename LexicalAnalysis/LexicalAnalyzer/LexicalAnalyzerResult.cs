@@ -6,10 +6,10 @@ namespace LexicalAnalysis.LexicalAnalyzer
 {
     public class LexicalAnalyzerResult
     {
-        public List<Token> Tokens { get; }
+        public List<TerminalToken> Tokens { get; }
         public SymbolTable SymbolTable { get; }
 
-        public LexicalAnalyzerResult(List<Token> tokens, SymbolTable symbolTable)
+        public LexicalAnalyzerResult(List<TerminalToken> tokens, SymbolTable symbolTable)
         {
             Tokens = tokens;
             SymbolTable = symbolTable;

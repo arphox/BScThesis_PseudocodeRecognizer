@@ -9,18 +9,18 @@ namespace LexicalAnalysis.LexicalAnalyzer
     internal class OutputTokenListHandler
     {
         private readonly SymbolTableManager _symbolTableHandler;
-        private readonly List<Token> _outputTokens = new List<Token>();
+        private readonly List<TerminalToken> _outputTokens = new List<TerminalToken>();
 
         internal bool ProgramEndTokenAdded { get; private set; }
 
-        internal IReadOnlyList<Token> OutputTokens => _outputTokens.AsReadOnly();
+        internal IReadOnlyList<TerminalToken> OutputTokens => _outputTokens.AsReadOnly();
 
         internal OutputTokenListHandler(SymbolTableManager symbolTableHandler)
         {
             _symbolTableHandler = symbolTableHandler;
         }
 
-        internal void AddToken(Token token)
+        internal void AddToken(TerminalToken token)
             => _outputTokens.Add(token);
 
         internal bool IsLastTokenNotNewLine()
