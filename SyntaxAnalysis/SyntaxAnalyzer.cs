@@ -73,17 +73,9 @@ namespace SyntaxAnalysis
             // <állítások>      ::=     <egysorosÁllítás> <állítások>
             //                      |   <egysorosÁllítás>
 
-            _syntaxTree.StartNonTerminalNode(_currentRowNumber);
-
-            if (Match(() => EgysorosÁllítás() && Állítások())
-                || Match(EgysorosÁllítás))
-            {
-                return true;
-            }
-
-            _syntaxTree.EndNode();
-            _syntaxTree.RemoveLastAddedNode();
-            return false;
+            return ProductionRule(() => 
+                    Match(EgysorosÁllítás, Állítások)
+                ||  Match(EgysorosÁllítás));
         }
 
         internal bool EgysorosÁllítás()
@@ -91,29 +83,36 @@ namespace SyntaxAnalysis
             // <egysorosÁllítás>    ::=     "beolvas"
             //                          |   "kiír"
 
+            return ProductionRule(() => 
+                    Match(() => T("beolvas")) 
+                ||  Match(() => T("kiír")));
+        }
+
+        private bool ProductionRule(Func<bool> predicate)
+        {
             _syntaxTree.StartNonTerminalNode(_currentRowNumber);
 
-            if (Match(() => T("beolvas"))
-                || Match(() => T("kiír")))
+            if (predicate())
             {
                 return true;
             }
-
-            _syntaxTree.EndNode();
-            _syntaxTree.RemoveLastAddedNode();
-            return false;
+            else
+            {
+                _syntaxTree.EndNode();
+                _syntaxTree.RemoveLastAddedNode();
+                return false;
+            }
         }
-        
-        private bool Match(params Func<bool>[] actions)
+        private bool Match(params Func<bool>[] predicates)
         {
             int indexerBackup = _tokenIndexer;
             SyntaxTree<Token> backupTree = _syntaxTree.Copy();
 
             int i = 0;
-            while (i < actions.Length && actions[i]())
+            while (i < predicates.Length && predicates[i]())
                 i++;
 
-            if (i >= actions.Length)
+            if (i >= predicates.Length)
             {
                 _syntaxTree.EndNode();
                 return true;
