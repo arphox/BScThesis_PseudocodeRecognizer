@@ -14,11 +14,11 @@ namespace SyntaxAnalysis
     public sealed class SyntaxAnalyzer
     {
         private readonly List<Token> _tokens;
-        private int _tokenIterator = -1;
+        private int _tokenIndexer = -1;
         private int _currentRowNumber;
         private bool _alreadyStarted;
         private SyntaxTree<Token> _syntaxTree;
-        private Token CurrentToken => _tokens[_tokenIterator];
+        private Token CurrentToken => _tokens[_tokenIndexer];
 
         public SyntaxAnalyzer(IEnumerable<Token> tokens)
         {
@@ -44,7 +44,7 @@ namespace SyntaxAnalysis
         /// <summary>    Matches a terminal    </summary>
         private bool T(string tokenName)
         {
-            _tokenIterator++;
+            _tokenIndexer++;
             _currentRowNumber = CurrentToken.RowNumber;
             _syntaxTree.StartNode(CurrentToken);
             _syntaxTree.EndNode();
