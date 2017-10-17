@@ -60,29 +60,29 @@ namespace SyntaxAnalysisTests
 
             Assert.That(st.CurrentNode, Is.EqualTo(node3));
 
-            st.RemoveLastNode();
+            st.RemoveLastAddedNode();
             Assert.That(st.CurrentNode.Children, Has.Count.EqualTo(2));
             Assert.That(st.CurrentNode.Children[0], Is.EqualTo(node3Child1));
             Assert.That(st.CurrentNode.Children[1], Is.EqualTo(node3Child2));
 
-            st.RemoveLastNode();
+            st.RemoveLastAddedNode();
             Assert.That(st.CurrentNode.Children, Has.Count.EqualTo(1));
             Assert.That(st.CurrentNode.Children[0], Is.EqualTo(node3Child1));
 
-            st.RemoveLastNode();
+            st.RemoveLastAddedNode();
             Assert.That(st.CurrentNode.Children, Is.Empty);
 
-            st.RemoveLastNode();
+            st.RemoveLastAddedNode();
             Assert.That(st.CurrentNode.Children, Has.Count.EqualTo(1));
             Assert.That(st.CurrentNode.Children[0], Is.EqualTo(node2Child1));
 
-            st.RemoveLastNode();
+            st.RemoveLastAddedNode();
             Assert.That(st.CurrentNode, Is.EqualTo(node2));
 
-            st.RemoveLastNode();
+            st.RemoveLastAddedNode();
             Assert.That(st.CurrentNode, Is.EqualTo(root));
 
-            Assert.Throws<InvalidOperationException>(st.RemoveLastNode);
+            Assert.Throws<InvalidOperationException>(st.RemoveLastAddedNode);
         }
 
         [Test]

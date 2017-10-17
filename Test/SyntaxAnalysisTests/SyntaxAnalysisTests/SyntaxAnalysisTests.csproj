@@ -44,6 +44,7 @@
     <Reference Include="System.Core" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="BasicTests.cs" />
     <Compile Include="SyntaxTreeTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -51,6 +52,10 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\..\..\LexicalAnalysis\LexicalAnalysis.csproj">
+      <Project>{5C7EF03C-6FC4-4BD7-A714-8F2B7B7765DE}</Project>
+      <Name>LexicalAnalysis</Name>
+    </ProjectReference>
     <ProjectReference Include="..\..\..\SyntaxAnalysis\SyntaxAnalysis.csproj">
       <Project>{7572f7af-2dce-4f54-bb01-a4e319bb8142}</Project>
       <Name>SyntaxAnalysis</Name>

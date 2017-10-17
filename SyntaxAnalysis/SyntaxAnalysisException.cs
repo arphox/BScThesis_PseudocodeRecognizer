@@ -3,7 +3,7 @@ using System;
 
 namespace SyntaxAnalysis
 {
-    internal class SyntaxAnalysisException : ApplicationException
+    public class SyntaxAnalysisException : ApplicationException
     {
         public Token LastToken { get; }
         public int CurrentRowNumber { get; }

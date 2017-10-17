@@ -36,7 +36,7 @@ namespace SyntaxAnalysis.ST
         /// <summary>
         /// Removes the last added node.
         /// </summary>
-        internal void RemoveLastNode()
+        internal void RemoveLastAddedNode()
         {
             if (CurrentNode.Children.Any())
             {

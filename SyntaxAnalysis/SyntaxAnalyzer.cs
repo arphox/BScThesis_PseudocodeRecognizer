@@ -11,12 +11,11 @@ namespace SyntaxAnalysis
     public sealed class SyntaxAnalyzer
     {
         private readonly List<Token> _tokens;
-        private int _pointer;
+        private int _tokenIterator = -1;
         private int _currentRowNumber;
-
+        private bool _alreadyStarted;
         private SyntaxTree<Token> _syntaxTree;
-
-        private Token CurrentToken => _tokens[_pointer];
+        private Token CurrentToken => _tokens[_tokenIterator];
 
         public SyntaxAnalyzer(IEnumerable<Token> tokens)
         {
@@ -31,23 +30,27 @@ namespace SyntaxAnalysis
 
         public SyntaxAnalyzerResult Start()
         {
+            if (_alreadyStarted)
+                throw new InvalidOperationException("This method can be only called once.");
+            _alreadyStarted = true;
+
             bool success = Program();
             return new SyntaxAnalyzerResult(_syntaxTree, success);
         }
 
-        /// <summary> Matches a terminal </summary>
+        /// <summary>    Matches a terminal    </summary>
         private bool T(string tokenName)
         {
+            _tokenIterator++;
             _currentRowNumber = CurrentToken.RowNumber;
             _syntaxTree.StartNode(CurrentToken);
-            bool isSuccessful = CurrentToken.Id == LexicalElementCodeDictionary.GetCode(tokenName);
             _syntaxTree.EndNode();
 
+            bool isSuccessful = CurrentToken.Id == LexicalElementCodeDictionary.GetCode(tokenName);
             if (!isSuccessful)
             {
-                _syntaxTree.RemoveLastNode();
+                _syntaxTree.RemoveLastAddedNode();
             }
-            _pointer++;
             return isSuccessful;
         }
 

@@ -48,7 +48,7 @@ namespace SyntaxAnalysis.Trash
 
             if (!isSuccessful)
             {
-                _syntaxTree.RemoveLastNode();
+                _syntaxTree.RemoveLastAddedNode();
             }
             _pointer++;
             return isSuccessful;
@@ -62,7 +62,7 @@ namespace SyntaxAnalysis.Trash
 
             if (!isSuccessful)
             {
-                _syntaxTree.RemoveLastNode();
+                _syntaxTree.RemoveLastAddedNode();
             }
             _pointer++;
             return isSuccessful;
@@ -116,7 +116,7 @@ namespace SyntaxAnalysis.Trash
             }
 
             _syntaxTree.EndNode();
-            _syntaxTree.RemoveLastNode();
+            _syntaxTree.RemoveLastAddedNode();
             return false;
         }
         private bool EgysorosÁllítás()
@@ -153,7 +153,7 @@ namespace SyntaxAnalysis.Trash
             }
 
             _syntaxTree.EndNode();
-            _syntaxTree.RemoveLastNode();
+            _syntaxTree.RemoveLastAddedNode();
             return false;
         }
         private bool Állítás()
@@ -190,7 +190,7 @@ namespace SyntaxAnalysis.Trash
             }
 
             _syntaxTree.EndNode();
-            _syntaxTree.RemoveLastNode();
+            _syntaxTree.RemoveLastAddedNode();
             return false;
         }
         private bool LokálisVáltozóDeklaráció()
@@ -228,7 +228,7 @@ namespace SyntaxAnalysis.Trash
             }
 
             _syntaxTree.EndNode();
-            _syntaxTree.RemoveLastNode();
+            _syntaxTree.RemoveLastAddedNode();
             return false;
         }
         private bool Típus()
@@ -265,7 +265,7 @@ namespace SyntaxAnalysis.Trash
             }
 
             _syntaxTree.EndNode();
-            _syntaxTree.RemoveLastNode();
+            _syntaxTree.RemoveLastAddedNode();
             return false;
         }
         private bool AlapTípus()
@@ -326,7 +326,7 @@ namespace SyntaxAnalysis.Trash
             }
 
             _syntaxTree.EndNode();
-            _syntaxTree.RemoveLastNode();
+            _syntaxTree.RemoveLastAddedNode();
             return false;
         }
         private bool TömbTípus()
@@ -351,7 +351,7 @@ namespace SyntaxAnalysis.Trash
             }
 
             _syntaxTree.EndNode();
-            _syntaxTree.RemoveLastNode();
+            _syntaxTree.RemoveLastAddedNode();
             return false;
         }
         private bool BelsőFüggvény()
@@ -384,7 +384,7 @@ namespace SyntaxAnalysis.Trash
             }
 
             _syntaxTree.EndNode();
-            _syntaxTree.RemoveLastNode();
+            _syntaxTree.RemoveLastAddedNode();
             return false;
         }
         private bool BeágyazottÁllítás()
@@ -469,7 +469,7 @@ namespace SyntaxAnalysis.Trash
             }
 
             _syntaxTree.EndNode();
-            _syntaxTree.RemoveLastNode();
+            _syntaxTree.RemoveLastAddedNode();
             return false;
         }
         private bool ParancsÁllítás()
@@ -494,7 +494,7 @@ namespace SyntaxAnalysis.Trash
             }
 
             _syntaxTree.EndNode();
-            _syntaxTree.RemoveLastNode();
+            _syntaxTree.RemoveLastAddedNode();
             return false;
         }
         private bool Parancs()
@@ -531,7 +531,7 @@ namespace SyntaxAnalysis.Trash
             }
 
             _syntaxTree.EndNode();
-            _syntaxTree.RemoveLastNode();
+            _syntaxTree.RemoveLastAddedNode();
             return false;
         }
         private bool Értékadás()
@@ -556,7 +556,7 @@ namespace SyntaxAnalysis.Trash
             }
 
             _syntaxTree.EndNode();
-            _syntaxTree.RemoveLastNode();
+            _syntaxTree.RemoveLastAddedNode();
             return false;
         }
         private bool SzámlálóCiklusInicializáló()
@@ -593,7 +593,7 @@ namespace SyntaxAnalysis.Trash
             }
 
             _syntaxTree.EndNode();
-            _syntaxTree.RemoveLastNode();
+            _syntaxTree.RemoveLastAddedNode();
             return false;
         }
         private bool ElsődlegesKifejezés()
@@ -630,7 +630,7 @@ namespace SyntaxAnalysis.Trash
             }
 
             _syntaxTree.EndNode();
-            _syntaxTree.RemoveLastNode();
+            _syntaxTree.RemoveLastAddedNode();
             return false;
         }
         private bool ElsődlegesNemTömbLétrehozóKifejezés()
@@ -691,7 +691,7 @@ namespace SyntaxAnalysis.Trash
             }
 
             _syntaxTree.EndNode();
-            _syntaxTree.RemoveLastNode();
+            _syntaxTree.RemoveLastAddedNode();
             return false;
         }
         private bool ZárójelesKifejezés()
@@ -716,7 +716,7 @@ namespace SyntaxAnalysis.Trash
             }
 
             _syntaxTree.EndNode();
-            _syntaxTree.RemoveLastNode();
+            _syntaxTree.RemoveLastAddedNode();
             return false;
         }
         private bool TömbElemElérés()
@@ -753,7 +753,7 @@ namespace SyntaxAnalysis.Trash
             }
 
             _syntaxTree.EndNode();
-            _syntaxTree.RemoveLastNode();
+            _syntaxTree.RemoveLastAddedNode();
             return false;
         }
         private bool TömbLétrehozóKifejezés()
@@ -779,7 +779,7 @@ namespace SyntaxAnalysis.Trash
             }
 
             _syntaxTree.EndNode();
-            _syntaxTree.RemoveLastNode();
+            _syntaxTree.RemoveLastAddedNode();
             return false;
         }
         private bool LogikaiKifejezés()
@@ -804,7 +804,7 @@ namespace SyntaxAnalysis.Trash
             }
 
             _syntaxTree.EndNode();
-            _syntaxTree.RemoveLastNode();
+            _syntaxTree.RemoveLastAddedNode();
             return false;
         }
         private bool Kifejezés()
@@ -829,7 +829,7 @@ namespace SyntaxAnalysis.Trash
             }
 
             _syntaxTree.EndNode();
-            _syntaxTree.RemoveLastNode();
+            _syntaxTree.RemoveLastAddedNode();
             return false;
         }
         private bool FeltételesVagyKifejezés()
@@ -866,7 +866,7 @@ namespace SyntaxAnalysis.Trash
             }
 
             _syntaxTree.EndNode();
-            _syntaxTree.RemoveLastNode();
+            _syntaxTree.RemoveLastAddedNode();
             return false;
         }
         private bool FeltételesÉsKifejezés()
@@ -903,7 +903,7 @@ namespace SyntaxAnalysis.Trash
             }
 
             _syntaxTree.EndNode();
-            _syntaxTree.RemoveLastNode();
+            _syntaxTree.RemoveLastAddedNode();
             return false;
         }
         private bool EgyenlőségKifejezés()
@@ -952,7 +952,7 @@ namespace SyntaxAnalysis.Trash
             }
 
             _syntaxTree.EndNode();
-            _syntaxTree.RemoveLastNode();
+            _syntaxTree.RemoveLastAddedNode();
             return false;
         }
         private bool RelációsKifejezés()
@@ -1025,7 +1025,7 @@ namespace SyntaxAnalysis.Trash
             }
 
             _syntaxTree.EndNode();
-            _syntaxTree.RemoveLastNode();
+            _syntaxTree.RemoveLastAddedNode();
             return false;
         }
         private bool AdditívKifejezés()
@@ -1087,7 +1087,7 @@ namespace SyntaxAnalysis.Trash
             }
 
             _syntaxTree.EndNode();
-            _syntaxTree.RemoveLastNode();
+            _syntaxTree.RemoveLastAddedNode();
             return false;
         }
         private bool MultiplikatívKifejezés()
@@ -1148,7 +1148,7 @@ namespace SyntaxAnalysis.Trash
             }
 
             _syntaxTree.EndNode();
-            _syntaxTree.RemoveLastNode();
+            _syntaxTree.RemoveLastAddedNode();
             return false;
         }
         private bool UnárisKifejezés()
@@ -1221,7 +1221,7 @@ namespace SyntaxAnalysis.Trash
             }
 
             _syntaxTree.EndNode();
-            _syntaxTree.RemoveLastNode();
+            _syntaxTree.RemoveLastAddedNode();
             return false;
         }
         private bool BelsőFüggvényHívóKifejezés()
@@ -1246,7 +1246,7 @@ namespace SyntaxAnalysis.Trash
             }
 
             _syntaxTree.EndNode();
-            _syntaxTree.RemoveLastNode();
+            _syntaxTree.RemoveLastAddedNode();
             return false;
         }
 
