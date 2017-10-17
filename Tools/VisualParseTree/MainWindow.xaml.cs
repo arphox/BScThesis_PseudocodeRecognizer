@@ -36,6 +36,8 @@ namespace VisualParseTree
 
             SyntaxTreeConverter.FillTreeView(TreeView, _syntaxTree);
             Console.WriteLine("SUCCESS? : " + result.IsSuccessful);
+
+            ButtonExpandAll_Click(null, null);
         }
 
         private TreeViewItem SelectedItem

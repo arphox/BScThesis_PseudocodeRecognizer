@@ -75,7 +75,7 @@ namespace SyntaxAnalysis
 
             _syntaxTree.StartNonTerminalNode(_currentRowNumber);
 
-            if (Match(EgysorosÁllítás, Állítások)
+            if (Match(() => EgysorosÁllítás() && Állítások())
                 || Match(EgysorosÁllítás))
             {
                 return true;
@@ -103,44 +103,20 @@ namespace SyntaxAnalysis
             _syntaxTree.RemoveLastAddedNode();
             return false;
         }
-
-        private bool Match(Func<bool> action)
+        
+        private bool Match(params Func<bool>[] actions)
         {
             int indexerBackup = _tokenIndexer;
             SyntaxTree<Token> backupTree = _syntaxTree.Copy();
-            bool result = action();
-            if (result)
+
+            int i = 0;
+            while (i < actions.Length && actions[i]())
+                i++;
+
+            if (i >= actions.Length)
             {
                 _syntaxTree.EndNode();
                 return true;
-            }
-            else
-            {
-                _tokenIndexer = indexerBackup;
-                _syntaxTree = backupTree;
-                return false;
-            }
-        }
-
-        private bool Match(Func<bool> action1, Func<bool> action2)
-        {
-            int indexerBackup = _tokenIndexer;
-            SyntaxTree<Token> backupTree = _syntaxTree.Copy();
-            bool res1 = action1();
-            if (res1)
-            {
-                bool res2 = action2();
-                if (res2)
-                {
-                    _syntaxTree.EndNode();
-                    return true;
-                }
-                else
-                {
-                    _tokenIndexer = indexerBackup;
-                    _syntaxTree = backupTree;
-                    return false;
-                }
             }
             else
             {

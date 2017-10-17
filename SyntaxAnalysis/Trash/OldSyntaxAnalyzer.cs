@@ -1253,7 +1253,7 @@ namespace SyntaxAnalysis.Trash
         }
 
 
-        private bool MINTA()
+        private bool Minta()
         {
             _syntaxTree.StartNode(new NonTerminalToken(GetCurrentMethodName(), _currentRowNumber));
             int backupPointer = _tokenIndexer;
