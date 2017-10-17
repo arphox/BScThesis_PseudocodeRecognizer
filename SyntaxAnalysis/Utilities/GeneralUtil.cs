@@ -6,12 +6,14 @@ namespace SyntaxAnalysis.Utilities
     internal static class GeneralUtil
     {
         [MethodImpl(MethodImplOptions.NoInlining)]
-        public static string GetCurrentMethodName()
+        internal static string GetCurrentMethodName()
         {
             StackTrace st = new StackTrace();
             StackFrame sf = st.GetFrame(1);
 
             return sf.GetMethod().Name;
         }
+
+        internal static string GetCallerName([CallerMemberName] string caller = null) => caller;
     }
 }

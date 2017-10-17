@@ -1,0 +1,7 @@
+<program>							::=		"program_kezd" "újsor" <állítások> "program_vége"
+			
+<állítások>							::=		<egysorosÁllítás>
+										|	<állítások> <egysorosÁllítás>
+
+<egysorosÁllítás>					::=		"beolvas"
+										|	"kiír"

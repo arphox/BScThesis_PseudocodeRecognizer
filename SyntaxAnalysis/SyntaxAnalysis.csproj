@@ -43,6 +43,7 @@
     <Compile Include="SyntaxAnalyzer.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="SyntaxAnalyzerResult.cs" />
+    <Compile Include="Trash\OldSyntaxAnalyzer.cs" />
     <Compile Include="Utilities\GeneralUtil.cs" />
     <Compile Include="Utilities\ObjectExtensions.cs" />
   </ItemGroup>
