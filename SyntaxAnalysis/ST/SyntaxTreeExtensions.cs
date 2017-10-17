@@ -7,7 +7,7 @@ namespace SyntaxAnalysis.ST
     {
         internal static void StartNonTerminalNode(this SyntaxTree<Token> tree, int row)
         {
-            tree.StartNode(new NonTerminalToken(GetCurrentMethodName(2), row));
+            tree.StartNode(new NonTerminalToken(GetCurrentMethodName(3), row));
         }
 
         internal static void StartNonTerminalNode(this SyntaxTree<Token> tree, string name, int row)
