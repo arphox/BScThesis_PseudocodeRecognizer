@@ -31,7 +31,7 @@ namespace SyntaxAnalysis
 
         public SyntaxAnalyzerResult Start()
         {
-            bool success = program();
+            bool success = Program();
             return new SyntaxAnalyzerResult(_syntaxTree, success);
         }
 
@@ -51,7 +51,7 @@ namespace SyntaxAnalysis
             return isSuccessful;
         }
 
-        private bool program()
+        private bool Program()
         {
             // <program> ::= "program_kezd" "újsor" <állítások> "program_vége"
             _syntaxTree = new SyntaxTree<Token>(new NonTerminalToken(GeneralUtil.GetCallerName(), _currentRowNumber));
