@@ -74,29 +74,11 @@ namespace SyntaxAnalysis
             //                      |   <egysorosÁllítás>
 
             _syntaxTree.StartNonTerminalNode(_currentRowNumber);
-            int backupPointer = _tokenIndexer;
-            SyntaxTree<Token> backupTree = _syntaxTree.Copy();
 
-            if (EgysorosÁllítás() && Állítások())
+            if (Match(EgysorosÁllítás, Állítások)
+                || Match(EgysorosÁllítás))
             {
-                _syntaxTree.EndNode();
                 return true;
-            }
-            else
-            {
-                _tokenIndexer = backupPointer;
-                _syntaxTree = backupTree;
-            }
-
-            if (EgysorosÁllítás())
-            {
-                _syntaxTree.EndNode();
-                return true;
-            }
-            else
-            {
-                _tokenIndexer = backupPointer;
-                _syntaxTree = backupTree;
             }
 
             _syntaxTree.EndNode();
@@ -110,34 +92,62 @@ namespace SyntaxAnalysis
             //                          |   "kiír"
 
             _syntaxTree.StartNonTerminalNode(_currentRowNumber);
-            int backupPointer = _tokenIndexer;
-            SyntaxTree<Token> backupTree = _syntaxTree.Copy();
 
-            if (T("beolvas"))
+            if (Match(() => T("beolvas"))
+                || Match(() => T("kiír")))
             {
-                _syntaxTree.EndNode();
                 return true;
-            }
-            else
-            {
-                _tokenIndexer = backupPointer;
-                _syntaxTree = backupTree;
-            }
-
-            if (T("kiír"))
-            {
-                _syntaxTree.EndNode();
-                return true;
-            }
-            else
-            {
-                _tokenIndexer = backupPointer;
-                _syntaxTree = backupTree;
             }
 
             _syntaxTree.EndNode();
             _syntaxTree.RemoveLastAddedNode();
             return false;
+        }
+
+        private bool Match(Func<bool> action)
+        {
+            int indexerBackup = _tokenIndexer;
+            SyntaxTree<Token> backupTree = _syntaxTree.Copy();
+            bool result = action();
+            if (result)
+            {
+                _syntaxTree.EndNode();
+                return true;
+            }
+            else
+            {
+                _tokenIndexer = indexerBackup;
+                _syntaxTree = backupTree;
+                return false;
+            }
+        }
+
+        private bool Match(Func<bool> action1, Func<bool> action2)
+        {
+            int indexerBackup = _tokenIndexer;
+            SyntaxTree<Token> backupTree = _syntaxTree.Copy();
+            bool res1 = action1();
+            if (res1)
+            {
+                bool res2 = action2();
+                if (res2)
+                {
+                    _syntaxTree.EndNode();
+                    return true;
+                }
+                else
+                {
+                    _tokenIndexer = indexerBackup;
+                    _syntaxTree = backupTree;
+                    return false;
+                }
+            }
+            else
+            {
+                _tokenIndexer = indexerBackup;
+                _syntaxTree = backupTree;
+                return false;
+            }
         }
     }
 }
