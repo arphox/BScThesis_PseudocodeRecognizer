@@ -20,7 +20,7 @@ namespace SyntaxAnalysisTests
             SyntaxAnalyzerResult result = new SyntaxAnalyzer(tokens).Start();
 
             Assert.That(result.IsSuccessful, Is.True);
-            Assert.That((result.SyntaxTree.Root.Value as NonTerminalToken).Value, Is.EqualTo("Program"));
+            Assert.That((result.SyntaxTree.Root.Value as NonTerminalToken).Value, Is.EqualTo(nameof(SyntaxAnalyzer.Program)));
 
             var rootChildren = result.SyntaxTree.Root.Children;
             Assert.That(NameOf(rootChildren[0].Value.Id), Is.EqualTo("program_kezd"));

@@ -8,6 +8,9 @@ using LexicalAnalysis.LexicalElementIdentification;
 
 namespace SyntaxAnalysis
 {
+    /// <summary>
+    /// The nonterminal matching methods are only internal so they can be tested and referenced with nameof().
+    /// </summary>
     public sealed class SyntaxAnalyzer
     {
         private readonly List<Token> _tokens;
@@ -54,10 +57,10 @@ namespace SyntaxAnalysis
             return isSuccessful;
         }
 
-        private bool Program()
+        internal bool Program()
         {
             // <program> ::= "program_kezd" "újsor" <állítások> "program_vége"
-            _syntaxTree = new SyntaxTree<Token>(new NonTerminalToken(GeneralUtil.GetCallerName(), _currentRowNumber));
+            _syntaxTree = new SyntaxTree<Token>(new NonTerminalToken(nameof(Program), _currentRowNumber));
 
             return T("program_kezd")
                 && T("újsor")
