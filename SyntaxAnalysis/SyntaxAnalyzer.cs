@@ -1,10 +1,10 @@
 ﻿using LexicalAnalysis.Tokens;
 using SyntaxAnalysis.ST;
-using SyntaxAnalysis.Utilities;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using LexicalAnalysis.LexicalElementIdentification;
+using SyntaxAnalysis.Utilities;
 
 namespace SyntaxAnalysis
 {
@@ -64,8 +64,80 @@ namespace SyntaxAnalysis
 
             return T("program_kezd")
                 && T("újsor")
-                //&& Állítások()
+                && Állítások()
                 && T("program_vége");
+        }
+
+        internal bool Állítások()
+        {
+            // <állítások>      ::=     <egysorosÁllítás> <állítások>
+            //                      |   <egysorosÁllítás>
+
+            _syntaxTree.StartNonTerminalNode(_currentRowNumber);
+            int backupPointer = _tokenIndexer;
+            SyntaxTree<Token> backupTree = _syntaxTree.Copy();
+
+            if (EgysorosÁllítás() && Állítások())
+            {
+                _syntaxTree.EndNode();
+                return true;
+            }
+            else
+            {
+                _tokenIndexer = backupPointer;
+                _syntaxTree = backupTree;
+            }
+
+            if (EgysorosÁllítás())
+            {
+                _syntaxTree.EndNode();
+                return true;
+            }
+            else
+            {
+                _tokenIndexer = backupPointer;
+                _syntaxTree = backupTree;
+            }
+
+            _syntaxTree.EndNode();
+            _syntaxTree.RemoveLastAddedNode();
+            return false;
+        }
+
+        internal bool EgysorosÁllítás()
+        {
+            // <egysorosÁllítás>    ::=     "beolvas"
+            //                          |   "kiír"
+
+            _syntaxTree.StartNonTerminalNode(_currentRowNumber);
+            int backupPointer = _tokenIndexer;
+            SyntaxTree<Token> backupTree = _syntaxTree.Copy();
+
+            if (T("beolvas"))
+            {
+                _syntaxTree.EndNode();
+                return true;
+            }
+            else
+            {
+                _tokenIndexer = backupPointer;
+                _syntaxTree = backupTree;
+            }
+
+            if (T("kiír"))
+            {
+                _syntaxTree.EndNode();
+                return true;
+            }
+            else
+            {
+                _tokenIndexer = backupPointer;
+                _syntaxTree = backupTree;
+            }
+
+            _syntaxTree.EndNode();
+            _syntaxTree.RemoveLastAddedNode();
+            return false;
         }
     }
 }

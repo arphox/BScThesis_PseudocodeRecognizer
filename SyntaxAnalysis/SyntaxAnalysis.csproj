@@ -37,6 +37,7 @@
   <ItemGroup>
     <Compile Include="NonTerminalToken.cs" />
     <Compile Include="ST\SyntaxTree.cs" />
+    <Compile Include="ST\SyntaxTreeExtensions.cs" />
     <Compile Include="ST\TreeNode.cs" />
     <Compile Include="SyntaxAnalysisException.cs" />
     <Compile Include="SyntaxAnalyzer.cs" />
