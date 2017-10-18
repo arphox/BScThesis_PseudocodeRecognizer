@@ -1,17 +1,14 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
 using LexicalAnalysis.LexicalElementIdentification;
 using LexicalAnalysis.Tokens;
 using SyntaxAnalysis.Tree;
 using SyntaxAnalysis.Utilities;
+using System;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace SyntaxAnalysis.Analyzer
 {
-    /// <summary>
-    /// The nonterminal matching methods are only internal so they can be tested and referenced with nameof().
-    /// </summary>
-    public sealed class SyntaxAnalyzer
+    public sealed partial class SyntaxAnalyzer
     {
         private readonly List<Token> _tokens;
         private int _tokenIndexer = -1;
@@ -39,30 +36,6 @@ namespace SyntaxAnalysis.Analyzer
 
             bool success = Program();
             return new SyntaxAnalyzerResult(_syntaxTree, success);
-        }
-
-        internal bool Program()
-        {
-            _syntaxTree = new SyntaxTree<Token>(new NonTerminalToken(nameof(Program), _currentRowNumber));
-
-            return Terminal("program_kezd")
-                && Terminal("újsor")
-                && Állítások()
-                && Terminal("program_vége");
-        }
-
-        internal bool Állítások()
-        {
-            return Rule(() => 
-                    Match(EgysorosÁllítás, Állítások)
-                ||  Match(EgysorosÁllítás));
-        }
-
-        internal bool EgysorosÁllítás()
-        {
-            return Rule(() => 
-                    Match(() => Terminal("beolvas")) 
-                ||  Match(() => Terminal("kiír")));
         }
 
         /// <summary>   Matches a production rule   </summary>
@@ -106,19 +79,14 @@ namespace SyntaxAnalysis.Analyzer
         }
 
         /// <summary>    Matches a terminal    </summary>
-        private bool Terminal(string tokenName)
+        private bool T(string tokenName)
         {
             _tokenIndexer++;
             _currentRowNumber = CurrentToken.RowNumber;
             _syntaxTree.StartNode(CurrentToken);
             _syntaxTree.EndNode();
 
-            bool isSuccessful = CurrentToken.Id == LexicalElementCodeDictionary.GetCode(tokenName);
-            if (!isSuccessful)
-            {
-                _syntaxTree.RemoveLastAddedNode();
-            }
-            return isSuccessful;
+            return CurrentToken.Id == LexicalElementCodeDictionary.GetCode(tokenName);
         }
     }
 }

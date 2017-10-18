@@ -1254,6 +1254,7 @@ namespace SyntaxAnalysis.Trash
         }
 
 
+        // ReSharper disable once UnusedMember.Local
         private bool Minta()
         {
             _syntaxTree.StartNode(new NonTerminalToken(GetCurrentMethodName(), _currentRowNumber));

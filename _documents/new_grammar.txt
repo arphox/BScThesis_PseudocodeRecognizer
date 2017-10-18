@@ -6,10 +6,7 @@ A szabályok megadása során csak a jobbrekurzió engedett meg.
 
 <program>							::=		"program_kezd" "újsor" <állítások> "program_vége"
 			
-<állítások>							::=		<egysorosÁllítás> <állítások>
-										|	<egysorosÁllítás>
-
-<egysorosÁllítás>					::=		<állítás>
+<állítások>							::=		<állítás> "újsor" <állítások>
 										|	<állítás> "újsor"
 										
 <állítás>							::=		<lokálisVáltozóDeklaráció>
