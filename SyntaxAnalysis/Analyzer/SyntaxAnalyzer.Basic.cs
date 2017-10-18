@@ -4,7 +4,11 @@ using SyntaxAnalysis.Tree;
 using SyntaxAnalysis.Utilities;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
+using System.Reflection;
+using System.Runtime.CompilerServices;
+using System.Text;
 
 namespace SyntaxAnalysis.Analyzer
 {
@@ -38,6 +42,16 @@ namespace SyntaxAnalysis.Analyzer
             return new SyntaxAnalyzerResult(_syntaxTree, success);
         }
 
+        internal bool Program()
+        {
+            _syntaxTree = new SyntaxTree<Token>(new NonTerminalToken(nameof(Program), _currentRowNumber));
+
+            return T("program_kezd")
+                   && T("újsor")
+                   && Állítások()
+                   && T("program_vége");
+        }
+
         /// <summary>   Matches a production rule   </summary>
         private bool Rule(Func<bool> predicate)
         {
@@ -60,7 +74,7 @@ namespace SyntaxAnalysis.Analyzer
         {
             int indexerBackup = _tokenIndexer;
             SyntaxTree<Token> backupTree = _syntaxTree.Copy();
-
+            
             int i = 0;
             while (i < predicates.Length && predicates[i]())
                 i++;

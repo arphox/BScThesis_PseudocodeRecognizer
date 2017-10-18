@@ -17,7 +17,8 @@ A szabályok megadása során csak a jobbrekurzió engedett meg.
 										|	"ha" <logikaiKifejezés> "akkor" <beágyazottÁllítás> "elágazás_vége"
 										|	"ciklus_amíg" <logikaiKifejezés> <beágyazottÁllítás>
 										|	"ciklus" <számlálóCiklusInicializáló> "-tól" <logikaiKifejezés> "-ig" <beágyazottÁllítás>
-										|	<parancs> azonosító
+										|	<IOparancs> azonosító
+										|	"kilép"
 
 <számlálóCiklusInicializáló>		::=		<lokálisVáltozóDeklaráció>
 										|	<értékadás>
@@ -42,7 +43,7 @@ A szabályok megadása során csak a jobbrekurzió engedett meg.
 										|	"szöveg tömb"
 										|	"logikai tömb"
 
-<parancs>							::=		"beolvas"
+<IOparancs>							::=		"beolvas"
 										|	"kiír"
 
 <kifejezés>							::=		"azonosító"

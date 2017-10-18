@@ -33,7 +33,7 @@ namespace VisualParseTree
             _syntaxTree = result.SyntaxTree;
 
             SyntaxTreeConverter.FillTreeView(TreeView, _syntaxTree);
-            Console.WriteLine("SUCCESS? : " + result.IsSuccessful);
+            Console.WriteLine("IsSuccessful = " + result.IsSuccessful);
 
             ButtonExpandAll_Click(null, null);
         }
