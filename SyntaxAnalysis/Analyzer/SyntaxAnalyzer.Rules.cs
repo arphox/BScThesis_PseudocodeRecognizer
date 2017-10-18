@@ -18,6 +18,7 @@ namespace SyntaxAnalysis.Analyzer
         {
             _syntaxTree = new SyntaxTree<Token>(new NonTerminalToken(nameof(Program), _currentRowNumber));
 
+            // In the initial rule, no need to use the matching methods:
             return T("program_kezd")
                 && T("újsor")
                 && Állítások()
