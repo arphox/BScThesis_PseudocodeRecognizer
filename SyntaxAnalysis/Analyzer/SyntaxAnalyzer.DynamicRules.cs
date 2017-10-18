@@ -5,9 +5,15 @@ namespace SyntaxAnalysis.Analyzer
     public sealed partial class SyntaxAnalyzer
     {
         public const string TestCode = "program_kezd\r\n" +
+                                       //"egész a = 2\r\n" +
+                                       //"tört b\r\n" +
+                                       //"szöveg[] c\r\n" +
+                                       //"a = 3\r\n" +
+                                       "ha igaz akkor\r\n" +
                                        "kilép\r\n" +
+                                       "különben\r\n" +
                                        "kilép\r\n" +
-                                       "kilép\r\n" +
+                                       "elágazás_vége\r\n" +
                                        "program_vége";
 
         internal bool Állítások()
@@ -28,7 +34,8 @@ namespace SyntaxAnalysis.Analyzer
         {
             return Rule(() =>
                    Match(Értékadás)
-                || Match(() => T("ha"), LogikaiKifejezés, () => T("akkor"), BeágyazottÁllítás, () => T("különben"), BeágyazottÁllítás, () => T("elágazás_vége"))
+                || Match(() => T("ha"), LogikaiKifejezés, () => T("akkor"), () => T("újsor"), BeágyazottÁllítás, () => T("újsor"), () => T("különben"), () => T("újsor"), BeágyazottÁllítás, () => T("újsor"), () => T("elágazás_vége"))
+                || Match(() => T("ha"), LogikaiKifejezés, () => T("akkor"), BeágyazottÁllítás, () => T("elágazás_vége"))
                 || Match(() => T("ciklus_amíg"), LogikaiKifejezés, BeágyazottÁllítás)
                 || Match(() => T("ciklus"), SzámlálóCiklusInicializáló, () => T("-tól"), LogikaiKifejezés, () => T("-ig"), BeágyazottÁllítás)
                 || Match(IoParancs, () => T("azonosító"))
@@ -64,7 +71,9 @@ namespace SyntaxAnalysis.Analyzer
 
         internal bool Kifejezés()
         {
-            return false;
+            return Rule(() =>
+                   Match(() => T("azonosító"))
+                || Match(Literál));
         }
     }
 }

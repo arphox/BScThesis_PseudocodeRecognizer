@@ -2,7 +2,7 @@ Itt található az új nyelvtan BNF formában.
 Felsorolási szabály, hogy alulról felfelé olvasva a szabályokat
 mindig hamarabb történjen a definíció, mint a használat.
 A szabályok megadása során csak a jobbrekurzió engedett meg.
---------------------------------------------------------------------------------------
+-----------------------------------------------------------------------------------------------
 
 <program>							::=		"program_kezd" "újsor" <állítások> "program_vége"
 			
@@ -30,6 +30,16 @@ A szabályok megadása során csak a jobbrekurzió engedett meg.
 <lokálisVáltozóDeklaráció>			::=		<típus> "azonosító" "=" <kifejezés>
 										|	<típus> "azonosító"
 
+<kifejezés>							::=		"azonosító"
+										|	"literál"
+
+
+
+
+-----------------------------------------------------------------------------------------------
+	Statikus szabályok:
+-----------------------------------------------------------------------------------------------
+
 <típus>								::=		<alapTípus>
 										|	<tömbTípus>
 
@@ -46,10 +56,6 @@ A szabályok megadása során csak a jobbrekurzió engedett meg.
 <IOparancs>							::=		"beolvas"
 										|	"kiír"
 
-<kifejezés>							::=		"azonosító"
-
-
-Nem hivatkozott, de később még kell:
 <belsőFüggvény>						::=		"egészből_logikaiba"
 										|	"törtből_egészbe"
 										|	"törtből_logikaiba"

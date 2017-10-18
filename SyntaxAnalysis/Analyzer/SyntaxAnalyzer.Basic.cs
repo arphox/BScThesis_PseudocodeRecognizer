@@ -102,5 +102,20 @@ namespace SyntaxAnalysis.Analyzer
 
             return CurrentToken.Id == LexicalElementCodeDictionary.GetCode(tokenName);
         }
+
+        private bool T(Type tokenType)
+        {
+            _tokenIndexer++;
+            _currentRowNumber = CurrentToken.RowNumber;
+            _syntaxTree.StartNode(CurrentToken);
+            _syntaxTree.EndNode();
+
+            return CurrentToken.GetType() == tokenType;
+        }
+
+        private bool Literál()
+        {
+            return T(typeof(LiteralToken));
+        }
     }
 }
