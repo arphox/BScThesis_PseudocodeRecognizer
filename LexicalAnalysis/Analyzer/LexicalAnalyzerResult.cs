@@ -2,7 +2,7 @@
 using LexicalAnalysis.SymbolTableManagement;
 using LexicalAnalysis.Tokens;
 
-namespace LexicalAnalysis.LexicalAnalyzer
+namespace LexicalAnalysis.Analyzer
 {
     public class LexicalAnalyzerResult
     {

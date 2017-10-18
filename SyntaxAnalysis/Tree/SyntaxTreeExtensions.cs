@@ -1,7 +1,7 @@
 ﻿using System.Diagnostics;
 using LexicalAnalysis.Tokens;
 
-namespace SyntaxAnalysis.ST
+namespace SyntaxAnalysis.Tree
 {
     internal static class SyntaxTreeExtensions
     {

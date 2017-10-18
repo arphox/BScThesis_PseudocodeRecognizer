@@ -1,7 +1,7 @@
-﻿using LexicalAnalysis.Tokens;
-using System;
+﻿using System;
+using LexicalAnalysis.Tokens;
 
-namespace SyntaxAnalysis
+namespace SyntaxAnalysis.Analyzer
 {
     public class SyntaxAnalysisException : ApplicationException
     {

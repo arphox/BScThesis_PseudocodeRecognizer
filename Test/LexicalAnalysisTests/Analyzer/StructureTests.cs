@@ -1,8 +1,8 @@
-﻿using LexicalAnalysis.LexicalAnalyzer;
+﻿using LexicalAnalysis.Analyzer;
 using LexicalAnalysis.SymbolTableManagement;
 using NUnit.Framework;
 
-namespace LexicalAnalysisTests.LexicalAnalyzer
+namespace LexicalAnalysisTests.Analyzer
 {
     [TestFixture]
     public sealed class StructureTests
@@ -18,7 +18,7 @@ namespace LexicalAnalysisTests.LexicalAnalyzer
                                 "elágazás_vége\n" +
                                 "program_vége";
 
-            LexicalAnalyzerResult result = new LexicalAnalysis.LexicalAnalyzer.LexicalAnalyzer(code).Analyze();
+            LexicalAnalyzerResult result = new LexicalAnalyzer(code).Analyze();
 
             TokenTester tt = new TokenTester(result);
 
@@ -60,7 +60,7 @@ namespace LexicalAnalysisTests.LexicalAnalyzer
                           "ciklus_vége\n" +
                           "program_vége";
 
-            LexicalAnalyzerResult result = new LexicalAnalysis.LexicalAnalyzer.LexicalAnalyzer(code).Analyze();
+            LexicalAnalyzerResult result = new LexicalAnalyzer(code).Analyze();
 
             TokenTester tt = new TokenTester(result);
 
@@ -105,7 +105,7 @@ namespace LexicalAnalysisTests.LexicalAnalyzer
                                 "ciklus_vége\n" +
                                 "program_vége";
 
-            LexicalAnalyzerResult result = new LexicalAnalysis.LexicalAnalyzer.LexicalAnalyzer(code).Analyze();
+            LexicalAnalyzerResult result = new LexicalAnalyzer(code).Analyze();
 
             TokenTester tt = new TokenTester(result);
 

@@ -2,7 +2,7 @@
 using NUnit.Framework;
 using System;
 using System.Collections.Generic;
-using LexicalAnalysis.LexicalAnalyzer;
+using LexicalAnalysis.Analyzer;
 using LexicalAnalysis.LexicalElementIdentification;
 using LexicalAnalysis.SymbolTableManagement;
 

@@ -1,9 +1,9 @@
-﻿using NUnit.Framework;
-using System.Linq;
-using LexicalAnalysis.LexicalAnalyzer;
+﻿using System.Linq;
+using LexicalAnalysis.Analyzer;
 using LexicalAnalysis.SymbolTableManagement;
+using NUnit.Framework;
 
-namespace LexicalAnalysisTests.LexicalAnalyzer
+namespace LexicalAnalysisTests.Analyzer
 {
     [TestFixture]
     public sealed class DefinitionAndDeclarationTests
@@ -17,7 +17,7 @@ namespace LexicalAnalysisTests.LexicalAnalyzer
                           type + " óóüöúőűáéí\n" +
                           "program_vége";
 
-            LexicalAnalyzerResult result = new LexicalAnalysis.LexicalAnalyzer.LexicalAnalyzer(code).Analyze();
+            LexicalAnalyzerResult result = new LexicalAnalyzer(code).Analyze();
 
             TokenTester tt = new TokenTester(result);
 
@@ -44,7 +44,7 @@ namespace LexicalAnalysisTests.LexicalAnalyzer
                           type + "[] alma_körte\n" +
                           "program_vége";
 
-            LexicalAnalyzerResult result = new LexicalAnalysis.LexicalAnalyzer.LexicalAnalyzer(code).Analyze();
+            LexicalAnalyzerResult result = new LexicalAnalyzer(code).Analyze();
 
             TokenTester tt = new TokenTester(result);
 
@@ -71,7 +71,7 @@ namespace LexicalAnalysisTests.LexicalAnalyzer
                                 "tört s = -3,1111\n" +
                                 "program_vége";
 
-            LexicalAnalyzerResult result = new LexicalAnalysis.LexicalAnalyzer.LexicalAnalyzer(code).Analyze();
+            LexicalAnalyzerResult result = new LexicalAnalyzer(code).Analyze();
 
             TokenTester tt = new TokenTester(result);
 
@@ -100,7 +100,7 @@ namespace LexicalAnalysisTests.LexicalAnalyzer
                                 "szöveg[] sorok = létrehoz(szöveg)[97]\n" +
                                 "program_vége";
 
-            LexicalAnalyzerResult result = new LexicalAnalysis.LexicalAnalyzer.LexicalAnalyzer(code).Analyze();
+            LexicalAnalyzerResult result = new LexicalAnalyzer(code).Analyze();
 
             TokenTester tt = new TokenTester(result);
 

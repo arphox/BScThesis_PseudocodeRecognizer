@@ -4,7 +4,7 @@ using LexicalAnalysis.LexicalElementIdentification;
 using LexicalAnalysis.SymbolTableManagement;
 using LexicalAnalysis.Tokens;
 
-namespace LexicalAnalysis.LexicalAnalyzer
+namespace LexicalAnalysis.Analyzer
 {
     internal class OutputTokenListHandler
     {

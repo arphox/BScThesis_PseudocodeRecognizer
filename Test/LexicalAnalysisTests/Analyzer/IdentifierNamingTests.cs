@@ -1,7 +1,7 @@
-﻿using LexicalAnalysis.LexicalAnalyzer;
+﻿using LexicalAnalysis.Analyzer;
 using NUnit.Framework;
 
-namespace LexicalAnalysisTests.LexicalAnalyzer
+namespace LexicalAnalysisTests.Analyzer
 {
     [TestFixture]
     public sealed class IdentifierNamingTests
@@ -16,7 +16,7 @@ namespace LexicalAnalysisTests.LexicalAnalyzer
                           "egész " + identifierName + "\n" +
                           "program_vége";
 
-            LexicalAnalyzerResult result = new LexicalAnalysis.LexicalAnalyzer.LexicalAnalyzer(code).Analyze();
+            LexicalAnalyzerResult result = new LexicalAnalyzer(code).Analyze();
 
             TokenTester tt = new TokenTester(result);
 
@@ -42,7 +42,7 @@ namespace LexicalAnalysisTests.LexicalAnalyzer
                           "egész " + identifierName + "\n" +
                           "program_vége";
 
-            LexicalAnalyzerResult result = new LexicalAnalysis.LexicalAnalyzer.LexicalAnalyzer(code).Analyze();
+            LexicalAnalyzerResult result = new LexicalAnalyzer(code).Analyze();
 
             TokenTester tt = new TokenTester(result);
 

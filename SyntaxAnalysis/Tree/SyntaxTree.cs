@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 
-namespace SyntaxAnalysis.ST
+namespace SyntaxAnalysis.Tree
 {
     public sealed class SyntaxTree<T>
     {

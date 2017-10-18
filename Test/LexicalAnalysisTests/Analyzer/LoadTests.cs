@@ -1,9 +1,9 @@
-﻿using LexicalAnalysis.Tokens;
+﻿using System.Linq;
+using LexicalAnalysis.Analyzer;
+using LexicalAnalysis.Tokens;
 using NUnit.Framework;
-using System.Linq;
-using LexicalAnalysis.LexicalAnalyzer;
 
-namespace LexicalAnalysisTests.LexicalAnalyzer
+namespace LexicalAnalysisTests.Analyzer
 {
     [TestFixture]
     public sealed class LoadTests
@@ -16,7 +16,7 @@ namespace LexicalAnalysisTests.LexicalAnalyzer
 
         private static void DoLoadTest(string code)
         {
-            LexicalAnalyzerResult result = new LexicalAnalysis.LexicalAnalyzer.LexicalAnalyzer(code).Analyze();
+            LexicalAnalyzerResult result = new LexicalAnalyzer(code).Analyze();
             Assert.That(result.Tokens.Any(t => t is ErrorToken), Is.False);
         }
     }

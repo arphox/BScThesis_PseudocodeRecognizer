@@ -1,6 +1,6 @@
 ﻿using LexicalAnalysis.Tokens;
-using SyntaxAnalysis.ST;
 using System.Windows.Controls;
+using SyntaxAnalysis.Tree;
 
 namespace VisualParseTree
 {

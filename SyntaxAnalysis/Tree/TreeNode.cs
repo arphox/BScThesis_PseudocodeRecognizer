@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace SyntaxAnalysis.ST
+namespace SyntaxAnalysis.Tree
 {
     public class TreeNode<T>
     {

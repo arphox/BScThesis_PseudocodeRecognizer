@@ -1,4 +1,4 @@
-﻿namespace LexicalAnalysis.LexicalAnalyzer
+﻿namespace LexicalAnalysis.Analyzer
 {
     internal struct NonWhitespaceRecognitionResult
     {

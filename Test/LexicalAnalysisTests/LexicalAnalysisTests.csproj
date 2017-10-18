@@ -45,14 +45,14 @@
     <Reference Include="System.Core" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="LexicalAnalyzer\ComplexTests.cs" />
-    <Compile Include="LexicalAnalyzer\DefinitionAndDeclarationTests.cs" />
-    <Compile Include="LexicalAnalyzer\LiteralTests.cs" />
-    <Compile Include="LexicalAnalyzer\LoadTests.cs" />
-    <Compile Include="LexicalAnalyzer\NegativeTests.cs" />
-    <Compile Include="LexicalAnalyzer\SimpleTests.cs" />
-    <Compile Include="LexicalAnalyzer\IdentifierNamingTests.cs" />
-    <Compile Include="LexicalAnalyzer\StructureTests.cs" />
+    <Compile Include="Analyzer\ComplexTests.cs" />
+    <Compile Include="Analyzer\DefinitionAndDeclarationTests.cs" />
+    <Compile Include="Analyzer\LiteralTests.cs" />
+    <Compile Include="Analyzer\LoadTests.cs" />
+    <Compile Include="Analyzer\NegativeTests.cs" />
+    <Compile Include="Analyzer\SimpleTests.cs" />
+    <Compile Include="Analyzer\IdentifierNamingTests.cs" />
+    <Compile Include="Analyzer\StructureTests.cs" />
     <Compile Include="LexicalElementCodeDictionaryTests.cs" />
     <Compile Include="Resources\LoadTests.Designer.cs">
       <AutoGen>True</AutoGen>

@@ -1,6 +1,6 @@
 ﻿using LexicalAnalysis.LexicalElementIdentification;
 
-namespace LexicalAnalysis.LexicalAnalyzer
+namespace LexicalAnalysis.Analyzer
 {
     internal static class NonWhitespaceRecognizer
     {

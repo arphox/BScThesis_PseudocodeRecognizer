@@ -1,7 +1,7 @@
 ﻿using LexicalAnalysis.Tokens;
-using SyntaxAnalysis.ST;
+using SyntaxAnalysis.Tree;
 
-namespace SyntaxAnalysis
+namespace SyntaxAnalysis.Analyzer
 {
     public struct SyntaxAnalyzerResult
     {

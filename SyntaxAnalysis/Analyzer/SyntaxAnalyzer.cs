@@ -1,12 +1,12 @@
-﻿using LexicalAnalysis.Tokens;
-using SyntaxAnalysis.ST;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using LexicalAnalysis.LexicalElementIdentification;
+using LexicalAnalysis.Tokens;
+using SyntaxAnalysis.Tree;
 using SyntaxAnalysis.Utilities;
 
-namespace SyntaxAnalysis
+namespace SyntaxAnalysis.Analyzer
 {
     /// <summary>
     /// The nonterminal matching methods are only internal so they can be tested and referenced with nameof().
@@ -41,54 +41,32 @@ namespace SyntaxAnalysis
             return new SyntaxAnalyzerResult(_syntaxTree, success);
         }
 
-        /// <summary>    Matches a terminal    </summary>
-        private bool T(string tokenName)
-        {
-            _tokenIndexer++;
-            _currentRowNumber = CurrentToken.RowNumber;
-            _syntaxTree.StartNode(CurrentToken);
-            _syntaxTree.EndNode();
-
-            bool isSuccessful = CurrentToken.Id == LexicalElementCodeDictionary.GetCode(tokenName);
-            if (!isSuccessful)
-            {
-                _syntaxTree.RemoveLastAddedNode();
-            }
-            return isSuccessful;
-        }
-
         internal bool Program()
         {
-            // <program> ::= "program_kezd" "újsor" <állítások> "program_vége"
             _syntaxTree = new SyntaxTree<Token>(new NonTerminalToken(nameof(Program), _currentRowNumber));
 
-            return T("program_kezd")
-                && T("újsor")
+            return Terminal("program_kezd")
+                && Terminal("újsor")
                 && Állítások()
-                && T("program_vége");
+                && Terminal("program_vége");
         }
 
         internal bool Állítások()
         {
-            // <állítások>      ::=     <egysorosÁllítás> <állítások>
-            //                      |   <egysorosÁllítás>
-
-            return ProductionRule(() => 
+            return Rule(() => 
                     Match(EgysorosÁllítás, Állítások)
                 ||  Match(EgysorosÁllítás));
         }
 
         internal bool EgysorosÁllítás()
         {
-            // <egysorosÁllítás>    ::=     "beolvas"
-            //                          |   "kiír"
-
-            return ProductionRule(() => 
-                    Match(() => T("beolvas")) 
-                ||  Match(() => T("kiír")));
+            return Rule(() => 
+                    Match(() => Terminal("beolvas")) 
+                ||  Match(() => Terminal("kiír")));
         }
 
-        private bool ProductionRule(Func<bool> predicate)
+        /// <summary>   Matches a production rule   </summary>
+        private bool Rule(Func<bool> predicate)
         {
             _syntaxTree.StartNonTerminalNode(_currentRowNumber);
 
@@ -103,6 +81,8 @@ namespace SyntaxAnalysis
                 return false;
             }
         }
+
+        /// <summary>   Matches predicates   </summary>
         private bool Match(params Func<bool>[] predicates)
         {
             int indexerBackup = _tokenIndexer;
@@ -123,6 +103,22 @@ namespace SyntaxAnalysis
                 _syntaxTree = backupTree;
                 return false;
             }
+        }
+
+        /// <summary>    Matches a terminal    </summary>
+        private bool Terminal(string tokenName)
+        {
+            _tokenIndexer++;
+            _currentRowNumber = CurrentToken.RowNumber;
+            _syntaxTree.StartNode(CurrentToken);
+            _syntaxTree.EndNode();
+
+            bool isSuccessful = CurrentToken.Id == LexicalElementCodeDictionary.GetCode(tokenName);
+            if (!isSuccessful)
+            {
+                _syntaxTree.RemoveLastAddedNode();
+            }
+            return isSuccessful;
         }
     }
 }

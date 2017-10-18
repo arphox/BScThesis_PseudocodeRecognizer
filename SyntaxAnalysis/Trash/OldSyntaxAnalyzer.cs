@@ -1,5 +1,4 @@
 ﻿using LexicalAnalysis.Tokens;
-using SyntaxAnalysis.ST;
 using SyntaxAnalysis.Utilities;
 using System;
 using System.Collections.Generic;
@@ -7,6 +6,8 @@ using System.Diagnostics;
 using System.Linq;
 using System.Runtime.CompilerServices;
 using LexicalAnalysis.LexicalElementIdentification;
+using SyntaxAnalysis.Analyzer;
+using SyntaxAnalysis.Tree;
 
 namespace SyntaxAnalysis.Trash
 {

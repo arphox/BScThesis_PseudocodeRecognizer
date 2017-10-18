@@ -1,12 +1,12 @@
-﻿using LexicalAnalysis.LexicalAnalyzer;
-using LexicalAnalysis.Tokens;
-using SyntaxAnalysis;
-using SyntaxAnalysis.ST;
+﻿using LexicalAnalysis.Tokens;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
+using LexicalAnalysis.Analyzer;
+using SyntaxAnalysis.Analyzer;
+using SyntaxAnalysis.Tree;
 
 namespace VisualParseTree
 {

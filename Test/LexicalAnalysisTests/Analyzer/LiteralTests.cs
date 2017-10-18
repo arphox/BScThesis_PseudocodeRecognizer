@@ -1,7 +1,7 @@
-﻿using LexicalAnalysis.LexicalAnalyzer;
+﻿using LexicalAnalysis.Analyzer;
 using NUnit.Framework;
 
-namespace LexicalAnalysisTests.LexicalAnalyzer
+namespace LexicalAnalysisTests.Analyzer
 {
     [TestFixture]
     public sealed class LiteralTests
@@ -39,7 +39,7 @@ namespace LexicalAnalysisTests.LexicalAnalyzer
                           value + "\n" +
                           "program_vége";
 
-            LexicalAnalyzerResult result = new LexicalAnalysis.LexicalAnalyzer.LexicalAnalyzer(code).Analyze();
+            LexicalAnalyzerResult result = new LexicalAnalyzer(code).Analyze();
 
             TokenTester tt = new TokenTester(result);
 
@@ -64,7 +64,7 @@ namespace LexicalAnalysisTests.LexicalAnalyzer
                            value + "\n" +
                           "program_vége";
 
-            LexicalAnalyzerResult result = new LexicalAnalysis.LexicalAnalyzer.LexicalAnalyzer(code).Analyze();
+            LexicalAnalyzerResult result = new LexicalAnalyzer(code).Analyze();
 
             TokenTester tt = new TokenTester(result);
 
@@ -90,7 +90,7 @@ namespace LexicalAnalysisTests.LexicalAnalyzer
                                 "hamis\n" +
                                 "program_vége";
 
-            LexicalAnalyzerResult result = new LexicalAnalysis.LexicalAnalyzer.LexicalAnalyzer(code).Analyze();
+            LexicalAnalyzerResult result = new LexicalAnalyzer(code).Analyze();
 
             TokenTester tt = new TokenTester(result);
 
