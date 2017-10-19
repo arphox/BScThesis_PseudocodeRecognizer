@@ -26,14 +26,14 @@ A szabályok megadása során csak a jobbrekurzió engedett meg.
 
 <AlapVáltozóDeklaráció>				::=		<AlapTípus> "azonosító" "=" <AlapKifejezés>
 
-<TömbVáltozóDeklaráció>				::=		<TömbTípus> "azonosító" "=" <TömbKifejezés>
+<TömbVáltozóDeklaráció>				::=		<TömbTípus> "azonosító" "=" <TömbLétrehozóKifejezés>
 
 <Értékadás>							::=		<AlapÉrtékadás>
 										|	<TömbÉrtékadás>
 
 <AlapÉrtékadás>						::=		"azonosító" "=" <AlapKifejezés>
 
-<TömbÉrtékadás>						::=		"azonosító" "=" <TömbKifejezés>
+<TömbÉrtékadás>						::=		"azonosító" "=" <TömbLétrehozóKifejezés>
 
 <SzámlálóCiklusInicializáló>		::=		<AlapVáltozóDeklaráció>
 										|	<AlapÉrtékadás>
@@ -41,12 +41,12 @@ A szabályok megadása során csak a jobbrekurzió engedett meg.
 <LogikaiKifejezés>					::=		<Kifejezés>
 
 <Kifejezés>							::=		<AlapKifejezés>
-										|	<TömbKifejezés>
+										|	<TömbLétrehozóKifejezés>
 
 <AlapKifejezés>						::=		"azonosító"
 										|	"literál"
 
-<TömbKifejezés>						::=		"azonosító"
+<TömbLétrehozóKifejezés>						::=		"azonosító"
 										|	"létrehoz" "[" <AlapKifejezés> "]"
 
 

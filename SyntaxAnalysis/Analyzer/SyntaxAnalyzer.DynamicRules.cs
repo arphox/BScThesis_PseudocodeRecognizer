@@ -111,7 +111,7 @@ namespace SyntaxAnalysis.Analyzer
         {
             return Rule(() =>
                    Match(AlapKifejezés)
-                || Match(TömbKifejezés));
+                || Match(TömbLétrehozóKifejezés));
         }
 
         internal bool AlapKifejezés()
@@ -121,7 +121,7 @@ namespace SyntaxAnalysis.Analyzer
                 || Match(Literál));
         }
 
-        internal bool TömbKifejezés()
+        internal bool TömbLétrehozóKifejezés()
         {
             return Rule(() =>
                    Match(() => T("azonosító"))
