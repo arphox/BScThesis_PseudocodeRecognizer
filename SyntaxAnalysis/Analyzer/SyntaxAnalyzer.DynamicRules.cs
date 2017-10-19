@@ -117,8 +117,8 @@ namespace SyntaxAnalysis.Analyzer
         internal bool AlapKifejezés()
         {
             return Rule(() =>
-                   Match(() => T("azonosító"))
-                || Match(Literál));
+                   Match(Literál)
+                || Match(() => T("azonosító")));
         }
 
         internal bool TömbLétrehozóKifejezés()

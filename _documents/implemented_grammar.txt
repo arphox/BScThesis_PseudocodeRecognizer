@@ -43,8 +43,8 @@ A szabályok megadása során csak a jobbrekurzió engedett meg.
 <Kifejezés>							::=		<AlapKifejezés>
 										|	<TömbLétrehozóKifejezés>
 
-<AlapKifejezés>						::=		"azonosító"
-										|	"literál"
+<AlapKifejezés>						::=		"literál"
+										|	"azonosító"
 
 <TömbLétrehozóKifejezés>			::=		"azonosító"
 										|	"létrehoz" "[" <AlapKifejezés> "]"
