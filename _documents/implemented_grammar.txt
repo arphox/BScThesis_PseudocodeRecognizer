@@ -46,7 +46,7 @@ A szabályok megadása során csak a jobbrekurzió engedett meg.
 <AlapKifejezés>						::=		"azonosító"
 										|	"literál"
 
-<TömbLétrehozóKifejezés>						::=		"azonosító"
+<TömbLétrehozóKifejezés>			::=		"azonosító"
 										|	"létrehoz" "[" <AlapKifejezés> "]"
 
 
