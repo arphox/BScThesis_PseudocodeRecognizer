@@ -40,27 +40,65 @@ namespace SyntaxAnalysis.Analyzer
             return Rule(() =>
                    Match(VáltozóDeklaráció)
                 || Match(VáltozóDefiníció)
-                || Match(BeágyazottÁllítás));
-        }
-
-        internal bool BeágyazottÁllítás()
-        {
-            return Rule(() =>
-                   Match(Értékadás)
-                || Match(() => T("ha"), LogikaiKifejezés, () => T("akkor"), Újsor, BeágyazottÁllítás, Újsor, () => T("különben"), Újsor, BeágyazottÁllítás, Újsor, () => T("elágazás_vége"))
-                || Match(() => T("ha"), LogikaiKifejezés, () => T("akkor"), Újsor, BeágyazottÁllítás, Újsor, () => T("elágazás_vége"))
-                || Match(() => T("ciklus_amíg"), LogikaiKifejezés, Újsor, BeágyazottÁllítás, Újsor, () => T("ciklus_vége"))
-                || Match(() => T("ciklus"), SzámlálóCiklusInicializáló, () => T("-tól"), LogikaiKifejezés, () => T("-ig"), Újsor, BeágyazottÁllítás, Újsor, () => T("ciklus_vége"))
+                || Match(Értékadás)
                 || Match(IoParancs, () => T("azonosító"))
                 || Match(() => T("kilép"))
+                || Match(() => T("ha"), LogikaiKifejezés, () => T("akkor"), Újsor, Állítás, Újsor, () => T("különben"), Újsor, Állítás, Újsor, () => T("elágazás_vége"))
+                || Match(() => T("ha"), LogikaiKifejezés, () => T("akkor"), Újsor, Állítás, Újsor, () => T("elágazás_vége"))
+                || Match(() => T("ciklus_amíg"), LogikaiKifejezés, Újsor, Állítás, Újsor, () => T("ciklus_vége"))
+                || Match(() => T("ciklus"), SzámlálóCiklusInicializáló, () => T("-tól"), LogikaiKifejezés, () => T("-ig"), Újsor, Állítás, Újsor, () => T("ciklus_vége"))
                 );
+        }
+
+        internal bool VáltozóDefiníció()
+        {
+            return Rule(() =>
+                Match(Típus, () => T("azonosító")));
+        }
+
+        internal bool VáltozóDeklaráció()
+        {
+            return Rule(() =>
+                   Match(AlapVáltozóDeklaráció)
+                || Match(TömbVáltozóDeklaráció));
+        }
+
+        internal bool AlapVáltozóDeklaráció()
+        {
+            return Rule(() =>
+                Match(AlapTípus, () => T("azonosító"), () => T("="), Kifejezés));
+        }
+
+        internal bool TömbVáltozóDeklaráció()
+        {
+            return Rule(() =>
+                Match(TömbTípus, () => T("azonosító"), () => T("="), Kifejezés));
+        }
+
+        internal bool Értékadás()
+        {
+            return Rule(() =>
+                   Match(AlapÉrtékadás)
+                || Match(TömbÉrtékadás));
+        }
+
+        internal bool AlapÉrtékadás()
+        {
+            return Rule(() =>
+                Match(() => T("azonosító"), () => T("="), Kifejezés));
+        }
+
+        internal bool TömbÉrtékadás()
+        {
+            return Rule(() =>
+                Match(() => T("azonosító"), () => T("="), Kifejezés));
         }
 
         internal bool SzámlálóCiklusInicializáló()
         {
             return Rule(() =>
-                   Match(VáltozóDeklaráció)
-                || Match(Értékadás));
+                   Match(AlapVáltozóDeklaráció)
+                || Match(AlapÉrtékadás));
         }
 
         internal bool LogikaiKifejezés()
@@ -69,29 +107,25 @@ namespace SyntaxAnalysis.Analyzer
                    Match(Kifejezés));
         }
 
-        internal bool Értékadás()
-        {
-            return Rule(() =>
-                   Match(() => T("azonosító"), () => T("="), Kifejezés));
-        }
-
-        internal bool VáltozóDeklaráció()
-        {
-            return Rule(() =>
-                   Match(Típus, () => T("azonosító"), () => T("="), Kifejezés));
-        }
-
-        internal bool VáltozóDefiníció()
-        {
-            return Rule(() =>
-                   Match(Típus, () => T("azonosító")));
-        }
-
         internal bool Kifejezés()
+        {
+            return Rule(() =>
+                   Match(AlapKifejezés)
+                || Match(TömbKifejezés));
+        }
+
+        internal bool AlapKifejezés()
         {
             return Rule(() =>
                    Match(() => T("azonosító"))
                 || Match(Literál));
+        }
+
+        internal bool TömbKifejezés()
+        {
+            return Rule(() =>
+                   Match(() => T("azonosító"))
+                || Match(() => T("létrehoz"), () => T("["), AlapKifejezés, () => T("]")));
         }
     }
 }

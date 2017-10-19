@@ -11,30 +11,43 @@ A szabályok megadása során csak a jobbrekurzió engedett meg.
 										
 <Állítás>							::=		<VáltozóDeklaráció>
 										|	<VáltozóDefiníció>
-										|	<BeágyazottÁllítás>
-
-<BeágyazottÁllítás>					::=		<Értékadás>
-										|	"ha" <LogikaiKifejezés> "akkor" "újsor" <BeágyazottÁllítás> "újsor" "különben" "újsor" <BeágyazottÁllítás> "újsor" "elágazás_vége"
-										|	"ha" <LogikaiKifejezés> "akkor" "újsor" <BeágyazottÁllítás> "újsor" "elágazás_vége"
-										|	"ciklus_amíg" <LogikaiKifejezés> "újsor" <BeágyazottÁllítás> "újsor" "ciklus_vége"
-										|	"ciklus" <SzámlálóCiklusInicializáló> "-tól" <LogikaiKifejezés> "-ig" "újsor" <BeágyazottÁllítás> "újsor" "ciklus_vége"
-										|	<IOparancs> azonosító
-										|	"kilép"
-
-<SzámlálóCiklusInicializáló>		::=		<VáltozóDeklaráció>
 										|	<Értékadás>
+										|	<IoParancs> "azonosító"
+										|	"kilép"
+										|	"ha" <LogikaiKifejezés> "akkor" "újsor" <Állítás> "újsor" "különben" "újsor" <Állítás> "újsor" "elágazás_vége"
+										|	"ha" <LogikaiKifejezés> "akkor" "újsor" <Állítás> "újsor" "elágazás_vége"
+										|	"ciklus_amíg" <LogikaiKifejezés> "újsor" <Állítás> "újsor" "ciklus_vége"
+										|	"ciklus" <SzámlálóCiklusInicializáló> "-tól" <LogikaiKifejezés> "-ig" "újsor" <Állítás> "újsor" "ciklus_vége"
+
+<VáltozóDeklaráció>					::=		<AlapVáltozóDeklaráció>
+										| 	<TömbVáltozóDeklaráció>
+
+<VáltozóDefiníció>					::=		<Típus> "azonosító"
+
+<AlapVáltozóDeklaráció>				::=		<AlapTípus> "azonosító" "=" <AlapKifejezés>
+
+<TömbVáltozóDeklaráció>				::=		<TömbTípus> "azonosító" "=" <TömbKifejezés>
+
+<Értékadás>							::=		<AlapÉrtékadás>
+										|	<TömbÉrtékadás>
+
+<AlapÉrtékadás>						::=		"azonosító" "=" <AlapKifejezés>
+
+<TömbÉrtékadás>						::=		"azonosító" "=" <TömbKifejezés>
+
+<SzámlálóCiklusInicializáló>		::=		<AlapVáltozóDeklaráció>
+										|	<AlapÉrtékadás>
 
 <LogikaiKifejezés>					::=		<Kifejezés>
 
-<Értékadás>							::=		"azonosító" "=" <Kifejezés>
+<Kifejezés>							::=		<AlapKifejezés>
+										|	<TömbKifejezés>
 
-<VáltozóDeklaráció>					::=		<Típus> "azonosító" "=" <Kifejezés>
-
-<VáltozóDefiníció>			::=		<Típus> "azonosító"
-
-<Kifejezés>							::=		"azonosító"
+<AlapKifejezés>						::=		"azonosító"
 										|	"literál"
 
+<TömbKifejezés>						::=		"azonosító"
+										|	"létrehoz" "[" <AlapKifejezés> "]"
 
 
 
@@ -55,7 +68,7 @@ A szabályok megadása során csak a jobbrekurzió engedett meg.
 										|	"szöveg tömb"
 										|	"logikai tömb"
 
-<IOparancs>							::=		"beolvas"
+<IoParancs>							::=		"beolvas"
 										|	"kiír"
 
 <BelsőFüggvény>						::=		"egészből_logikaiba"
