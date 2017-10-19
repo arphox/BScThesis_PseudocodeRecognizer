@@ -45,8 +45,6 @@ namespace SyntaxAnalysis.Analyzer
 
         internal bool BeágyazottÁllítás()
         {
-            0 = 2;
-
             return Rule(() =>
                    Match(Értékadás)
                 || Match(() => T("ha"), LogikaiKifejezés, () => T("akkor"), Újsor, BeágyazottÁllítás, Újsor, () => T("különben"), Újsor, BeágyazottÁllítás, Újsor, () => T("elágazás_vége"))
