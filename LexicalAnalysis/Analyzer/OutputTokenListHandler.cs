@@ -72,20 +72,20 @@ namespace LexicalAnalysis.Analyzer
             _symbolTableHandler.InsertNewSymbolTableEntry(name, code, currentRowNumber);
             int insertedId = _symbolTableHandler.LastInsertedSymbolId;
             int identifierCode = LexicalElementCodeDictionary.GetCode("azonosító");
-            _outputTokens.Add(new IdentifierToken(identifierCode, insertedId, currentRowNumber));
+            _outputTokens.Add(new IdentifierToken(identifierCode, insertedId, name, currentRowNumber));
         }
 
-        private void AddExistingIdentifier(string symbolName, int symbolTableId, int currentRowNumber)
+        private void AddExistingIdentifier(string name, int symbolId, int currentRowNumber)
         {
             int type = _outputTokens.FindTypeOfIdentifierAtLastPosition();
             if (type != LexicalElementCodeDictionary.ErrorCode)
             {
-                _outputTokens.Add(new ErrorToken(ErrorTokenType.CannotRedefineVariable, currentRowNumber, $"Variable name: {symbolName}"));
+                _outputTokens.Add(new ErrorToken(ErrorTokenType.CannotRedefineVariable, currentRowNumber, $"Variable name: {name}"));
             }
             else
             {
                 int code = LexicalElementCodeDictionary.GetCode("azonosító");
-                _outputTokens.Add(new IdentifierToken(code, symbolTableId, currentRowNumber));
+                _outputTokens.Add(new IdentifierToken(code, symbolId, name, currentRowNumber));
             }
         }
     }
