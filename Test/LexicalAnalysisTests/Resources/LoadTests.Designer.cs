@@ -72,7 +72,7 @@ namespace LexicalAnalysisTests.Resources {
         ///
         ///// Létrehozás
         ///N = 10
-        ///tömb = létrehoz(egész)[N]
+        ///tömb = létrehoz[N]
         ///
         ///// Feltöltés
         ///ciklus egész i = 0-tól i &lt; N-ig
@@ -89,7 +89,8 @@ namespace LexicalAnalysisTests.Resources {
         ///// Megszámlálás
         ///darab = 0
         ///ciklus egész i = 0-tól i&lt; N-ig
-        ///	ha tömb[i] mod 2 == 0  [rest of string was truncated]&quot;;.
+        ///	ha tömb[i] mod 2 == 0 akkor
+        /// [rest of string was truncated]&quot;;.
         /// </summary>
         internal static string loadtest10k {
             get {
@@ -109,7 +110,7 @@ namespace LexicalAnalysisTests.Resources {
         ///
         ///// Létrehozás
         ///N = 10
-        ///tömb = létrehoz(egész)[N]
+        ///tömb = létrehoz[N]
         ///
         ///// Feltöltés
         ///ciklus egész i = 0-tól i &lt; N-ig
@@ -126,7 +127,8 @@ namespace LexicalAnalysisTests.Resources {
         ///// Megszámlálás
         ///darab = 0
         ///ciklus egész i = 0-tól i&lt; N-ig
-        ///	ha tömb[i] mod 2 == 0  [rest of string was truncated]&quot;;.
+        ///	ha tömb[i] mod 2 == 0 akkor
+        /// [rest of string was truncated]&quot;;.
         /// </summary>
         internal static string loadtest1k {
             get {

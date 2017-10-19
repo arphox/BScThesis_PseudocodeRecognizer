@@ -129,7 +129,7 @@ egész maxi
 
 // Létrehozás
 N = 10
-tömb = létrehoz(egész)[N]
+tömb = létrehoz[N]
 
 // Feltöltés
 ciklus egész i = 0-tól i &lt; N-ig
@@ -163,7 +163,7 @@ kiír: "A tömb legnagyobb eleme: tömb[" . maxi . "] = " . tömb[maxi] . "."
 
 // Létrehozás
 N = 10
-tömb = létrehoz(egész)[N]
+tömb = létrehoz[N]
 
 // Feltöltés
 ciklus egész i = 0-tól i &lt; N-ig
@@ -197,7 +197,7 @@ kiír: "A tömb legnagyobb eleme: tömb[" . maxi . "] = " . tömb[maxi] . "."
 
 // Létrehozás
 N = 10
-tömb = létrehoz(egész)[N]
+tömb = létrehoz[N]
 
 // Feltöltés
 ciklus egész i = 0-tól i &lt; N-ig
@@ -231,7 +231,7 @@ kiír: "A tömb legnagyobb eleme: tömb[" . maxi . "] = " . tömb[maxi] . "."
 
 // Létrehozás
 N = 10
-tömb = létrehoz(egész)[N]
+tömb = létrehoz[N]
 
 // Feltöltés
 ciklus egész i = 0-tól i &lt; N-ig
@@ -265,7 +265,7 @@ kiír: "A tömb legnagyobb eleme: tömb[" . maxi . "] = " . tömb[maxi] . "."
 
 // Létrehozás
 N = 10
-tömb = létrehoz(egész)[N]
+tömb = létrehoz[N]
 
 // Feltöltés
 ciklus egész i = 0-tól i &lt; N-ig
@@ -299,7 +299,7 @@ kiír: "A tömb legnagyobb eleme: tömb[" . maxi . "] = " . tömb[maxi] . "."
 
 // Létrehozás
 N = 10
-tömb = létrehoz(egész)[N]
+tömb = létrehoz[N]
 
 // Feltöltés
 ciklus egész i = 0-tól i &lt; N-ig
@@ -333,7 +333,7 @@ kiír: "A tömb legnagyobb eleme: tömb[" . maxi . "] = " . tömb[maxi] . "."
 
 // Létrehozás
 N = 10
-tömb = létrehoz(egész)[N]
+tömb = létrehoz[N]
 
 // Feltöltés
 ciklus egész i = 0-tól i &lt; N-ig
@@ -367,7 +367,7 @@ kiír: "A tömb legnagyobb eleme: tömb[" . maxi . "] = " . tömb[maxi] . "."
 
 // Létrehozás
 N = 10
-tömb = létrehoz(egész)[N]
+tömb = létrehoz[N]
 
 // Feltöltés
 ciklus egész i = 0-tól i &lt; N-ig
@@ -401,7 +401,7 @@ kiír: "A tömb legnagyobb eleme: tömb[" . maxi . "] = " . tömb[maxi] . "."
 
 // Létrehozás
 N = 10
-tömb = létrehoz(egész)[N]
+tömb = létrehoz[N]
 
 // Feltöltés
 ciklus egész i = 0-tól i &lt; N-ig
@@ -435,7 +435,7 @@ kiír: "A tömb legnagyobb eleme: tömb[" . maxi . "] = " . tömb[maxi] . "."
 
 // Létrehozás
 N = 10
-tömb = létrehoz(egész)[N]
+tömb = létrehoz[N]
 
 // Feltöltés
 ciklus egész i = 0-tól i &lt; N-ig
@@ -469,7 +469,7 @@ kiír: "A tömb legnagyobb eleme: tömb[" . maxi . "] = " . tömb[maxi] . "."
 
 // Létrehozás
 N = 10
-tömb = létrehoz(egész)[N]
+tömb = létrehoz[N]
 
 // Feltöltés
 ciklus egész i = 0-tól i &lt; N-ig
@@ -503,7 +503,7 @@ kiír: "A tömb legnagyobb eleme: tömb[" . maxi . "] = " . tömb[maxi] . "."
 
 // Létrehozás
 N = 10
-tömb = létrehoz(egész)[N]
+tömb = létrehoz[N]
 
 // Feltöltés
 ciklus egész i = 0-tól i &lt; N-ig
@@ -537,7 +537,7 @@ kiír: "A tömb legnagyobb eleme: tömb[" . maxi . "] = " . tömb[maxi] . "."
 
 // Létrehozás
 N = 10
-tömb = létrehoz(egész)[N]
+tömb = létrehoz[N]
 
 // Feltöltés
 ciklus egész i = 0-tól i &lt; N-ig
@@ -571,7 +571,7 @@ kiír: "A tömb legnagyobb eleme: tömb[" . maxi . "] = " . tömb[maxi] . "."
 
 // Létrehozás
 N = 10
-tömb = létrehoz(egész)[N]
+tömb = létrehoz[N]
 
 // Feltöltés
 ciklus egész i = 0-tól i &lt; N-ig
@@ -605,7 +605,7 @@ kiír: "A tömb legnagyobb eleme: tömb[" . maxi . "] = " . tömb[maxi] . "."
 
 // Létrehozás
 N = 10
-tömb = létrehoz(egész)[N]
+tömb = létrehoz[N]
 
 // Feltöltés
 ciklus egész i = 0-tól i &lt; N-ig
@@ -639,7 +639,7 @@ kiír: "A tömb legnagyobb eleme: tömb[" . maxi . "] = " . tömb[maxi] . "."
 
 // Létrehozás
 N = 10
-tömb = létrehoz(egész)[N]
+tömb = létrehoz[N]
 
 // Feltöltés
 ciklus egész i = 0-tól i &lt; N-ig
@@ -673,7 +673,7 @@ kiír: "A tömb legnagyobb eleme: tömb[" . maxi . "] = " . tömb[maxi] . "."
 
 // Létrehozás
 N = 10
-tömb = létrehoz(egész)[N]
+tömb = létrehoz[N]
 
 // Feltöltés
 ciklus egész i = 0-tól i &lt; N-ig
@@ -707,7 +707,7 @@ kiír: "A tömb legnagyobb eleme: tömb[" . maxi . "] = " . tömb[maxi] . "."
 
 // Létrehozás
 N = 10
-tömb = létrehoz(egész)[N]
+tömb = létrehoz[N]
 
 // Feltöltés
 ciklus egész i = 0-tól i &lt; N-ig
@@ -741,7 +741,7 @@ kiír: "A tömb legnagyobb eleme: tömb[" . maxi . "] = " . tömb[maxi] . "."
 
 // Létrehozás
 N = 10
-tömb = létrehoz(egész)[N]
+tömb = létrehoz[N]
 
 // Feltöltés
 ciklus egész i = 0-tól i &lt; N-ig
@@ -775,7 +775,7 @@ kiír: "A tömb legnagyobb eleme: tömb[" . maxi . "] = " . tömb[maxi] . "."
 
 // Létrehozás
 N = 10
-tömb = létrehoz(egész)[N]
+tömb = létrehoz[N]
 
 // Feltöltés
 ciklus egész i = 0-tól i &lt; N-ig
@@ -809,7 +809,7 @@ kiír: "A tömb legnagyobb eleme: tömb[" . maxi . "] = " . tömb[maxi] . "."
 
 // Létrehozás
 N = 10
-tömb = létrehoz(egész)[N]
+tömb = létrehoz[N]
 
 // Feltöltés
 ciklus egész i = 0-tól i &lt; N-ig
@@ -843,7 +843,7 @@ kiír: "A tömb legnagyobb eleme: tömb[" . maxi . "] = " . tömb[maxi] . "."
 
 // Létrehozás
 N = 10
-tömb = létrehoz(egész)[N]
+tömb = létrehoz[N]
 
 // Feltöltés
 ciklus egész i = 0-tól i &lt; N-ig
@@ -877,7 +877,7 @@ kiír: "A tömb legnagyobb eleme: tömb[" . maxi . "] = " . tömb[maxi] . "."
 
 // Létrehozás
 N = 10
-tömb = létrehoz(egész)[N]
+tömb = létrehoz[N]
 
 // Feltöltés
 ciklus egész i = 0-tól i &lt; N-ig
@@ -911,7 +911,7 @@ kiír: "A tömb legnagyobb eleme: tömb[" . maxi . "] = " . tömb[maxi] . "."
 
 // Létrehozás
 N = 10
-tömb = létrehoz(egész)[N]
+tömb = létrehoz[N]
 
 // Feltöltés
 ciklus egész i = 0-tól i &lt; N-ig
@@ -945,7 +945,7 @@ kiír: "A tömb legnagyobb eleme: tömb[" . maxi . "] = " . tömb[maxi] . "."
 
 // Létrehozás
 N = 10
-tömb = létrehoz(egész)[N]
+tömb = létrehoz[N]
 
 // Feltöltés
 ciklus egész i = 0-tól i &lt; N-ig
@@ -979,7 +979,7 @@ kiír: "A tömb legnagyobb eleme: tömb[" . maxi . "] = " . tömb[maxi] . "."
 
 // Létrehozás
 N = 10
-tömb = létrehoz(egész)[N]
+tömb = létrehoz[N]
 
 // Feltöltés
 ciklus egész i = 0-tól i &lt; N-ig
@@ -1013,7 +1013,7 @@ kiír: "A tömb legnagyobb eleme: tömb[" . maxi . "] = " . tömb[maxi] . "."
 
 // Létrehozás
 N = 10
-tömb = létrehoz(egész)[N]
+tömb = létrehoz[N]
 
 // Feltöltés
 ciklus egész i = 0-tól i &lt; N-ig
@@ -1047,7 +1047,7 @@ kiír: "A tömb legnagyobb eleme: tömb[" . maxi . "] = " . tömb[maxi] . "."
 
 // Létrehozás
 N = 10
-tömb = létrehoz(egész)[N]
+tömb = létrehoz[N]
 
 // Feltöltés
 ciklus egész i = 0-tól i &lt; N-ig
@@ -1081,7 +1081,7 @@ kiír: "A tömb legnagyobb eleme: tömb[" . maxi . "] = " . tömb[maxi] . "."
 
 // Létrehozás
 N = 10
-tömb = létrehoz(egész)[N]
+tömb = létrehoz[N]
 
 // Feltöltés
 ciklus egész i = 0-tól i &lt; N-ig
@@ -1115,7 +1115,7 @@ kiír: "A tömb legnagyobb eleme: tömb[" . maxi . "] = " . tömb[maxi] . "."
 
 // Létrehozás
 N = 10
-tömb = létrehoz(egész)[N]
+tömb = létrehoz[N]
 
 // Feltöltés
 ciklus egész i = 0-tól i &lt; N-ig
@@ -1149,7 +1149,7 @@ kiír: "A tömb legnagyobb eleme: tömb[" . maxi . "] = " . tömb[maxi] . "."
 
 // Létrehozás
 N = 10
-tömb = létrehoz(egész)[N]
+tömb = létrehoz[N]
 
 // Feltöltés
 ciklus egész i = 0-tól i &lt; N-ig
@@ -1183,7 +1183,7 @@ kiír: "A tömb legnagyobb eleme: tömb[" . maxi . "] = " . tömb[maxi] . "."
 
 // Létrehozás
 N = 10
-tömb = létrehoz(egész)[N]
+tömb = létrehoz[N]
 
 // Feltöltés
 ciklus egész i = 0-tól i &lt; N-ig
@@ -1217,7 +1217,7 @@ kiír: "A tömb legnagyobb eleme: tömb[" . maxi . "] = " . tömb[maxi] . "."
 
 // Létrehozás
 N = 10
-tömb = létrehoz(egész)[N]
+tömb = létrehoz[N]
 
 // Feltöltés
 ciklus egész i = 0-tól i &lt; N-ig
@@ -1251,7 +1251,7 @@ kiír: "A tömb legnagyobb eleme: tömb[" . maxi . "] = " . tömb[maxi] . "."
 
 // Létrehozás
 N = 10
-tömb = létrehoz(egész)[N]
+tömb = létrehoz[N]
 
 // Feltöltés
 ciklus egész i = 0-tól i &lt; N-ig
@@ -1285,7 +1285,7 @@ kiír: "A tömb legnagyobb eleme: tömb[" . maxi . "] = " . tömb[maxi] . "."
 
 // Létrehozás
 N = 10
-tömb = létrehoz(egész)[N]
+tömb = létrehoz[N]
 
 // Feltöltés
 ciklus egész i = 0-tól i &lt; N-ig
@@ -1319,7 +1319,7 @@ kiír: "A tömb legnagyobb eleme: tömb[" . maxi . "] = " . tömb[maxi] . "."
 
 // Létrehozás
 N = 10
-tömb = létrehoz(egész)[N]
+tömb = létrehoz[N]
 
 // Feltöltés
 ciklus egész i = 0-tól i &lt; N-ig
@@ -1353,7 +1353,7 @@ kiír: "A tömb legnagyobb eleme: tömb[" . maxi . "] = " . tömb[maxi] . "."
 
 // Létrehozás
 N = 10
-tömb = létrehoz(egész)[N]
+tömb = létrehoz[N]
 
 // Feltöltés
 ciklus egész i = 0-tól i &lt; N-ig
@@ -1387,7 +1387,7 @@ kiír: "A tömb legnagyobb eleme: tömb[" . maxi . "] = " . tömb[maxi] . "."
 
 // Létrehozás
 N = 10
-tömb = létrehoz(egész)[N]
+tömb = létrehoz[N]
 
 // Feltöltés
 ciklus egész i = 0-tól i &lt; N-ig
@@ -1421,7 +1421,7 @@ kiír: "A tömb legnagyobb eleme: tömb[" . maxi . "] = " . tömb[maxi] . "."
 
 // Létrehozás
 N = 10
-tömb = létrehoz(egész)[N]
+tömb = létrehoz[N]
 
 // Feltöltés
 ciklus egész i = 0-tól i &lt; N-ig
@@ -1455,7 +1455,7 @@ kiír: "A tömb legnagyobb eleme: tömb[" . maxi . "] = " . tömb[maxi] . "."
 
 // Létrehozás
 N = 10
-tömb = létrehoz(egész)[N]
+tömb = létrehoz[N]
 
 // Feltöltés
 ciklus egész i = 0-tól i &lt; N-ig
@@ -1489,7 +1489,7 @@ kiír: "A tömb legnagyobb eleme: tömb[" . maxi . "] = " . tömb[maxi] . "."
 
 // Létrehozás
 N = 10
-tömb = létrehoz(egész)[N]
+tömb = létrehoz[N]
 
 // Feltöltés
 ciklus egész i = 0-tól i &lt; N-ig
@@ -1523,7 +1523,7 @@ kiír: "A tömb legnagyobb eleme: tömb[" . maxi . "] = " . tömb[maxi] . "."
 
 // Létrehozás
 N = 10
-tömb = létrehoz(egész)[N]
+tömb = létrehoz[N]
 
 // Feltöltés
 ciklus egész i = 0-tól i &lt; N-ig
@@ -1557,7 +1557,7 @@ kiír: "A tömb legnagyobb eleme: tömb[" . maxi . "] = " . tömb[maxi] . "."
 
 // Létrehozás
 N = 10
-tömb = létrehoz(egész)[N]
+tömb = létrehoz[N]
 
 // Feltöltés
 ciklus egész i = 0-tól i &lt; N-ig
@@ -1591,7 +1591,7 @@ kiír: "A tömb legnagyobb eleme: tömb[" . maxi . "] = " . tömb[maxi] . "."
 
 // Létrehozás
 N = 10
-tömb = létrehoz(egész)[N]
+tömb = létrehoz[N]
 
 // Feltöltés
 ciklus egész i = 0-tól i &lt; N-ig
@@ -1625,7 +1625,7 @@ kiír: "A tömb legnagyobb eleme: tömb[" . maxi . "] = " . tömb[maxi] . "."
 
 // Létrehozás
 N = 10
-tömb = létrehoz(egész)[N]
+tömb = létrehoz[N]
 
 // Feltöltés
 ciklus egész i = 0-tól i &lt; N-ig
@@ -1659,7 +1659,7 @@ kiír: "A tömb legnagyobb eleme: tömb[" . maxi . "] = " . tömb[maxi] . "."
 
 // Létrehozás
 N = 10
-tömb = létrehoz(egész)[N]
+tömb = létrehoz[N]
 
 // Feltöltés
 ciklus egész i = 0-tól i &lt; N-ig
@@ -1693,7 +1693,7 @@ kiír: "A tömb legnagyobb eleme: tömb[" . maxi . "] = " . tömb[maxi] . "."
 
 // Létrehozás
 N = 10
-tömb = létrehoz(egész)[N]
+tömb = létrehoz[N]
 
 // Feltöltés
 ciklus egész i = 0-tól i &lt; N-ig
@@ -1727,7 +1727,7 @@ kiír: "A tömb legnagyobb eleme: tömb[" . maxi . "] = " . tömb[maxi] . "."
 
 // Létrehozás
 N = 10
-tömb = létrehoz(egész)[N]
+tömb = létrehoz[N]
 
 // Feltöltés
 ciklus egész i = 0-tól i &lt; N-ig
@@ -1761,7 +1761,7 @@ kiír: "A tömb legnagyobb eleme: tömb[" . maxi . "] = " . tömb[maxi] . "."
 
 // Létrehozás
 N = 10
-tömb = létrehoz(egész)[N]
+tömb = létrehoz[N]
 
 // Feltöltés
 ciklus egész i = 0-tól i &lt; N-ig
@@ -1795,7 +1795,7 @@ kiír: "A tömb legnagyobb eleme: tömb[" . maxi . "] = " . tömb[maxi] . "."
 
 // Létrehozás
 N = 10
-tömb = létrehoz(egész)[N]
+tömb = létrehoz[N]
 
 // Feltöltés
 ciklus egész i = 0-tól i &lt; N-ig
@@ -1829,7 +1829,7 @@ kiír: "A tömb legnagyobb eleme: tömb[" . maxi . "] = " . tömb[maxi] . "."
 
 // Létrehozás
 N = 10
-tömb = létrehoz(egész)[N]
+tömb = létrehoz[N]
 
 // Feltöltés
 ciklus egész i = 0-tól i &lt; N-ig
@@ -1863,7 +1863,7 @@ kiír: "A tömb legnagyobb eleme: tömb[" . maxi . "] = " . tömb[maxi] . "."
 
 // Létrehozás
 N = 10
-tömb = létrehoz(egész)[N]
+tömb = létrehoz[N]
 
 // Feltöltés
 ciklus egész i = 0-tól i &lt; N-ig
@@ -1897,7 +1897,7 @@ kiír: "A tömb legnagyobb eleme: tömb[" . maxi . "] = " . tömb[maxi] . "."
 
 // Létrehozás
 N = 10
-tömb = létrehoz(egész)[N]
+tömb = létrehoz[N]
 
 // Feltöltés
 ciklus egész i = 0-tól i &lt; N-ig
@@ -1931,7 +1931,7 @@ kiír: "A tömb legnagyobb eleme: tömb[" . maxi . "] = " . tömb[maxi] . "."
 
 // Létrehozás
 N = 10
-tömb = létrehoz(egész)[N]
+tömb = létrehoz[N]
 
 // Feltöltés
 ciklus egész i = 0-tól i &lt; N-ig
@@ -1965,7 +1965,7 @@ kiír: "A tömb legnagyobb eleme: tömb[" . maxi . "] = " . tömb[maxi] . "."
 
 // Létrehozás
 N = 10
-tömb = létrehoz(egész)[N]
+tömb = létrehoz[N]
 
 // Feltöltés
 ciklus egész i = 0-tól i &lt; N-ig
@@ -1999,7 +1999,7 @@ kiír: "A tömb legnagyobb eleme: tömb[" . maxi . "] = " . tömb[maxi] . "."
 
 // Létrehozás
 N = 10
-tömb = létrehoz(egész)[N]
+tömb = létrehoz[N]
 
 // Feltöltés
 ciklus egész i = 0-tól i &lt; N-ig
@@ -2033,7 +2033,7 @@ kiír: "A tömb legnagyobb eleme: tömb[" . maxi . "] = " . tömb[maxi] . "."
 
 // Létrehozás
 N = 10
-tömb = létrehoz(egész)[N]
+tömb = létrehoz[N]
 
 // Feltöltés
 ciklus egész i = 0-tól i &lt; N-ig
@@ -2067,7 +2067,7 @@ kiír: "A tömb legnagyobb eleme: tömb[" . maxi . "] = " . tömb[maxi] . "."
 
 // Létrehozás
 N = 10
-tömb = létrehoz(egész)[N]
+tömb = létrehoz[N]
 
 // Feltöltés
 ciklus egész i = 0-tól i &lt; N-ig
@@ -2101,7 +2101,7 @@ kiír: "A tömb legnagyobb eleme: tömb[" . maxi . "] = " . tömb[maxi] . "."
 
 // Létrehozás
 N = 10
-tömb = létrehoz(egész)[N]
+tömb = létrehoz[N]
 
 // Feltöltés
 ciklus egész i = 0-tól i &lt; N-ig
@@ -2135,7 +2135,7 @@ kiír: "A tömb legnagyobb eleme: tömb[" . maxi . "] = " . tömb[maxi] . "."
 
 // Létrehozás
 N = 10
-tömb = létrehoz(egész)[N]
+tömb = létrehoz[N]
 
 // Feltöltés
 ciklus egész i = 0-tól i &lt; N-ig
@@ -2169,7 +2169,7 @@ kiír: "A tömb legnagyobb eleme: tömb[" . maxi . "] = " . tömb[maxi] . "."
 
 // Létrehozás
 N = 10
-tömb = létrehoz(egész)[N]
+tömb = létrehoz[N]
 
 // Feltöltés
 ciklus egész i = 0-tól i &lt; N-ig
@@ -2203,7 +2203,7 @@ kiír: "A tömb legnagyobb eleme: tömb[" . maxi . "] = " . tömb[maxi] . "."
 
 // Létrehozás
 N = 10
-tömb = létrehoz(egész)[N]
+tömb = létrehoz[N]
 
 // Feltöltés
 ciklus egész i = 0-tól i &lt; N-ig
@@ -2237,7 +2237,7 @@ kiír: "A tömb legnagyobb eleme: tömb[" . maxi . "] = " . tömb[maxi] . "."
 
 // Létrehozás
 N = 10
-tömb = létrehoz(egész)[N]
+tömb = létrehoz[N]
 
 // Feltöltés
 ciklus egész i = 0-tól i &lt; N-ig
@@ -2271,7 +2271,7 @@ kiír: "A tömb legnagyobb eleme: tömb[" . maxi . "] = " . tömb[maxi] . "."
 
 // Létrehozás
 N = 10
-tömb = létrehoz(egész)[N]
+tömb = létrehoz[N]
 
 // Feltöltés
 ciklus egész i = 0-tól i &lt; N-ig
@@ -2305,7 +2305,7 @@ kiír: "A tömb legnagyobb eleme: tömb[" . maxi . "] = " . tömb[maxi] . "."
 
 // Létrehozás
 N = 10
-tömb = létrehoz(egész)[N]
+tömb = létrehoz[N]
 
 // Feltöltés
 ciklus egész i = 0-tól i &lt; N-ig
@@ -2339,7 +2339,7 @@ kiír: "A tömb legnagyobb eleme: tömb[" . maxi . "] = " . tömb[maxi] . "."
 
 // Létrehozás
 N = 10
-tömb = létrehoz(egész)[N]
+tömb = létrehoz[N]
 
 // Feltöltés
 ciklus egész i = 0-tól i &lt; N-ig
@@ -2373,7 +2373,7 @@ kiír: "A tömb legnagyobb eleme: tömb[" . maxi . "] = " . tömb[maxi] . "."
 
 // Létrehozás
 N = 10
-tömb = létrehoz(egész)[N]
+tömb = létrehoz[N]
 
 // Feltöltés
 ciklus egész i = 0-tól i &lt; N-ig
@@ -2407,7 +2407,7 @@ kiír: "A tömb legnagyobb eleme: tömb[" . maxi . "] = " . tömb[maxi] . "."
 
 // Létrehozás
 N = 10
-tömb = létrehoz(egész)[N]
+tömb = létrehoz[N]
 
 // Feltöltés
 ciklus egész i = 0-tól i &lt; N-ig
@@ -2441,7 +2441,7 @@ kiír: "A tömb legnagyobb eleme: tömb[" . maxi . "] = " . tömb[maxi] . "."
 
 // Létrehozás
 N = 10
-tömb = létrehoz(egész)[N]
+tömb = létrehoz[N]
 
 // Feltöltés
 ciklus egész i = 0-tól i &lt; N-ig
@@ -2475,7 +2475,7 @@ kiír: "A tömb legnagyobb eleme: tömb[" . maxi . "] = " . tömb[maxi] . "."
 
 // Létrehozás
 N = 10
-tömb = létrehoz(egész)[N]
+tömb = létrehoz[N]
 
 // Feltöltés
 ciklus egész i = 0-tól i &lt; N-ig
@@ -2509,7 +2509,7 @@ kiír: "A tömb legnagyobb eleme: tömb[" . maxi . "] = " . tömb[maxi] . "."
 
 // Létrehozás
 N = 10
-tömb = létrehoz(egész)[N]
+tömb = létrehoz[N]
 
 // Feltöltés
 ciklus egész i = 0-tól i &lt; N-ig
@@ -2543,7 +2543,7 @@ kiír: "A tömb legnagyobb eleme: tömb[" . maxi . "] = " . tömb[maxi] . "."
 
 // Létrehozás
 N = 10
-tömb = létrehoz(egész)[N]
+tömb = létrehoz[N]
 
 // Feltöltés
 ciklus egész i = 0-tól i &lt; N-ig
@@ -2577,7 +2577,7 @@ kiír: "A tömb legnagyobb eleme: tömb[" . maxi . "] = " . tömb[maxi] . "."
 
 // Létrehozás
 N = 10
-tömb = létrehoz(egész)[N]
+tömb = létrehoz[N]
 
 // Feltöltés
 ciklus egész i = 0-tól i &lt; N-ig
@@ -2611,7 +2611,7 @@ kiír: "A tömb legnagyobb eleme: tömb[" . maxi . "] = " . tömb[maxi] . "."
 
 // Létrehozás
 N = 10
-tömb = létrehoz(egész)[N]
+tömb = létrehoz[N]
 
 // Feltöltés
 ciklus egész i = 0-tól i &lt; N-ig
@@ -2645,7 +2645,7 @@ kiír: "A tömb legnagyobb eleme: tömb[" . maxi . "] = " . tömb[maxi] . "."
 
 // Létrehozás
 N = 10
-tömb = létrehoz(egész)[N]
+tömb = létrehoz[N]
 
 // Feltöltés
 ciklus egész i = 0-tól i &lt; N-ig
@@ -2679,7 +2679,7 @@ kiír: "A tömb legnagyobb eleme: tömb[" . maxi . "] = " . tömb[maxi] . "."
 
 // Létrehozás
 N = 10
-tömb = létrehoz(egész)[N]
+tömb = létrehoz[N]
 
 // Feltöltés
 ciklus egész i = 0-tól i &lt; N-ig
@@ -2713,7 +2713,7 @@ kiír: "A tömb legnagyobb eleme: tömb[" . maxi . "] = " . tömb[maxi] . "."
 
 // Létrehozás
 N = 10
-tömb = létrehoz(egész)[N]
+tömb = létrehoz[N]
 
 // Feltöltés
 ciklus egész i = 0-tól i &lt; N-ig
@@ -2747,7 +2747,7 @@ kiír: "A tömb legnagyobb eleme: tömb[" . maxi . "] = " . tömb[maxi] . "."
 
 // Létrehozás
 N = 10
-tömb = létrehoz(egész)[N]
+tömb = létrehoz[N]
 
 // Feltöltés
 ciklus egész i = 0-tól i &lt; N-ig
@@ -2781,7 +2781,7 @@ kiír: "A tömb legnagyobb eleme: tömb[" . maxi . "] = " . tömb[maxi] . "."
 
 // Létrehozás
 N = 10
-tömb = létrehoz(egész)[N]
+tömb = létrehoz[N]
 
 // Feltöltés
 ciklus egész i = 0-tól i &lt; N-ig
@@ -2815,7 +2815,7 @@ kiír: "A tömb legnagyobb eleme: tömb[" . maxi . "] = " . tömb[maxi] . "."
 
 // Létrehozás
 N = 10
-tömb = létrehoz(egész)[N]
+tömb = létrehoz[N]
 
 // Feltöltés
 ciklus egész i = 0-tól i &lt; N-ig
@@ -2849,7 +2849,7 @@ kiír: "A tömb legnagyobb eleme: tömb[" . maxi . "] = " . tömb[maxi] . "."
 
 // Létrehozás
 N = 10
-tömb = létrehoz(egész)[N]
+tömb = létrehoz[N]
 
 // Feltöltés
 ciklus egész i = 0-tól i &lt; N-ig
@@ -2883,7 +2883,7 @@ kiír: "A tömb legnagyobb eleme: tömb[" . maxi . "] = " . tömb[maxi] . "."
 
 // Létrehozás
 N = 10
-tömb = létrehoz(egész)[N]
+tömb = létrehoz[N]
 
 // Feltöltés
 ciklus egész i = 0-tól i &lt; N-ig
@@ -2917,7 +2917,7 @@ kiír: "A tömb legnagyobb eleme: tömb[" . maxi . "] = " . tömb[maxi] . "."
 
 // Létrehozás
 N = 10
-tömb = létrehoz(egész)[N]
+tömb = létrehoz[N]
 
 // Feltöltés
 ciklus egész i = 0-tól i &lt; N-ig
@@ -2951,7 +2951,7 @@ kiír: "A tömb legnagyobb eleme: tömb[" . maxi . "] = " . tömb[maxi] . "."
 
 // Létrehozás
 N = 10
-tömb = létrehoz(egész)[N]
+tömb = létrehoz[N]
 
 // Feltöltés
 ciklus egész i = 0-tól i &lt; N-ig
@@ -2985,7 +2985,7 @@ kiír: "A tömb legnagyobb eleme: tömb[" . maxi . "] = " . tömb[maxi] . "."
 
 // Létrehozás
 N = 10
-tömb = létrehoz(egész)[N]
+tömb = létrehoz[N]
 
 // Feltöltés
 ciklus egész i = 0-tól i &lt; N-ig
@@ -3019,7 +3019,7 @@ kiír: "A tömb legnagyobb eleme: tömb[" . maxi . "] = " . tömb[maxi] . "."
 
 // Létrehozás
 N = 10
-tömb = létrehoz(egész)[N]
+tömb = létrehoz[N]
 
 // Feltöltés
 ciklus egész i = 0-tól i &lt; N-ig
@@ -3053,7 +3053,7 @@ kiír: "A tömb legnagyobb eleme: tömb[" . maxi . "] = " . tömb[maxi] . "."
 
 // Létrehozás
 N = 10
-tömb = létrehoz(egész)[N]
+tömb = létrehoz[N]
 
 // Feltöltés
 ciklus egész i = 0-tól i &lt; N-ig
@@ -3087,7 +3087,7 @@ kiír: "A tömb legnagyobb eleme: tömb[" . maxi . "] = " . tömb[maxi] . "."
 
 // Létrehozás
 N = 10
-tömb = létrehoz(egész)[N]
+tömb = létrehoz[N]
 
 // Feltöltés
 ciklus egész i = 0-tól i &lt; N-ig
@@ -3121,7 +3121,7 @@ kiír: "A tömb legnagyobb eleme: tömb[" . maxi . "] = " . tömb[maxi] . "."
 
 // Létrehozás
 N = 10
-tömb = létrehoz(egész)[N]
+tömb = létrehoz[N]
 
 // Feltöltés
 ciklus egész i = 0-tól i &lt; N-ig
@@ -3155,7 +3155,7 @@ kiír: "A tömb legnagyobb eleme: tömb[" . maxi . "] = " . tömb[maxi] . "."
 
 // Létrehozás
 N = 10
-tömb = létrehoz(egész)[N]
+tömb = létrehoz[N]
 
 // Feltöltés
 ciklus egész i = 0-tól i &lt; N-ig
@@ -3189,7 +3189,7 @@ kiír: "A tömb legnagyobb eleme: tömb[" . maxi . "] = " . tömb[maxi] . "."
 
 // Létrehozás
 N = 10
-tömb = létrehoz(egész)[N]
+tömb = létrehoz[N]
 
 // Feltöltés
 ciklus egész i = 0-tól i &lt; N-ig
@@ -3223,7 +3223,7 @@ kiír: "A tömb legnagyobb eleme: tömb[" . maxi . "] = " . tömb[maxi] . "."
 
 // Létrehozás
 N = 10
-tömb = létrehoz(egész)[N]
+tömb = létrehoz[N]
 
 // Feltöltés
 ciklus egész i = 0-tól i &lt; N-ig
@@ -3257,7 +3257,7 @@ kiír: "A tömb legnagyobb eleme: tömb[" . maxi . "] = " . tömb[maxi] . "."
 
 // Létrehozás
 N = 10
-tömb = létrehoz(egész)[N]
+tömb = létrehoz[N]
 
 // Feltöltés
 ciklus egész i = 0-tól i &lt; N-ig
@@ -3291,7 +3291,7 @@ kiír: "A tömb legnagyobb eleme: tömb[" . maxi . "] = " . tömb[maxi] . "."
 
 // Létrehozás
 N = 10
-tömb = létrehoz(egész)[N]
+tömb = létrehoz[N]
 
 // Feltöltés
 ciklus egész i = 0-tól i &lt; N-ig
@@ -3325,7 +3325,7 @@ kiír: "A tömb legnagyobb eleme: tömb[" . maxi . "] = " . tömb[maxi] . "."
 
 // Létrehozás
 N = 10
-tömb = létrehoz(egész)[N]
+tömb = létrehoz[N]
 
 // Feltöltés
 ciklus egész i = 0-tól i &lt; N-ig
@@ -3359,7 +3359,7 @@ kiír: "A tömb legnagyobb eleme: tömb[" . maxi . "] = " . tömb[maxi] . "."
 
 // Létrehozás
 N = 10
-tömb = létrehoz(egész)[N]
+tömb = létrehoz[N]
 
 // Feltöltés
 ciklus egész i = 0-tól i &lt; N-ig
@@ -3393,7 +3393,7 @@ kiír: "A tömb legnagyobb eleme: tömb[" . maxi . "] = " . tömb[maxi] . "."
 
 // Létrehozás
 N = 10
-tömb = létrehoz(egész)[N]
+tömb = létrehoz[N]
 
 // Feltöltés
 ciklus egész i = 0-tól i &lt; N-ig
@@ -3427,7 +3427,7 @@ kiír: "A tömb legnagyobb eleme: tömb[" . maxi . "] = " . tömb[maxi] . "."
 
 // Létrehozás
 N = 10
-tömb = létrehoz(egész)[N]
+tömb = létrehoz[N]
 
 // Feltöltés
 ciklus egész i = 0-tól i &lt; N-ig
@@ -3461,7 +3461,7 @@ kiír: "A tömb legnagyobb eleme: tömb[" . maxi . "] = " . tömb[maxi] . "."
 
 // Létrehozás
 N = 10
-tömb = létrehoz(egész)[N]
+tömb = létrehoz[N]
 
 // Feltöltés
 ciklus egész i = 0-tól i &lt; N-ig
@@ -3495,7 +3495,7 @@ kiír: "A tömb legnagyobb eleme: tömb[" . maxi . "] = " . tömb[maxi] . "."
 
 // Létrehozás
 N = 10
-tömb = létrehoz(egész)[N]
+tömb = létrehoz[N]
 
 // Feltöltés
 ciklus egész i = 0-tól i &lt; N-ig
@@ -3529,7 +3529,7 @@ kiír: "A tömb legnagyobb eleme: tömb[" . maxi . "] = " . tömb[maxi] . "."
 
 // Létrehozás
 N = 10
-tömb = létrehoz(egész)[N]
+tömb = létrehoz[N]
 
 // Feltöltés
 ciklus egész i = 0-tól i &lt; N-ig
@@ -3563,7 +3563,7 @@ kiír: "A tömb legnagyobb eleme: tömb[" . maxi . "] = " . tömb[maxi] . "."
 
 // Létrehozás
 N = 10
-tömb = létrehoz(egész)[N]
+tömb = létrehoz[N]
 
 // Feltöltés
 ciklus egész i = 0-tól i &lt; N-ig
@@ -3597,7 +3597,7 @@ kiír: "A tömb legnagyobb eleme: tömb[" . maxi . "] = " . tömb[maxi] . "."
 
 // Létrehozás
 N = 10
-tömb = létrehoz(egész)[N]
+tömb = létrehoz[N]
 
 // Feltöltés
 ciklus egész i = 0-tól i &lt; N-ig
@@ -3631,7 +3631,7 @@ kiír: "A tömb legnagyobb eleme: tömb[" . maxi . "] = " . tömb[maxi] . "."
 
 // Létrehozás
 N = 10
-tömb = létrehoz(egész)[N]
+tömb = létrehoz[N]
 
 // Feltöltés
 ciklus egész i = 0-tól i &lt; N-ig
@@ -3665,7 +3665,7 @@ kiír: "A tömb legnagyobb eleme: tömb[" . maxi . "] = " . tömb[maxi] . "."
 
 // Létrehozás
 N = 10
-tömb = létrehoz(egész)[N]
+tömb = létrehoz[N]
 
 // Feltöltés
 ciklus egész i = 0-tól i &lt; N-ig
@@ -3699,7 +3699,7 @@ kiír: "A tömb legnagyobb eleme: tömb[" . maxi . "] = " . tömb[maxi] . "."
 
 // Létrehozás
 N = 10
-tömb = létrehoz(egész)[N]
+tömb = létrehoz[N]
 
 // Feltöltés
 ciklus egész i = 0-tól i &lt; N-ig
@@ -3733,7 +3733,7 @@ kiír: "A tömb legnagyobb eleme: tömb[" . maxi . "] = " . tömb[maxi] . "."
 
 // Létrehozás
 N = 10
-tömb = létrehoz(egész)[N]
+tömb = létrehoz[N]
 
 // Feltöltés
 ciklus egész i = 0-tól i &lt; N-ig
@@ -3767,7 +3767,7 @@ kiír: "A tömb legnagyobb eleme: tömb[" . maxi . "] = " . tömb[maxi] . "."
 
 // Létrehozás
 N = 10
-tömb = létrehoz(egész)[N]
+tömb = létrehoz[N]
 
 // Feltöltés
 ciklus egész i = 0-tól i &lt; N-ig
@@ -3801,7 +3801,7 @@ kiír: "A tömb legnagyobb eleme: tömb[" . maxi . "] = " . tömb[maxi] . "."
 
 // Létrehozás
 N = 10
-tömb = létrehoz(egész)[N]
+tömb = létrehoz[N]
 
 // Feltöltés
 ciklus egész i = 0-tól i &lt; N-ig
@@ -3835,7 +3835,7 @@ kiír: "A tömb legnagyobb eleme: tömb[" . maxi . "] = " . tömb[maxi] . "."
 
 // Létrehozás
 N = 10
-tömb = létrehoz(egész)[N]
+tömb = létrehoz[N]
 
 // Feltöltés
 ciklus egész i = 0-tól i &lt; N-ig
@@ -3869,7 +3869,7 @@ kiír: "A tömb legnagyobb eleme: tömb[" . maxi . "] = " . tömb[maxi] . "."
 
 // Létrehozás
 N = 10
-tömb = létrehoz(egész)[N]
+tömb = létrehoz[N]
 
 // Feltöltés
 ciklus egész i = 0-tól i &lt; N-ig
@@ -3903,7 +3903,7 @@ kiír: "A tömb legnagyobb eleme: tömb[" . maxi . "] = " . tömb[maxi] . "."
 
 // Létrehozás
 N = 10
-tömb = létrehoz(egész)[N]
+tömb = létrehoz[N]
 
 // Feltöltés
 ciklus egész i = 0-tól i &lt; N-ig
@@ -3937,7 +3937,7 @@ kiír: "A tömb legnagyobb eleme: tömb[" . maxi . "] = " . tömb[maxi] . "."
 
 // Létrehozás
 N = 10
-tömb = létrehoz(egész)[N]
+tömb = létrehoz[N]
 
 // Feltöltés
 ciklus egész i = 0-tól i &lt; N-ig
@@ -3971,7 +3971,7 @@ kiír: "A tömb legnagyobb eleme: tömb[" . maxi . "] = " . tömb[maxi] . "."
 
 // Létrehozás
 N = 10
-tömb = létrehoz(egész)[N]
+tömb = létrehoz[N]
 
 // Feltöltés
 ciklus egész i = 0-tól i &lt; N-ig
@@ -4005,7 +4005,7 @@ kiír: "A tömb legnagyobb eleme: tömb[" . maxi . "] = " . tömb[maxi] . "."
 
 // Létrehozás
 N = 10
-tömb = létrehoz(egész)[N]
+tömb = létrehoz[N]
 
 // Feltöltés
 ciklus egész i = 0-tól i &lt; N-ig
@@ -4039,7 +4039,7 @@ kiír: "A tömb legnagyobb eleme: tömb[" . maxi . "] = " . tömb[maxi] . "."
 
 // Létrehozás
 N = 10
-tömb = létrehoz(egész)[N]
+tömb = létrehoz[N]
 
 // Feltöltés
 ciklus egész i = 0-tól i &lt; N-ig
@@ -4073,7 +4073,7 @@ kiír: "A tömb legnagyobb eleme: tömb[" . maxi . "] = " . tömb[maxi] . "."
 
 // Létrehozás
 N = 10
-tömb = létrehoz(egész)[N]
+tömb = létrehoz[N]
 
 // Feltöltés
 ciklus egész i = 0-tól i &lt; N-ig
@@ -4107,7 +4107,7 @@ kiír: "A tömb legnagyobb eleme: tömb[" . maxi . "] = " . tömb[maxi] . "."
 
 // Létrehozás
 N = 10
-tömb = létrehoz(egész)[N]
+tömb = létrehoz[N]
 
 // Feltöltés
 ciklus egész i = 0-tól i &lt; N-ig
@@ -4141,7 +4141,7 @@ kiír: "A tömb legnagyobb eleme: tömb[" . maxi . "] = " . tömb[maxi] . "."
 
 // Létrehozás
 N = 10
-tömb = létrehoz(egész)[N]
+tömb = létrehoz[N]
 
 // Feltöltés
 ciklus egész i = 0-tól i &lt; N-ig
@@ -4175,7 +4175,7 @@ kiír: "A tömb legnagyobb eleme: tömb[" . maxi . "] = " . tömb[maxi] . "."
 
 // Létrehozás
 N = 10
-tömb = létrehoz(egész)[N]
+tömb = létrehoz[N]
 
 // Feltöltés
 ciklus egész i = 0-tól i &lt; N-ig
@@ -4209,7 +4209,7 @@ kiír: "A tömb legnagyobb eleme: tömb[" . maxi . "] = " . tömb[maxi] . "."
 
 // Létrehozás
 N = 10
-tömb = létrehoz(egész)[N]
+tömb = létrehoz[N]
 
 // Feltöltés
 ciklus egész i = 0-tól i &lt; N-ig
@@ -4243,7 +4243,7 @@ kiír: "A tömb legnagyobb eleme: tömb[" . maxi . "] = " . tömb[maxi] . "."
 
 // Létrehozás
 N = 10
-tömb = létrehoz(egész)[N]
+tömb = létrehoz[N]
 
 // Feltöltés
 ciklus egész i = 0-tól i &lt; N-ig
@@ -4277,7 +4277,7 @@ kiír: "A tömb legnagyobb eleme: tömb[" . maxi . "] = " . tömb[maxi] . "."
 
 // Létrehozás
 N = 10
-tömb = létrehoz(egész)[N]
+tömb = létrehoz[N]
 
 // Feltöltés
 ciklus egész i = 0-tól i &lt; N-ig
@@ -4311,7 +4311,7 @@ kiír: "A tömb legnagyobb eleme: tömb[" . maxi . "] = " . tömb[maxi] . "."
 
 // Létrehozás
 N = 10
-tömb = létrehoz(egész)[N]
+tömb = létrehoz[N]
 
 // Feltöltés
 ciklus egész i = 0-tól i &lt; N-ig
@@ -4345,7 +4345,7 @@ kiír: "A tömb legnagyobb eleme: tömb[" . maxi . "] = " . tömb[maxi] . "."
 
 // Létrehozás
 N = 10
-tömb = létrehoz(egész)[N]
+tömb = létrehoz[N]
 
 // Feltöltés
 ciklus egész i = 0-tól i &lt; N-ig
@@ -4379,7 +4379,7 @@ kiír: "A tömb legnagyobb eleme: tömb[" . maxi . "] = " . tömb[maxi] . "."
 
 // Létrehozás
 N = 10
-tömb = létrehoz(egész)[N]
+tömb = létrehoz[N]
 
 // Feltöltés
 ciklus egész i = 0-tól i &lt; N-ig
@@ -4413,7 +4413,7 @@ kiír: "A tömb legnagyobb eleme: tömb[" . maxi . "] = " . tömb[maxi] . "."
 
 // Létrehozás
 N = 10
-tömb = létrehoz(egész)[N]
+tömb = létrehoz[N]
 
 // Feltöltés
 ciklus egész i = 0-tól i &lt; N-ig
@@ -4447,7 +4447,7 @@ kiír: "A tömb legnagyobb eleme: tömb[" . maxi . "] = " . tömb[maxi] . "."
 
 // Létrehozás
 N = 10
-tömb = létrehoz(egész)[N]
+tömb = létrehoz[N]
 
 // Feltöltés
 ciklus egész i = 0-tól i &lt; N-ig
@@ -4481,7 +4481,7 @@ kiír: "A tömb legnagyobb eleme: tömb[" . maxi . "] = " . tömb[maxi] . "."
 
 // Létrehozás
 N = 10
-tömb = létrehoz(egész)[N]
+tömb = létrehoz[N]
 
 // Feltöltés
 ciklus egész i = 0-tól i &lt; N-ig
@@ -4515,7 +4515,7 @@ kiír: "A tömb legnagyobb eleme: tömb[" . maxi . "] = " . tömb[maxi] . "."
 
 // Létrehozás
 N = 10
-tömb = létrehoz(egész)[N]
+tömb = létrehoz[N]
 
 // Feltöltés
 ciklus egész i = 0-tól i &lt; N-ig
@@ -4549,7 +4549,7 @@ kiír: "A tömb legnagyobb eleme: tömb[" . maxi . "] = " . tömb[maxi] . "."
 
 // Létrehozás
 N = 10
-tömb = létrehoz(egész)[N]
+tömb = létrehoz[N]
 
 // Feltöltés
 ciklus egész i = 0-tól i &lt; N-ig
@@ -4583,7 +4583,7 @@ kiír: "A tömb legnagyobb eleme: tömb[" . maxi . "] = " . tömb[maxi] . "."
 
 // Létrehozás
 N = 10
-tömb = létrehoz(egész)[N]
+tömb = létrehoz[N]
 
 // Feltöltés
 ciklus egész i = 0-tól i &lt; N-ig
@@ -4617,7 +4617,7 @@ kiír: "A tömb legnagyobb eleme: tömb[" . maxi . "] = " . tömb[maxi] . "."
 
 // Létrehozás
 N = 10
-tömb = létrehoz(egész)[N]
+tömb = létrehoz[N]
 
 // Feltöltés
 ciklus egész i = 0-tól i &lt; N-ig
@@ -4651,7 +4651,7 @@ kiír: "A tömb legnagyobb eleme: tömb[" . maxi . "] = " . tömb[maxi] . "."
 
 // Létrehozás
 N = 10
-tömb = létrehoz(egész)[N]
+tömb = létrehoz[N]
 
 // Feltöltés
 ciklus egész i = 0-tól i &lt; N-ig
@@ -4685,7 +4685,7 @@ kiír: "A tömb legnagyobb eleme: tömb[" . maxi . "] = " . tömb[maxi] . "."
 
 // Létrehozás
 N = 10
-tömb = létrehoz(egész)[N]
+tömb = létrehoz[N]
 
 // Feltöltés
 ciklus egész i = 0-tól i &lt; N-ig
@@ -4719,7 +4719,7 @@ kiír: "A tömb legnagyobb eleme: tömb[" . maxi . "] = " . tömb[maxi] . "."
 
 // Létrehozás
 N = 10
-tömb = létrehoz(egész)[N]
+tömb = létrehoz[N]
 
 // Feltöltés
 ciklus egész i = 0-tól i &lt; N-ig
@@ -4753,7 +4753,7 @@ kiír: "A tömb legnagyobb eleme: tömb[" . maxi . "] = " . tömb[maxi] . "."
 
 // Létrehozás
 N = 10
-tömb = létrehoz(egész)[N]
+tömb = létrehoz[N]
 
 // Feltöltés
 ciklus egész i = 0-tól i &lt; N-ig
@@ -4787,7 +4787,7 @@ kiír: "A tömb legnagyobb eleme: tömb[" . maxi . "] = " . tömb[maxi] . "."
 
 // Létrehozás
 N = 10
-tömb = létrehoz(egész)[N]
+tömb = létrehoz[N]
 
 // Feltöltés
 ciklus egész i = 0-tól i &lt; N-ig
@@ -4821,7 +4821,7 @@ kiír: "A tömb legnagyobb eleme: tömb[" . maxi . "] = " . tömb[maxi] . "."
 
 // Létrehozás
 N = 10
-tömb = létrehoz(egész)[N]
+tömb = létrehoz[N]
 
 // Feltöltés
 ciklus egész i = 0-tól i &lt; N-ig
@@ -4855,7 +4855,7 @@ kiír: "A tömb legnagyobb eleme: tömb[" . maxi . "] = " . tömb[maxi] . "."
 
 // Létrehozás
 N = 10
-tömb = létrehoz(egész)[N]
+tömb = létrehoz[N]
 
 // Feltöltés
 ciklus egész i = 0-tól i &lt; N-ig
@@ -4889,7 +4889,7 @@ kiír: "A tömb legnagyobb eleme: tömb[" . maxi . "] = " . tömb[maxi] . "."
 
 // Létrehozás
 N = 10
-tömb = létrehoz(egész)[N]
+tömb = létrehoz[N]
 
 // Feltöltés
 ciklus egész i = 0-tól i &lt; N-ig
@@ -4923,7 +4923,7 @@ kiír: "A tömb legnagyobb eleme: tömb[" . maxi . "] = " . tömb[maxi] . "."
 
 // Létrehozás
 N = 10
-tömb = létrehoz(egész)[N]
+tömb = létrehoz[N]
 
 // Feltöltés
 ciklus egész i = 0-tól i &lt; N-ig
@@ -4957,7 +4957,7 @@ kiír: "A tömb legnagyobb eleme: tömb[" . maxi . "] = " . tömb[maxi] . "."
 
 // Létrehozás
 N = 10
-tömb = létrehoz(egész)[N]
+tömb = létrehoz[N]
 
 // Feltöltés
 ciklus egész i = 0-tól i &lt; N-ig
@@ -4991,7 +4991,7 @@ kiír: "A tömb legnagyobb eleme: tömb[" . maxi . "] = " . tömb[maxi] . "."
 
 // Létrehozás
 N = 10
-tömb = létrehoz(egész)[N]
+tömb = létrehoz[N]
 
 // Feltöltés
 ciklus egész i = 0-tól i &lt; N-ig
@@ -5025,7 +5025,7 @@ kiír: "A tömb legnagyobb eleme: tömb[" . maxi . "] = " . tömb[maxi] . "."
 
 // Létrehozás
 N = 10
-tömb = létrehoz(egész)[N]
+tömb = létrehoz[N]
 
 // Feltöltés
 ciklus egész i = 0-tól i &lt; N-ig
@@ -5059,7 +5059,7 @@ kiír: "A tömb legnagyobb eleme: tömb[" . maxi . "] = " . tömb[maxi] . "."
 
 // Létrehozás
 N = 10
-tömb = létrehoz(egész)[N]
+tömb = létrehoz[N]
 
 // Feltöltés
 ciklus egész i = 0-tól i &lt; N-ig
@@ -5093,7 +5093,7 @@ kiír: "A tömb legnagyobb eleme: tömb[" . maxi . "] = " . tömb[maxi] . "."
 
 // Létrehozás
 N = 10
-tömb = létrehoz(egész)[N]
+tömb = létrehoz[N]
 
 // Feltöltés
 ciklus egész i = 0-tól i &lt; N-ig
@@ -5127,7 +5127,7 @@ kiír: "A tömb legnagyobb eleme: tömb[" . maxi . "] = " . tömb[maxi] . "."
 
 // Létrehozás
 N = 10
-tömb = létrehoz(egész)[N]
+tömb = létrehoz[N]
 
 // Feltöltés
 ciklus egész i = 0-tól i &lt; N-ig
@@ -5161,7 +5161,7 @@ kiír: "A tömb legnagyobb eleme: tömb[" . maxi . "] = " . tömb[maxi] . "."
 
 // Létrehozás
 N = 10
-tömb = létrehoz(egész)[N]
+tömb = létrehoz[N]
 
 // Feltöltés
 ciklus egész i = 0-tól i &lt; N-ig
@@ -5195,7 +5195,7 @@ kiír: "A tömb legnagyobb eleme: tömb[" . maxi . "] = " . tömb[maxi] . "."
 
 // Létrehozás
 N = 10
-tömb = létrehoz(egész)[N]
+tömb = létrehoz[N]
 
 // Feltöltés
 ciklus egész i = 0-tól i &lt; N-ig
@@ -5229,7 +5229,7 @@ kiír: "A tömb legnagyobb eleme: tömb[" . maxi . "] = " . tömb[maxi] . "."
 
 // Létrehozás
 N = 10
-tömb = létrehoz(egész)[N]
+tömb = létrehoz[N]
 
 // Feltöltés
 ciklus egész i = 0-tól i &lt; N-ig
@@ -5263,7 +5263,7 @@ kiír: "A tömb legnagyobb eleme: tömb[" . maxi . "] = " . tömb[maxi] . "."
 
 // Létrehozás
 N = 10
-tömb = létrehoz(egész)[N]
+tömb = létrehoz[N]
 
 // Feltöltés
 ciklus egész i = 0-tól i &lt; N-ig
@@ -5297,7 +5297,7 @@ kiír: "A tömb legnagyobb eleme: tömb[" . maxi . "] = " . tömb[maxi] . "."
 
 // Létrehozás
 N = 10
-tömb = létrehoz(egész)[N]
+tömb = létrehoz[N]
 
 // Feltöltés
 ciklus egész i = 0-tól i &lt; N-ig
@@ -5331,7 +5331,7 @@ kiír: "A tömb legnagyobb eleme: tömb[" . maxi . "] = " . tömb[maxi] . "."
 
 // Létrehozás
 N = 10
-tömb = létrehoz(egész)[N]
+tömb = létrehoz[N]
 
 // Feltöltés
 ciklus egész i = 0-tól i &lt; N-ig
@@ -5365,7 +5365,7 @@ kiír: "A tömb legnagyobb eleme: tömb[" . maxi . "] = " . tömb[maxi] . "."
 
 // Létrehozás
 N = 10
-tömb = létrehoz(egész)[N]
+tömb = létrehoz[N]
 
 // Feltöltés
 ciklus egész i = 0-tól i &lt; N-ig
@@ -5399,7 +5399,7 @@ kiír: "A tömb legnagyobb eleme: tömb[" . maxi . "] = " . tömb[maxi] . "."
 
 // Létrehozás
 N = 10
-tömb = létrehoz(egész)[N]
+tömb = létrehoz[N]
 
 // Feltöltés
 ciklus egész i = 0-tól i &lt; N-ig
@@ -5433,7 +5433,7 @@ kiír: "A tömb legnagyobb eleme: tömb[" . maxi . "] = " . tömb[maxi] . "."
 
 // Létrehozás
 N = 10
-tömb = létrehoz(egész)[N]
+tömb = létrehoz[N]
 
 // Feltöltés
 ciklus egész i = 0-tól i &lt; N-ig
@@ -5467,7 +5467,7 @@ kiír: "A tömb legnagyobb eleme: tömb[" . maxi . "] = " . tömb[maxi] . "."
 
 // Létrehozás
 N = 10
-tömb = létrehoz(egész)[N]
+tömb = létrehoz[N]
 
 // Feltöltés
 ciklus egész i = 0-tól i &lt; N-ig
@@ -5501,7 +5501,7 @@ kiír: "A tömb legnagyobb eleme: tömb[" . maxi . "] = " . tömb[maxi] . "."
 
 // Létrehozás
 N = 10
-tömb = létrehoz(egész)[N]
+tömb = létrehoz[N]
 
 // Feltöltés
 ciklus egész i = 0-tól i &lt; N-ig
@@ -5535,7 +5535,7 @@ kiír: "A tömb legnagyobb eleme: tömb[" . maxi . "] = " . tömb[maxi] . "."
 
 // Létrehozás
 N = 10
-tömb = létrehoz(egész)[N]
+tömb = létrehoz[N]
 
 // Feltöltés
 ciklus egész i = 0-tól i &lt; N-ig
@@ -5569,7 +5569,7 @@ kiír: "A tömb legnagyobb eleme: tömb[" . maxi . "] = " . tömb[maxi] . "."
 
 // Létrehozás
 N = 10
-tömb = létrehoz(egész)[N]
+tömb = létrehoz[N]
 
 // Feltöltés
 ciklus egész i = 0-tól i &lt; N-ig
@@ -5603,7 +5603,7 @@ kiír: "A tömb legnagyobb eleme: tömb[" . maxi . "] = " . tömb[maxi] . "."
 
 // Létrehozás
 N = 10
-tömb = létrehoz(egész)[N]
+tömb = létrehoz[N]
 
 // Feltöltés
 ciklus egész i = 0-tól i &lt; N-ig
@@ -5637,7 +5637,7 @@ kiír: "A tömb legnagyobb eleme: tömb[" . maxi . "] = " . tömb[maxi] . "."
 
 // Létrehozás
 N = 10
-tömb = létrehoz(egész)[N]
+tömb = létrehoz[N]
 
 // Feltöltés
 ciklus egész i = 0-tól i &lt; N-ig
@@ -5671,7 +5671,7 @@ kiír: "A tömb legnagyobb eleme: tömb[" . maxi . "] = " . tömb[maxi] . "."
 
 // Létrehozás
 N = 10
-tömb = létrehoz(egész)[N]
+tömb = létrehoz[N]
 
 // Feltöltés
 ciklus egész i = 0-tól i &lt; N-ig
@@ -5705,7 +5705,7 @@ kiír: "A tömb legnagyobb eleme: tömb[" . maxi . "] = " . tömb[maxi] . "."
 
 // Létrehozás
 N = 10
-tömb = létrehoz(egész)[N]
+tömb = létrehoz[N]
 
 // Feltöltés
 ciklus egész i = 0-tól i &lt; N-ig
@@ -5739,7 +5739,7 @@ kiír: "A tömb legnagyobb eleme: tömb[" . maxi . "] = " . tömb[maxi] . "."
 
 // Létrehozás
 N = 10
-tömb = létrehoz(egész)[N]
+tömb = létrehoz[N]
 
 // Feltöltés
 ciklus egész i = 0-tól i &lt; N-ig
@@ -5773,7 +5773,7 @@ kiír: "A tömb legnagyobb eleme: tömb[" . maxi . "] = " . tömb[maxi] . "."
 
 // Létrehozás
 N = 10
-tömb = létrehoz(egész)[N]
+tömb = létrehoz[N]
 
 // Feltöltés
 ciklus egész i = 0-tól i &lt; N-ig
@@ -5807,7 +5807,7 @@ kiír: "A tömb legnagyobb eleme: tömb[" . maxi . "] = " . tömb[maxi] . "."
 
 // Létrehozás
 N = 10
-tömb = létrehoz(egész)[N]
+tömb = létrehoz[N]
 
 // Feltöltés
 ciklus egész i = 0-tól i &lt; N-ig
@@ -5841,7 +5841,7 @@ kiír: "A tömb legnagyobb eleme: tömb[" . maxi . "] = " . tömb[maxi] . "."
 
 // Létrehozás
 N = 10
-tömb = létrehoz(egész)[N]
+tömb = létrehoz[N]
 
 // Feltöltés
 ciklus egész i = 0-tól i &lt; N-ig
@@ -5875,7 +5875,7 @@ kiír: "A tömb legnagyobb eleme: tömb[" . maxi . "] = " . tömb[maxi] . "."
 
 // Létrehozás
 N = 10
-tömb = létrehoz(egész)[N]
+tömb = létrehoz[N]
 
 // Feltöltés
 ciklus egész i = 0-tól i &lt; N-ig
@@ -5909,7 +5909,7 @@ kiír: "A tömb legnagyobb eleme: tömb[" . maxi . "] = " . tömb[maxi] . "."
 
 // Létrehozás
 N = 10
-tömb = létrehoz(egész)[N]
+tömb = létrehoz[N]
 
 // Feltöltés
 ciklus egész i = 0-tól i &lt; N-ig
@@ -5943,7 +5943,7 @@ kiír: "A tömb legnagyobb eleme: tömb[" . maxi . "] = " . tömb[maxi] . "."
 
 // Létrehozás
 N = 10
-tömb = létrehoz(egész)[N]
+tömb = létrehoz[N]
 
 // Feltöltés
 ciklus egész i = 0-tól i &lt; N-ig
@@ -5977,7 +5977,7 @@ kiír: "A tömb legnagyobb eleme: tömb[" . maxi . "] = " . tömb[maxi] . "."
 
 // Létrehozás
 N = 10
-tömb = létrehoz(egész)[N]
+tömb = létrehoz[N]
 
 // Feltöltés
 ciklus egész i = 0-tól i &lt; N-ig
@@ -6011,7 +6011,7 @@ kiír: "A tömb legnagyobb eleme: tömb[" . maxi . "] = " . tömb[maxi] . "."
 
 // Létrehozás
 N = 10
-tömb = létrehoz(egész)[N]
+tömb = létrehoz[N]
 
 // Feltöltés
 ciklus egész i = 0-tól i &lt; N-ig
@@ -6045,7 +6045,7 @@ kiír: "A tömb legnagyobb eleme: tömb[" . maxi . "] = " . tömb[maxi] . "."
 
 // Létrehozás
 N = 10
-tömb = létrehoz(egész)[N]
+tömb = létrehoz[N]
 
 // Feltöltés
 ciklus egész i = 0-tól i &lt; N-ig
@@ -6079,7 +6079,7 @@ kiír: "A tömb legnagyobb eleme: tömb[" . maxi . "] = " . tömb[maxi] . "."
 
 // Létrehozás
 N = 10
-tömb = létrehoz(egész)[N]
+tömb = létrehoz[N]
 
 // Feltöltés
 ciklus egész i = 0-tól i &lt; N-ig
@@ -6113,7 +6113,7 @@ kiír: "A tömb legnagyobb eleme: tömb[" . maxi . "] = " . tömb[maxi] . "."
 
 // Létrehozás
 N = 10
-tömb = létrehoz(egész)[N]
+tömb = létrehoz[N]
 
 // Feltöltés
 ciklus egész i = 0-tól i &lt; N-ig
@@ -6147,7 +6147,7 @@ kiír: "A tömb legnagyobb eleme: tömb[" . maxi . "] = " . tömb[maxi] . "."
 
 // Létrehozás
 N = 10
-tömb = létrehoz(egész)[N]
+tömb = létrehoz[N]
 
 // Feltöltés
 ciklus egész i = 0-tól i &lt; N-ig
@@ -6181,7 +6181,7 @@ kiír: "A tömb legnagyobb eleme: tömb[" . maxi . "] = " . tömb[maxi] . "."
 
 // Létrehozás
 N = 10
-tömb = létrehoz(egész)[N]
+tömb = létrehoz[N]
 
 // Feltöltés
 ciklus egész i = 0-tól i &lt; N-ig
@@ -6215,7 +6215,7 @@ kiír: "A tömb legnagyobb eleme: tömb[" . maxi . "] = " . tömb[maxi] . "."
 
 // Létrehozás
 N = 10
-tömb = létrehoz(egész)[N]
+tömb = létrehoz[N]
 
 // Feltöltés
 ciklus egész i = 0-tól i &lt; N-ig
@@ -6249,7 +6249,7 @@ kiír: "A tömb legnagyobb eleme: tömb[" . maxi . "] = " . tömb[maxi] . "."
 
 // Létrehozás
 N = 10
-tömb = létrehoz(egész)[N]
+tömb = létrehoz[N]
 
 // Feltöltés
 ciklus egész i = 0-tól i &lt; N-ig
@@ -6283,7 +6283,7 @@ kiír: "A tömb legnagyobb eleme: tömb[" . maxi . "] = " . tömb[maxi] . "."
 
 // Létrehozás
 N = 10
-tömb = létrehoz(egész)[N]
+tömb = létrehoz[N]
 
 // Feltöltés
 ciklus egész i = 0-tól i &lt; N-ig
@@ -6317,7 +6317,7 @@ kiír: "A tömb legnagyobb eleme: tömb[" . maxi . "] = " . tömb[maxi] . "."
 
 // Létrehozás
 N = 10
-tömb = létrehoz(egész)[N]
+tömb = létrehoz[N]
 
 // Feltöltés
 ciklus egész i = 0-tól i &lt; N-ig
@@ -6351,7 +6351,7 @@ kiír: "A tömb legnagyobb eleme: tömb[" . maxi . "] = " . tömb[maxi] . "."
 
 // Létrehozás
 N = 10
-tömb = létrehoz(egész)[N]
+tömb = létrehoz[N]
 
 // Feltöltés
 ciklus egész i = 0-tól i &lt; N-ig
@@ -6385,7 +6385,7 @@ kiír: "A tömb legnagyobb eleme: tömb[" . maxi . "] = " . tömb[maxi] . "."
 
 // Létrehozás
 N = 10
-tömb = létrehoz(egész)[N]
+tömb = létrehoz[N]
 
 // Feltöltés
 ciklus egész i = 0-tól i &lt; N-ig
@@ -6419,7 +6419,7 @@ kiír: "A tömb legnagyobb eleme: tömb[" . maxi . "] = " . tömb[maxi] . "."
 
 // Létrehozás
 N = 10
-tömb = létrehoz(egész)[N]
+tömb = létrehoz[N]
 
 // Feltöltés
 ciklus egész i = 0-tól i &lt; N-ig
@@ -6453,7 +6453,7 @@ kiír: "A tömb legnagyobb eleme: tömb[" . maxi . "] = " . tömb[maxi] . "."
 
 // Létrehozás
 N = 10
-tömb = létrehoz(egész)[N]
+tömb = létrehoz[N]
 
 // Feltöltés
 ciklus egész i = 0-tól i &lt; N-ig
@@ -6487,7 +6487,7 @@ kiír: "A tömb legnagyobb eleme: tömb[" . maxi . "] = " . tömb[maxi] . "."
 
 // Létrehozás
 N = 10
-tömb = létrehoz(egész)[N]
+tömb = létrehoz[N]
 
 // Feltöltés
 ciklus egész i = 0-tól i &lt; N-ig
@@ -6521,7 +6521,7 @@ kiír: "A tömb legnagyobb eleme: tömb[" . maxi . "] = " . tömb[maxi] . "."
 
 // Létrehozás
 N = 10
-tömb = létrehoz(egész)[N]
+tömb = létrehoz[N]
 
 // Feltöltés
 ciklus egész i = 0-tól i &lt; N-ig
@@ -6555,7 +6555,7 @@ kiír: "A tömb legnagyobb eleme: tömb[" . maxi . "] = " . tömb[maxi] . "."
 
 // Létrehozás
 N = 10
-tömb = létrehoz(egész)[N]
+tömb = létrehoz[N]
 
 // Feltöltés
 ciklus egész i = 0-tól i &lt; N-ig
@@ -6589,7 +6589,7 @@ kiír: "A tömb legnagyobb eleme: tömb[" . maxi . "] = " . tömb[maxi] . "."
 
 // Létrehozás
 N = 10
-tömb = létrehoz(egész)[N]
+tömb = létrehoz[N]
 
 // Feltöltés
 ciklus egész i = 0-tól i &lt; N-ig
@@ -6623,7 +6623,7 @@ kiír: "A tömb legnagyobb eleme: tömb[" . maxi . "] = " . tömb[maxi] . "."
 
 // Létrehozás
 N = 10
-tömb = létrehoz(egész)[N]
+tömb = létrehoz[N]
 
 // Feltöltés
 ciklus egész i = 0-tól i &lt; N-ig
@@ -6657,7 +6657,7 @@ kiír: "A tömb legnagyobb eleme: tömb[" . maxi . "] = " . tömb[maxi] . "."
 
 // Létrehozás
 N = 10
-tömb = létrehoz(egész)[N]
+tömb = létrehoz[N]
 
 // Feltöltés
 ciklus egész i = 0-tól i &lt; N-ig
@@ -6691,7 +6691,7 @@ kiír: "A tömb legnagyobb eleme: tömb[" . maxi . "] = " . tömb[maxi] . "."
 
 // Létrehozás
 N = 10
-tömb = létrehoz(egész)[N]
+tömb = létrehoz[N]
 
 // Feltöltés
 ciklus egész i = 0-tól i &lt; N-ig
@@ -6725,7 +6725,7 @@ kiír: "A tömb legnagyobb eleme: tömb[" . maxi . "] = " . tömb[maxi] . "."
 
 // Létrehozás
 N = 10
-tömb = létrehoz(egész)[N]
+tömb = létrehoz[N]
 
 // Feltöltés
 ciklus egész i = 0-tól i &lt; N-ig
@@ -6759,7 +6759,7 @@ kiír: "A tömb legnagyobb eleme: tömb[" . maxi . "] = " . tömb[maxi] . "."
 
 // Létrehozás
 N = 10
-tömb = létrehoz(egész)[N]
+tömb = létrehoz[N]
 
 // Feltöltés
 ciklus egész i = 0-tól i &lt; N-ig
@@ -6793,7 +6793,7 @@ kiír: "A tömb legnagyobb eleme: tömb[" . maxi . "] = " . tömb[maxi] . "."
 
 // Létrehozás
 N = 10
-tömb = létrehoz(egész)[N]
+tömb = létrehoz[N]
 
 // Feltöltés
 ciklus egész i = 0-tól i &lt; N-ig
@@ -6827,7 +6827,7 @@ kiír: "A tömb legnagyobb eleme: tömb[" . maxi . "] = " . tömb[maxi] . "."
 
 // Létrehozás
 N = 10
-tömb = létrehoz(egész)[N]
+tömb = létrehoz[N]
 
 // Feltöltés
 ciklus egész i = 0-tól i &lt; N-ig
@@ -6861,7 +6861,7 @@ kiír: "A tömb legnagyobb eleme: tömb[" . maxi . "] = " . tömb[maxi] . "."
 
 // Létrehozás
 N = 10
-tömb = létrehoz(egész)[N]
+tömb = létrehoz[N]
 
 // Feltöltés
 ciklus egész i = 0-tól i &lt; N-ig
@@ -6895,7 +6895,7 @@ kiír: "A tömb legnagyobb eleme: tömb[" . maxi . "] = " . tömb[maxi] . "."
 
 // Létrehozás
 N = 10
-tömb = létrehoz(egész)[N]
+tömb = létrehoz[N]
 
 // Feltöltés
 ciklus egész i = 0-tól i &lt; N-ig
@@ -6929,7 +6929,7 @@ kiír: "A tömb legnagyobb eleme: tömb[" . maxi . "] = " . tömb[maxi] . "."
 
 // Létrehozás
 N = 10
-tömb = létrehoz(egész)[N]
+tömb = létrehoz[N]
 
 // Feltöltés
 ciklus egész i = 0-tól i &lt; N-ig
@@ -6963,7 +6963,7 @@ kiír: "A tömb legnagyobb eleme: tömb[" . maxi . "] = " . tömb[maxi] . "."
 
 // Létrehozás
 N = 10
-tömb = létrehoz(egész)[N]
+tömb = létrehoz[N]
 
 // Feltöltés
 ciklus egész i = 0-tól i &lt; N-ig
@@ -6997,7 +6997,7 @@ kiír: "A tömb legnagyobb eleme: tömb[" . maxi . "] = " . tömb[maxi] . "."
 
 // Létrehozás
 N = 10
-tömb = létrehoz(egész)[N]
+tömb = létrehoz[N]
 
 // Feltöltés
 ciklus egész i = 0-tól i &lt; N-ig
@@ -7031,7 +7031,7 @@ kiír: "A tömb legnagyobb eleme: tömb[" . maxi . "] = " . tömb[maxi] . "."
 
 // Létrehozás
 N = 10
-tömb = létrehoz(egész)[N]
+tömb = létrehoz[N]
 
 // Feltöltés
 ciklus egész i = 0-tól i &lt; N-ig
@@ -7065,7 +7065,7 @@ kiír: "A tömb legnagyobb eleme: tömb[" . maxi . "] = " . tömb[maxi] . "."
 
 // Létrehozás
 N = 10
-tömb = létrehoz(egész)[N]
+tömb = létrehoz[N]
 
 // Feltöltés
 ciklus egész i = 0-tól i &lt; N-ig
@@ -7099,7 +7099,7 @@ kiír: "A tömb legnagyobb eleme: tömb[" . maxi . "] = " . tömb[maxi] . "."
 
 // Létrehozás
 N = 10
-tömb = létrehoz(egész)[N]
+tömb = létrehoz[N]
 
 // Feltöltés
 ciklus egész i = 0-tól i &lt; N-ig
@@ -7133,7 +7133,7 @@ kiír: "A tömb legnagyobb eleme: tömb[" . maxi . "] = " . tömb[maxi] . "."
 
 // Létrehozás
 N = 10
-tömb = létrehoz(egész)[N]
+tömb = létrehoz[N]
 
 // Feltöltés
 ciklus egész i = 0-tól i &lt; N-ig
@@ -7167,7 +7167,7 @@ kiír: "A tömb legnagyobb eleme: tömb[" . maxi . "] = " . tömb[maxi] . "."
 
 // Létrehozás
 N = 10
-tömb = létrehoz(egész)[N]
+tömb = létrehoz[N]
 
 // Feltöltés
 ciklus egész i = 0-tól i &lt; N-ig
@@ -7201,7 +7201,7 @@ kiír: "A tömb legnagyobb eleme: tömb[" . maxi . "] = " . tömb[maxi] . "."
 
 // Létrehozás
 N = 10
-tömb = létrehoz(egész)[N]
+tömb = létrehoz[N]
 
 // Feltöltés
 ciklus egész i = 0-tól i &lt; N-ig
@@ -7235,7 +7235,7 @@ kiír: "A tömb legnagyobb eleme: tömb[" . maxi . "] = " . tömb[maxi] . "."
 
 // Létrehozás
 N = 10
-tömb = létrehoz(egész)[N]
+tömb = létrehoz[N]
 
 // Feltöltés
 ciklus egész i = 0-tól i &lt; N-ig
@@ -7269,7 +7269,7 @@ kiír: "A tömb legnagyobb eleme: tömb[" . maxi . "] = " . tömb[maxi] . "."
 
 // Létrehozás
 N = 10
-tömb = létrehoz(egész)[N]
+tömb = létrehoz[N]
 
 // Feltöltés
 ciklus egész i = 0-tól i &lt; N-ig
@@ -7303,7 +7303,7 @@ kiír: "A tömb legnagyobb eleme: tömb[" . maxi . "] = " . tömb[maxi] . "."
 
 // Létrehozás
 N = 10
-tömb = létrehoz(egész)[N]
+tömb = létrehoz[N]
 
 // Feltöltés
 ciklus egész i = 0-tól i &lt; N-ig
@@ -7337,7 +7337,7 @@ kiír: "A tömb legnagyobb eleme: tömb[" . maxi . "] = " . tömb[maxi] . "."
 
 // Létrehozás
 N = 10
-tömb = létrehoz(egész)[N]
+tömb = létrehoz[N]
 
 // Feltöltés
 ciklus egész i = 0-tól i &lt; N-ig
@@ -7371,7 +7371,7 @@ kiír: "A tömb legnagyobb eleme: tömb[" . maxi . "] = " . tömb[maxi] . "."
 
 // Létrehozás
 N = 10
-tömb = létrehoz(egész)[N]
+tömb = létrehoz[N]
 
 // Feltöltés
 ciklus egész i = 0-tól i &lt; N-ig
@@ -7405,7 +7405,7 @@ kiír: "A tömb legnagyobb eleme: tömb[" . maxi . "] = " . tömb[maxi] . "."
 
 // Létrehozás
 N = 10
-tömb = létrehoz(egész)[N]
+tömb = létrehoz[N]
 
 // Feltöltés
 ciklus egész i = 0-tól i &lt; N-ig
@@ -7439,7 +7439,7 @@ kiír: "A tömb legnagyobb eleme: tömb[" . maxi . "] = " . tömb[maxi] . "."
 
 // Létrehozás
 N = 10
-tömb = létrehoz(egész)[N]
+tömb = létrehoz[N]
 
 // Feltöltés
 ciklus egész i = 0-tól i &lt; N-ig
@@ -7473,7 +7473,7 @@ kiír: "A tömb legnagyobb eleme: tömb[" . maxi . "] = " . tömb[maxi] . "."
 
 // Létrehozás
 N = 10
-tömb = létrehoz(egész)[N]
+tömb = létrehoz[N]
 
 // Feltöltés
 ciklus egész i = 0-tól i &lt; N-ig
@@ -7507,7 +7507,7 @@ kiír: "A tömb legnagyobb eleme: tömb[" . maxi . "] = " . tömb[maxi] . "."
 
 // Létrehozás
 N = 10
-tömb = létrehoz(egész)[N]
+tömb = létrehoz[N]
 
 // Feltöltés
 ciklus egész i = 0-tól i &lt; N-ig
@@ -7541,7 +7541,7 @@ kiír: "A tömb legnagyobb eleme: tömb[" . maxi . "] = " . tömb[maxi] . "."
 
 // Létrehozás
 N = 10
-tömb = létrehoz(egész)[N]
+tömb = létrehoz[N]
 
 // Feltöltés
 ciklus egész i = 0-tól i &lt; N-ig
@@ -7575,7 +7575,7 @@ kiír: "A tömb legnagyobb eleme: tömb[" . maxi . "] = " . tömb[maxi] . "."
 
 // Létrehozás
 N = 10
-tömb = létrehoz(egész)[N]
+tömb = létrehoz[N]
 
 // Feltöltés
 ciklus egész i = 0-tól i &lt; N-ig
@@ -7609,7 +7609,7 @@ kiír: "A tömb legnagyobb eleme: tömb[" . maxi . "] = " . tömb[maxi] . "."
 
 // Létrehozás
 N = 10
-tömb = létrehoz(egész)[N]
+tömb = létrehoz[N]
 
 // Feltöltés
 ciklus egész i = 0-tól i &lt; N-ig
@@ -7643,7 +7643,7 @@ kiír: "A tömb legnagyobb eleme: tömb[" . maxi . "] = " . tömb[maxi] . "."
 
 // Létrehozás
 N = 10
-tömb = létrehoz(egész)[N]
+tömb = létrehoz[N]
 
 // Feltöltés
 ciklus egész i = 0-tól i &lt; N-ig
@@ -7677,7 +7677,7 @@ kiír: "A tömb legnagyobb eleme: tömb[" . maxi . "] = " . tömb[maxi] . "."
 
 // Létrehozás
 N = 10
-tömb = létrehoz(egész)[N]
+tömb = létrehoz[N]
 
 // Feltöltés
 ciklus egész i = 0-tól i &lt; N-ig
@@ -7711,7 +7711,7 @@ kiír: "A tömb legnagyobb eleme: tömb[" . maxi . "] = " . tömb[maxi] . "."
 
 // Létrehozás
 N = 10
-tömb = létrehoz(egész)[N]
+tömb = létrehoz[N]
 
 // Feltöltés
 ciklus egész i = 0-tól i &lt; N-ig
@@ -7745,7 +7745,7 @@ kiír: "A tömb legnagyobb eleme: tömb[" . maxi . "] = " . tömb[maxi] . "."
 
 // Létrehozás
 N = 10
-tömb = létrehoz(egész)[N]
+tömb = létrehoz[N]
 
 // Feltöltés
 ciklus egész i = 0-tól i &lt; N-ig
@@ -7779,7 +7779,7 @@ kiír: "A tömb legnagyobb eleme: tömb[" . maxi . "] = " . tömb[maxi] . "."
 
 // Létrehozás
 N = 10
-tömb = létrehoz(egész)[N]
+tömb = létrehoz[N]
 
 // Feltöltés
 ciklus egész i = 0-tól i &lt; N-ig
@@ -7813,7 +7813,7 @@ kiír: "A tömb legnagyobb eleme: tömb[" . maxi . "] = " . tömb[maxi] . "."
 
 // Létrehozás
 N = 10
-tömb = létrehoz(egész)[N]
+tömb = létrehoz[N]
 
 // Feltöltés
 ciklus egész i = 0-tól i &lt; N-ig
@@ -7847,7 +7847,7 @@ kiír: "A tömb legnagyobb eleme: tömb[" . maxi . "] = " . tömb[maxi] . "."
 
 // Létrehozás
 N = 10
-tömb = létrehoz(egész)[N]
+tömb = létrehoz[N]
 
 // Feltöltés
 ciklus egész i = 0-tól i &lt; N-ig
@@ -7881,7 +7881,7 @@ kiír: "A tömb legnagyobb eleme: tömb[" . maxi . "] = " . tömb[maxi] . "."
 
 // Létrehozás
 N = 10
-tömb = létrehoz(egész)[N]
+tömb = létrehoz[N]
 
 // Feltöltés
 ciklus egész i = 0-tól i &lt; N-ig
@@ -7915,7 +7915,7 @@ kiír: "A tömb legnagyobb eleme: tömb[" . maxi . "] = " . tömb[maxi] . "."
 
 // Létrehozás
 N = 10
-tömb = létrehoz(egész)[N]
+tömb = létrehoz[N]
 
 // Feltöltés
 ciklus egész i = 0-tól i &lt; N-ig
@@ -7949,7 +7949,7 @@ kiír: "A tömb legnagyobb eleme: tömb[" . maxi . "] = " . tömb[maxi] . "."
 
 // Létrehozás
 N = 10
-tömb = létrehoz(egész)[N]
+tömb = létrehoz[N]
 
 // Feltöltés
 ciklus egész i = 0-tól i &lt; N-ig
@@ -7983,7 +7983,7 @@ kiír: "A tömb legnagyobb eleme: tömb[" . maxi . "] = " . tömb[maxi] . "."
 
 // Létrehozás
 N = 10
-tömb = létrehoz(egész)[N]
+tömb = létrehoz[N]
 
 // Feltöltés
 ciklus egész i = 0-tól i &lt; N-ig
@@ -8017,7 +8017,7 @@ kiír: "A tömb legnagyobb eleme: tömb[" . maxi . "] = " . tömb[maxi] . "."
 
 // Létrehozás
 N = 10
-tömb = létrehoz(egész)[N]
+tömb = létrehoz[N]
 
 // Feltöltés
 ciklus egész i = 0-tól i &lt; N-ig
@@ -8051,7 +8051,7 @@ kiír: "A tömb legnagyobb eleme: tömb[" . maxi . "] = " . tömb[maxi] . "."
 
 // Létrehozás
 N = 10
-tömb = létrehoz(egész)[N]
+tömb = létrehoz[N]
 
 // Feltöltés
 ciklus egész i = 0-tól i &lt; N-ig
@@ -8085,7 +8085,7 @@ kiír: "A tömb legnagyobb eleme: tömb[" . maxi . "] = " . tömb[maxi] . "."
 
 // Létrehozás
 N = 10
-tömb = létrehoz(egész)[N]
+tömb = létrehoz[N]
 
 // Feltöltés
 ciklus egész i = 0-tól i &lt; N-ig
@@ -8119,7 +8119,7 @@ kiír: "A tömb legnagyobb eleme: tömb[" . maxi . "] = " . tömb[maxi] . "."
 
 // Létrehozás
 N = 10
-tömb = létrehoz(egész)[N]
+tömb = létrehoz[N]
 
 // Feltöltés
 ciklus egész i = 0-tól i &lt; N-ig
@@ -8153,7 +8153,7 @@ kiír: "A tömb legnagyobb eleme: tömb[" . maxi . "] = " . tömb[maxi] . "."
 
 // Létrehozás
 N = 10
-tömb = létrehoz(egész)[N]
+tömb = létrehoz[N]
 
 // Feltöltés
 ciklus egész i = 0-tól i &lt; N-ig
@@ -8187,7 +8187,7 @@ kiír: "A tömb legnagyobb eleme: tömb[" . maxi . "] = " . tömb[maxi] . "."
 
 // Létrehozás
 N = 10
-tömb = létrehoz(egész)[N]
+tömb = létrehoz[N]
 
 // Feltöltés
 ciklus egész i = 0-tól i &lt; N-ig
@@ -8221,7 +8221,7 @@ kiír: "A tömb legnagyobb eleme: tömb[" . maxi . "] = " . tömb[maxi] . "."
 
 // Létrehozás
 N = 10
-tömb = létrehoz(egész)[N]
+tömb = létrehoz[N]
 
 // Feltöltés
 ciklus egész i = 0-tól i &lt; N-ig
@@ -8255,7 +8255,7 @@ kiír: "A tömb legnagyobb eleme: tömb[" . maxi . "] = " . tömb[maxi] . "."
 
 // Létrehozás
 N = 10
-tömb = létrehoz(egész)[N]
+tömb = létrehoz[N]
 
 // Feltöltés
 ciklus egész i = 0-tól i &lt; N-ig
@@ -8289,7 +8289,7 @@ kiír: "A tömb legnagyobb eleme: tömb[" . maxi . "] = " . tömb[maxi] . "."
 
 // Létrehozás
 N = 10
-tömb = létrehoz(egész)[N]
+tömb = létrehoz[N]
 
 // Feltöltés
 ciklus egész i = 0-tól i &lt; N-ig
@@ -8323,7 +8323,7 @@ kiír: "A tömb legnagyobb eleme: tömb[" . maxi . "] = " . tömb[maxi] . "."
 
 // Létrehozás
 N = 10
-tömb = létrehoz(egész)[N]
+tömb = létrehoz[N]
 
 // Feltöltés
 ciklus egész i = 0-tól i &lt; N-ig
@@ -8357,7 +8357,7 @@ kiír: "A tömb legnagyobb eleme: tömb[" . maxi . "] = " . tömb[maxi] . "."
 
 // Létrehozás
 N = 10
-tömb = létrehoz(egész)[N]
+tömb = létrehoz[N]
 
 // Feltöltés
 ciklus egész i = 0-tól i &lt; N-ig
@@ -8391,7 +8391,7 @@ kiír: "A tömb legnagyobb eleme: tömb[" . maxi . "] = " . tömb[maxi] . "."
 
 // Létrehozás
 N = 10
-tömb = létrehoz(egész)[N]
+tömb = létrehoz[N]
 
 // Feltöltés
 ciklus egész i = 0-tól i &lt; N-ig
@@ -8425,7 +8425,7 @@ kiír: "A tömb legnagyobb eleme: tömb[" . maxi . "] = " . tömb[maxi] . "."
 
 // Létrehozás
 N = 10
-tömb = létrehoz(egész)[N]
+tömb = létrehoz[N]
 
 // Feltöltés
 ciklus egész i = 0-tól i &lt; N-ig
@@ -8459,7 +8459,7 @@ kiír: "A tömb legnagyobb eleme: tömb[" . maxi . "] = " . tömb[maxi] . "."
 
 // Létrehozás
 N = 10
-tömb = létrehoz(egész)[N]
+tömb = létrehoz[N]
 
 // Feltöltés
 ciklus egész i = 0-tól i &lt; N-ig
@@ -8493,7 +8493,7 @@ kiír: "A tömb legnagyobb eleme: tömb[" . maxi . "] = " . tömb[maxi] . "."
 
 // Létrehozás
 N = 10
-tömb = létrehoz(egész)[N]
+tömb = létrehoz[N]
 
 // Feltöltés
 ciklus egész i = 0-tól i &lt; N-ig
@@ -8527,7 +8527,7 @@ kiír: "A tömb legnagyobb eleme: tömb[" . maxi . "] = " . tömb[maxi] . "."
 
 // Létrehozás
 N = 10
-tömb = létrehoz(egész)[N]
+tömb = létrehoz[N]
 
 // Feltöltés
 ciklus egész i = 0-tól i &lt; N-ig
@@ -8561,7 +8561,7 @@ kiír: "A tömb legnagyobb eleme: tömb[" . maxi . "] = " . tömb[maxi] . "."
 
 // Létrehozás
 N = 10
-tömb = létrehoz(egész)[N]
+tömb = létrehoz[N]
 
 // Feltöltés
 ciklus egész i = 0-tól i &lt; N-ig
@@ -8595,7 +8595,7 @@ kiír: "A tömb legnagyobb eleme: tömb[" . maxi . "] = " . tömb[maxi] . "."
 
 // Létrehozás
 N = 10
-tömb = létrehoz(egész)[N]
+tömb = létrehoz[N]
 
 // Feltöltés
 ciklus egész i = 0-tól i &lt; N-ig
@@ -8629,7 +8629,7 @@ kiír: "A tömb legnagyobb eleme: tömb[" . maxi . "] = " . tömb[maxi] . "."
 
 // Létrehozás
 N = 10
-tömb = létrehoz(egész)[N]
+tömb = létrehoz[N]
 
 // Feltöltés
 ciklus egész i = 0-tól i &lt; N-ig
@@ -8663,7 +8663,7 @@ kiír: "A tömb legnagyobb eleme: tömb[" . maxi . "] = " . tömb[maxi] . "."
 
 // Létrehozás
 N = 10
-tömb = létrehoz(egész)[N]
+tömb = létrehoz[N]
 
 // Feltöltés
 ciklus egész i = 0-tól i &lt; N-ig
@@ -8697,7 +8697,7 @@ kiír: "A tömb legnagyobb eleme: tömb[" . maxi . "] = " . tömb[maxi] . "."
 
 // Létrehozás
 N = 10
-tömb = létrehoz(egész)[N]
+tömb = létrehoz[N]
 
 // Feltöltés
 ciklus egész i = 0-tól i &lt; N-ig
@@ -8731,7 +8731,7 @@ kiír: "A tömb legnagyobb eleme: tömb[" . maxi . "] = " . tömb[maxi] . "."
 
 // Létrehozás
 N = 10
-tömb = létrehoz(egész)[N]
+tömb = létrehoz[N]
 
 // Feltöltés
 ciklus egész i = 0-tól i &lt; N-ig
@@ -8765,7 +8765,7 @@ kiír: "A tömb legnagyobb eleme: tömb[" . maxi . "] = " . tömb[maxi] . "."
 
 // Létrehozás
 N = 10
-tömb = létrehoz(egész)[N]
+tömb = létrehoz[N]
 
 // Feltöltés
 ciklus egész i = 0-tól i &lt; N-ig
@@ -8799,7 +8799,7 @@ kiír: "A tömb legnagyobb eleme: tömb[" . maxi . "] = " . tömb[maxi] . "."
 
 // Létrehozás
 N = 10
-tömb = létrehoz(egész)[N]
+tömb = létrehoz[N]
 
 // Feltöltés
 ciklus egész i = 0-tól i &lt; N-ig
@@ -8833,7 +8833,7 @@ kiír: "A tömb legnagyobb eleme: tömb[" . maxi . "] = " . tömb[maxi] . "."
 
 // Létrehozás
 N = 10
-tömb = létrehoz(egész)[N]
+tömb = létrehoz[N]
 
 // Feltöltés
 ciklus egész i = 0-tól i &lt; N-ig
@@ -8867,7 +8867,7 @@ kiír: "A tömb legnagyobb eleme: tömb[" . maxi . "] = " . tömb[maxi] . "."
 
 // Létrehozás
 N = 10
-tömb = létrehoz(egész)[N]
+tömb = létrehoz[N]
 
 // Feltöltés
 ciklus egész i = 0-tól i &lt; N-ig
@@ -8901,7 +8901,7 @@ kiír: "A tömb legnagyobb eleme: tömb[" . maxi . "] = " . tömb[maxi] . "."
 
 // Létrehozás
 N = 10
-tömb = létrehoz(egész)[N]
+tömb = létrehoz[N]
 
 // Feltöltés
 ciklus egész i = 0-tól i &lt; N-ig
@@ -8935,7 +8935,7 @@ kiír: "A tömb legnagyobb eleme: tömb[" . maxi . "] = " . tömb[maxi] . "."
 
 // Létrehozás
 N = 10
-tömb = létrehoz(egész)[N]
+tömb = létrehoz[N]
 
 // Feltöltés
 ciklus egész i = 0-tól i &lt; N-ig
@@ -8969,7 +8969,7 @@ kiír: "A tömb legnagyobb eleme: tömb[" . maxi . "] = " . tömb[maxi] . "."
 
 // Létrehozás
 N = 10
-tömb = létrehoz(egész)[N]
+tömb = létrehoz[N]
 
 // Feltöltés
 ciklus egész i = 0-tól i &lt; N-ig
@@ -9003,7 +9003,7 @@ kiír: "A tömb legnagyobb eleme: tömb[" . maxi . "] = " . tömb[maxi] . "."
 
 // Létrehozás
 N = 10
-tömb = létrehoz(egész)[N]
+tömb = létrehoz[N]
 
 // Feltöltés
 ciklus egész i = 0-tól i &lt; N-ig
@@ -9037,7 +9037,7 @@ kiír: "A tömb legnagyobb eleme: tömb[" . maxi . "] = " . tömb[maxi] . "."
 
 // Létrehozás
 N = 10
-tömb = létrehoz(egész)[N]
+tömb = létrehoz[N]
 
 // Feltöltés
 ciklus egész i = 0-tól i &lt; N-ig
@@ -9071,7 +9071,7 @@ kiír: "A tömb legnagyobb eleme: tömb[" . maxi . "] = " . tömb[maxi] . "."
 
 // Létrehozás
 N = 10
-tömb = létrehoz(egész)[N]
+tömb = létrehoz[N]
 
 // Feltöltés
 ciklus egész i = 0-tól i &lt; N-ig
@@ -9105,7 +9105,7 @@ kiír: "A tömb legnagyobb eleme: tömb[" . maxi . "] = " . tömb[maxi] . "."
 
 // Létrehozás
 N = 10
-tömb = létrehoz(egész)[N]
+tömb = létrehoz[N]
 
 // Feltöltés
 ciklus egész i = 0-tól i &lt; N-ig
@@ -9139,7 +9139,7 @@ kiír: "A tömb legnagyobb eleme: tömb[" . maxi . "] = " . tömb[maxi] . "."
 
 // Létrehozás
 N = 10
-tömb = létrehoz(egész)[N]
+tömb = létrehoz[N]
 
 // Feltöltés
 ciklus egész i = 0-tól i &lt; N-ig
@@ -9173,7 +9173,7 @@ kiír: "A tömb legnagyobb eleme: tömb[" . maxi . "] = " . tömb[maxi] . "."
 
 // Létrehozás
 N = 10
-tömb = létrehoz(egész)[N]
+tömb = létrehoz[N]
 
 // Feltöltés
 ciklus egész i = 0-tól i &lt; N-ig
@@ -9207,7 +9207,7 @@ kiír: "A tömb legnagyobb eleme: tömb[" . maxi . "] = " . tömb[maxi] . "."
 
 // Létrehozás
 N = 10
-tömb = létrehoz(egész)[N]
+tömb = létrehoz[N]
 
 // Feltöltés
 ciklus egész i = 0-tól i &lt; N-ig
@@ -9241,7 +9241,7 @@ kiír: "A tömb legnagyobb eleme: tömb[" . maxi . "] = " . tömb[maxi] . "."
 
 // Létrehozás
 N = 10
-tömb = létrehoz(egész)[N]
+tömb = létrehoz[N]
 
 // Feltöltés
 ciklus egész i = 0-tól i &lt; N-ig
@@ -9275,7 +9275,7 @@ kiír: "A tömb legnagyobb eleme: tömb[" . maxi . "] = " . tömb[maxi] . "."
 
 // Létrehozás
 N = 10
-tömb = létrehoz(egész)[N]
+tömb = létrehoz[N]
 
 // Feltöltés
 ciklus egész i = 0-tól i &lt; N-ig
@@ -9309,7 +9309,7 @@ kiír: "A tömb legnagyobb eleme: tömb[" . maxi . "] = " . tömb[maxi] . "."
 
 // Létrehozás
 N = 10
-tömb = létrehoz(egész)[N]
+tömb = létrehoz[N]
 
 // Feltöltés
 ciklus egész i = 0-tól i &lt; N-ig
@@ -9343,7 +9343,7 @@ kiír: "A tömb legnagyobb eleme: tömb[" . maxi . "] = " . tömb[maxi] . "."
 
 // Létrehozás
 N = 10
-tömb = létrehoz(egész)[N]
+tömb = létrehoz[N]
 
 // Feltöltés
 ciklus egész i = 0-tól i &lt; N-ig
@@ -9377,7 +9377,7 @@ kiír: "A tömb legnagyobb eleme: tömb[" . maxi . "] = " . tömb[maxi] . "."
 
 // Létrehozás
 N = 10
-tömb = létrehoz(egész)[N]
+tömb = létrehoz[N]
 
 // Feltöltés
 ciklus egész i = 0-tól i &lt; N-ig
@@ -9411,7 +9411,7 @@ kiír: "A tömb legnagyobb eleme: tömb[" . maxi . "] = " . tömb[maxi] . "."
 
 // Létrehozás
 N = 10
-tömb = létrehoz(egész)[N]
+tömb = létrehoz[N]
 
 // Feltöltés
 ciklus egész i = 0-tól i &lt; N-ig
@@ -9445,7 +9445,7 @@ kiír: "A tömb legnagyobb eleme: tömb[" . maxi . "] = " . tömb[maxi] . "."
 
 // Létrehozás
 N = 10
-tömb = létrehoz(egész)[N]
+tömb = létrehoz[N]
 
 // Feltöltés
 ciklus egész i = 0-tól i &lt; N-ig
@@ -9479,7 +9479,7 @@ kiír: "A tömb legnagyobb eleme: tömb[" . maxi . "] = " . tömb[maxi] . "."
 
 // Létrehozás
 N = 10
-tömb = létrehoz(egész)[N]
+tömb = létrehoz[N]
 
 // Feltöltés
 ciklus egész i = 0-tól i &lt; N-ig
@@ -9513,7 +9513,7 @@ kiír: "A tömb legnagyobb eleme: tömb[" . maxi . "] = " . tömb[maxi] . "."
 
 // Létrehozás
 N = 10
-tömb = létrehoz(egész)[N]
+tömb = létrehoz[N]
 
 // Feltöltés
 ciklus egész i = 0-tól i &lt; N-ig
@@ -9547,7 +9547,7 @@ kiír: "A tömb legnagyobb eleme: tömb[" . maxi . "] = " . tömb[maxi] . "."
 
 // Létrehozás
 N = 10
-tömb = létrehoz(egész)[N]
+tömb = létrehoz[N]
 
 // Feltöltés
 ciklus egész i = 0-tól i &lt; N-ig
@@ -9581,7 +9581,7 @@ kiír: "A tömb legnagyobb eleme: tömb[" . maxi . "] = " . tömb[maxi] . "."
 
 // Létrehozás
 N = 10
-tömb = létrehoz(egész)[N]
+tömb = létrehoz[N]
 
 // Feltöltés
 ciklus egész i = 0-tól i &lt; N-ig
@@ -9615,7 +9615,7 @@ kiír: "A tömb legnagyobb eleme: tömb[" . maxi . "] = " . tömb[maxi] . "."
 
 // Létrehozás
 N = 10
-tömb = létrehoz(egész)[N]
+tömb = létrehoz[N]
 
 // Feltöltés
 ciklus egész i = 0-tól i &lt; N-ig
@@ -9649,7 +9649,7 @@ kiír: "A tömb legnagyobb eleme: tömb[" . maxi . "] = " . tömb[maxi] . "."
 
 // Létrehozás
 N = 10
-tömb = létrehoz(egész)[N]
+tömb = létrehoz[N]
 
 // Feltöltés
 ciklus egész i = 0-tól i &lt; N-ig
@@ -9683,7 +9683,7 @@ kiír: "A tömb legnagyobb eleme: tömb[" . maxi . "] = " . tömb[maxi] . "."
 
 // Létrehozás
 N = 10
-tömb = létrehoz(egész)[N]
+tömb = létrehoz[N]
 
 // Feltöltés
 ciklus egész i = 0-tól i &lt; N-ig
@@ -9717,7 +9717,7 @@ kiír: "A tömb legnagyobb eleme: tömb[" . maxi . "] = " . tömb[maxi] . "."
 
 // Létrehozás
 N = 10
-tömb = létrehoz(egész)[N]
+tömb = létrehoz[N]
 
 // Feltöltés
 ciklus egész i = 0-tól i &lt; N-ig
@@ -9751,7 +9751,7 @@ kiír: "A tömb legnagyobb eleme: tömb[" . maxi . "] = " . tömb[maxi] . "."
 
 // Létrehozás
 N = 10
-tömb = létrehoz(egész)[N]
+tömb = létrehoz[N]
 
 // Feltöltés
 ciklus egész i = 0-tól i &lt; N-ig
@@ -9785,7 +9785,7 @@ kiír: "A tömb legnagyobb eleme: tömb[" . maxi . "] = " . tömb[maxi] . "."
 
 // Létrehozás
 N = 10
-tömb = létrehoz(egész)[N]
+tömb = létrehoz[N]
 
 // Feltöltés
 ciklus egész i = 0-tól i &lt; N-ig
@@ -9819,7 +9819,7 @@ kiír: "A tömb legnagyobb eleme: tömb[" . maxi . "] = " . tömb[maxi] . "."
 
 // Létrehozás
 N = 10
-tömb = létrehoz(egész)[N]
+tömb = létrehoz[N]
 
 // Feltöltés
 ciklus egész i = 0-tól i &lt; N-ig
@@ -9853,7 +9853,7 @@ kiír: "A tömb legnagyobb eleme: tömb[" . maxi . "] = " . tömb[maxi] . "."
 
 // Létrehozás
 N = 10
-tömb = létrehoz(egész)[N]
+tömb = létrehoz[N]
 
 // Feltöltés
 ciklus egész i = 0-tól i &lt; N-ig
@@ -9887,7 +9887,7 @@ kiír: "A tömb legnagyobb eleme: tömb[" . maxi . "] = " . tömb[maxi] . "."
 
 // Létrehozás
 N = 10
-tömb = létrehoz(egész)[N]
+tömb = létrehoz[N]
 
 // Feltöltés
 ciklus egész i = 0-tól i &lt; N-ig
@@ -9921,7 +9921,7 @@ kiír: "A tömb legnagyobb eleme: tömb[" . maxi . "] = " . tömb[maxi] . "."
 
 // Létrehozás
 N = 10
-tömb = létrehoz(egész)[N]
+tömb = létrehoz[N]
 
 // Feltöltés
 ciklus egész i = 0-tól i &lt; N-ig
@@ -9955,7 +9955,7 @@ kiír: "A tömb legnagyobb eleme: tömb[" . maxi . "] = " . tömb[maxi] . "."
 
 // Létrehozás
 N = 10
-tömb = létrehoz(egész)[N]
+tömb = létrehoz[N]
 
 // Feltöltés
 ciklus egész i = 0-tól i &lt; N-ig
@@ -9989,7 +9989,7 @@ kiír: "A tömb legnagyobb eleme: tömb[" . maxi . "] = " . tömb[maxi] . "."
 
 // Létrehozás
 N = 10
-tömb = létrehoz(egész)[N]
+tömb = létrehoz[N]
 
 // Feltöltés
 ciklus egész i = 0-tól i &lt; N-ig
@@ -10023,7 +10023,7 @@ kiír: "A tömb legnagyobb eleme: tömb[" . maxi . "] = " . tömb[maxi] . "."
 
 // Létrehozás
 N = 10
-tömb = létrehoz(egész)[N]
+tömb = létrehoz[N]
 
 // Feltöltés
 ciklus egész i = 0-tól i &lt; N-ig
@@ -10057,7 +10057,7 @@ kiír: "A tömb legnagyobb eleme: tömb[" . maxi . "] = " . tömb[maxi] . "."
 
 // Létrehozás
 N = 10
-tömb = létrehoz(egész)[N]
+tömb = létrehoz[N]
 
 // Feltöltés
 ciklus egész i = 0-tól i &lt; N-ig
@@ -10089,7 +10089,7 @@ ciklus_vége
 kiír: "A tömb legnagyobb eleme: tömb[" . maxi . "] = " . tömb[maxi] . "."
 
 N = 10
-tömb = létrehoz(egész)[N]
+tömb = létrehoz[N]
 
 ciklus egész i = 0-tól i &lt; N-ig
 	tömb[i] = i * 10
@@ -10131,7 +10131,7 @@ egész maxi
 
 // Létrehozás
 N = 10
-tömb = létrehoz(egész)[N]
+tömb = létrehoz[N]
 
 // Feltöltés
 ciklus egész i = 0-tól i &lt; N-ig
@@ -10166,7 +10166,7 @@ kiír: "A tömb legnagyobb eleme: tömb[" . maxi . "] = " . tömb[maxi] . "."
 
 // Létrehozás
 N = 10
-tömb = létrehoz(egész)[N]
+tömb = létrehoz[N]
 
 // Feltöltés
 ciklus egész i = 0-tól i &lt; N-ig
@@ -10201,7 +10201,7 @@ kiír: "A tömb legnagyobb eleme: tömb[" . maxi . "] = " . tömb[maxi] . "."
 
 // Létrehozás
 N = 10
-tömb = létrehoz(egész)[N]
+tömb = létrehoz[N]
 
 // Feltöltés
 ciklus egész i = 0-tól i &lt; N-ig
@@ -10235,7 +10235,7 @@ kiír: "A tömb legnagyobb eleme: tömb[" . maxi . "] = " . tömb[maxi] . "."
 
 // Létrehozás
 N = 10
-tömb = létrehoz(egész)[N]
+tömb = létrehoz[N]
 
 // Feltöltés
 ciklus egész i = 0-tól i &lt; N-ig
@@ -10269,7 +10269,7 @@ kiír: "A tömb legnagyobb eleme: tömb[" . maxi . "] = " . tömb[maxi] . "."
 
 // Létrehozás
 N = 10
-tömb = létrehoz(egész)[N]
+tömb = létrehoz[N]
 
 // Feltöltés
 ciklus egész i = 0-tól i &lt; N-ig
@@ -10303,7 +10303,7 @@ kiír: "A tömb legnagyobb eleme: tömb[" . maxi . "] = " . tömb[maxi] . "."
 
 // Létrehozás
 N = 10
-tömb = létrehoz(egész)[N]
+tömb = létrehoz[N]
 
 // Feltöltés
 ciklus egész i = 0-tól i &lt; N-ig
@@ -10337,7 +10337,7 @@ kiír: "A tömb legnagyobb eleme: tömb[" . maxi . "] = " . tömb[maxi] . "."
 
 // Létrehozás
 N = 10
-tömb = létrehoz(egész)[N]
+tömb = létrehoz[N]
 
 // Feltöltés
 ciklus egész i = 0-tól i &lt; N-ig
@@ -10371,7 +10371,7 @@ kiír: "A tömb legnagyobb eleme: tömb[" . maxi . "] = " . tömb[maxi] . "."
 
 // Létrehozás
 N = 10
-tömb = létrehoz(egész)[N]
+tömb = létrehoz[N]
 
 // Feltöltés
 ciklus egész i = 0-tól i &lt; N-ig
@@ -10405,7 +10405,7 @@ kiír: "A tömb legnagyobb eleme: tömb[" . maxi . "] = " . tömb[maxi] . "."
 
 // Létrehozás
 N = 10
-tömb = létrehoz(egész)[N]
+tömb = létrehoz[N]
 
 // Feltöltés
 ciklus egész i = 0-tól i &lt; N-ig
@@ -10439,7 +10439,7 @@ kiír: "A tömb legnagyobb eleme: tömb[" . maxi . "] = " . tömb[maxi] . "."
 
 // Létrehozás
 N = 10
-tömb = létrehoz(egész)[N]
+tömb = létrehoz[N]
 
 // Feltöltés
 ciklus egész i = 0-tól i &lt; N-ig
@@ -10473,7 +10473,7 @@ kiír: "A tömb legnagyobb eleme: tömb[" . maxi . "] = " . tömb[maxi] . "."
 
 // Létrehozás
 N = 10
-tömb = létrehoz(egész)[N]
+tömb = létrehoz[N]
 
 // Feltöltés
 ciklus egész i = 0-tól i &lt; N-ig
@@ -10507,7 +10507,7 @@ kiír: "A tömb legnagyobb eleme: tömb[" . maxi . "] = " . tömb[maxi] . "."
 
 // Létrehozás
 N = 10
-tömb = létrehoz(egész)[N]
+tömb = létrehoz[N]
 
 // Feltöltés
 ciklus egész i = 0-tól i &lt; N-ig
@@ -10541,7 +10541,7 @@ kiír: "A tömb legnagyobb eleme: tömb[" . maxi . "] = " . tömb[maxi] . "."
 
 // Létrehozás
 N = 10
-tömb = létrehoz(egész)[N]
+tömb = létrehoz[N]
 
 // Feltöltés
 ciklus egész i = 0-tól i &lt; N-ig
@@ -10575,7 +10575,7 @@ kiír: "A tömb legnagyobb eleme: tömb[" . maxi . "] = " . tömb[maxi] . "."
 
 // Létrehozás
 N = 10
-tömb = létrehoz(egész)[N]
+tömb = létrehoz[N]
 
 // Feltöltés
 ciklus egész i = 0-tól i &lt; N-ig
@@ -10609,7 +10609,7 @@ kiír: "A tömb legnagyobb eleme: tömb[" . maxi . "] = " . tömb[maxi] . "."
 
 // Létrehozás
 N = 10
-tömb = létrehoz(egész)[N]
+tömb = létrehoz[N]
 
 // Feltöltés
 ciklus egész i = 0-tól i &lt; N-ig
@@ -10643,7 +10643,7 @@ kiír: "A tömb legnagyobb eleme: tömb[" . maxi . "] = " . tömb[maxi] . "."
 
 // Létrehozás
 N = 10
-tömb = létrehoz(egész)[N]
+tömb = létrehoz[N]
 
 // Feltöltés
 ciklus egész i = 0-tól i &lt; N-ig
@@ -10677,7 +10677,7 @@ kiír: "A tömb legnagyobb eleme: tömb[" . maxi . "] = " . tömb[maxi] . "."
 
 // Létrehozás
 N = 10
-tömb = létrehoz(egész)[N]
+tömb = létrehoz[N]
 
 // Feltöltés
 ciklus egész i = 0-tól i &lt; N-ig
@@ -10711,7 +10711,7 @@ kiír: "A tömb legnagyobb eleme: tömb[" . maxi . "] = " . tömb[maxi] . "."
 
 // Létrehozás
 N = 10
-tömb = létrehoz(egész)[N]
+tömb = létrehoz[N]
 
 // Feltöltés
 ciklus egész i = 0-tól i &lt; N-ig
@@ -10745,7 +10745,7 @@ kiír: "A tömb legnagyobb eleme: tömb[" . maxi . "] = " . tömb[maxi] . "."
 
 // Létrehozás
 N = 10
-tömb = létrehoz(egész)[N]
+tömb = létrehoz[N]
 
 // Feltöltés
 ciklus egész i = 0-tól i &lt; N-ig
@@ -10779,7 +10779,7 @@ kiír: "A tömb legnagyobb eleme: tömb[" . maxi . "] = " . tömb[maxi] . "."
 
 // Létrehozás
 N = 10
-tömb = létrehoz(egész)[N]
+tömb = létrehoz[N]
 
 // Feltöltés
 ciklus egész i = 0-tól i &lt; N-ig
@@ -10813,7 +10813,7 @@ kiír: "A tömb legnagyobb eleme: tömb[" . maxi . "] = " . tömb[maxi] . "."
 
 // Létrehozás
 N = 10
-tömb = létrehoz(egész)[N]
+tömb = létrehoz[N]
 
 // Feltöltés
 ciklus egész i = 0-tól i &lt; N-ig
@@ -10847,7 +10847,7 @@ kiír: "A tömb legnagyobb eleme: tömb[" . maxi . "] = " . tömb[maxi] . "."
 
 // Létrehozás
 N = 10
-tömb = létrehoz(egész)[N]
+tömb = létrehoz[N]
 
 // Feltöltés
 ciklus egész i = 0-tól i &lt; N-ig
@@ -10881,7 +10881,7 @@ kiír: "A tömb legnagyobb eleme: tömb[" . maxi . "] = " . tömb[maxi] . "."
 
 // Létrehozás
 N = 10
-tömb = létrehoz(egész)[N]
+tömb = létrehoz[N]
 
 // Feltöltés
 ciklus egész i = 0-tól i &lt; N-ig
@@ -10915,7 +10915,7 @@ kiír: "A tömb legnagyobb eleme: tömb[" . maxi . "] = " . tömb[maxi] . "."
 
 // Létrehozás
 N = 10
-tömb = létrehoz(egész)[N]
+tömb = létrehoz[N]
 
 // Feltöltés
 ciklus egész i = 0-tól i &lt; N-ig
@@ -10949,7 +10949,7 @@ kiír: "A tömb legnagyobb eleme: tömb[" . maxi . "] = " . tömb[maxi] . "."
 
 // Létrehozás
 N = 10
-tömb = létrehoz(egész)[N]
+tömb = létrehoz[N]
 
 // Feltöltés
 ciklus egész i = 0-tól i &lt; N-ig
@@ -10983,7 +10983,7 @@ kiír: "A tömb legnagyobb eleme: tömb[" . maxi . "] = " . tömb[maxi] . "."
 
 // Létrehozás
 N = 10
-tömb = létrehoz(egész)[N]
+tömb = létrehoz[N]
 
 // Feltöltés
 ciklus egész i = 0-tól i &lt; N-ig
@@ -11017,7 +11017,7 @@ kiír: "A tömb legnagyobb eleme: tömb[" . maxi . "] = " . tömb[maxi] . "."
 
 // Létrehozás
 N = 10
-tömb = létrehoz(egész)[N]
+tömb = létrehoz[N]
 
 // Feltöltés
 ciklus egész i = 0-tól i &lt; N-ig
@@ -11051,7 +11051,7 @@ kiír: "A tömb legnagyobb eleme: tömb[" . maxi . "] = " . tömb[maxi] . "."
 
 // Létrehozás
 N = 10
-tömb = létrehoz(egész)[N]
+tömb = létrehoz[N]
 
 // Feltöltés
 ciklus egész i = 0-tól i &lt; N-ig
@@ -11085,7 +11085,7 @@ kiír: "A tömb legnagyobb eleme: tömb[" . maxi . "] = " . tömb[maxi] . "."
 
 // Létrehozás
 N = 10
-tömb = létrehoz(egész)[N]
+tömb = létrehoz[N]
 
 // Feltöltés
 ciklus egész i = 0-tól i &lt; N-ig

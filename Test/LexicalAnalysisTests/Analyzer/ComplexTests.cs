@@ -69,10 +69,10 @@ namespace LexicalAnalysisTests.Analyzer
                                 "tört b = -20,3677\n" +
                                 "szöveg c = \"alma\"\n" +
                                 "logikai d = hamis\n" +
-                                "egész[] e = létrehoz(egész)[10]\n" +
-                                "tört[] f = létrehoz(tört)[22]\n" +
-                                "szöveg[] g = létrehoz(szöveg)[36]\n" +
-                                "logikai[] h = létrehoz(logikai)[47]\n" +
+                                "egész[] e = létrehoz[10]\n" +
+                                "tört[] f = létrehoz[22]\n" +
+                                "szöveg[] g = létrehoz[36]\n" +
+                                "logikai[] h = létrehoz[47]\n" +
                                 "program_vége";
 
             LexicalAnalyzerResult result = new LexicalAnalyzer(code).Analyze();
@@ -111,53 +111,41 @@ namespace LexicalAnalysisTests.Analyzer
             tt.ExpectLogikaiLiteral("hamis");
             tt.NewLine();
 
-            // 6.  egész[] e = létrehoz(egész)[10]
+            // 6.  egész[] e = létrehoz[10]
             tt.ExpectKeyword("egész tömb");
             tt.ExpectIdentifier("e");
             tt.ExpectKeyword("=");
             tt.ExpectKeyword("létrehoz");
-            tt.ExpectKeyword("(");
-            tt.ExpectKeyword("egész");
-            tt.ExpectKeyword(")");
             tt.ExpectKeyword("[");
             tt.ExpectEgeszLiteral("10");
             tt.ExpectKeyword("]");
             tt.NewLine();
 
-            // 7.  tört[] f = létrehoz(tört)[22]
+            // 7.  tört[] f = létrehoz[22]
             tt.ExpectKeyword("tört tömb");
             tt.ExpectIdentifier("f");
             tt.ExpectKeyword("=");
             tt.ExpectKeyword("létrehoz");
-            tt.ExpectKeyword("(");
-            tt.ExpectKeyword("tört");
-            tt.ExpectKeyword(")");
             tt.ExpectKeyword("[");
             tt.ExpectEgeszLiteral("22");
             tt.ExpectKeyword("]");
             tt.NewLine();
 
-            // 8.  szöveg[] g = létrehoz(szöveg)[36]
+            // 8.  szöveg[] g = létrehoz[36]
             tt.ExpectKeyword("szöveg tömb");
             tt.ExpectIdentifier("g");
             tt.ExpectKeyword("=");
             tt.ExpectKeyword("létrehoz");
-            tt.ExpectKeyword("(");
-            tt.ExpectKeyword("szöveg");
-            tt.ExpectKeyword(")");
             tt.ExpectKeyword("[");
             tt.ExpectEgeszLiteral("36");
             tt.ExpectKeyword("]");
             tt.NewLine();
 
-            // 9.  logikai[] h = létrehoz(logikai)[47]
+            // 9.  logikai[] h = létrehoz[47]
             tt.ExpectKeyword("logikai tömb");
             tt.ExpectIdentifier("h");
             tt.ExpectKeyword("=");
             tt.ExpectKeyword("létrehoz");
-            tt.ExpectKeyword("(");
-            tt.ExpectKeyword("logikai");
-            tt.ExpectKeyword(")");
             tt.ExpectKeyword("[");
             tt.ExpectEgeszLiteral("47");
             tt.ExpectKeyword("]");
@@ -305,7 +293,7 @@ namespace LexicalAnalysisTests.Analyzer
                                 "különben\r\n" +
                                 "   kiír \"x kisebb, mint kettő!\"\r\n" +
                                 "elágazás_vége\r\n" +
-                                "egész[] y = létrehoz(egész)[10]\r\n" +
+                                "egész[] y = létrehoz[10]\r\n" +
                                 "ciklus egész i=0-tól 9-ig\r\n" +
                                 "   y[i]=i\r\n" +
                                 "   kiír y[i]\r\n" +
@@ -353,14 +341,11 @@ namespace LexicalAnalysisTests.Analyzer
             tt.ExpectKeyword("elágazás_vége");
             tt.NewLine();
 
-            // egész[] y = létrehoz(egész)[10]\r\n
+            // egész[] y = létrehoz[10]\r\n
             tt.ExpectKeyword("egész tömb");
             tt.ExpectIdentifier("y");
             tt.ExpectKeyword("=");
             tt.ExpectKeyword("létrehoz");
-            tt.ExpectKeyword("(");
-            tt.ExpectKeyword("egész");
-            tt.ExpectKeyword(")");
             tt.ExpectKeyword("[");
             tt.ExpectEgeszLiteral("10");
             tt.ExpectKeyword("]");
@@ -520,7 +505,7 @@ namespace LexicalAnalysisTests.Analyzer
         {
             const string code = "program_kezd\r\n" +
                           /*2*/ "\r\n" +
-                          /*3*/ "egész[] tömb = létrehoz(egész)[10]\r\n" +
+                          /*3*/ "egész[] tömb = létrehoz[10]\r\n" +
                           /*4*/ "\r\n" +
                           /*5*/ "ciklus egész i=0-tól i<9-ig\r\n" +
                           /*6*/ "   tömb[i] = i*10\r\n" +
@@ -559,15 +544,12 @@ namespace LexicalAnalysisTests.Analyzer
             // 2. \r\n
             tt.CurrentRow++;
 
-            // 3. egész[] tömb = létrehoz(egész)[10]\r\n
+            // 3. egész[] tömb = létrehoz[10]\r\n
             tt.ExpectKeyword("egész tömb");
             tt.ExpectIdentifier("tömb");
             st.ExpectSimpleEntry(SingleEntryType.EgeszTomb, "tömb", 3);
             tt.ExpectKeyword("=");
             tt.ExpectKeyword("létrehoz");
-            tt.ExpectKeyword("(");
-            tt.ExpectKeyword("egész");
-            tt.ExpectKeyword(")");
             tt.ExpectKeyword("[");
             tt.ExpectEgeszLiteral("10");
             tt.ExpectKeyword("]");
@@ -771,7 +753,7 @@ namespace LexicalAnalysisTests.Analyzer
         {
             const string code = "program_kezd\r\n" +
                          /*2*/  "\r\n" +
-                         /*3*/  "egész[] tömb = létrehoz(egész)[10]\r\n" +
+                         /*3*/  "egész[] tömb = létrehoz[10]\r\n" +
                          /*4*/  "\r\n" +
                          /*5*/  "egész a = 2\r\n" +
                          /*6*/  "ciklus egész aa = 0-tól aa < 9-ig\r\n" +
@@ -816,15 +798,12 @@ namespace LexicalAnalysisTests.Analyzer
             // 2. \r\n
             tt.CurrentRow++;
 
-            // 3. egész[] tömb = létrehoz(egész)[10]\r\n
+            // 3. egész[] tömb = létrehoz[10]\r\n
             tt.ExpectKeyword("egész tömb");
             tt.ExpectIdentifier("tömb");
             st.ExpectSimpleEntry(SingleEntryType.EgeszTomb, "tömb", 3);
             tt.ExpectKeyword("=");
             tt.ExpectKeyword("létrehoz");
-            tt.ExpectKeyword("(");
-            tt.ExpectKeyword("egész");
-            tt.ExpectKeyword(")");
             tt.ExpectKeyword("[");
             tt.ExpectEgeszLiteral("10");
             tt.ExpectKeyword("]");
@@ -1062,7 +1041,7 @@ namespace LexicalAnalysisTests.Analyzer
         {
             const string code = "program_kezd\r\n" +
                          /*2*/  "\r\n" +
-                         /*3*/  "egész[] tömb = létrehoz(egész)[10]\r\n" +
+                         /*3*/  "egész[] tömb = létrehoz[10]\r\n" +
                          /*4*/  "egész a = törtből_egészbe(tömb[0] * 2,5) + logikaiból_egészbe(igaz)\r\n" +
                          /*5*/  "szöveg sz = szövegből_egészbe(a)\r\n" +
                          /*6*/  "logikai log = igaz\r\n" +
@@ -1088,15 +1067,12 @@ namespace LexicalAnalysisTests.Analyzer
             // 2. \r\n
             tt.CurrentRow++;
 
-            // 3. egész[] tömb = létrehoz(egész)[10]\r\n
+            // 3. egész[] tömb = létrehoz[10]\r\n
             tt.ExpectKeyword("egész tömb");
             tt.ExpectIdentifier("tömb");
             st.ExpectSimpleEntry(SingleEntryType.EgeszTomb, "tömb", 3);
             tt.ExpectKeyword("=");
             tt.ExpectKeyword("létrehoz");
-            tt.ExpectKeyword("(");
-            tt.ExpectKeyword("egész");
-            tt.ExpectKeyword(")");
             tt.ExpectKeyword("[");
             tt.ExpectEgeszLiteral("10");
             tt.ExpectKeyword("]");

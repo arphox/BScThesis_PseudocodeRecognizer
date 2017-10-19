@@ -97,7 +97,7 @@ namespace LexicalAnalysisTests.Analyzer
         public void CanRecognizeArrayDeclaration()
         {
             const string code = "program_kezd\n" +
-                                "szöveg[] sorok = létrehoz(szöveg)[97]\n" +
+                                "szöveg[] sorok = létrehoz[97]\n" +
                                 "program_vége";
 
             LexicalAnalyzerResult result = new LexicalAnalyzer(code).Analyze();
@@ -111,9 +111,6 @@ namespace LexicalAnalysisTests.Analyzer
             tt.ExpectIdentifier("sorok");
             tt.ExpectKeyword("=");
             tt.ExpectKeyword("létrehoz");
-            tt.ExpectKeyword("(");
-            tt.ExpectKeyword("szöveg");
-            tt.ExpectKeyword(")");
             tt.ExpectKeyword("[");
             tt.ExpectEgeszLiteral("97");
             tt.ExpectKeyword("]");
