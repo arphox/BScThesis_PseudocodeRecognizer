@@ -32,6 +32,10 @@ A szabályok megadása során csak a jobbrekurzió engedett meg.
 										|	<TömbÉrtékadás>
 
 <AlapÉrtékadás>						::=		"azonosító" "=" <AlapKifejezés>
+										|	<TömbElemElérés> "=" <AlapKifejezés>
+
+<TömbElemElérés>					::=		"azonosító" "[" "azonosító" "]"
+										|	"azonosító" "[" <AlapKifejezés> "]"
 
 <TömbÉrtékadás>						::=		"azonosító" "=" <TömbLétrehozóKifejezés>
 

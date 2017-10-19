@@ -85,13 +85,21 @@ namespace SyntaxAnalysis.Analyzer
         internal bool AlapÉrtékadás()
         {
             return Rule(() =>
-                Match(() => T("azonosító"), () => T("="), Kifejezés));
+                   Match(() => T("azonosító"), () => T("="), AlapKifejezés)
+                || Match(TömbElemElérés, () => T("="), AlapKifejezés));
+        }
+
+        internal bool TömbElemElérés()
+        {
+            return Rule(() =>
+                   Match(() => T("azonosító"), () => T("["), () => T("azonosító"), () => T("]"))
+                || Match(() => T("azonosító"), () => T("["), AlapKifejezés, () => T("]")));
         }
 
         internal bool TömbÉrtékadás()
         {
             return Rule(() =>
-                Match(() => T("azonosító"), () => T("="), Kifejezés));
+                Match(() => T("azonosító"), () => T("="), TömbLétrehozóKifejezés));
         }
 
         internal bool SzámlálóCiklusInicializáló()
