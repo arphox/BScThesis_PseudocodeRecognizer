@@ -38,13 +38,15 @@ namespace SyntaxAnalysis.Analyzer
         internal bool Állítás()
         {
             return Rule(() =>
-                   Match(LokálisVáltozóDeklaráció)
-                || Match(LokálisVáltozóDefiníció)
+                   Match(VáltozóDeklaráció)
+                || Match(VáltozóDefiníció)
                 || Match(BeágyazottÁllítás));
         }
 
         internal bool BeágyazottÁllítás()
         {
+            0 = 2;
+
             return Rule(() =>
                    Match(Értékadás)
                 || Match(() => T("ha"), LogikaiKifejezés, () => T("akkor"), Újsor, BeágyazottÁllítás, Újsor, () => T("különben"), Újsor, BeágyazottÁllítás, Újsor, () => T("elágazás_vége"))
@@ -59,7 +61,7 @@ namespace SyntaxAnalysis.Analyzer
         internal bool SzámlálóCiklusInicializáló()
         {
             return Rule(() =>
-                   Match(LokálisVáltozóDeklaráció)
+                   Match(VáltozóDeklaráció)
                 || Match(Értékadás));
         }
 
@@ -75,13 +77,13 @@ namespace SyntaxAnalysis.Analyzer
                    Match(() => T("azonosító"), () => T("="), Kifejezés));
         }
 
-        internal bool LokálisVáltozóDeklaráció()
+        internal bool VáltozóDeklaráció()
         {
             return Rule(() =>
                    Match(Típus, () => T("azonosító"), () => T("="), Kifejezés));
         }
 
-        internal bool LokálisVáltozóDefiníció()
+        internal bool VáltozóDefiníció()
         {
             return Rule(() =>
                    Match(Típus, () => T("azonosító")));

@@ -4,34 +4,35 @@ mindig hamarabb történjen a definíció, mint a használat.
 A szabályok megadása során csak a jobbrekurzió engedett meg.
 -----------------------------------------------------------------------------------------------
 
-<program>							::=		"program_kezd" "újsor" <állítások> "program_vége"
+<Program>							::=		"program_kezd" "újsor" <Állítások> "program_vége"
 			
-<állítások>							::=		<állítás> "újsor" <állítások>
-										|	<állítás> "újsor"
+<Állítások>							::=		<Állítás> "újsor" <Állítások>
+										|	<Állítás> "újsor"
 										
-<állítás>							::=		<lokálisVáltozóDeklaráció>
-										|	<beágyazottÁllítás>
+<Állítás>							::=		<VáltozóDeklaráció>
+										|	<VáltozóDefiníció>
+										|	<BeágyazottÁllítás>
 
-<beágyazottÁllítás>					::=		<értékadás>
-										|	"ha" <logikaiKifejezés> "akkor" "újsor" <beágyazottÁllítás> "újsor" "különben" "újsor" <beágyazottÁllítás> "újsor" "elágazás_vége"
-										|	"ha" <logikaiKifejezés> "akkor" "újsor" <beágyazottÁllítás> "újsor" "elágazás_vége"
-										|	"ciklus_amíg" <logikaiKifejezés> "újsor" <beágyazottÁllítás> "újsor" "ciklus_vége"
-										|	"ciklus" <számlálóCiklusInicializáló> "-tól" <logikaiKifejezés> "-ig" "újsor" <beágyazottÁllítás> "újsor" "ciklus_vége"
+<BeágyazottÁllítás>					::=		<Értékadás>
+										|	"ha" <LogikaiKifejezés> "akkor" "újsor" <BeágyazottÁllítás> "újsor" "különben" "újsor" <BeágyazottÁllítás> "újsor" "elágazás_vége"
+										|	"ha" <LogikaiKifejezés> "akkor" "újsor" <BeágyazottÁllítás> "újsor" "elágazás_vége"
+										|	"ciklus_amíg" <LogikaiKifejezés> "újsor" <BeágyazottÁllítás> "újsor" "ciklus_vége"
+										|	"ciklus" <SzámlálóCiklusInicializáló> "-tól" <LogikaiKifejezés> "-ig" "újsor" <BeágyazottÁllítás> "újsor" "ciklus_vége"
 										|	<IOparancs> azonosító
 										|	"kilép"
 
-<számlálóCiklusInicializáló>		::=		<lokálisVáltozóDeklaráció>
-										|	<értékadás>
+<SzámlálóCiklusInicializáló>		::=		<VáltozóDeklaráció>
+										|	<Értékadás>
 
-<logikaiKifejezés>					::=		<kifejezés>
+<LogikaiKifejezés>					::=		<Kifejezés>
 
-<értékadás>							::=		"azonosító" "=" <kifejezés>
+<Értékadás>							::=		"azonosító" "=" <Kifejezés>
 
-<lokálisVáltozóDeklaráció>			::=		<típus> "azonosító" "=" <kifejezés>
+<VáltozóDeklaráció>					::=		<Típus> "azonosító" "=" <Kifejezés>
 
-<lokálisVáltozóDefiníció>			::=		<típus> "azonosító"
+<VáltozóDefiníció>			::=		<Típus> "azonosító"
 
-<kifejezés>							::=		"azonosító"
+<Kifejezés>							::=		"azonosító"
 										|	"literál"
 
 
@@ -41,15 +42,15 @@ A szabályok megadása során csak a jobbrekurzió engedett meg.
 	Statikus szabályok:
 -----------------------------------------------------------------------------------------------
 
-<típus>								::=		<alapTípus>
-										|	<tömbTípus>
+<Típus>								::=		<AlapTípus>
+										|	<TömbTípus>
 
-<alapTípus>							::=		"egész"
+<AlapTípus>							::=		"egész"
 										|	"tört"
 										|	"szöveg"
 										|	"logikai"
 
-<tömbTípus>							::=		"egész tömb"
+<TömbTípus>							::=		"egész tömb"
 										|	"tört tömb"
 										|	"szöveg tömb"
 										|	"logikai tömb"
@@ -57,7 +58,7 @@ A szabályok megadása során csak a jobbrekurzió engedett meg.
 <IOparancs>							::=		"beolvas"
 										|	"kiír"
 
-<belsőFüggvény>						::=		"egészből_logikaiba"
+<BelsőFüggvény>						::=		"egészből_logikaiba"
 										|	"törtből_egészbe"
 										|	"törtből_logikaiba"
 										|	"logikaiból_egészbe"
