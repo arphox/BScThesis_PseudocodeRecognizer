@@ -1,6 +1,7 @@
 ﻿using LexicalAnalysis.Tokens;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
@@ -27,12 +28,21 @@ namespace VisualParseTree
 
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
+            Stopwatch sw = Stopwatch.StartNew();
             List<TerminalToken> tokenList = new LexicalAnalyzer(SyntaxAnalyzer.TestCode).Analyze().Tokens;
+            sw.Stop();
+            Console.WriteLine($"Lexer: {sw.ElapsedMilliseconds} ms.");
+            sw.Restart();
 
             SyntaxAnalyzerResult result = new SyntaxAnalyzer(tokenList).Start();
-            _syntaxTree = result.SyntaxTree;
+            sw.Stop();
+            Console.WriteLine($"Parser: {sw.ElapsedMilliseconds} ms.");
+            sw.Restart();
 
+            _syntaxTree = result.SyntaxTree;
             SyntaxTreeConverter.FillTreeView(TreeView, _syntaxTree);
+            Console.WriteLine($"Visual tree build: {sw.ElapsedMilliseconds} ms.");
+
             Console.WriteLine("IsSuccessful = " + result.IsSuccessful);
 
             ButtonExpandAll_Click(null, null);

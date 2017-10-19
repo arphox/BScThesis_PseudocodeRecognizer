@@ -113,9 +113,7 @@ namespace SyntaxAnalysis.Analyzer
             return CurrentToken.GetType() == tokenType;
         }
 
-        private bool Literál()
-        {
-            return T(typeof(LiteralToken));
-        }
+        private bool Literál() => T(typeof(LiteralToken));
+        private bool Újsor() => T("újsor");
     }
 }

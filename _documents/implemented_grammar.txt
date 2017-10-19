@@ -1,7 +1,67 @@
+Itt található az új nyelvtan BNF formában.
+Felsorolási szabály, hogy alulról felfelé olvasva a szabályokat
+mindig hamarabb történjen a definíció, mint a használat.
+A szabályok megadása során csak a jobbrekurzió engedett meg.
+-----------------------------------------------------------------------------------------------
+
 <program>							::=		"program_kezd" "újsor" <állítások> "program_vége"
 			
 <állítások>							::=		<állítás> "újsor" <állítások>
 										|	<állítás> "újsor"
+										
+<állítás>							::=		<lokálisVáltozóDeklaráció>
+										|	<beágyazottÁllítás>
 
-<állítás>							::=		"beolvas"
+<beágyazottÁllítás>					::=		<értékadás>
+										|	"ha" <logikaiKifejezés> "akkor" "újsor" <beágyazottÁllítás> "újsor" "különben" "újsor" <beágyazottÁllítás> "újsor" "elágazás_vége"
+										|	"ha" <logikaiKifejezés> "akkor" "újsor" <beágyazottÁllítás> "újsor" "elágazás_vége"
+										|	"ciklus_amíg" <logikaiKifejezés> "újsor" <beágyazottÁllítás> "újsor" "ciklus_vége"
+										|	"ciklus" <számlálóCiklusInicializáló> "-tól" <logikaiKifejezés> "-ig" "újsor" <beágyazottÁllítás> "újsor" "ciklus_vége"
+										|	<IOparancs> azonosító
+										|	"kilép"
+
+<számlálóCiklusInicializáló>		::=		<lokálisVáltozóDeklaráció>
+										|	<értékadás>
+
+<logikaiKifejezés>					::=		<kifejezés>
+
+<értékadás>							::=		"azonosító" "=" <kifejezés>
+
+<lokálisVáltozóDeklaráció>			::=		<típus> "azonosító" "=" <kifejezés>
+
+<lokálisVáltozóDefiníció>			::=		<típus> "azonosító"
+
+<kifejezés>							::=		"azonosító"
+										|	"literál"
+
+
+
+
+-----------------------------------------------------------------------------------------------
+	Statikus szabályok:
+-----------------------------------------------------------------------------------------------
+
+<típus>								::=		<alapTípus>
+										|	<tömbTípus>
+
+<alapTípus>							::=		"egész"
+										|	"tört"
+										|	"szöveg"
+										|	"logikai"
+
+<tömbTípus>							::=		"egész tömb"
+										|	"tört tömb"
+										|	"szöveg tömb"
+										|	"logikai tömb"
+
+<IOparancs>							::=		"beolvas"
 										|	"kiír"
+
+<belsőFüggvény>						::=		"egészből_logikaiba"
+										|	"törtből_egészbe"
+										|	"törtből_logikaiba"
+										|	"logikaiból_egészbe"
+										|	"logikaiból_törtbe"
+										|	"szövegből_egészbe"
+										|	"szövegből_törtbe"
+										|	"szövegből_logikaiba"
