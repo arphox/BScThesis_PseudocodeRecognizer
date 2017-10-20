@@ -37,8 +37,8 @@
   <ItemGroup>
     <Compile Include="Analyzer\SyntaxAnalyzer.DynamicRules.cs" />
     <Compile Include="NonTerminalToken.cs" />
-    <Compile Include="Tree\SyntaxTree.cs" />
-    <Compile Include="Tree\SyntaxTreeExtensions.cs" />
+    <Compile Include="Tree\ParseTree.cs" />
+    <Compile Include="Tree\ParseTreeExtensions.cs" />
     <Compile Include="Tree\TreeNode.cs" />
     <Compile Include="Analyzer\SyntaxAnalysisException.cs" />
     <Compile Include="Analyzer\SyntaxAnalyzer.Basic.cs" />

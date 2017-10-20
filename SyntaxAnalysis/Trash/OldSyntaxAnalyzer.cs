@@ -17,7 +17,7 @@ namespace SyntaxAnalysis.Trash
         private int _tokenIndexer;
         private int _currentRowNumber;
 
-        private SyntaxTree<Token> _syntaxTree;
+        private ParseTree<Token> _parseTree;
 
         private Token CurrentToken => _tokens[_tokenIndexer];
 
@@ -38,20 +38,20 @@ namespace SyntaxAnalysis.Trash
         public SyntaxAnalyzerResult Start()
         {
             bool success = Program();
-            return new SyntaxAnalyzerResult(_syntaxTree, success);
+            return new SyntaxAnalyzerResult(_parseTree, success);
         }
 
         // Terminal checkers
         private bool T(string tokenName)
         {
             _currentRowNumber = CurrentToken.RowNumber;
-            _syntaxTree.StartNode(CurrentToken);
+            _parseTree.StartNode(CurrentToken);
             bool isSuccessful = CurrentToken.Id == LexicalElementCodeDictionary.GetCode(tokenName);
-            _syntaxTree.EndNode();
+            _parseTree.EndNode();
 
             if (!isSuccessful)
             {
-                _syntaxTree.RemoveLastAddedNode();
+                _parseTree.RemoveLastAddedNode();
             }
             _tokenIndexer++;
             return isSuccessful;
@@ -59,13 +59,13 @@ namespace SyntaxAnalysis.Trash
         private bool T(Type tokenType)
         {
             _currentRowNumber = CurrentToken.RowNumber;
-            _syntaxTree.StartNode(CurrentToken);
+            _parseTree.StartNode(CurrentToken);
             bool isSuccessful = (CurrentToken.GetType() == tokenType);
-            _syntaxTree.EndNode();
+            _parseTree.EndNode();
 
             if (!isSuccessful)
             {
-                _syntaxTree.RemoveLastAddedNode();
+                _parseTree.RemoveLastAddedNode();
             }
             _tokenIndexer++;
             return isSuccessful;
@@ -78,7 +78,7 @@ namespace SyntaxAnalysis.Trash
                 <program>:
                   program_kezd újsor <állítások> program_vége
             */
-            _syntaxTree = new SyntaxTree<Token>(new NonTerminalToken(GetCurrentMethodName(), _currentRowNumber));
+            _parseTree = new ParseTree<Token>(new NonTerminalToken(GetCurrentMethodName(), _currentRowNumber));
 
             return T("program_kezd")
                 && T("újsor")
@@ -92,34 +92,34 @@ namespace SyntaxAnalysis.Trash
                   <egysorosÁllítás> <állítások>
                   <egysorosÁllítás>
             */
-            _syntaxTree.StartNode(new NonTerminalToken(GetCurrentMethodName(), _currentRowNumber));
+            _parseTree.StartNode(new NonTerminalToken(GetCurrentMethodName(), _currentRowNumber));
             int backupPointer = _tokenIndexer;
-            SyntaxTree<Token> backupTree = _syntaxTree.Copy();
+            ParseTree<Token> backupTree = _parseTree.Copy();
 
             if (EgysorosÁllítás() && Állítások())
             {
-                _syntaxTree.EndNode();
+                _parseTree.EndNode();
                 return true;
             }
             else
             {
                 _tokenIndexer = backupPointer;
-                _syntaxTree = backupTree;
+                _parseTree = backupTree;
             }
 
             if (EgysorosÁllítás())
             {
-                _syntaxTree.EndNode();
+                _parseTree.EndNode();
                 return true;
             }
             else
             {
                 _tokenIndexer = backupPointer;
-                _syntaxTree = backupTree;
+                _parseTree = backupTree;
             }
 
-            _syntaxTree.EndNode();
-            _syntaxTree.RemoveLastAddedNode();
+            _parseTree.EndNode();
+            _parseTree.RemoveLastAddedNode();
             return false;
         }
         private bool EgysorosÁllítás()
@@ -129,34 +129,34 @@ namespace SyntaxAnalysis.Trash
                   <állítás> újsor
                   újsor
             */
-            _syntaxTree.StartNode(new NonTerminalToken(GetCurrentMethodName(), _currentRowNumber));
+            _parseTree.StartNode(new NonTerminalToken(GetCurrentMethodName(), _currentRowNumber));
             int backupPointer = _tokenIndexer;
-            SyntaxTree<Token> backupTree = _syntaxTree.Copy();
+            ParseTree<Token> backupTree = _parseTree.Copy();
 
             if (Állítás() && T("újsor"))
             {
-                _syntaxTree.EndNode();
+                _parseTree.EndNode();
                 return true;
             }
             else
             {
                 _tokenIndexer = backupPointer;
-                _syntaxTree = backupTree;
+                _parseTree = backupTree;
             }
 
             if (T("újsor"))
             {
-                _syntaxTree.EndNode();
+                _parseTree.EndNode();
                 return true;
             }
             else
             {
                 _tokenIndexer = backupPointer;
-                _syntaxTree = backupTree;
+                _parseTree = backupTree;
             }
 
-            _syntaxTree.EndNode();
-            _syntaxTree.RemoveLastAddedNode();
+            _parseTree.EndNode();
+            _parseTree.RemoveLastAddedNode();
             return false;
         }
         private bool Állítás()
@@ -166,34 +166,34 @@ namespace SyntaxAnalysis.Trash
                     <lokálisVáltozóDeklaráció>
                     <beágyazottÁllítás>
             */
-            _syntaxTree.StartNode(new NonTerminalToken(GetCurrentMethodName(), _currentRowNumber));
+            _parseTree.StartNode(new NonTerminalToken(GetCurrentMethodName(), _currentRowNumber));
             int backupPointer = _tokenIndexer;
-            SyntaxTree<Token> backupTree = _syntaxTree.Copy();
+            ParseTree<Token> backupTree = _parseTree.Copy();
 
             if (LokálisVáltozóDeklaráció())
             {
-                _syntaxTree.EndNode();
+                _parseTree.EndNode();
                 return true;
             }
             else
             {
                 _tokenIndexer = backupPointer;
-                _syntaxTree = backupTree;
+                _parseTree = backupTree;
             }
 
             if (BeágyazottÁllítás())
             {
-                _syntaxTree.EndNode();
+                _parseTree.EndNode();
                 return true;
             }
             else
             {
                 _tokenIndexer = backupPointer;
-                _syntaxTree = backupTree;
+                _parseTree = backupTree;
             }
 
-            _syntaxTree.EndNode();
-            _syntaxTree.RemoveLastAddedNode();
+            _parseTree.EndNode();
+            _parseTree.RemoveLastAddedNode();
             return false;
         }
         private bool LokálisVáltozóDeklaráció()
@@ -203,35 +203,35 @@ namespace SyntaxAnalysis.Trash
                     <típus> azonosító = <kifejezés>
                     <típus> azonosító
             */
-            _syntaxTree.StartNode(new NonTerminalToken(GetCurrentMethodName(), _currentRowNumber));
+            _parseTree.StartNode(new NonTerminalToken(GetCurrentMethodName(), _currentRowNumber));
             int backupPointer = _tokenIndexer;
-            SyntaxTree<Token> backupTree = _syntaxTree.Copy();
+            ParseTree<Token> backupTree = _parseTree.Copy();
 
             if (Típus() && T("azonosító") && T("=") && Kifejezés())
             {
-                _syntaxTree.EndNode();
+                _parseTree.EndNode();
                 return true;
             }
             else
             {
                 _tokenIndexer = backupPointer;
-                _syntaxTree = backupTree;
+                _parseTree = backupTree;
             }
 
 
             if (Típus() && T("azonosító"))
             {
-                _syntaxTree.EndNode();
+                _parseTree.EndNode();
                 return true;
             }
             else
             {
                 _tokenIndexer = backupPointer;
-                _syntaxTree = backupTree;
+                _parseTree = backupTree;
             }
 
-            _syntaxTree.EndNode();
-            _syntaxTree.RemoveLastAddedNode();
+            _parseTree.EndNode();
+            _parseTree.RemoveLastAddedNode();
             return false;
         }
         private bool Típus()
@@ -241,34 +241,34 @@ namespace SyntaxAnalysis.Trash
                     <tömbTípus>        
                     <alapTípus>
             */
-            _syntaxTree.StartNode(new NonTerminalToken(GetCurrentMethodName(), _currentRowNumber));
+            _parseTree.StartNode(new NonTerminalToken(GetCurrentMethodName(), _currentRowNumber));
             int backupPointer = _tokenIndexer;
-            SyntaxTree<Token> backupTree = _syntaxTree.Copy();
+            ParseTree<Token> backupTree = _parseTree.Copy();
 
             if (TömbTípus())
             {
-                _syntaxTree.EndNode();
+                _parseTree.EndNode();
                 return true;
             }
             else
             {
                 _tokenIndexer = backupPointer;
-                _syntaxTree = backupTree;
+                _parseTree = backupTree;
             }
 
             if (AlapTípus())
             {
-                _syntaxTree.EndNode();
+                _parseTree.EndNode();
                 return true;
             }
             else
             {
                 _tokenIndexer = backupPointer;
-                _syntaxTree = backupTree;
+                _parseTree = backupTree;
             }
 
-            _syntaxTree.EndNode();
-            _syntaxTree.RemoveLastAddedNode();
+            _parseTree.EndNode();
+            _parseTree.RemoveLastAddedNode();
             return false;
         }
         private bool AlapTípus()
@@ -280,56 +280,56 @@ namespace SyntaxAnalysis.Trash
                     szöveg
                     logikai
             */
-            _syntaxTree.StartNode(new NonTerminalToken(GetCurrentMethodName(), _currentRowNumber));
+            _parseTree.StartNode(new NonTerminalToken(GetCurrentMethodName(), _currentRowNumber));
             int backupPointer = _tokenIndexer;
-            SyntaxTree<Token> backupTree = _syntaxTree.Copy();
+            ParseTree<Token> backupTree = _parseTree.Copy();
 
             if (T("egész"))
             {
-                _syntaxTree.EndNode();
+                _parseTree.EndNode();
                 return true;
             }
             else
             {
                 _tokenIndexer = backupPointer;
-                _syntaxTree = backupTree;
+                _parseTree = backupTree;
             }
 
             if (T("tört"))
             {
-                _syntaxTree.EndNode();
+                _parseTree.EndNode();
                 return true;
             }
             else
             {
                 _tokenIndexer = backupPointer;
-                _syntaxTree = backupTree;
+                _parseTree = backupTree;
             }
 
             if (T("szöveg"))
             {
-                _syntaxTree.EndNode();
+                _parseTree.EndNode();
                 return true;
             }
             else
             {
                 _tokenIndexer = backupPointer;
-                _syntaxTree = backupTree;
+                _parseTree = backupTree;
             }
 
             if (T("logikai"))
             {
-                _syntaxTree.EndNode();
+                _parseTree.EndNode();
                 return true;
             }
             else
             {
                 _tokenIndexer = backupPointer;
-                _syntaxTree = backupTree;
+                _parseTree = backupTree;
             }
 
-            _syntaxTree.EndNode();
-            _syntaxTree.RemoveLastAddedNode();
+            _parseTree.EndNode();
+            _parseTree.RemoveLastAddedNode();
             return false;
         }
         private bool TömbTípus()
@@ -338,23 +338,23 @@ namespace SyntaxAnalysis.Trash
                 <tömbTípus>:
                     <alapTípus> [ ]
             */
-            _syntaxTree.StartNode(new NonTerminalToken(GetCurrentMethodName(), _currentRowNumber));
+            _parseTree.StartNode(new NonTerminalToken(GetCurrentMethodName(), _currentRowNumber));
             int backupPointer = _tokenIndexer;
-            SyntaxTree<Token> backupTree = _syntaxTree.Copy();
+            ParseTree<Token> backupTree = _parseTree.Copy();
 
             if (AlapTípus() && T("[") && T("]"))
             {
-                _syntaxTree.EndNode();
+                _parseTree.EndNode();
                 return true;
             }
             else
             {
                 _tokenIndexer = backupPointer;
-                _syntaxTree = backupTree;
+                _parseTree = backupTree;
             }
 
-            _syntaxTree.EndNode();
-            _syntaxTree.RemoveLastAddedNode();
+            _parseTree.EndNode();
+            _parseTree.RemoveLastAddedNode();
             return false;
         }
         private bool BelsőFüggvény()
@@ -371,23 +371,23 @@ namespace SyntaxAnalysis.Trash
                     szövegből_logikaiba
             */
 
-            _syntaxTree.StartNode(new NonTerminalToken(GetCurrentMethodName(), _currentRowNumber));
+            _parseTree.StartNode(new NonTerminalToken(GetCurrentMethodName(), _currentRowNumber));
             int savedPointer = _tokenIndexer;
-            SyntaxTree<Token> backupTree = _syntaxTree.Copy();
+            ParseTree<Token> backupTree = _parseTree.Copy();
 
             if (T(typeof(InternalFunctionToken)))
             {
-                _syntaxTree.EndNode();
+                _parseTree.EndNode();
                 return true;
             }
             else
             {
                 _tokenIndexer = savedPointer;
-                _syntaxTree = backupTree;
+                _parseTree = backupTree;
             }
 
-            _syntaxTree.EndNode();
-            _syntaxTree.RemoveLastAddedNode();
+            _parseTree.EndNode();
+            _parseTree.RemoveLastAddedNode();
             return false;
         }
         private bool BeágyazottÁllítás()
@@ -401,78 +401,78 @@ namespace SyntaxAnalysis.Trash
                     ciklus <számlálóCiklusInicializáló> -tól <logikaiKifejezés> -ig <beágyazottÁllítás>
                     <parancsÁllítás>
             */
-            _syntaxTree.StartNode(new NonTerminalToken(GetCurrentMethodName(), _currentRowNumber));
+            _parseTree.StartNode(new NonTerminalToken(GetCurrentMethodName(), _currentRowNumber));
             int backupPointer = _tokenIndexer;
-            SyntaxTree<Token> backupTree = _syntaxTree.Copy();
+            ParseTree<Token> backupTree = _parseTree.Copy();
 
             if (Értékadás())
             {
-                _syntaxTree.EndNode();
+                _parseTree.EndNode();
                 return true;
             }
             else
             {
                 _tokenIndexer = backupPointer;
-                _syntaxTree = backupTree;
+                _parseTree = backupTree;
             }
 
             if (T("ha") && LogikaiKifejezés() && T("akkor") && BeágyazottÁllítás() && T("különben") && BeágyazottÁllítás() && T("elágazás_vége"))
             {
-                _syntaxTree.EndNode();
+                _parseTree.EndNode();
                 return true;
             }
             else
             {
                 _tokenIndexer = backupPointer;
-                _syntaxTree = backupTree;
+                _parseTree = backupTree;
             }
 
             if (T("ha") && LogikaiKifejezés() && T("akkor") && BeágyazottÁllítás() && T("elágazás_vége"))
             {
-                _syntaxTree.EndNode();
+                _parseTree.EndNode();
                 return true;
             }
             else
             {
                 _tokenIndexer = backupPointer;
-                _syntaxTree = backupTree;
+                _parseTree = backupTree;
             }
 
             if (T("ciklus_amíg") && LogikaiKifejezés() && BeágyazottÁllítás())
             {
-                _syntaxTree.EndNode();
+                _parseTree.EndNode();
                 return true;
             }
             else
             {
                 _tokenIndexer = backupPointer;
-                _syntaxTree = backupTree;
+                _parseTree = backupTree;
             }
 
             if (T("ciklus") && SzámlálóCiklusInicializáló() && T("-tól") && LogikaiKifejezés() && T("-ig") && BeágyazottÁllítás())
             {
-                _syntaxTree.EndNode();
+                _parseTree.EndNode();
                 return true;
             }
             else
             {
                 _tokenIndexer = backupPointer;
-                _syntaxTree = backupTree;
+                _parseTree = backupTree;
             }
 
             if (ParancsÁllítás())
             {
-                _syntaxTree.EndNode();
+                _parseTree.EndNode();
                 return true;
             }
             else
             {
                 _tokenIndexer = backupPointer;
-                _syntaxTree = backupTree;
+                _parseTree = backupTree;
             }
 
-            _syntaxTree.EndNode();
-            _syntaxTree.RemoveLastAddedNode();
+            _parseTree.EndNode();
+            _parseTree.RemoveLastAddedNode();
             return false;
         }
         private bool ParancsÁllítás()
@@ -481,23 +481,23 @@ namespace SyntaxAnalysis.Trash
                 <parancsÁllítás>:
                     <parancs> azonosító
             */
-            _syntaxTree.StartNode(new NonTerminalToken(GetCurrentMethodName(), _currentRowNumber));
+            _parseTree.StartNode(new NonTerminalToken(GetCurrentMethodName(), _currentRowNumber));
             int backupPointer = _tokenIndexer;
-            SyntaxTree<Token> backupTree = _syntaxTree.Copy();
+            ParseTree<Token> backupTree = _parseTree.Copy();
 
             if (Parancs() && T("azonosító"))
             {
-                _syntaxTree.EndNode();
+                _parseTree.EndNode();
                 return true;
             }
             else
             {
                 _tokenIndexer = backupPointer;
-                _syntaxTree = backupTree;
+                _parseTree = backupTree;
             }
 
-            _syntaxTree.EndNode();
-            _syntaxTree.RemoveLastAddedNode();
+            _parseTree.EndNode();
+            _parseTree.RemoveLastAddedNode();
             return false;
         }
         private bool Parancs()
@@ -507,34 +507,34 @@ namespace SyntaxAnalysis.Trash
                     beolvas
                     kiír
              */
-            _syntaxTree.StartNode(new NonTerminalToken(GetCurrentMethodName(), _currentRowNumber));
+            _parseTree.StartNode(new NonTerminalToken(GetCurrentMethodName(), _currentRowNumber));
             int backupPointer = _tokenIndexer;
-            SyntaxTree<Token> backupTree = _syntaxTree.Copy();
+            ParseTree<Token> backupTree = _parseTree.Copy();
 
             if (T("beolvas"))
             {
-                _syntaxTree.EndNode();
+                _parseTree.EndNode();
                 return true;
             }
             else
             {
                 _tokenIndexer = backupPointer;
-                _syntaxTree = backupTree;
+                _parseTree = backupTree;
             }
 
             if (T("kiír"))
             {
-                _syntaxTree.EndNode();
+                _parseTree.EndNode();
                 return true;
             }
             else
             {
                 _tokenIndexer = backupPointer;
-                _syntaxTree = backupTree;
+                _parseTree = backupTree;
             }
 
-            _syntaxTree.EndNode();
-            _syntaxTree.RemoveLastAddedNode();
+            _parseTree.EndNode();
+            _parseTree.RemoveLastAddedNode();
             return false;
         }
         private bool Értékadás()
@@ -543,23 +543,23 @@ namespace SyntaxAnalysis.Trash
                 <értékadás>:
                     <unárisKifejezés> = <kifejezés>
             */
-            _syntaxTree.StartNode(new NonTerminalToken(GetCurrentMethodName(), _currentRowNumber));
+            _parseTree.StartNode(new NonTerminalToken(GetCurrentMethodName(), _currentRowNumber));
             int backupPointer = _tokenIndexer;
-            SyntaxTree<Token> backupTree = _syntaxTree.Copy();
+            ParseTree<Token> backupTree = _parseTree.Copy();
 
             if (UnárisKifejezés() && T("=") && Kifejezés())
             {
-                _syntaxTree.EndNode();
+                _parseTree.EndNode();
                 return true;
             }
             else
             {
                 _tokenIndexer = backupPointer;
-                _syntaxTree = backupTree;
+                _parseTree = backupTree;
             }
 
-            _syntaxTree.EndNode();
-            _syntaxTree.RemoveLastAddedNode();
+            _parseTree.EndNode();
+            _parseTree.RemoveLastAddedNode();
             return false;
         }
         private bool SzámlálóCiklusInicializáló()
@@ -569,34 +569,34 @@ namespace SyntaxAnalysis.Trash
                     <lokálisVáltozóDeklaráció>
                     <értékadás>
             */
-            _syntaxTree.StartNode(new NonTerminalToken(GetCurrentMethodName(), _currentRowNumber));
+            _parseTree.StartNode(new NonTerminalToken(GetCurrentMethodName(), _currentRowNumber));
             int backupPointer = _tokenIndexer;
-            SyntaxTree<Token> backupTree = _syntaxTree.Copy();
+            ParseTree<Token> backupTree = _parseTree.Copy();
 
             if (LokálisVáltozóDeklaráció())
             {
-                _syntaxTree.EndNode();
+                _parseTree.EndNode();
                 return true;
             }
             else
             {
                 _tokenIndexer = backupPointer;
-                _syntaxTree = backupTree;
+                _parseTree = backupTree;
             }
 
             if (Értékadás())
             {
-                _syntaxTree.EndNode();
+                _parseTree.EndNode();
                 return true;
             }
             else
             {
                 _tokenIndexer = backupPointer;
-                _syntaxTree = backupTree;
+                _parseTree = backupTree;
             }
 
-            _syntaxTree.EndNode();
-            _syntaxTree.RemoveLastAddedNode();
+            _parseTree.EndNode();
+            _parseTree.RemoveLastAddedNode();
             return false;
         }
         private bool ElsődlegesKifejezés()
@@ -606,34 +606,34 @@ namespace SyntaxAnalysis.Trash
                     <elsődlegesNemTömbLétrehozóKifejezés>
                     <tömbLétrehozóKifejezés>
             */
-            _syntaxTree.StartNode(new NonTerminalToken(GetCurrentMethodName(), _currentRowNumber));
+            _parseTree.StartNode(new NonTerminalToken(GetCurrentMethodName(), _currentRowNumber));
             int backupPointer = _tokenIndexer;
-            SyntaxTree<Token> backupTree = _syntaxTree.Copy();
+            ParseTree<Token> backupTree = _parseTree.Copy();
 
             if (ElsődlegesNemTömbLétrehozóKifejezés())
             {
-                _syntaxTree.EndNode();
+                _parseTree.EndNode();
                 return true;
             }
             else
             {
                 _tokenIndexer = backupPointer;
-                _syntaxTree = backupTree;
+                _parseTree = backupTree;
             }
 
             if (TömbLétrehozóKifejezés())
             {
-                _syntaxTree.EndNode();
+                _parseTree.EndNode();
                 return true;
             }
             else
             {
                 _tokenIndexer = backupPointer;
-                _syntaxTree = backupTree;
+                _parseTree = backupTree;
             }
 
-            _syntaxTree.EndNode();
-            _syntaxTree.RemoveLastAddedNode();
+            _parseTree.EndNode();
+            _parseTree.RemoveLastAddedNode();
             return false;
         }
         private bool ElsődlegesNemTömbLétrehozóKifejezés()
@@ -645,56 +645,56 @@ namespace SyntaxAnalysis.Trash
                     <zárójelesKifejezés>
                     <tömbElemElérés>
             */
-            _syntaxTree.StartNode(new NonTerminalToken(GetCurrentMethodName(), _currentRowNumber));
+            _parseTree.StartNode(new NonTerminalToken(GetCurrentMethodName(), _currentRowNumber));
             int backupPointer = _tokenIndexer;
-            SyntaxTree<Token> backupTree = _syntaxTree.Copy();
+            ParseTree<Token> backupTree = _parseTree.Copy();
 
             if (T(typeof(LiteralToken)))
             {
-                _syntaxTree.EndNode();
+                _parseTree.EndNode();
                 return true;
             }
             else
             {
                 _tokenIndexer = backupPointer;
-                _syntaxTree = backupTree;
+                _parseTree = backupTree;
             }
 
             if (T("azonosító"))
             {
-                _syntaxTree.EndNode();
+                _parseTree.EndNode();
                 return true;
             }
             else
             {
                 _tokenIndexer = backupPointer;
-                _syntaxTree = backupTree;
+                _parseTree = backupTree;
             }
 
             if (ZárójelesKifejezés())
             {
-                _syntaxTree.EndNode();
+                _parseTree.EndNode();
                 return true;
             }
             else
             {
                 _tokenIndexer = backupPointer;
-                _syntaxTree = backupTree;
+                _parseTree = backupTree;
             }
 
             if (TömbElemElérés())
             {
-                _syntaxTree.EndNode();
+                _parseTree.EndNode();
                 return true;
             }
             else
             {
                 _tokenIndexer = backupPointer;
-                _syntaxTree = backupTree;
+                _parseTree = backupTree;
             }
 
-            _syntaxTree.EndNode();
-            _syntaxTree.RemoveLastAddedNode();
+            _parseTree.EndNode();
+            _parseTree.RemoveLastAddedNode();
             return false;
         }
         private bool ZárójelesKifejezés()
@@ -703,23 +703,23 @@ namespace SyntaxAnalysis.Trash
                 <zárójelesKifejezés>:
                     ( <kifejezés> )
             */
-            _syntaxTree.StartNode(new NonTerminalToken(GetCurrentMethodName(), _currentRowNumber));
+            _parseTree.StartNode(new NonTerminalToken(GetCurrentMethodName(), _currentRowNumber));
             int backupPointer = _tokenIndexer;
-            SyntaxTree<Token> backupTree = _syntaxTree.Copy();
+            ParseTree<Token> backupTree = _parseTree.Copy();
 
             if (T("(") && Kifejezés() && T(")"))
             {
-                _syntaxTree.EndNode();
+                _parseTree.EndNode();
                 return true;
             }
             else
             {
                 _tokenIndexer = backupPointer;
-                _syntaxTree = backupTree;
+                _parseTree = backupTree;
             }
 
-            _syntaxTree.EndNode();
-            _syntaxTree.RemoveLastAddedNode();
+            _parseTree.EndNode();
+            _parseTree.RemoveLastAddedNode();
             return false;
         }
         private bool TömbElemElérés()
@@ -729,34 +729,34 @@ namespace SyntaxAnalysis.Trash
                     azonosító [ azonosító ]
                     azonosító [ <kifejezés> ]
             */
-            _syntaxTree.StartNode(new NonTerminalToken(GetCurrentMethodName(), _currentRowNumber));
+            _parseTree.StartNode(new NonTerminalToken(GetCurrentMethodName(), _currentRowNumber));
             int backupPointer = _tokenIndexer;
-            SyntaxTree<Token> backupTree = _syntaxTree.Copy();
+            ParseTree<Token> backupTree = _parseTree.Copy();
 
             if (T("azonosító") && T("[") && T("azonosító") && T("]"))
             {
-                _syntaxTree.EndNode();
+                _parseTree.EndNode();
                 return true;
             }
             else
             {
                 _tokenIndexer = backupPointer;
-                _syntaxTree = backupTree;
+                _parseTree = backupTree;
             }
 
             if (T("azonosító") && T("[") && Kifejezés() && T("]"))
             {
-                _syntaxTree.EndNode();
+                _parseTree.EndNode();
                 return true;
             }
             else
             {
                 _tokenIndexer = backupPointer;
-                _syntaxTree = backupTree;
+                _parseTree = backupTree;
             }
 
-            _syntaxTree.EndNode();
-            _syntaxTree.RemoveLastAddedNode();
+            _parseTree.EndNode();
+            _parseTree.RemoveLastAddedNode();
             return false;
         }
         private bool TömbLétrehozóKifejezés()
@@ -765,24 +765,24 @@ namespace SyntaxAnalysis.Trash
                 <tömbLétrehozóKifejezés>:
                     létrehoz ( <alapTípus> ) [ <elsődlegesNemTömbLétrehozóKifejezés> ]
             */
-            _syntaxTree.StartNode(new NonTerminalToken(GetCurrentMethodName(), _currentRowNumber));
+            _parseTree.StartNode(new NonTerminalToken(GetCurrentMethodName(), _currentRowNumber));
             int backupPointer = _tokenIndexer;
-            SyntaxTree<Token> backupTree = _syntaxTree.Copy();
+            ParseTree<Token> backupTree = _parseTree.Copy();
 
             if (T("létrehoz") && T("(") && AlapTípus() && T(")") && T("[")
                 && ElsődlegesNemTömbLétrehozóKifejezés() && T("]"))
             {
-                _syntaxTree.EndNode();
+                _parseTree.EndNode();
                 return true;
             }
             else
             {
                 _tokenIndexer = backupPointer;
-                _syntaxTree = backupTree;
+                _parseTree = backupTree;
             }
 
-            _syntaxTree.EndNode();
-            _syntaxTree.RemoveLastAddedNode();
+            _parseTree.EndNode();
+            _parseTree.RemoveLastAddedNode();
             return false;
         }
         private bool LogikaiKifejezés()
@@ -791,23 +791,23 @@ namespace SyntaxAnalysis.Trash
                 <logikaiKifejezés>:
                     <kifejezés>
             */
-            _syntaxTree.StartNode(new NonTerminalToken(GetCurrentMethodName(), _currentRowNumber));
+            _parseTree.StartNode(new NonTerminalToken(GetCurrentMethodName(), _currentRowNumber));
             int backupPointer = _tokenIndexer;
-            SyntaxTree<Token> backupTree = _syntaxTree.Copy();
+            ParseTree<Token> backupTree = _parseTree.Copy();
 
             if (Kifejezés())
             {
-                _syntaxTree.EndNode();
+                _parseTree.EndNode();
                 return true;
             }
             else
             {
                 _tokenIndexer = backupPointer;
-                _syntaxTree = backupTree;
+                _parseTree = backupTree;
             }
 
-            _syntaxTree.EndNode();
-            _syntaxTree.RemoveLastAddedNode();
+            _parseTree.EndNode();
+            _parseTree.RemoveLastAddedNode();
             return false;
         }
         private bool Kifejezés()
@@ -816,23 +816,23 @@ namespace SyntaxAnalysis.Trash
                 <kifejezés>:
                     <feltételesVagyKifejezés>
             */
-            _syntaxTree.StartNode(new NonTerminalToken(GetCurrentMethodName(), _currentRowNumber));
+            _parseTree.StartNode(new NonTerminalToken(GetCurrentMethodName(), _currentRowNumber));
             int backupPointer = _tokenIndexer;
-            SyntaxTree<Token> backupTree = _syntaxTree.Copy();
+            ParseTree<Token> backupTree = _parseTree.Copy();
 
             if (FeltételesVagyKifejezés())
             {
-                _syntaxTree.EndNode();
+                _parseTree.EndNode();
                 return true;
             }
             else
             {
                 _tokenIndexer = backupPointer;
-                _syntaxTree = backupTree;
+                _parseTree = backupTree;
             }
 
-            _syntaxTree.EndNode();
-            _syntaxTree.RemoveLastAddedNode();
+            _parseTree.EndNode();
+            _parseTree.RemoveLastAddedNode();
             return false;
         }
         private bool FeltételesVagyKifejezés()
@@ -842,34 +842,34 @@ namespace SyntaxAnalysis.Trash
                     <feltételesÉsKifejezés>
                     <feltételesVagyKifejezés> vagy <feltételesÉsKifejezés>
             */
-            _syntaxTree.StartNode(new NonTerminalToken(GetCurrentMethodName(), _currentRowNumber));
+            _parseTree.StartNode(new NonTerminalToken(GetCurrentMethodName(), _currentRowNumber));
             int backupPointer = _tokenIndexer;
-            SyntaxTree<Token> backupTree = _syntaxTree.Copy();
+            ParseTree<Token> backupTree = _parseTree.Copy();
 
             if (FeltételesÉsKifejezés())
             {
-                _syntaxTree.EndNode();
+                _parseTree.EndNode();
                 return true;
             }
             else
             {
                 _tokenIndexer = backupPointer;
-                _syntaxTree = backupTree;
+                _parseTree = backupTree;
             }
 
             if (FeltételesVagyKifejezés() && T("vagy") && FeltételesÉsKifejezés())
             {
-                _syntaxTree.EndNode();
+                _parseTree.EndNode();
                 return true;
             }
             else
             {
                 _tokenIndexer = backupPointer;
-                _syntaxTree = backupTree;
+                _parseTree = backupTree;
             }
 
-            _syntaxTree.EndNode();
-            _syntaxTree.RemoveLastAddedNode();
+            _parseTree.EndNode();
+            _parseTree.RemoveLastAddedNode();
             return false;
         }
         private bool FeltételesÉsKifejezés()
@@ -879,34 +879,34 @@ namespace SyntaxAnalysis.Trash
                     <egyenlőségKifejezés>
                     <feltételesÉsKifejezés> és <egyenlőségKifejezés>
             */
-            _syntaxTree.StartNode(new NonTerminalToken(GetCurrentMethodName(), _currentRowNumber));
+            _parseTree.StartNode(new NonTerminalToken(GetCurrentMethodName(), _currentRowNumber));
             int backupPointer = _tokenIndexer;
-            SyntaxTree<Token> backupTree = _syntaxTree.Copy();
+            ParseTree<Token> backupTree = _parseTree.Copy();
 
             if (EgyenlőségKifejezés())
             {
-                _syntaxTree.EndNode();
+                _parseTree.EndNode();
                 return true;
             }
             else
             {
                 _tokenIndexer = backupPointer;
-                _syntaxTree = backupTree;
+                _parseTree = backupTree;
             }
 
             if (FeltételesÉsKifejezés() && T("és") && EgyenlőségKifejezés())
             {
-                _syntaxTree.EndNode();
+                _parseTree.EndNode();
                 return true;
             }
             else
             {
                 _tokenIndexer = backupPointer;
-                _syntaxTree = backupTree;
+                _parseTree = backupTree;
             }
 
-            _syntaxTree.EndNode();
-            _syntaxTree.RemoveLastAddedNode();
+            _parseTree.EndNode();
+            _parseTree.RemoveLastAddedNode();
             return false;
         }
         private bool EgyenlőségKifejezés()
@@ -917,45 +917,45 @@ namespace SyntaxAnalysis.Trash
                     <egyenlőségKifejezés> == <relációsKifejezés>
                     <egyenlőségKifejezés> != <relációsKifejezés>
             */
-            _syntaxTree.StartNode(new NonTerminalToken(GetCurrentMethodName(), _currentRowNumber));
+            _parseTree.StartNode(new NonTerminalToken(GetCurrentMethodName(), _currentRowNumber));
             int backupPointer = _tokenIndexer;
-            SyntaxTree<Token> backupTree = _syntaxTree.Copy();
+            ParseTree<Token> backupTree = _parseTree.Copy();
 
             if (RelációsKifejezés())
             {
-                _syntaxTree.EndNode();
+                _parseTree.EndNode();
                 return true;
             }
             else
             {
                 _tokenIndexer = backupPointer;
-                _syntaxTree = backupTree;
+                _parseTree = backupTree;
             }
 
             if (EgyenlőségKifejezés() && T("==") && RelációsKifejezés())
             {
-                _syntaxTree.EndNode();
+                _parseTree.EndNode();
                 return true;
             }
             else
             {
                 _tokenIndexer = backupPointer;
-                _syntaxTree = backupTree;
+                _parseTree = backupTree;
             }
 
             if (EgyenlőségKifejezés() && T("!=") && RelációsKifejezés())
             {
-                _syntaxTree.EndNode();
+                _parseTree.EndNode();
                 return true;
             }
             else
             {
                 _tokenIndexer = backupPointer;
-                _syntaxTree = backupTree;
+                _parseTree = backupTree;
             }
 
-            _syntaxTree.EndNode();
-            _syntaxTree.RemoveLastAddedNode();
+            _parseTree.EndNode();
+            _parseTree.RemoveLastAddedNode();
             return false;
         }
         private bool RelációsKifejezés()
@@ -968,67 +968,67 @@ namespace SyntaxAnalysis.Trash
                     <relációsKifejezés> <= <additívKifejezés>
                     <relációsKifejezés> >= <additívKifejezés>
             */
-            _syntaxTree.StartNode(new NonTerminalToken(GetCurrentMethodName(), _currentRowNumber));
+            _parseTree.StartNode(new NonTerminalToken(GetCurrentMethodName(), _currentRowNumber));
             int backupPointer = _tokenIndexer;
-            SyntaxTree<Token> backupTree = _syntaxTree.Copy();
+            ParseTree<Token> backupTree = _parseTree.Copy();
 
             if (AdditívKifejezés())
             {
-                _syntaxTree.EndNode();
+                _parseTree.EndNode();
                 return true;
             }
             else
             {
                 _tokenIndexer = backupPointer;
-                _syntaxTree = backupTree;
+                _parseTree = backupTree;
             }
 
             if (RelációsKifejezés() && T("<") && AdditívKifejezés())
             {
-                _syntaxTree.EndNode();
+                _parseTree.EndNode();
                 return true;
             }
             else
             {
                 _tokenIndexer = backupPointer;
-                _syntaxTree = backupTree;
+                _parseTree = backupTree;
             }
 
             if (RelációsKifejezés() && T(">") && AdditívKifejezés())
             {
-                _syntaxTree.EndNode();
+                _parseTree.EndNode();
                 return true;
             }
             else
             {
                 _tokenIndexer = backupPointer;
-                _syntaxTree = backupTree;
+                _parseTree = backupTree;
             }
 
             if (RelációsKifejezés() && T("<=") && AdditívKifejezés())
             {
-                _syntaxTree.EndNode();
+                _parseTree.EndNode();
                 return true;
             }
             else
             {
                 _tokenIndexer = backupPointer;
-                _syntaxTree = backupTree;
+                _parseTree = backupTree;
             }
 
             if (RelációsKifejezés() && T(">=") && AdditívKifejezés())
             {
-                _syntaxTree.EndNode();
+                _parseTree.EndNode();
                 return true;
             }
             else
             {
                 _tokenIndexer = backupPointer;
-                _syntaxTree = backupTree;
+                _parseTree = backupTree;
             }
 
-            _syntaxTree.EndNode();
-            _syntaxTree.RemoveLastAddedNode();
+            _parseTree.EndNode();
+            _parseTree.RemoveLastAddedNode();
             return false;
         }
         private bool AdditívKifejezés()
@@ -1041,56 +1041,56 @@ namespace SyntaxAnalysis.Trash
                     <additívKifejezés> . <multiplikatívKifejezés>
                         # ^ nem vagyok biztos hogy ezt ide kéne
             */
-            _syntaxTree.StartNode(new NonTerminalToken(GetCurrentMethodName(), _currentRowNumber));
+            _parseTree.StartNode(new NonTerminalToken(GetCurrentMethodName(), _currentRowNumber));
             int backupPointer = _tokenIndexer;
-            SyntaxTree<Token> backupTree = _syntaxTree.Copy();
+            ParseTree<Token> backupTree = _parseTree.Copy();
 
             if (MultiplikatívKifejezés())
             {
-                _syntaxTree.EndNode();
+                _parseTree.EndNode();
                 return true;
             }
             else
             {
                 _tokenIndexer = backupPointer;
-                _syntaxTree = backupTree;
+                _parseTree = backupTree;
             }
 
             if (AdditívKifejezés() && T("+") && MultiplikatívKifejezés())
             {
-                _syntaxTree.EndNode();
+                _parseTree.EndNode();
                 return true;
             }
             else
             {
                 _tokenIndexer = backupPointer;
-                _syntaxTree = backupTree;
+                _parseTree = backupTree;
             }
 
             if (AdditívKifejezés() && T("-") && MultiplikatívKifejezés())
             {
-                _syntaxTree.EndNode();
+                _parseTree.EndNode();
                 return true;
             }
             else
             {
                 _tokenIndexer = backupPointer;
-                _syntaxTree = backupTree;
+                _parseTree = backupTree;
             }
 
             if (AdditívKifejezés() && T(".") && MultiplikatívKifejezés())
             {
-                _syntaxTree.EndNode();
+                _parseTree.EndNode();
                 return true;
             }
             else
             {
                 _tokenIndexer = backupPointer;
-                _syntaxTree = backupTree;
+                _parseTree = backupTree;
             }
 
-            _syntaxTree.EndNode();
-            _syntaxTree.RemoveLastAddedNode();
+            _parseTree.EndNode();
+            _parseTree.RemoveLastAddedNode();
             return false;
         }
         private bool MultiplikatívKifejezés()
@@ -1102,56 +1102,56 @@ namespace SyntaxAnalysis.Trash
                     <multiplikatívKifejezés> / <unárisKifejezés>
                     <multiplikatívKifejezés> mod <unárisKifejezés>
             */
-            _syntaxTree.StartNode(new NonTerminalToken(GetCurrentMethodName(), _currentRowNumber));
+            _parseTree.StartNode(new NonTerminalToken(GetCurrentMethodName(), _currentRowNumber));
             int backupPointer = _tokenIndexer;
-            SyntaxTree<Token> backupTree = _syntaxTree.Copy();
+            ParseTree<Token> backupTree = _parseTree.Copy();
 
             if (UnárisKifejezés())
             {
-                _syntaxTree.EndNode();
+                _parseTree.EndNode();
                 return true;
             }
             else
             {
                 _tokenIndexer = backupPointer;
-                _syntaxTree = backupTree;
+                _parseTree = backupTree;
             }
 
             if (MultiplikatívKifejezés() && T("*") && UnárisKifejezés())
             {
-                _syntaxTree.EndNode();
+                _parseTree.EndNode();
                 return true;
             }
             else
             {
                 _tokenIndexer = backupPointer;
-                _syntaxTree = backupTree;
+                _parseTree = backupTree;
             }
 
             if (MultiplikatívKifejezés() && T("/") && UnárisKifejezés())
             {
-                _syntaxTree.EndNode();
+                _parseTree.EndNode();
                 return true;
             }
             else
             {
                 _tokenIndexer = backupPointer;
-                _syntaxTree = backupTree;
+                _parseTree = backupTree;
             }
 
             if (MultiplikatívKifejezés() && T("mod") && UnárisKifejezés())
             {
-                _syntaxTree.EndNode();
+                _parseTree.EndNode();
                 return true;
             }
             else
             {
                 _tokenIndexer = backupPointer;
-                _syntaxTree = backupTree;
+                _parseTree = backupTree;
             }
 
-            _syntaxTree.EndNode();
-            _syntaxTree.RemoveLastAddedNode();
+            _parseTree.EndNode();
+            _parseTree.RemoveLastAddedNode();
             return false;
         }
         private bool UnárisKifejezés()
@@ -1164,67 +1164,67 @@ namespace SyntaxAnalysis.Trash
                     ! <unárisKifejezés>
                     <belsőFüggvényHívóKifejezés>
             */
-            _syntaxTree.StartNode(new NonTerminalToken(GetCurrentMethodName(), _currentRowNumber));
+            _parseTree.StartNode(new NonTerminalToken(GetCurrentMethodName(), _currentRowNumber));
             int backupPointer = _tokenIndexer;
-            SyntaxTree<Token> backupTree = _syntaxTree.Copy();
+            ParseTree<Token> backupTree = _parseTree.Copy();
 
             if (ElsődlegesKifejezés())
             {
-                _syntaxTree.EndNode();
+                _parseTree.EndNode();
                 return true;
             }
             else
             {
                 _tokenIndexer = backupPointer;
-                _syntaxTree = backupTree;
+                _parseTree = backupTree;
             }
 
             if (T("+") && UnárisKifejezés())
             {
-                _syntaxTree.EndNode();
+                _parseTree.EndNode();
                 return true;
             }
             else
             {
                 _tokenIndexer = backupPointer;
-                _syntaxTree = backupTree;
+                _parseTree = backupTree;
             }
 
             if (T("-") && UnárisKifejezés())
             {
-                _syntaxTree.EndNode();
+                _parseTree.EndNode();
                 return true;
             }
             else
             {
                 _tokenIndexer = backupPointer;
-                _syntaxTree = backupTree;
+                _parseTree = backupTree;
             }
 
             if (T("!") && UnárisKifejezés())
             {
-                _syntaxTree.EndNode();
+                _parseTree.EndNode();
                 return true;
             }
             else
             {
                 _tokenIndexer = backupPointer;
-                _syntaxTree = backupTree;
+                _parseTree = backupTree;
             }
 
             if (BelsőFüggvényHívóKifejezés())
             {
-                _syntaxTree.EndNode();
+                _parseTree.EndNode();
                 return true;
             }
             else
             {
                 _tokenIndexer = backupPointer;
-                _syntaxTree = backupTree;
+                _parseTree = backupTree;
             }
 
-            _syntaxTree.EndNode();
-            _syntaxTree.RemoveLastAddedNode();
+            _parseTree.EndNode();
+            _parseTree.RemoveLastAddedNode();
             return false;
         }
         private bool BelsőFüggvényHívóKifejezés()
@@ -1233,23 +1233,23 @@ namespace SyntaxAnalysis.Trash
                 <belsőFüggvényHívóKifejezés>:
                     <belsőFüggvény> ( <elsődlegesNemTömbLétrehozóKifejezés> )
             */
-            _syntaxTree.StartNode(new NonTerminalToken(GetCurrentMethodName(), _currentRowNumber));
+            _parseTree.StartNode(new NonTerminalToken(GetCurrentMethodName(), _currentRowNumber));
             int backupPointer = _tokenIndexer;
-            SyntaxTree<Token> backupTree = _syntaxTree.Copy();
+            ParseTree<Token> backupTree = _parseTree.Copy();
 
             if (BelsőFüggvény() && T("(") && ElsődlegesNemTömbLétrehozóKifejezés())
             {
-                _syntaxTree.EndNode();
+                _parseTree.EndNode();
                 return true;
             }
             else
             {
                 _tokenIndexer = backupPointer;
-                _syntaxTree = backupTree;
+                _parseTree = backupTree;
             }
 
-            _syntaxTree.EndNode();
-            _syntaxTree.RemoveLastAddedNode();
+            _parseTree.EndNode();
+            _parseTree.RemoveLastAddedNode();
             return false;
         }
 
@@ -1257,23 +1257,23 @@ namespace SyntaxAnalysis.Trash
         // ReSharper disable once UnusedMember.Local
         private bool Minta()
         {
-            _syntaxTree.StartNode(new NonTerminalToken(GetCurrentMethodName(), _currentRowNumber));
+            _parseTree.StartNode(new NonTerminalToken(GetCurrentMethodName(), _currentRowNumber));
             int backupPointer = _tokenIndexer;
-            SyntaxTree<Token> backupTree = _syntaxTree.Copy();
+            ParseTree<Token> backupTree = _parseTree.Copy();
 
             if (new Random().Next() < 0)
             {
-                _syntaxTree.EndNode();
+                _parseTree.EndNode();
                 return true;
             }
             else
             {
                 _tokenIndexer = backupPointer;
-                _syntaxTree = backupTree;
+                _parseTree = backupTree;
             }
 
-            _syntaxTree.EndNode();
-            _syntaxTree.RemoveLastAddedNode();
+            _parseTree.EndNode();
+            _parseTree.RemoveLastAddedNode();
             return false;
         }
 

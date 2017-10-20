@@ -14,7 +14,7 @@ namespace SyntaxAnalysis.Analyzer
         private int _tokenIndexer = -1;
         private int _currentRowNumber;
         private bool _alreadyStarted;
-        private SyntaxTree<Token> _syntaxTree;
+        private ParseTree<Token> _parseTree;
         private Token CurrentToken => _tokens[_tokenIndexer];
 
         public SyntaxAnalyzer(IEnumerable<Token> tokens)
@@ -35,12 +35,12 @@ namespace SyntaxAnalysis.Analyzer
             _alreadyStarted = true;
 
             bool success = Program();
-            return new SyntaxAnalyzerResult(_syntaxTree, success);
+            return new SyntaxAnalyzerResult(_parseTree, success);
         }
 
         internal bool Program()
         {
-            _syntaxTree = new SyntaxTree<Token>(new NonTerminalToken(nameof(Program), _currentRowNumber));
+            _parseTree = new ParseTree<Token>(new NonTerminalToken(nameof(Program), _currentRowNumber));
 
             return T("program_kezd")
                    && T("újsor")
@@ -51,7 +51,7 @@ namespace SyntaxAnalysis.Analyzer
         /// <summary>   Matches a production rule   </summary>
         private bool Rule(Func<bool> predicate)
         {
-            _syntaxTree.StartNonTerminalNode(_currentRowNumber);
+            _parseTree.StartNonTerminalNode(_currentRowNumber);
 
             if (predicate())
             {
@@ -59,8 +59,8 @@ namespace SyntaxAnalysis.Analyzer
             }
             else
             {
-                _syntaxTree.EndNode();
-                _syntaxTree.RemoveLastAddedNode();
+                _parseTree.EndNode();
+                _parseTree.RemoveLastAddedNode();
                 return false;
             }
         }
@@ -69,7 +69,7 @@ namespace SyntaxAnalysis.Analyzer
         private bool Match(params Func<bool>[] predicates)
         {
             int indexerBackup = _tokenIndexer;
-            SyntaxTree<Token> backupTree = _syntaxTree.Copy();
+            ParseTree<Token> backupTree = _parseTree.Copy();
             
             int i = 0;
             while (i < predicates.Length && predicates[i]())
@@ -77,13 +77,13 @@ namespace SyntaxAnalysis.Analyzer
 
             if (i >= predicates.Length)
             {
-                _syntaxTree.EndNode();
+                _parseTree.EndNode();
                 return true;
             }
             else
             {
                 _tokenIndexer = indexerBackup;
-                _syntaxTree = backupTree;
+                _parseTree = backupTree;
                 return false;
             }
         }
@@ -93,8 +93,8 @@ namespace SyntaxAnalysis.Analyzer
         {
             _tokenIndexer++;
             _currentRowNumber = CurrentToken.RowNumber;
-            _syntaxTree.StartNode(CurrentToken);
-            _syntaxTree.EndNode();
+            _parseTree.StartNode(CurrentToken);
+            _parseTree.EndNode();
 
             return CurrentToken.Id == LexicalElementCodeDictionary.GetCode(tokenName);
         }
@@ -103,8 +103,8 @@ namespace SyntaxAnalysis.Analyzer
         {
             _tokenIndexer++;
             _currentRowNumber = CurrentToken.RowNumber;
-            _syntaxTree.StartNode(CurrentToken);
-            _syntaxTree.EndNode();
+            _parseTree.StartNode(CurrentToken);
+            _parseTree.EndNode();
 
             return CurrentToken.GetType() == tokenType;
         }

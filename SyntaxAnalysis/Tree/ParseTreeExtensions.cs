@@ -3,9 +3,9 @@ using LexicalAnalysis.Tokens;
 
 namespace SyntaxAnalysis.Tree
 {
-    internal static class SyntaxTreeExtensions
+    internal static class ParseTreeExtensions
     {
-        internal static void StartNonTerminalNode(this SyntaxTree<Token> tree, int row)
+        internal static void StartNonTerminalNode(this ParseTree<Token> tree, int row)
         {
             tree.StartNode(new NonTerminalToken(GetCurrentMethodName(3), row));
         }

@@ -4,12 +4,12 @@ using System.Linq;
 
 namespace SyntaxAnalysis.Tree
 {
-    public sealed class SyntaxTree<T>
+    public sealed class ParseTree<T>
     {
         public TreeNode<T> Root { get; }
         public TreeNode<T> CurrentNode { get; private set; }
 
-        internal SyntaxTree(T rootValue)
+        internal ParseTree(T rootValue)
         {
             Root = new TreeNode<T>(null, rootValue);
             CurrentNode = Root;
@@ -53,7 +53,7 @@ namespace SyntaxAnalysis.Tree
         }
 
         /// <summary>
-        /// Gets the leaves of this <see cref="SyntaxTree{T}"/>.
+        /// Gets the leaves of this <see cref="ParseTree{T}"/>.
         /// </summary>
         public IList<T> GetLeaves() => Root.GetLeaves();
     }

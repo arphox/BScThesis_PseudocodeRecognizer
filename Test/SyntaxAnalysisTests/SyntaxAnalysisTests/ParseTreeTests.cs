@@ -6,12 +6,12 @@ using SyntaxAnalysis.Tree;
 namespace SyntaxAnalysisTests
 {
     [TestFixture]
-    public class SyntaxTreeTests
+    public class ParseTreeTests
     {
         [Test]
         public void Basic()
         {
-            SyntaxTree<int> st = new SyntaxTree<int>(2);
+            ParseTree<int> st = new ParseTree<int>(2);
             Assert.That(st.Root.Value, Is.EqualTo(2));
             Assert.That(st.CurrentNode.Value, Is.EqualTo(2));
             Assert.That(st.CurrentNode.Children, Has.Count.EqualTo(0));
@@ -21,7 +21,7 @@ namespace SyntaxAnalysisTests
         [Test]
         public void CanAdd()
         {
-            SyntaxTree<string> st = new SyntaxTree<string>("a");
+            ParseTree<string> st = new ParseTree<string>("a");
             var root = st.CurrentNode;
             var b = st.StartNode("b");
             Assert.That(st.CurrentNode, Is.EqualTo(b));
@@ -49,7 +49,7 @@ namespace SyntaxAnalysisTests
         [Test]
         public void CanRemove()
         {
-            SyntaxTree<double> st = new SyntaxTree<double>(1.0);
+            ParseTree<double> st = new ParseTree<double>(1.0);
             var root = st.CurrentNode;
             var node2 = st.StartNode(2.0);
             var node2Child1 = st.CurrentNode.AddChild(2.1);
@@ -88,7 +88,7 @@ namespace SyntaxAnalysisTests
         [Test]
         public void CanEnd()
         {
-            SyntaxTree<string> st = new SyntaxTree<string>("a");
+            ParseTree<string> st = new ParseTree<string>("a");
             var a = st.CurrentNode;
             var b = st.StartNode("b");
             Assert.That(st.CurrentNode, Is.EqualTo(b));
@@ -102,7 +102,7 @@ namespace SyntaxAnalysisTests
         [Test]
         public void GetLeaves()
         {
-            SyntaxTree<string> st = new SyntaxTree<string>("a");
+            ParseTree<string> st = new ParseTree<string>("a");
             var a = st.CurrentNode;
             var a1 = a.AddChild("a1");
             var a2 = a.AddChild("a2");

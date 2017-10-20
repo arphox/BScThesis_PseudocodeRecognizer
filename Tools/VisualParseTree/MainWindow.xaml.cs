@@ -16,7 +16,7 @@ namespace VisualParseTree
     /// </summary>
     public partial class MainWindow : Window
     {
-        private SyntaxTree<Token> _syntaxTree;
+        private ParseTree<Token> _parseTree;
 
         public MainWindow()
         {
@@ -38,8 +38,8 @@ namespace VisualParseTree
             Console.WriteLine($"Parser: {sw.ElapsedMilliseconds} ms.");
             sw.Restart();
 
-            _syntaxTree = syntaxAnalyzerResult.SyntaxTree;
-            SyntaxTreeConverter.FillTreeView(TreeView, _syntaxTree);
+            _parseTree = syntaxAnalyzerResult.ParseTree;
+            ParseTreeConverter.FillTreeView(TreeView, _parseTree);
             Console.WriteLine($"Visual tree build: {sw.ElapsedMilliseconds} ms.");
 
             Console.WriteLine("IsSuccessful = " + syntaxAnalyzerResult.IsSuccessful);
@@ -58,7 +58,7 @@ namespace VisualParseTree
 
         private void ButtonPrintLeaves_Click(object sender, RoutedEventArgs e)
         {
-            Console.WriteLine(string.Join("\n", _syntaxTree.GetLeaves().Select(s => s.ToString())));
+            Console.WriteLine(string.Join("\n", _parseTree.GetLeaves().Select(s => s.ToString())));
         }
 
     }

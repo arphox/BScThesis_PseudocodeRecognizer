@@ -5,12 +5,12 @@ namespace SyntaxAnalysis.Analyzer
 {
     public struct SyntaxAnalyzerResult
     {
-        public SyntaxTree<Token> SyntaxTree { get; }
+        public ParseTree<Token> ParseTree { get; }
         public bool IsSuccessful { get; }
 
-        public SyntaxAnalyzerResult(SyntaxTree<Token> syntaxTree, bool isSuccessful)
+        public SyntaxAnalyzerResult(ParseTree<Token> parseTree, bool isSuccessful)
         {
-            SyntaxTree = syntaxTree;
+            ParseTree = parseTree;
             IsSuccessful = isSuccessful;
         }
     }

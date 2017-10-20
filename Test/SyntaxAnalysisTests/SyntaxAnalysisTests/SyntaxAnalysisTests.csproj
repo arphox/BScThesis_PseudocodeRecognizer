@@ -44,8 +44,7 @@
     <Reference Include="System.Core" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="BasicTests.cs" />
-    <Compile Include="SyntaxTreeTests.cs" />
+    <Compile Include="ParseTreeTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
