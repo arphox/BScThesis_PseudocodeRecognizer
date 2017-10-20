@@ -3,6 +3,7 @@ using System.Linq;
 using LexicalAnalysis.Analyzer;
 using LexicalAnalysis.Tokens;
 using NUnit.Framework;
+using SyntaxAnalysis;
 using SyntaxAnalysis.Analyzer;
 using SyntaxAnalysis.Tree;
 
@@ -33,9 +34,16 @@ namespace SyntaxAnalysisTests
             TreeNode<Token> root = tree.Root;
             TestHelper.CheckRoot(root, isOneRowBody: true);
 
+            TreeNode<Token> állítások = root.GetNonTerminalChildOfName("Állítások");
 
+            TreeNode<Token> állításNode = állítások.GetNonTerminalChildOfName("Állítás");
+            állításNode.AssertParentToBe(állítások);
+            állításNode.AssertChildrenCount(1);
+            NonTerminalToken állításToken = (NonTerminalToken) állításNode.Value;
+            állításToken.AssertName(nameof(SyntaxAnalyzer.Állítás));
+            állításToken.AssertRowNumber(1);
 
-            Console.WriteLine();
+            var kilép = állításNode.GetTerminalChildOfName("kilép");
         }
     }
 }

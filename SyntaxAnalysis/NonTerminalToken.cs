@@ -4,14 +4,14 @@ namespace SyntaxAnalysis
 {
     internal class NonTerminalToken : Token
     {
-        public string Value { get; }
+        public string Name { get; }
 
-        public NonTerminalToken(string value, int currentRowNumber)
+        public NonTerminalToken(string name, int currentRowNumber)
             : base(int.MinValue, currentRowNumber)
         {
-            Value = value;
+            Name = name;
         }
 
-        public override string ToString() => $"{Value} at Line {RowNumber}";
+        public override string ToString() => $"{Name} at Line {RowNumber}";
     }
 }

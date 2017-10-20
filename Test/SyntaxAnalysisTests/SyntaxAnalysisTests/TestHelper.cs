@@ -6,10 +6,9 @@ using SyntaxAnalysis;
 using SyntaxAnalysis.Analyzer;
 using SyntaxAnalysis.Tree;
 using System.Collections.Generic;
-using System.Diagnostics;
-using System.Reflection;
-using System.Runtime.CompilerServices;
-using System.Runtime.Remoting;
+using System.Linq;
+
+// ReSharper disable UnusedParameter.Global
 
 namespace SyntaxAnalysisTests
 {
@@ -67,7 +66,7 @@ namespace SyntaxAnalysisTests
         }
         internal static void AssertName(this NonTerminalToken token, string expectedName)
         {
-            string actualName = token.Value;
+            string actualName = token.Name;
             Assert.That(actualName, Is.EqualTo(expectedName), $"Expected token name to be {expectedName}, but was {actualName}.");
         }
         internal static void AssertRowNumber(this Token token, int expectedRowNumber)
@@ -86,6 +85,16 @@ namespace SyntaxAnalysisTests
         {
             Assert.That(node.Parent, Is.EqualTo(expectedParent));
         }
+
+        internal static TreeNode<Token> GetNonTerminalChildOfName(this TreeNode<Token> node, string childName)
+        {
+            return node.Children.Where(c => c.Value is NonTerminalToken).First(n => ((NonTerminalToken)n.Value).Name == childName);
+        }
+        internal static TreeNode<Token> GetTerminalChildOfName(this TreeNode<Token> node, string childName)
+        {
+            return node.Children.Where(c => c.Value is TerminalToken).First(n => GetWord(node.Value.Id) == childName);
+        }
+
         private static string GetWord(int code)
         {
             return LexicalElementCodeDictionary.GetWord(code);
