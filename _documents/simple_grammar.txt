@@ -1,0 +1,61 @@
+<Program>							::=		"program_kezd" "újsor" <Állítások> "program_vége"
+			
+<Állítások>							::=		<Állítás> "újsor" <Állítások>
+										|	<Állítás> "újsor"
+										
+<Állítás>							::=		<VáltozóDeklaráció>
+										|	<Értékadás>
+										|	<IoParancs>
+										|	"kilép"
+										|	"ha" <LogikaiKifejezés> "akkor" "újsor" <Állítások> "újsor" "különben" "újsor" <Állítások> "újsor" "elágazás_vége"
+										|	"ha" <LogikaiKifejezés> "akkor" "újsor" <Állítások> "újsor" "elágazás_vége"
+										|	"ciklus_amíg" <LogikaiKifejezés> "újsor" <Állítások> "újsor" "ciklus_vége"
+
+<VáltozóDeklaráció>					::=		<AlapTípus> "azonosító" "=" <AlapKifejezés>
+										|	<TömbTípus> "azonosító" "=" <TömbLétrehozóKifejezés>
+
+<Értékadás>							::=		"azonosító" "=" <AlapKifejezés>
+										|	"azonosító" "=" <TömbLétrehozóKifejezés>
+										|	"azonosító" "[" <AlapKifejezés> "]" "=" <AlapKifejezés>
+
+<LogikaiKifejezés>					::=		<AlapKifejezés>
+
+<Kifejezés>							::=		<AlapKifejezés>
+										|	<TömbLétrehozóKifejezés>
+
+<AlapKifejezés>						::=		"azonosító"
+										|	"literál"
+
+<TömbLétrehozóKifejezés>			::=		"azonosító"
+										|	"létrehoz" "[" <AlapKifejezés> "]"
+
+
+
+-----------------------------------------------------------------------------------------------
+	Statikus szabályok:
+-----------------------------------------------------------------------------------------------
+
+<Típus>								::=		<AlapTípus>
+										|	<TömbTípus>
+
+<AlapTípus>							::=		"egész"
+										|	"tört"
+										|	"szöveg"
+										|	"logikai"
+
+<TömbTípus>							::=		"egész tömb"
+										|	"tört tömb"
+										|	"szöveg tömb"
+										|	"logikai tömb"
+
+<IoParancs>							::=		"beolvas" "azonosító"
+										|	"kiír" "azonosító"
+
+<BelsőFüggvény>						::=		"egészből_logikaiba"
+										|	"törtből_egészbe"
+										|	"törtből_logikaiba"
+										|	"logikaiból_egészbe"
+										|	"logikaiból_törtbe"
+										|	"szövegből_egészbe"
+										|	"szövegből_törtbe"
+										|	"szövegből_logikaiba"
