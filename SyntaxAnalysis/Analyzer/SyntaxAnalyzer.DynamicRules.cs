@@ -52,9 +52,9 @@ namespace SyntaxAnalysis.Analyzer
                 || Match(Értékadás)
                 || Match(IoParancs)
                 || Match(() => T("kilép"))
-                || Match(() => T("ha"), LogikaiKifejezés, () => T("akkor"), Újsor, Állítások, () => T("különben"), Újsor, Állítások, () => T("elágazás_vége"))
-                || Match(() => T("ha"), LogikaiKifejezés, () => T("akkor"), Újsor, Állítások, () => T("elágazás_vége"))
-                || Match(() => T("ciklus_amíg"), LogikaiKifejezés, Újsor, Állítások, () => T("ciklus_vége")));
+                || Match(() => T("ha"), NemTömbLétrehozóKifejezés, () => T("akkor"), Újsor, Állítások, () => T("különben"), Újsor, Állítások, () => T("elágazás_vége"))
+                || Match(() => T("ha"), NemTömbLétrehozóKifejezés, () => T("akkor"), Újsor, Állítások, () => T("elágazás_vége"))
+                || Match(() => T("ciklus_amíg"), NemTömbLétrehozóKifejezés, Újsor, Állítások, () => T("ciklus_vége")));
         }
         internal bool VáltozóDeklaráció()
         {
@@ -70,11 +70,6 @@ namespace SyntaxAnalysis.Analyzer
                 || Match(Azonosító, () => T("="), TömbLétrehozóKifejezés)
                 || Match(Azonosító, () => T("="), BelsőFüggvény, () => T("("), NemTömbLétrehozóKifejezés, () => T(")"))
                 || Match(Azonosító, () => T("["), NemTömbLétrehozóKifejezés, () => T("]"), () => T("="), NemTömbLétrehozóKifejezés));
-        }
-        internal bool LogikaiKifejezés()
-        {
-            return Rule(() =>
-                Match(NemTömbLétrehozóKifejezés));
         }
         internal bool Operandus()
         {

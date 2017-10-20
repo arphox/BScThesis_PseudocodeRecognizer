@@ -11,9 +11,9 @@
 										|	<Értékadás>
 										|	<IoParancs>
 										|	"kilép"
-										|	"ha" <LogikaiKifejezés> "akkor" "újsor" <Állítások> "újsor" "különben" "újsor" <Állítások> "újsor" "elágazás_vége"
-										|	"ha" <LogikaiKifejezés> "akkor" "újsor" <Állítások> "újsor" "elágazás_vége"
-										|	"ciklus_amíg" <LogikaiKifejezés> "újsor" <Állítások> "újsor" "ciklus_vége"
+										|	"ha" <NemTömbLétrehozóKifejezés> "akkor" "újsor" <Állítások> "újsor" "különben" "újsor" <Állítások> "újsor" "elágazás_vége"
+										|	"ha" <NemTömbLétrehozóKifejezés> "akkor" "újsor" <Állítások> "újsor" "elágazás_vége"
+										|	"ciklus_amíg" <NemTömbLétrehozóKifejezés> "újsor" <Állítások> "újsor" "ciklus_vége"
 
 <VáltozóDeklaráció>					::=		<AlapTípus> "azonosító" "=" <NemTömbLétrehozóKifejezés>
 										|	<TömbTípus> "azonosító" "=" <TömbLétrehozóKifejezés>
@@ -23,8 +23,6 @@
 										|	"azonosító" "=" <TömbLétrehozóKifejezés>
 										|	"azonosító" "=" <BelsőFüggvény> "(" <NemTömbLétrehozóKifejezés> ")"
 										|	"azonosító" "[" <NemTömbLétrehozóKifejezés> "]" "=" <NemTömbLétrehozóKifejezés>
-
-<LogikaiKifejezés>					::=		<NemTömbLétrehozóKifejezés>
 
 <Operandus>							::=		<UnárisOperátor> "azonosító"
 										|	<UnárisOperátor> "literál"
