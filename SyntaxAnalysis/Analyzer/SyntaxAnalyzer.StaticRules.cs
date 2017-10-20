@@ -54,5 +54,25 @@ namespace SyntaxAnalysis.Analyzer
                    Match(() => T("-"))
                 || Match(() => T("!")));
         }
+
+        internal bool BinárisOperátor()
+        {
+            return Rule(() =>
+                   Match(() => T("="))
+                || Match(() => T("=="))
+                || Match(() => T("!="))
+                || Match(() => T("és"))
+                || Match(() => T("vagy"))
+                || Match(() => T(">"))
+                || Match(() => T(">="))
+                || Match(() => T("<"))
+                || Match(() => T("<="))
+                || Match(() => T("+"))
+                || Match(() => T("-"))
+                || Match(() => T("*"))
+                || Match(() => T("/"))
+                || Match(() => T("mod"))
+                || Match(() => T(".")));
+        }
     }
 }

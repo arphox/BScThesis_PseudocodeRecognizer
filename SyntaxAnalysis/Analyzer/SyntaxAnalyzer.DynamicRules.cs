@@ -5,21 +5,36 @@ namespace SyntaxAnalysis.Analyzer
     public sealed partial class SyntaxAnalyzer
     {
         public const string TestCode = "program_kezd\r\n" +
-                                       "egész a = 2\r\n" +
-                                       "tört b = hamis\r\n" +
-                                       "szöveg[] c = \"igaz\"\r\n" +
-                                       "a = 3\r\n" +
+                                       "egész e = 2\r\n" +
+                                       "tört t = -2,4\r\n" +
+                                       "logikai l = hamis\r\n" +
+                                       "szöveg sz = \"alma\"\r\n" +
+                                       "szöveg[] szt = létrehoz[10]\r\n" +
+                                       "szt[0] = 2\r\n" +
+                                       "e = 3\r\n" +
                                        "ha igaz akkor\r\n" +
-                                       "beolvas a\r\n" +
+                                       "    beolvas e\r\n" +
                                        "különben\r\n" +
-                                       "kiír a\r\n" +
+                                       "    kiír t\r\n" +
                                        "elágazás_vége\r\n" +
-                                       "ha igaz akkor\r\n" +
-                                       "kilép\r\n" +
+                                       "ha hamis akkor\r\n" +
+                                       "    beolvas e\r\n" +
                                        "elágazás_vége\r\n" +
                                        "ciklus_amíg hamis\r\n" +
-                                       "kilép\r\n" +
+                                       "    kilép\r\n" +
                                        "ciklus_vége\r\n" +
+                                       "egész i = 0\r\n" +
+                                       "i = - i\r\n" +
+                                       "i = ! hamis\r\n" +
+                                       "i = i\r\n" +
+                                       "i = -9,4\r\n" +
+                                       "i = 9 / i\r\n" +
+                                       "i = -9 mod i\r\n" +
+                                       "i = 9 . - i\r\n" +
+                                       "i = ! 9 - ! i\r\n" +
+                                       "egész[] et = létrehoz[10 + 2]\r\n" +
+                                       "et = létrehoz[e + 2]\r\n" +
+                                       "szt[0 - 3] = 2\r\n" +
                                        "program_vége";
 
         internal bool Állítások()
@@ -28,7 +43,6 @@ namespace SyntaxAnalysis.Analyzer
                    Match(Állítás, Újsor, Állítások)
                 || Match(Állítás, Újsor));
         }
-
         internal bool Állítás()
         {
             return Rule(() =>
@@ -36,18 +50,16 @@ namespace SyntaxAnalysis.Analyzer
                 || Match(Értékadás)
                 || Match(IoParancs)
                 || Match(() => T("kilép"))
-                || Match(() => T("ha"), LogikaiKifejezés, () => T("akkor"), Újsor, Állítások, Újsor, () => T("különben"), Újsor, Állítások, Újsor, () => T("elágazás_vége"))
-                || Match(() => T("ha"), LogikaiKifejezés, () => T("akkor"), Újsor, Állítások, Újsor, () => T("elágazás_vége"))
-                || Match(() => T("ciklus_amíg"), LogikaiKifejezés, Újsor, Állítások, Újsor, () => T("ciklus_vége")));
+                || Match(() => T("ha"), LogikaiKifejezés, () => T("akkor"), Újsor, Állítások, () => T("különben"), Újsor, Állítások, () => T("elágazás_vége"))
+                || Match(() => T("ha"), LogikaiKifejezés, () => T("akkor"), Újsor, Állítások, () => T("elágazás_vége"))
+                || Match(() => T("ciklus_amíg"), LogikaiKifejezés, Újsor, Állítások, () => T("ciklus_vége")));
         }
-
         internal bool VáltozóDeklaráció()
         {
             return Rule(() =>
                    Match(AlapTípus, Azonosító, () => T("="), NemTömbLétrehozóKifejezés)
                 || Match(TömbTípus, Azonosító, () => T("="), TömbLétrehozóKifejezés));
         }
-
         internal bool Értékadás()
         {
             return Rule(() =>
@@ -55,13 +67,11 @@ namespace SyntaxAnalysis.Analyzer
                 || Match(Azonosító, () => T("="), TömbLétrehozóKifejezés)
                 || Match(Azonosító, () => T("["), NemTömbLétrehozóKifejezés, () => T("]"), () => T("="), NemTömbLétrehozóKifejezés));
         }
-
         internal bool LogikaiKifejezés()
         {
             return Rule(() =>
                 Match(NemTömbLétrehozóKifejezés));
         }
-
         internal bool Operandus()
         {
             return Rule(() =>
@@ -70,24 +80,22 @@ namespace SyntaxAnalysis.Analyzer
                 || Match(Azonosító)
                 || Match(Literál));
         }
-
         internal bool NemTömbLétrehozóKifejezés()
         {
             return Rule(() =>
                    Match(BinárisKifejezés)
                 || Match(Operandus));
         }
-
         internal bool TömbLétrehozóKifejezés()
         {
             return Rule(() =>
                    Match(Azonosító)
                 || Match(() => T("létrehoz"), () => T("["), NemTömbLétrehozóKifejezés, () => T("]")));
         }
-
         internal bool BinárisKifejezés()
         {
-            return Rule(() => true);
+            return Rule(() =>
+                   Match(Operandus, BinárisOperátor, Operandus));
         }
     }
 }

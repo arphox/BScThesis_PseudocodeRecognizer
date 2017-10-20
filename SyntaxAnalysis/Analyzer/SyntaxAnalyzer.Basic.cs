@@ -4,6 +4,7 @@ using SyntaxAnalysis.Tree;
 using SyntaxAnalysis.Utilities;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 
 namespace SyntaxAnalysis.Analyzer
