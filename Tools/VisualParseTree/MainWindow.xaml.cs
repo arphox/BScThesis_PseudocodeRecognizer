@@ -16,9 +16,6 @@ namespace VisualParseTree
     /// </summary>
     public partial class MainWindow : Window
     {
-        // ReSharper disable once UnusedMember.Local
-        private const string Code = "program_kezd\r\n\tegész a\r\n\tbeolvas a\r\n\tegész b\r\n\tbeolvas b\r\n\tegész c\r\n\tbeolvas c\r\n\ttört diszkrimináns=b*b-(4*a*c)\r\n\tha diszkrimináns<0,0 akkor\r\n\t\tkiír \"Nincs valós gyöke!\"\r\n\tkülönben\r\n\t\tkiír \"Van legalább egy valós gyöke!\"\r\n\telágazás_vége\r\nprogram_vége";
-
         private SyntaxTree<Token> _syntaxTree;
 
         public MainWindow()
@@ -29,21 +26,23 @@ namespace VisualParseTree
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
             Stopwatch sw = Stopwatch.StartNew();
-            List<TerminalToken> tokenList = new LexicalAnalyzer(SyntaxAnalyzer.TestCode).Analyze().Tokens;
+
+            LexicalAnalyzerResult lexicalAnalyzerResult = new LexicalAnalyzer(SyntaxAnalyzer.TestCode).Analyze();
+            List<TerminalToken> tokenList = lexicalAnalyzerResult.Tokens;
             sw.Stop();
             Console.WriteLine($"Lexer: {sw.ElapsedMilliseconds} ms.");
             sw.Restart();
 
-            SyntaxAnalyzerResult result = new SyntaxAnalyzer(tokenList).Start();
+            SyntaxAnalyzerResult syntaxAnalyzerResult = new SyntaxAnalyzer(tokenList).Start();
             sw.Stop();
             Console.WriteLine($"Parser: {sw.ElapsedMilliseconds} ms.");
             sw.Restart();
 
-            _syntaxTree = result.SyntaxTree;
+            _syntaxTree = syntaxAnalyzerResult.SyntaxTree;
             SyntaxTreeConverter.FillTreeView(TreeView, _syntaxTree);
             Console.WriteLine($"Visual tree build: {sw.ElapsedMilliseconds} ms.");
 
-            Console.WriteLine("IsSuccessful = " + result.IsSuccessful);
+            Console.WriteLine("IsSuccessful = " + syntaxAnalyzerResult.IsSuccessful);
 
             ButtonExpandAll_Click(null, null);
         }

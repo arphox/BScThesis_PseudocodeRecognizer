@@ -1,5 +1,4 @@
 ﻿using LexicalAnalysis.Analyzer;
-using LexicalAnalysis.SymbolTableManagement;
 using NUnit.Framework;
 
 namespace LexicalAnalysisTests.Analyzer
