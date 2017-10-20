@@ -35,6 +35,8 @@ namespace SyntaxAnalysis.Analyzer
                                        "egész[] et = létrehoz[10 + 2]\r\n" +
                                        "et = létrehoz[e + 2]\r\n" +
                                        "szt[0 - 3] = 2\r\n" +
+                                       "e = törtből_egészbe(e + 2)\r\n" +
+                                       "egész e2 = törtből_egészbe(e + 2)\r\n" +
                                        "program_vége";
 
         internal bool Állítások()
@@ -58,6 +60,7 @@ namespace SyntaxAnalysis.Analyzer
         {
             return Rule(() =>
                    Match(AlapTípus, Azonosító, () => T("="), NemTömbLétrehozóKifejezés)
+                || Match(AlapTípus, Azonosító, () => T("="), BelsőFüggvény, () => T("("), NemTömbLétrehozóKifejezés, () => T(")"))
                 || Match(TömbTípus, Azonosító, () => T("="), TömbLétrehozóKifejezés));
         }
         internal bool Értékadás()
@@ -65,6 +68,7 @@ namespace SyntaxAnalysis.Analyzer
             return Rule(() =>
                    Match(Azonosító, () => T("="), NemTömbLétrehozóKifejezés)
                 || Match(Azonosító, () => T("="), TömbLétrehozóKifejezés)
+                || Match(Azonosító, () => T("="), BelsőFüggvény, () => T("("), NemTömbLétrehozóKifejezés, () => T(")"))
                 || Match(Azonosító, () => T("["), NemTömbLétrehozóKifejezés, () => T("]"), () => T("="), NemTömbLétrehozóKifejezés));
         }
         internal bool LogikaiKifejezés()

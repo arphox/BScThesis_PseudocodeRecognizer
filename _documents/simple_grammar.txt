@@ -16,10 +16,12 @@
 										|	"ciklus_amíg" <LogikaiKifejezés> "újsor" <Állítások> "újsor" "ciklus_vége"
 
 <VáltozóDeklaráció>					::=		<AlapTípus> "azonosító" "=" <NemTömbLétrehozóKifejezés>
+										|	<AlapTípus> "azonosító" "=" <BelsőFüggvény> "(" <NemTömbLétrehozóKifejezés> ")"
 										|	<TömbTípus> "azonosító" "=" <TömbLétrehozóKifejezés>
 
 <Értékadás>							::=		"azonosító" "=" <NemTömbLétrehozóKifejezés>
 										|	"azonosító" "=" <TömbLétrehozóKifejezés>
+										|	"azonosító" "=" <BelsőFüggvény> "(" <NemTömbLétrehozóKifejezés> ")"
 										|	"azonosító" "[" <NemTömbLétrehozóKifejezés> "]" "=" <NemTömbLétrehozóKifejezés>
 
 <LogikaiKifejezés>					::=		<NemTömbLétrehozóKifejezés>
