@@ -10,7 +10,7 @@ namespace LexicalAnalysisTests.Analyzer
         private static readonly string[] SimpleKeywords =
         {
             // keywords, logical literals
-            "ha", "akkor", "különben", "elágazás_vége", "ciklus", "ciklus_amíg", "ciklus_vége", "-tól", "-től", "-ig", "beolvas", "beolvas:",
+            "ha", "akkor", "különben", "elágazás_vége", "ciklus_amíg", "ciklus_vége", "beolvas", "beolvas:",
             "kiír", "kiír:", "létrehoz", "egész", "tört", "szöveg", "logikai",
             // operators
             "[", "]", "+", "-", "!", "(", ")", "=", "==", "!=", "és", "vagy", ">", ">=", "<", "<=", "*", "/", "mod", "."

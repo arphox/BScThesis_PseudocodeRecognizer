@@ -284,7 +284,7 @@ namespace LexicalAnalysisTests.Analyzer
         }
 
         [Test]
-        public void ArrayForIf()
+        public void ArrayIf()
         {
             const string code = "program_kezd\r\n" +
                                 "egész x=2\r\n" +
@@ -294,10 +294,6 @@ namespace LexicalAnalysisTests.Analyzer
                                 "   kiír \"x kisebb, mint kettő!\"\r\n" +
                                 "elágazás_vége\r\n" +
                                 "egész[] y = létrehoz[10]\r\n" +
-                                "ciklus egész i=0-tól 9-ig\r\n" +
-                                "   y[i]=i\r\n" +
-                                "   kiír y[i]\r\n" +
-                                "ciklus_vége\r\n" +
                                 "program_vége";
 
             LexicalAnalyzerResult result = new LexicalAnalyzer(code).Analyze();
@@ -351,38 +347,6 @@ namespace LexicalAnalysisTests.Analyzer
             tt.ExpectKeyword("]");
             tt.NewLine();
 
-            // ciklus egész i=0-tól 9-ig\r\n
-            tt.ExpectKeyword("ciklus");
-            tt.ExpectKeyword("egész");
-            tt.ExpectIdentifier("i");
-            tt.ExpectKeyword("=");
-            tt.ExpectEgeszLiteral("0");
-            tt.ExpectKeyword("-tól");
-            tt.ExpectEgeszLiteral("9");
-            tt.ExpectKeyword("-ig");
-            tt.NewLine();
-
-            //    y[i]=i\r\n
-            tt.ExpectIdentifier("y");
-            tt.ExpectKeyword("[");
-            tt.ExpectIdentifier("i");
-            tt.ExpectKeyword("]");
-            tt.ExpectKeyword("=");
-            tt.ExpectIdentifier("i");
-            tt.NewLine();
-
-            //    kiír y[i]\r\n
-            tt.ExpectKeyword("kiír");
-            tt.ExpectIdentifier("y");
-            tt.ExpectKeyword("[");
-            tt.ExpectIdentifier("i");
-            tt.ExpectKeyword("]");
-            tt.NewLine();
-
-            // ciklus_vége\r\n
-            tt.ExpectKeyword("ciklus_vége");
-            tt.NewLine();
-
             tt.ExpectEnd();
             tt.ExpectNoMore();
 
@@ -390,9 +354,6 @@ namespace LexicalAnalysisTests.Analyzer
             SymbolTableTester st = new SymbolTableTester(result.SymbolTable);
             st.ExpectSimpleEntry(SingleEntryType.Egesz, "x", 2);
             st.ExpectSimpleEntry(SingleEntryType.EgeszTomb, "y", 8);
-            st.IncreaseIndent();
-            st.ExpectSimpleEntry(SingleEntryType.Egesz, "i", 9);
-            st.DecreaseIndent();
             st.ExpectNoMore();
             TestContext.Write(result.SymbolTable.ToStringNice());
         }
@@ -501,256 +462,7 @@ namespace LexicalAnalysisTests.Analyzer
             st.ExpectNoMore();
             TestContext.Write(result.SymbolTable.ToStringNice());
         }
-
-        [Test]
-        public void SimpleTheorems()
-        {
-            const string code = "program_kezd\r\n" +
-                          /*2*/ "\r\n" +
-                          /*3*/ "egész[] tömb = létrehoz[10]\r\n" +
-                          /*4*/ "\r\n" +
-                          /*5*/ "ciklus egész i=0-tól i<9-ig\r\n" +
-                          /*6*/ "   tömb[i] = i*10\r\n" +
-                          /*7*/ "   kiír tömb[i]\r\n" +
-                          /*8*/ "ciklus_vége\r\n" +
-                          /*9*/ "\r\n" +
-                         /*10*/ "\r\n" +
-                         /*11*/ "\r\n" +
-                         /*12*/ "egész db=0\r\n" +
-                         /*13*/ "ciklus egész i=0-tól i<9-ig\r\n" +
-                         /*14*/ "   ha tömb[i]mod 2==0 akkor\r\n" +
-                         /*15*/ "      db=db+1\r\n" +
-                         /*16*/ "   elágazás_vége\r\n" +
-                         /*17*/ "ciklus_vége\r\n" +
-                         /*18*/ "kiír \"Ennyi darab páros \\\"szám van: \".db\r\n" +
-                         /*19*/ "\r\n" +
-                         /*20*/ "egész maxi=0\r\n" +
-                         /*21*/ "ciklus egész i=0-tól i<9-ig\r\n" +
-                         /*22*/ "   ha tömb[i]>tömb[maxi]\r\n" +
-                         /*23*/ "      maxi=i\r\n" +
-                         /*24*/ "   elágazás_vége\r\n" +
-                         /*25*/ "ciklus_vége\r\n" +
-                         /*26*/ "kiír \"A maximális elem: tömb[\".maxi.\"]=\".tömb[maxi]\r\n" +
-                         /*27*/ "egész xxx = szövegből_egészbe(\"10\")\r\n" +
-                         /*28*/ "program_vége";
-
-            LexicalAnalyzerResult result = new LexicalAnalyzer(code).Analyze();
-
-            TokenTester tt = new TokenTester(result);
-            SymbolTableTester st = new SymbolTableTester(result.SymbolTable);
-
-            // 1. program_kezd\r\n
-            tt.ExpectKeyword("program_kezd");
-            tt.NewLine();
-
-            // 2. \r\n
-            tt.CurrentRow++;
-
-            // 3. egész[] tömb = létrehoz[10]\r\n
-            tt.ExpectKeyword("egész tömb");
-            tt.ExpectIdentifier("tömb");
-            st.ExpectSimpleEntry(SingleEntryType.EgeszTomb, "tömb", 3);
-            tt.ExpectKeyword("=");
-            tt.ExpectKeyword("létrehoz");
-            tt.ExpectKeyword("[");
-            tt.ExpectEgeszLiteral("10");
-            tt.ExpectKeyword("]");
-            tt.NewLine();
-
-            // 4. \r\n
-            tt.CurrentRow++;
-
-            // 5. ciklus egész i=0-tól i<9-ig\r\n
-            tt.ExpectKeyword("ciklus");
-            tt.ExpectKeyword("egész");
-            tt.ExpectIdentifier("i");
-            st.IncreaseIndent();
-            st.ExpectSimpleEntry(SingleEntryType.Egesz, "i", 5);
-            tt.ExpectKeyword("=");
-            tt.ExpectEgeszLiteral("0");
-            tt.ExpectKeyword("-tól");
-            tt.ExpectIdentifier("i");
-            tt.ExpectKeyword("<");
-            tt.ExpectEgeszLiteral("9");
-            tt.ExpectKeyword("-ig");
-            tt.NewLine();
-
-            // 6.    tömb[i] = i*10\r\n
-            tt.ExpectIdentifier("tömb");
-            tt.ExpectKeyword("[");
-            tt.ExpectIdentifier("i");
-            tt.ExpectKeyword("]");
-            tt.ExpectKeyword("=");
-            tt.ExpectIdentifier("i");
-            tt.ExpectKeyword("*");
-            tt.ExpectEgeszLiteral("10");
-            tt.NewLine();
-
-            // 7.    kiír tömb[i]\r\n
-            tt.ExpectKeyword("kiír");
-            tt.ExpectIdentifier("tömb");
-            tt.ExpectKeyword("[");
-            tt.ExpectIdentifier("i");
-            tt.ExpectKeyword("]");
-            tt.NewLine();
-
-            // 8. ciklus_vége\r\n
-            tt.ExpectKeyword("ciklus_vége");
-            st.DecreaseIndent();
-            tt.NewLine();
-
-            // 9. \r\n
-            // 10. \r\n
-            // 11. \r\n
-            tt.CurrentRow += 3;
-
-            // 12. egész db=0\r\n
-            tt.ExpectKeyword("egész");
-            tt.ExpectIdentifier("db");
-            st.ExpectSimpleEntry(SingleEntryType.Egesz, "db", 12);
-            tt.ExpectKeyword("=");
-            tt.ExpectEgeszLiteral("0");
-            tt.NewLine();
-
-            // 13. ciklus egész i=0-tól i<9-ig\r\n
-            tt.ExpectKeyword("ciklus");
-            tt.ExpectKeyword("egész");
-            tt.ExpectIdentifier("i");
-            st.IncreaseIndent();
-            st.ExpectSimpleEntry(SingleEntryType.Egesz, "i", 13);
-            tt.ExpectKeyword("=");
-            tt.ExpectEgeszLiteral("0");
-            tt.ExpectKeyword("-tól");
-            tt.ExpectIdentifier("i");
-            tt.ExpectKeyword("<");
-            tt.ExpectEgeszLiteral("9");
-            tt.ExpectKeyword("-ig");
-            tt.NewLine();
-
-            // 14.    ha tömb[i]mod 2==0 akkor\r\n
-            tt.ExpectKeyword("ha");
-            tt.ExpectIdentifier("tömb");
-            tt.ExpectKeyword("[");
-            tt.ExpectIdentifier("i");
-            tt.ExpectKeyword("]");
-            tt.ExpectKeyword("mod");
-            tt.ExpectEgeszLiteral("2");
-            tt.ExpectKeyword("==");
-            tt.ExpectEgeszLiteral("0");
-            tt.ExpectKeyword("akkor");
-            tt.NewLine();
-
-            // 15.       db=db+1\r\n
-            tt.ExpectIdentifier("db");
-            tt.ExpectKeyword("=");
-            tt.ExpectIdentifier("db");
-            tt.ExpectKeyword("+");
-            tt.ExpectEgeszLiteral("1");
-            tt.NewLine();
-
-            // 16.    elágazás_vége\r\n
-            tt.ExpectKeyword("elágazás_vége");
-            tt.NewLine();
-
-            // 17. ciklus_vége\r\n
-            tt.ExpectKeyword("ciklus_vége");
-            st.DecreaseIndent();
-            tt.NewLine();
-
-            // 18. kiír \"Ennyi darab páros \\\"szám van: \".db\r\n
-            tt.ExpectKeyword("kiír");
-            tt.ExpectSzovegLiteral("Ennyi darab páros \\\"szám van: ");
-            tt.ExpectKeyword(".");
-            tt.ExpectIdentifier("db");
-            tt.NewLine();
-
-            // 19. \r\n
-            tt.CurrentRow++;
-
-            // 20. egész maxi=0\r\n
-            tt.ExpectKeyword("egész");
-            tt.ExpectIdentifier("maxi");
-            st.ExpectSimpleEntry(SingleEntryType.Egesz, "maxi", 20);
-            tt.ExpectKeyword("=");
-            tt.ExpectEgeszLiteral("0");
-            tt.NewLine();
-
-            // 21. ciklus egész i=0-tól i<9-ig\r\n
-            tt.ExpectKeyword("ciklus");
-            tt.ExpectKeyword("egész");
-            st.IncreaseIndent();
-            st.ExpectSimpleEntry(SingleEntryType.Egesz, "i", 21);
-            tt.ExpectIdentifier("i");
-            tt.ExpectKeyword("=");
-            tt.ExpectEgeszLiteral("0");
-            tt.ExpectKeyword("-tól");
-            tt.ExpectIdentifier("i");
-            tt.ExpectKeyword("<");
-            tt.ExpectEgeszLiteral("9");
-            tt.ExpectKeyword("-ig");
-            tt.NewLine();
-
-            // 22.    ha tömb[i]>tömb[maxi]\r\n
-            tt.ExpectKeyword("ha");
-            tt.ExpectIdentifier("tömb");
-            tt.ExpectKeyword("[");
-            tt.ExpectIdentifier("i");
-            tt.ExpectKeyword("]");
-            tt.ExpectKeyword(">");
-            tt.ExpectIdentifier("tömb");
-            tt.ExpectKeyword("[");
-            tt.ExpectIdentifier("maxi");
-            tt.ExpectKeyword("]");
-            tt.NewLine();
-
-            // 23.       maxi=i\r\n
-            tt.ExpectIdentifier("maxi");
-            tt.ExpectKeyword("=");
-            tt.ExpectIdentifier("i");
-            tt.NewLine();
-
-            // 24.    elágazás_vége\r\n
-            tt.ExpectKeyword("elágazás_vége");
-            tt.NewLine();
-
-            // 25. ciklus_vége\r\n
-            tt.ExpectKeyword("ciklus_vége");
-            st.DecreaseIndent();
-            tt.NewLine();
-
-            // 26. kiír \"A maximális elem: tömb[\".maxi.\"]=\".tömb[maxi]\r\n
-            tt.ExpectKeyword("kiír");
-            tt.ExpectSzovegLiteral("A maximális elem: tömb[");
-            tt.ExpectKeyword(".");
-            tt.ExpectIdentifier("maxi");
-            tt.ExpectKeyword(".");
-            tt.ExpectSzovegLiteral("]=");
-            tt.ExpectKeyword(".");
-            tt.ExpectIdentifier("tömb");
-            tt.ExpectKeyword("[");
-            tt.ExpectIdentifier("maxi");
-            tt.ExpectKeyword("]");
-            tt.NewLine();
-
-            // 27. egész xxx = szövegből_egészbe(\"10\")\r\n
-            tt.ExpectKeyword("egész");
-            tt.ExpectIdentifier("xxx");
-            st.ExpectSimpleEntry(SingleEntryType.Egesz, "xxx", 27);
-            tt.ExpectKeyword("=");
-            tt.ExpectInternalFunction("szövegből_egészbe");
-            tt.ExpectKeyword("(");
-            tt.ExpectSzovegLiteral("10");
-            tt.ExpectKeyword(")");
-            tt.NewLine();
-
-            // 28. program_vége
-            tt.ExpectKeyword("program_vége");
-
-            tt.ExpectNoMore();
-            st.ExpectNoMore();
-            TestContext.Write(result.SymbolTable.ToStringNice());
-        }
-
+        
         [Test]
         public void DeepBlocks()
         {
@@ -759,35 +471,19 @@ namespace LexicalAnalysisTests.Analyzer
                          /*3*/  "egész[] tömb = létrehoz[10]\r\n" +
                          /*4*/  "\r\n" +
                          /*5*/  "egész a = 2\r\n" +
-                         /*6*/  "ciklus egész aa = 0-tól aa < 9-ig\r\n" +
-                         /*7*/  "   tört aaa = 2,4\r\n" +
-                         /*8*/  "ciklus_vége\r\n" +
+                         /*6*/  "\r\n" +
+                         /*7*/  "\r\n" +
+                         /*8*/  "egész b = 0\r\n" +
                          /*9*/  "\r\n" +
-                        /*10*/  "\r\n" +
-                        /*11*/  "egész b = 0\r\n" +
-                        /*12*/  "ciklus egész bb = 0-tól bb < 9-ig\r\n" +
-                        /*13*/  "   szöveg bbb = \"alma\"\r\n" +
-                        /*14*/  "   ha bb mod 2 == 0 akkor\r\n" +
-                        /*15*/  "      szöveg bbbb = \"asd\"\r\n" +
-                        /*16*/  "   elágazás_vége\r\n" +
+                        /*10*/  "egész c = 0\r\n" +
+                        /*11*/  "ciklus_amíg c < 2\r\n" +
+                        /*12*/  "   egész ccc = 2\r\n" +
+                        /*13*/  "   ha ccc == 3 akkor\r\n" +
+                        /*14*/  "      logikai l = hamis\r\n" +
+                        /*15*/  "   elágazás_vége\r\n" +
+                        /*16*/  "   szöveg sz = \"haha\"\r\n" +
                         /*17*/  "ciklus_vége\r\n" +
-                        /*18*/  "\r\n" +
-                        /*19*/  "egész c = 0\r\n" +
-                        /*20*/  "ciklus_amíg c < 2\r\n" +
-                        /*21*/  "   egész ccc = 2\r\n" +
-                        /*22*/  "   ha ccc == 3 akkor\r\n" +
-                        /*23*/  "      ciklus egész cccc = 1-től cccc < 10-ig\r\n" +
-                        /*24*/  "         tört ccccc = 3,14\r\n" +
-                        /*25*/  "         ciklus_amíg ccc > 2\r\n" +
-                        /*26*/  "            ccc = ccc - 2\r\n" +
-                        /*27*/  "         ciklus_vége\r\n" +
-                        /*28*/  "         egész ccccc2\r\n" +
-                        /*29*/  "      ciklus_vége\r\n" +
-                        /*30*/  "      logikai l = hamis\r\n" +
-                        /*31*/  "   elágazás_vége\r\n" +
-                        /*32*/  "   szöveg sz = \"haha\"\r\n" +
-                        /*33*/  "ciklus_vége\r\n" +
-                        /*34*/  "program_vége";
+                        /*18*/  "program_vége";
 
             LexicalAnalyzerResult result = new LexicalAnalyzer(code).Analyze();
 
@@ -823,112 +519,32 @@ namespace LexicalAnalysisTests.Analyzer
             tt.ExpectEgeszLiteral("2");
             tt.NewLine();
 
-            // 6. ciklus egész aa = 0-tól aa < 9-ig\r\n
-            tt.ExpectKeyword("ciklus");
+            // 6. \r\n
+            tt.CurrentRow++;
+
+            // 7. \r\n
+            tt.CurrentRow++;
+
+            // 8. egész b = 0\r\n
             tt.ExpectKeyword("egész");
-            tt.ExpectIdentifier("aa");
-            st.IncreaseIndent();
-            st.ExpectSimpleEntry(SingleEntryType.Egesz, "aa", 6);
+            tt.ExpectIdentifier("b");
+            st.ExpectSimpleEntry(SingleEntryType.Egesz, "b", 8);
             tt.ExpectKeyword("=");
             tt.ExpectEgeszLiteral("0");
-            tt.ExpectKeyword("-tól");
-            tt.ExpectIdentifier("aa");
-            tt.ExpectKeyword("<");
-            tt.ExpectEgeszLiteral("9");
-            tt.ExpectKeyword("-ig");
-            tt.NewLine();
-
-            // 7.    tört aaa = 2,4\r\n
-            tt.ExpectKeyword("tört");
-            tt.ExpectIdentifier("aaa");
-            st.ExpectSimpleEntry(SingleEntryType.Tort, "aaa", 7);
-            tt.ExpectKeyword("=");
-            tt.ExpectTortLiteral("2,4");
-            tt.NewLine();
-
-            // 8. ciklus_vége\r\n
-            tt.ExpectKeyword("ciklus_vége");
-            st.DecreaseIndent();
             tt.NewLine();
 
             // 9. \r\n
             tt.CurrentRow++;
 
-            // 10. \r\n
-            tt.CurrentRow++;
-
-            // 11. egész b = 0\r\n
-            tt.ExpectKeyword("egész");
-            tt.ExpectIdentifier("b");
-            st.ExpectSimpleEntry(SingleEntryType.Egesz, "b", 11);
-            tt.ExpectKeyword("=");
-            tt.ExpectEgeszLiteral("0");
-            tt.NewLine();
-
-            // 12. ciklus egész bb = 0-tól bb < 9-ig\r\n
-            tt.ExpectKeyword("ciklus");
-            tt.ExpectKeyword("egész");
-            tt.ExpectIdentifier("bb");
-            st.IncreaseIndent();
-            st.ExpectSimpleEntry(SingleEntryType.Egesz, "bb", 12);
-            tt.ExpectKeyword("=");
-            tt.ExpectEgeszLiteral("0");
-            tt.ExpectKeyword("-tól");
-            tt.ExpectIdentifier("bb");
-            tt.ExpectKeyword("<");
-            tt.ExpectEgeszLiteral("9");
-            tt.ExpectKeyword("-ig");
-            tt.NewLine();
-
-            // 13.    szöveg bbb = \"alma\"\r\n
-            tt.ExpectKeyword("szöveg");
-            tt.ExpectIdentifier("bbb");
-            st.ExpectSimpleEntry(SingleEntryType.Szoveg, "bbb", 13);
-            tt.ExpectKeyword("=");
-            tt.ExpectSzovegLiteral("alma");
-            tt.NewLine();
-
-            // 14.    ha bb mod 2 == 0 akkor\r\n
-            tt.ExpectKeyword("ha");
-            tt.ExpectIdentifier("bb");
-            st.IncreaseIndent();
-            tt.ExpectKeyword("mod");
-            tt.ExpectEgeszLiteral("2");
-            tt.ExpectKeyword("==");
-            tt.ExpectEgeszLiteral("0");
-            tt.ExpectKeyword("akkor");
-            tt.NewLine();
-
-            // 15.       szöveg bbbb = \"asd\"\r\n
-            tt.ExpectKeyword("szöveg");
-            tt.ExpectIdentifier("bbbb");
-            st.ExpectSimpleEntry(SingleEntryType.Szoveg, "bbbb", 15);
-            tt.ExpectKeyword("=");
-            tt.ExpectSzovegLiteral("asd");
-            tt.NewLine();
-
-            // 16.    elágazás_vége\r\n
-            tt.ExpectKeyword("elágazás_vége");
-            st.DecreaseIndent();
-            tt.NewLine();
-
-            // 17. ciklus_vége\r\n
-            tt.ExpectKeyword("ciklus_vége");
-            st.DecreaseIndent();
-            tt.NewLine();
-
-            // 18. \r\n
-            tt.CurrentRow++;
-
-            // 19. egész c = 0\r\n
+            // 10. egész c = 0\r\n
             tt.ExpectKeyword("egész");
             tt.ExpectIdentifier("c");
-            st.ExpectSimpleEntry(SingleEntryType.Egesz, "c", 19);
+            st.ExpectSimpleEntry(SingleEntryType.Egesz, "c", 10);
             tt.ExpectKeyword("=");
             tt.ExpectEgeszLiteral("0");
             tt.NewLine();
 
-            // 20. ciklus_amíg c < 2\r\n
+            // 11. ciklus_amíg c < 2\r\n
             tt.ExpectKeyword("ciklus_amíg");
             st.IncreaseIndent();
             tt.ExpectIdentifier("c");
@@ -936,15 +552,15 @@ namespace LexicalAnalysisTests.Analyzer
             tt.ExpectEgeszLiteral("2");
             tt.NewLine();
 
-            // 21.    egész ccc = 2\r\n
+            // 12.    egész ccc = 2\r\n
             tt.ExpectKeyword("egész");
             tt.ExpectIdentifier("ccc");
-            st.ExpectSimpleEntry(SingleEntryType.Egesz, "ccc", 21);
+            st.ExpectSimpleEntry(SingleEntryType.Egesz, "ccc", 12);
             tt.ExpectKeyword("=");
             tt.ExpectEgeszLiteral("2");
             tt.NewLine();
 
-            // 22.    ha ccc == 3 akkor\r\n
+            // 13.    ha ccc == 3 akkor\r\n
             tt.ExpectKeyword("ha");
             st.IncreaseIndent();
             tt.ExpectIdentifier("ccc");
@@ -953,85 +569,32 @@ namespace LexicalAnalysisTests.Analyzer
             tt.ExpectKeyword("akkor");
             tt.NewLine();
 
-            // 23.       ciklus egész cccc = 1-től cccc < 10-ig\r\n
-            tt.ExpectKeyword("ciklus");
-            st.IncreaseIndent();
-            tt.ExpectKeyword("egész");
-            tt.ExpectIdentifier("cccc");
-            st.ExpectSimpleEntry(SingleEntryType.Egesz, "cccc", 23);
-            tt.ExpectKeyword("=");
-            tt.ExpectEgeszLiteral("1");
-            tt.ExpectKeyword("-től");
-            tt.ExpectIdentifier("cccc");
-            tt.ExpectKeyword("<");
-            tt.ExpectEgeszLiteral("10");
-            tt.ExpectKeyword("-ig");
-            tt.NewLine();
-
-            // 24.          tört ccccc = 3,14\r\n
-            tt.ExpectKeyword("tört");
-            tt.ExpectIdentifier("ccccc");
-            st.ExpectSimpleEntry(SingleEntryType.Tort, "ccccc", 24);
-            tt.ExpectKeyword("=");
-            tt.ExpectTortLiteral("3,14");
-            tt.NewLine();
-
-            // 25.          ciklus_amíg ccc > 2\r\n
-            tt.ExpectKeyword("ciklus_amíg");
-            tt.ExpectIdentifier("ccc");
-            tt.ExpectKeyword(">");
-            tt.ExpectEgeszLiteral("2");
-            tt.NewLine();
-
-            // 26.             ccc = ccc - 2\r\n
-            tt.ExpectIdentifier("ccc");
-            tt.ExpectKeyword("=");
-            tt.ExpectIdentifier("ccc");
-            tt.ExpectKeyword("-");
-            tt.ExpectEgeszLiteral("2");
-            tt.NewLine();
-
-            // 27.          ciklus_vége\r\n
-            tt.ExpectKeyword("ciklus_vége");
-            tt.NewLine();
-
-            // 28.          egész ccccc2\r\n
-            tt.ExpectKeyword("egész");
-            tt.ExpectIdentifier("ccccc2");
-            st.ExpectSimpleEntry(SingleEntryType.Egesz, "ccccc2", 28);
-            tt.NewLine();
-
-            // 29.       ciklus_vége\r\n
-            tt.ExpectKeyword("ciklus_vége");
-            st.DecreaseIndent();
-            tt.NewLine();
-
-            // 30.       logikai l = hamis\r\n
+            // 14.       logikai l = hamis\r\n
             tt.ExpectKeyword("logikai");
             tt.ExpectIdentifier("l");
-            st.ExpectSimpleEntry(SingleEntryType.Logikai, "l", 30);
+            st.ExpectSimpleEntry(SingleEntryType.Logikai, "l", 14);
             tt.ExpectKeyword("=");
             tt.ExpectLogikaiLiteral("hamis");
             tt.NewLine();
 
-            // 31.    elágazás_vége\r\n
+            // 15.    elágazás_vége\r\n
             tt.ExpectKeyword("elágazás_vége");
             st.DecreaseIndent();
             tt.NewLine();
 
-            // 32.    szöveg sz = \"haha\"\r\n
+            // 16.    szöveg sz = \"haha\"\r\n
             tt.ExpectKeyword("szöveg");
             tt.ExpectIdentifier("sz");
-            st.ExpectSimpleEntry(SingleEntryType.Szoveg, "sz", 32);
+            st.ExpectSimpleEntry(SingleEntryType.Szoveg, "sz", 16);
             tt.ExpectKeyword("=");
             tt.ExpectSzovegLiteral("haha");
             tt.NewLine();
 
-            // 33. ciklus_vége\r\n
+            // 17. ciklus_vége\r\n
             tt.ExpectKeyword("ciklus_vége");
             tt.NewLine();
 
-            // 34 program_vége
+            // 18 program_vége
             tt.ExpectKeyword("program_vége");
 
             tt.ExpectNoMore();
@@ -1051,12 +614,10 @@ namespace LexicalAnalysisTests.Analyzer
                          /*7*/  "tört trx = logikaiból_törtbe(log)\r\n" +
                          /*8*/  "trx = szövegből_törtbe(sz)\r\n" +
                          /*9*/  "log = egészből_logikaiba(123231)\r\n" +
-                        /*10*/  "ciklus egész b = 0-tól b < 9-ig\r\n" +
-                        /*11*/  "   logikai dell = törtből_logikaiba(0,0)\r\n" +
-                        /*12*/  "ciklus_vége\r\n" +
-                        /*13*/  "szöveg sx = \"hamis\"\r\n" +
-                        /*14*/  "log = szövegből_logikaiba(sx)\r\n" +
-                        /*15*/  "program_vége";
+                        /*10*/  "logikai dell = törtből_logikaiba(0,0)\r\n" +
+                        /*11*/  "szöveg sx = \"hamis\"\r\n" +
+                        /*12*/  "log = szövegből_logikaiba(sx)\r\n" +
+                        /*13*/  "program_vége";
 
             LexicalAnalyzerResult result = new LexicalAnalyzer(code).Analyze();
 
@@ -1149,47 +710,27 @@ namespace LexicalAnalysisTests.Analyzer
             tt.ExpectEgeszLiteral("123231");
             tt.ExpectKeyword(")");
             tt.NewLine();
-
-            // 10. ciklus egész b = 0-tól b < 9-ig\r\n
-            tt.ExpectKeyword("ciklus");
-            st.IncreaseIndent();
-            tt.ExpectKeyword("egész");
-            tt.ExpectIdentifier("b");
-            st.ExpectSimpleEntry(SingleEntryType.Egesz, "b", 10);
-            tt.ExpectKeyword("=");
-            tt.ExpectEgeszLiteral("0");
-            tt.ExpectKeyword("-tól");
-            tt.ExpectIdentifier("b");
-            tt.ExpectKeyword("<");
-            tt.ExpectEgeszLiteral("9");
-            tt.ExpectKeyword("-ig");
-            tt.NewLine();
-
-            // 11.    logikai dell = törtből_logikaiba(0,0)\r\n
+            
+            // 10.    logikai dell = törtből_logikaiba(0,0)\r\n
             tt.ExpectKeyword("logikai");
             tt.ExpectIdentifier("dell");
-            st.ExpectSimpleEntry(SingleEntryType.Logikai, "dell", 11);
+            st.ExpectSimpleEntry(SingleEntryType.Logikai, "dell", 10);
             tt.ExpectKeyword("=");
             tt.ExpectInternalFunction("törtből_logikaiba");
             tt.ExpectKeyword("(");
             tt.ExpectTortLiteral("0,0");
             tt.ExpectKeyword(")");
             tt.NewLine();
-
-            // 12. ciklus_vége\r\n
-            tt.ExpectKeyword("ciklus_vége");
-            st.DecreaseIndent();
-            tt.NewLine();
-
-            // 13. szöveg sx = \"hamis\"\r\n
+            
+            // 11. szöveg sx = \"hamis\"\r\n
             tt.ExpectKeyword("szöveg");
             tt.ExpectIdentifier("sx");
-            st.ExpectSimpleEntry(SingleEntryType.Szoveg, "sx", 13);
+            st.ExpectSimpleEntry(SingleEntryType.Szoveg, "sx", 11);
             tt.ExpectKeyword("=");
             tt.ExpectSzovegLiteral("hamis");
             tt.NewLine();
 
-            // 14. log = szövegből_logikaiba(sx)\r\n
+            // 12. log = szövegből_logikaiba(sx)\r\n
             tt.ExpectIdentifier("log");
             tt.ExpectKeyword("=");
             tt.ExpectInternalFunction("szövegből_logikaiba");
@@ -1198,7 +739,7 @@ namespace LexicalAnalysisTests.Analyzer
             tt.ExpectKeyword(")");
             tt.NewLine();
 
-            // 15. program_vége
+            // 13. program_vége
             tt.ExpectEnd();
 
             tt.ExpectNoMore();

@@ -48,17 +48,11 @@
     <Compile Include="Analyzer\ComplexTests.cs" />
     <Compile Include="Analyzer\DefinitionAndDeclarationTests.cs" />
     <Compile Include="Analyzer\LiteralTests.cs" />
-    <Compile Include="Analyzer\LoadTests.cs" />
     <Compile Include="Analyzer\NegativeTests.cs" />
     <Compile Include="Analyzer\SimpleTests.cs" />
     <Compile Include="Analyzer\IdentifierNamingTests.cs" />
     <Compile Include="Analyzer\StructureTests.cs" />
     <Compile Include="LexicalElementCodeDictionaryTests.cs" />
-    <Compile Include="Resources\LoadTests.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>LoadTests.resx</DependentUpon>
-    </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="SymbolTableTester.cs" />
     <Compile Include="TokenTester.cs" />
@@ -71,13 +65,6 @@
       <Project>{5c7ef03c-6fc4-4bd7-a714-8f2b7b7765de}</Project>
       <Name>LexicalAnalysis</Name>
     </ProjectReference>
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="Resources\LoadTests.resx">
-      <Generator>ResXFileCodeGenerator</Generator>
-      <LastGenOutput>LoadTests.Designer.cs</LastGenOutput>
-      <SubType>Designer</SubType>
-    </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(VSToolsPath)\TeamTest\Microsoft.TestTools.targets" Condition="Exists('$(VSToolsPath)\TeamTest\Microsoft.TestTools.targets')" />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

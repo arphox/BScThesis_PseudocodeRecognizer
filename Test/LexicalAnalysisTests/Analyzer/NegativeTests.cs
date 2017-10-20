@@ -91,9 +91,6 @@ namespace LexicalAnalysisTests.Analyzer
                                 "egész x = 2\r\n" +
                                 "x = x + 1\r\n" +
                                 "egész a = 2\r\n" +
-                                "ciklus egész b = 0-tól b < 9-ig\r\n" +
-                                "   egész c = törtből_egészbe(2,4)\r\n" +
-                                "ciklus_vége\r\n" +
                                 "program_vége\r\n" +
                                 "egész x = 2\r\n" +
                                 "x = x + 1\r\n" +
@@ -134,35 +131,8 @@ namespace LexicalAnalysisTests.Analyzer
             tt.ExpectKeyword("=");
             tt.ExpectEgeszLiteral("2");
             tt.NewLine();
-
-            // 7.    ciklus egész b = 0-tól b < 9-ig
-            tt.ExpectKeyword("ciklus");
-            tt.ExpectKeyword("egész");
-            tt.ExpectIdentifier("b");
-            tt.ExpectKeyword("=");
-            tt.ExpectEgeszLiteral("0");
-            tt.ExpectKeyword("-tól");
-            tt.ExpectIdentifier("b");
-            tt.ExpectKeyword("<");
-            tt.ExpectEgeszLiteral("9");
-            tt.ExpectKeyword("-ig");
-            tt.NewLine();
-
-            // 8.        egész c = törtből_egészbe(2,4)
-            tt.ExpectKeyword("egész");
-            tt.ExpectIdentifier("c");
-            tt.ExpectKeyword("=");
-            tt.ExpectInternalFunction("törtből_egészbe");
-            tt.ExpectKeyword("(");
-            tt.ExpectTortLiteral("2,4");
-            tt.ExpectKeyword(")");
-            tt.NewLine();
-
-            // 9.    ciklus_vége
-            tt.ExpectKeyword("ciklus_vége");
-            tt.NewLine();
-
-            // 10.   program_vége
+            
+            // 7.   program_vége
             tt.ExpectEnd();
 
             tt.ExpectNoMore();
@@ -171,9 +141,6 @@ namespace LexicalAnalysisTests.Analyzer
             SymbolTableTester st = new SymbolTableTester(result.SymbolTable);
             st.ExpectSimpleEntry(SingleEntryType.Egesz, "x", 4);
             st.ExpectSimpleEntry(SingleEntryType.Egesz, "a", 6);
-            st.IncreaseIndent();
-            st.ExpectSimpleEntry(SingleEntryType.Egesz, "b", 7);
-            st.ExpectSimpleEntry(SingleEntryType.Egesz, "c", 8);
             st.ExpectNoMore();
             TestContext.Write(result.SymbolTable.ToStringNice());
         }

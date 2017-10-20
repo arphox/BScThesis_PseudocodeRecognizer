@@ -28,17 +28,13 @@ namespace LexicalAnalysis.LexicalElementIdentification
             WordsToCodes.Add("akkor", 5);
             WordsToCodes.Add("különben", 6);
             WordsToCodes.Add("elágazás_vége", 7);
-            WordsToCodes.Add("ciklus", 8);
-            WordsToCodes.Add("ciklus_amíg", 9);
-            WordsToCodes.Add("-tól", 10);
-            WordsToCodes.Add("-től", 10);
-            WordsToCodes.Add("-ig", 11);
-            WordsToCodes.Add("ciklus_vége", 12);
-            WordsToCodes.Add("beolvas", 13);
-            WordsToCodes.Add("beolvas:", 13);
-            WordsToCodes.Add("kiír", 14);
-            WordsToCodes.Add("kiír:", 14);
-            WordsToCodes.Add("létrehoz", 15);
+            WordsToCodes.Add("ciklus_amíg", 8);
+            WordsToCodes.Add("ciklus_vége", 9);
+            WordsToCodes.Add("beolvas", 10);
+            WordsToCodes.Add("beolvas:", 10);
+            WordsToCodes.Add("kiír", 11);
+            WordsToCodes.Add("kiír:", 11);
+            WordsToCodes.Add("létrehoz", 12);
 
             #endregion
 
@@ -151,7 +147,6 @@ namespace LexicalAnalysis.LexicalElementIdentification
         {
             return
                 blockCode == GetCode("ha") ||
-                blockCode == GetCode("ciklus") ||
                 blockCode == GetCode("ciklus_amíg");
         }
 
