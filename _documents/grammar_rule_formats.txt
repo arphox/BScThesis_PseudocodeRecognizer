@@ -1,0 +1,10 @@
+1.  A rule can ONLY be right-recursive.
+2.  Use BNF to describe a production rule, see examples at "implemented_grammar.txt"
+3.  A rule is attempted to match in the order the rule says.
+    If a rule matching fails, another "branch" is tried (if there are more) until the end.
+    And the implementation is not full-backtrack which means if you describe a rule like this:
+
+<X>	::=	    <A> "newline"
+        |   <A> "newline" <X>
+
+The second row will never be reached because the first row is a subset of the second row.
