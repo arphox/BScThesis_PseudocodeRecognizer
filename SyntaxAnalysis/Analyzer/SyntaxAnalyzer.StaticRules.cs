@@ -32,8 +32,8 @@ namespace SyntaxAnalysis.Analyzer
         internal bool IoParancs()
         {
             return Rule(() =>
-                   Match(() => T("beolvas"), () => T("azonosító"))
-                || Match(() => T("kiír"), () => T("azonosító")));
+                   Match(() => T("beolvas"), Azonosító)
+                || Match(() => T("kiír"), Azonosító));
         }
 
         internal bool BelsőFüggvény()

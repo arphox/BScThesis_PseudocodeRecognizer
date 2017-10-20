@@ -43,7 +43,7 @@ namespace SyntaxAnalysis.Analyzer
             _parseTree = new ParseTree<Token>(new NonTerminalToken(nameof(Program), _currentRowNumber));
 
             return T("program_kezd")
-                   && T("újsor")
+                   && Újsor()
                    && Állítások()
                    && T("program_vége");
         }

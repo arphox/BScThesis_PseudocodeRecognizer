@@ -1,11 +1,11 @@
-﻿using LexicalAnalysis.Analyzer;
+﻿using System;
+using System.Linq;
+using LexicalAnalysis.Analyzer;
 using LexicalAnalysis.Tokens;
 using NUnit.Framework;
 using SyntaxAnalysis.Analyzer;
-using System;
-using System.Linq;
 
-namespace SyntaxAnalysisTests
+namespace SyntaxAnalysisTests.Simple
 {
     [TestFixture]
     public sealed class SimpleTests
@@ -30,10 +30,7 @@ namespace SyntaxAnalysisTests
 
             var parser = new SyntaxAnalyzer(new LexicalAnalyzer(code).Analyze().Tokens);
             SyntaxAnalyzerResult res = parser.Start();
-
             TestHelper.CheckForUnsuccessfulOrEmpty(res);
         }
-
-
     }
 }
