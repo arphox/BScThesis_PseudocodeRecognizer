@@ -6,7 +6,7 @@
 			
 <Állítások>							::=		<Állítás> "újsor" <Állítások>
 										|	<Állítás> "újsor"
-										
+
 <Állítás>							::=		<VáltozóDeklaráció>
 										|	<Értékadás>
 										|	<IoParancs>
