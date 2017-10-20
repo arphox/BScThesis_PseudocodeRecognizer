@@ -11,24 +11,27 @@
 										|	"ha" <LogikaiKifejezés> "akkor" "újsor" <Állítások> "újsor" "elágazás_vége"
 										|	"ciklus_amíg" <LogikaiKifejezés> "újsor" <Állítások> "újsor" "ciklus_vége"
 
-<VáltozóDeklaráció>					::=		<AlapTípus> "azonosító" "=" <AlapKifejezés>
+<VáltozóDeklaráció>					::=		<AlapTípus> "azonosító" "=" <NemTömbLétrehozóKifejezés>
 										|	<TömbTípus> "azonosító" "=" <TömbLétrehozóKifejezés>
 
-<Értékadás>							::=		"azonosító" "=" <AlapKifejezés>
+<Értékadás>							::=		"azonosító" "=" <NemTömbLétrehozóKifejezés>
 										|	"azonosító" "=" <TömbLétrehozóKifejezés>
-										|	"azonosító" "[" <AlapKifejezés> "]" "=" <AlapKifejezés>
+										|	"azonosító" "[" <NemTömbLétrehozóKifejezés> "]" "=" <NemTömbLétrehozóKifejezés>
 
-<LogikaiKifejezés>					::=		<AlapKifejezés>
+<LogikaiKifejezés>					::=		<NemTömbLétrehozóKifejezés>
 
-<AlapKifejezés>						::=		"azonosító"
+<Operandus>							::=		<UnárisOperátor> "azonosító"
+										|	<UnárisOperátor> "literál"
+										|	"azonosító"
 										|	"literál"
 
+<NemTömbLétrehozóKifejezés>			::=		<BinárisKifejezés>
+										|	<Operandus>
+
 <TömbLétrehozóKifejezés>			::=		"azonosító"
-										|	"létrehoz" "[" <AlapKifejezés> "]"
+										|	"létrehoz" "[" <NemTömbLétrehozóKifejezés> "]"
 
-
-
-
+<BinárisKifejezés>					::=		<Operandus> <BinárisOperátor> <Operandus>
 
 
 
@@ -60,3 +63,6 @@
 										|	"szövegből_egészbe"
 										|	"szövegből_törtbe"
 										|	"szövegből_logikaiba"
+
+<UnárisOperátor>					::=		"-"
+										|	"!"

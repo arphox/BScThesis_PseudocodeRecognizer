@@ -4,11 +4,7 @@ using SyntaxAnalysis.Tree;
 using SyntaxAnalysis.Utilities;
 using System;
 using System.Collections.Generic;
-using System.Diagnostics;
 using System.Linq;
-using System.Reflection;
-using System.Runtime.CompilerServices;
-using System.Text;
 
 namespace SyntaxAnalysis.Analyzer
 {
@@ -115,5 +111,6 @@ namespace SyntaxAnalysis.Analyzer
 
         private bool Literál() => T(typeof(LiteralToken));
         private bool Újsor() => T("újsor");
+        private bool Azonosító() => T("azonosító");
     }
 }

@@ -7,8 +7,8 @@ namespace SyntaxAnalysis.Analyzer
         internal bool Típus()
         {
             return Rule(() =>
-                Match(AlapTípus)
-             || Match(TömbTípus));
+                   Match(AlapTípus)
+                || Match(TömbTípus));
         }
 
         internal bool AlapTípus()
@@ -32,8 +32,8 @@ namespace SyntaxAnalysis.Analyzer
         internal bool IoParancs()
         {
             return Rule(() =>
-                   Match(() => T("beolvas"))
-                || Match(() => T("kiír")));
+                   Match(() => T("beolvas"), () => T("azonosító"))
+                || Match(() => T("kiír"), () => T("azonosító")));
         }
 
         internal bool BelsőFüggvény()
@@ -46,6 +46,13 @@ namespace SyntaxAnalysis.Analyzer
                 || Match(() => T("szövegből_egészbe"))
                 || Match(() => T("szövegből_törtbe"))
                 || Match(() => T("szövegből_logikaiba")));
+        }
+
+        internal bool UnárisOperátor()
+        {
+            return Rule(() =>
+                   Match(() => T("-"))
+                || Match(() => T("!")));
         }
     }
 }
