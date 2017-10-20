@@ -39,10 +39,15 @@ namespace SyntaxAnalysis.Analyzer
         internal bool BelsőFüggvény()
         {
             return Rule(() =>
-                   Match(() => T("törtből_egészbe"))
+                   Match(() => T("egészből_logikaiba"))
+                || Match(() => T("egészből_törtbe"))
+                || Match(() => T("egészből_szövegbe"))
+                || Match(() => T("törtből_egészbe"))
                 || Match(() => T("törtből_logikaiba"))
+                || Match(() => T("törtből_szövegbe"))
                 || Match(() => T("logikaiból_egészbe"))
                 || Match(() => T("logikaiból_törtbe"))
+                || Match(() => T("logikaiból_szövegbe"))
                 || Match(() => T("szövegből_egészbe"))
                 || Match(() => T("szövegből_törtbe"))
                 || Match(() => T("szövegből_logikaiba")));
