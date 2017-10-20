@@ -467,13 +467,15 @@ namespace LexicalAnalysisTests.Analyzer
             tt.ExpectKeyword("*");
             tt.ExpectKeyword("+");
             tt.ExpectKeyword("+");
-            tt.ExpectEgeszLiteral("+10");
+            tt.ExpectKeyword("+");
+            tt.ExpectEgeszLiteral("10");
             tt.ExpectKeyword("-");
             tt.ExpectKeyword("(");
             tt.ExpectKeyword("-");
             tt.ExpectTortLiteral("-0,3");
             tt.ExpectKeyword("*");
-            tt.ExpectTortLiteral("+4,1");
+            tt.ExpectKeyword("+");
+            tt.ExpectTortLiteral("4,1");
             tt.ExpectKeyword(")");
             tt.ExpectKeyword("/");
             tt.ExpectKeyword("-");
@@ -642,7 +644,8 @@ namespace LexicalAnalysisTests.Analyzer
             tt.ExpectIdentifier("db");
             tt.ExpectKeyword("=");
             tt.ExpectIdentifier("db");
-            tt.ExpectEgeszLiteral("+1");
+            tt.ExpectKeyword("+");
+            tt.ExpectEgeszLiteral("1");
             tt.NewLine();
 
             // 16.    elágazás_vége\r\n

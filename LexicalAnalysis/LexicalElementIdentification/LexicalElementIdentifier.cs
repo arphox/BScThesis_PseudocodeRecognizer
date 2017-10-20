@@ -4,8 +4,8 @@ namespace LexicalAnalysis.LexicalElementIdentification
 {
     internal static class LexicalElementIdentifier
     {
-        private const string IntegerLiteralPattern = @"^[+-]?[0-9]+$";
-        private const string DecimalLiteralPattern = @"^[+-]?[0-9]+,[0-9]+$";
+        private const string IntegerLiteralPattern = @"^[-]?[0-9]+$";
+        private const string DecimalLiteralPattern = @"^[-]?[0-9]+,[0-9]+$";
         private const string IdentifierPattern = @"^[a-záéíóöőúüű]+[0-9a-z_áéíóöőúüű]*$";
 
         internal static int IdentifyLexicalElement(string word)

@@ -31,8 +31,8 @@ namespace LexicalAnalysisTests.Analyzer
 
         #endregion
 
-        [TestCaseSource(nameof(GenerateLiterals), new object[] { "egész literál", new[] { "0", "+0", "-0", "1", "5", "13273211", "-8908001" } })]
-        [TestCaseSource(nameof(GenerateLiterals), new object[] { "tört literál", new[] { "0,1", "+1,2", "-3,4", "123,45", "-3123,78895", "132,73211", "-8,908001" } })]
+        [TestCaseSource(nameof(GenerateLiterals), new object[] { "egész literál", new[] { "0", "-0", "1", "5", "13273211", "-8908001" } })]
+        [TestCaseSource(nameof(GenerateLiterals), new object[] { "tört literál", new[] { "0,1", "-3,4", "123,45", "-3123,78895", "132,73211", "-8,908001" } })]
         public void CanRecognizeLiterals(string type, string value)
         {
             string code = "program_kezd\n" +

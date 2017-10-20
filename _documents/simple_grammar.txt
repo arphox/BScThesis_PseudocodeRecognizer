@@ -20,14 +20,15 @@
 
 <LogikaiKifejezés>					::=		<AlapKifejezés>
 
-<Kifejezés>							::=		<AlapKifejezés>
-										|	<TömbLétrehozóKifejezés>
-
 <AlapKifejezés>						::=		"azonosító"
 										|	"literál"
 
 <TömbLétrehozóKifejezés>			::=		"azonosító"
 										|	"létrehoz" "[" <AlapKifejezés> "]"
+
+
+
+
 
 
 
