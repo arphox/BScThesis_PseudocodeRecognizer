@@ -118,5 +118,65 @@ namespace SyntaxAnalysisTests
             operandus.ExpectChildrenNames("egész literál");
             operandus.GetTerminalChildOfName("egész literál").ExpectLiteralValueOf("2");
         }
+
+        [Test]
+        public void VáltozóDeklaráció2()
+        {
+            const string code = "program_kezd\r\n" +
+                                "egész a = 123\r\n" +
+                                "egész[] b = a\r\n" +
+                                "program_vége";
+
+            ParseTree<Token> tree = TestHelper.Parse(code);
+
+            tree.ExpectLeaves(
+                "program_kezd", "újsor",
+                "egész", "azonosító", "=", "egész literál", "újsor",
+                "egész tömb", "azonosító", "=", "azonosító", "újsor",
+                "program_vége");
+
+            var root = tree.Root;
+            TestHelper.CheckRoot(root);
+
+            var állítások = root.GetNonTerminalChildOfName(nameof(SA.Állítások));
+            állítások.ExpectChildrenNames(nameof(SA.Állítás), "újsor", nameof(SA.Állítások));
+
+            // egész a = 123\r\n
+
+            var állítás = állítások.GetNonTerminalChildOfName(nameof(SA.Állítás));
+            állítás.ExpectChildrenNames(nameof(SA.VáltozóDeklaráció));
+
+            var változóDeklaráció = állítás.GetNonTerminalChildOfName(nameof(SA.VáltozóDeklaráció));
+            változóDeklaráció.ExpectChildrenNames(nameof(SA.AlapTípus), "azonosító", "=", nameof(SA.NemTömbLétrehozóKifejezés));
+
+            változóDeklaráció.GetTerminalChildOfName("azonosító").ExpectIdentifierNameOf("a");
+            változóDeklaráció.GetNonTerminalChildOfName(nameof(SA.AlapTípus)).ExpectChildrenNames("egész");
+
+            var nemTömbLétrehozóKifejezés = változóDeklaráció.GetNonTerminalChildOfName(nameof(SA.NemTömbLétrehozóKifejezés));
+            nemTömbLétrehozóKifejezés.ExpectChildrenNames(nameof(SA.Operandus));
+
+            var operandus = nemTömbLétrehozóKifejezés.GetNonTerminalChildOfName(nameof(SA.Operandus));
+            operandus.ExpectChildrenNames("egész literál");
+            operandus.GetTerminalChildOfName("egész literál").ExpectLiteralValueOf("123");
+
+            // egész[] b = a\r\n
+
+            var állítások2 = állítások.GetNonTerminalChildOfName(nameof(SA.Állítások));
+
+            var állítás2 = állítások2.GetNonTerminalChildOfName(nameof(SA.Állítás));
+            állítás2.ExpectChildrenNames(nameof(SA.VáltozóDeklaráció));
+
+            var változóDeklaráció2 = állítás2.GetNonTerminalChildOfName(nameof(SA.VáltozóDeklaráció));
+            változóDeklaráció2.ExpectChildrenNames(nameof(SA.TömbTípus), "azonosító", "=", nameof(SA.TömbLétrehozóKifejezés));
+
+            változóDeklaráció2.GetTerminalChildOfName("azonosító").ExpectIdentifierNameOf("b");
+            változóDeklaráció2.GetNonTerminalChildOfName(nameof(SA.TömbTípus)).ExpectChildrenNames("egész tömb");
+
+            var tömbLétrehozóKifejezés = változóDeklaráció2.GetNonTerminalChildOfName(nameof(SA.TömbLétrehozóKifejezés));
+            tömbLétrehozóKifejezés.ExpectChildrenNames("azonosító");
+
+            tömbLétrehozóKifejezés.GetTerminalChildOfName("azonosító").ExpectIdentifierNameOf("a");
+        }
+
     }
 }
