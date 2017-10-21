@@ -6,7 +6,7 @@
                 
 <Állítások>					    :=		<Állítás> "újsor" <Állítások>
                                     |	<Állítás> "újsor"
-    
+
 <Állítás>					    :=		<VáltozóDeklaráció>
                                     |	<Értékadás>
                                     |	<IoParancs>
@@ -18,7 +18,7 @@
 <VáltozóDeklaráció>			    :=		<AlapTípus> "azonosító" "=" <NemTömbLétrehozóKifejezés>
                                     |	<TömbTípus> "azonosító" "=" <TömbLétrehozóKifejezés>
                                     |	<AlapTípus> "azonosító" "=" <BelsőFüggvény> "(" <NemTömbLétrehozóKifejezés> ")"
-    
+
 <Értékadás>					    :=		"azonosító" "=" <NemTömbLétrehozóKifejezés>
                                     |	"azonosító" "=" <TömbLétrehozóKifejezés>
                                     |	"azonosító" "=" <BelsőFüggvény> "(" <NemTömbLétrehozóKifejezés> ")"
@@ -31,7 +31,7 @@
     
 <NemTömbLétrehozóKifejezés>	    :=		<BinárisKifejezés>
                                     |	<Operandus>
-    
+
 <TömbLétrehozóKifejezés>	    :=		"azonosító"
                                     |	"létrehoz" "[" <NemTömbLétrehozóKifejezés> "]"
     
