@@ -5,7 +5,7 @@ using SyntaxAnalysis.Analyzer;
 using SyntaxAnalysis.Tree;
 using System;
 using System.Linq;
-using SA = SyntaxAnalysis.Analyzer.SyntaxAnalyzer; 
+using SA = SyntaxAnalysis.Analyzer.SyntaxAnalyzer;
 
 namespace SyntaxAnalysisTests
 {
@@ -33,8 +33,8 @@ namespace SyntaxAnalysisTests
             ParseTree<Token> tree = TestHelper.Parse(code);
 
             tree.ExpectLeaves(
-                "program_kezd", "újsor", 
-                "kilép", "újsor", 
+                "program_kezd", "újsor",
+                "kilép", "újsor",
                 "program_vége");
 
             var root = tree.Root;
@@ -42,7 +42,7 @@ namespace SyntaxAnalysisTests
 
             var állítások = root.GetNonTerminalChildOfName(nameof(SA.Állítások));
             állítások.ExpectChildrenNames(nameof(SA.Állítás), "újsor");
-       
+
             var állítás = állítások.GetNonTerminalChildOfName(nameof(SA.Állítás));
             állítás.ExpectChildrenNames("kilép");
 
@@ -61,8 +61,8 @@ namespace SyntaxAnalysisTests
             ParseTree<Token> tree = TestHelper.Parse(code);
 
             tree.ExpectLeaves(
-                "program_kezd", "újsor", 
-                "kilép", "újsor", 
+                "program_kezd", "újsor",
+                "kilép", "újsor",
                 "kilép", "újsor",
                 "program_vége");
 
@@ -93,7 +93,7 @@ namespace SyntaxAnalysisTests
 
             tree.ExpectLeaves(
                 "program_kezd", "újsor",
-                "egész", "azonosító", "=", "egész literál", "újsor", 
+                "egész", "azonosító", "=", "egész literál", "újsor",
                 "program_vége");
 
             var root = tree.Root;
@@ -176,6 +176,45 @@ namespace SyntaxAnalysisTests
             tömbLétrehozóKifejezés.ExpectChildrenNames("azonosító");
 
             tömbLétrehozóKifejezés.GetTerminalChildOfName("azonosító").ExpectIdentifierNameOf("a");
+        }
+
+        [Test]
+        public void TömbLétrehozóKifejezés2() // 1 is checked in VáltozóDeklaráció2
+        {
+            const string code = "program_kezd\r\n" +
+                                "tört[] c = létrehoz[99]\r\n" +
+                                "program_vége";
+
+            ParseTree<Token> tree = TestHelper.Parse(code);
+
+            tree.ExpectLeaves(
+                "program_kezd", "újsor",
+                "tört tömb", "azonosító", "=", "létrehoz", "[", "egész literál", "]", "újsor",
+                "program_vége");
+
+            var root = tree.Root;
+            TestHelper.CheckRoot(root, isOneRowBody: true);
+
+            var állítások = root.GetNonTerminalChildOfName(nameof(SA.Állítások));
+
+            var állítás = állítások.GetNonTerminalChildOfName(nameof(SA.Állítás));
+            állítás.ExpectChildrenNames(nameof(SA.VáltozóDeklaráció));
+
+            var változóDeklaráció = állítás.GetNonTerminalChildOfName(nameof(SA.VáltozóDeklaráció));
+            változóDeklaráció.ExpectChildrenNames(nameof(SA.TömbTípus), "azonosító", "=", nameof(SA.TömbLétrehozóKifejezés));
+
+            változóDeklaráció.GetTerminalChildOfName("azonosító").ExpectIdentifierNameOf("c");
+            változóDeklaráció.GetNonTerminalChildOfName(nameof(SA.TömbTípus)).ExpectChildrenNames("tört tömb");
+
+            var tömbLétrehozóKifejezés = változóDeklaráció.GetNonTerminalChildOfName(nameof(SA.TömbLétrehozóKifejezés));
+            tömbLétrehozóKifejezés.ExpectChildrenNames("létrehoz", "[", nameof(SA.NemTömbLétrehozóKifejezés), "]");
+
+            var nemTömbLétrehozóKifejezés = tömbLétrehozóKifejezés.GetNonTerminalChildOfName(nameof(SA.NemTömbLétrehozóKifejezés));
+            nemTömbLétrehozóKifejezés.ExpectChildrenNames(nameof(SA.Operandus));
+
+            var operandus = nemTömbLétrehozóKifejezés.GetNonTerminalChildOfName(nameof(SA.Operandus));
+            operandus.ExpectChildrenNames("egész literál");
+            operandus.GetTerminalChildOfName("egész literál").ExpectLiteralValueOf("99");
         }
 
     }
