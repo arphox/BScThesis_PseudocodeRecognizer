@@ -3,17 +3,17 @@
     public class IdentifierToken : TerminalToken
     {
         public int SymbolId { get; }
-        public string Name { get; }
+        public string SymbolName { get; }
 
-        internal IdentifierToken(int id, int symbolId, string name, int rowNumber)
+        internal IdentifierToken(int id, int symbolId, string symbolName, int rowNumber)
             : base(id, rowNumber)
         {
             SymbolId = symbolId;
-            Name = name;
+            SymbolName = symbolName;
         }
 
         public override string ToString() => 
-            $"[{GetType().Name}] {nameof(Id)}={Id} ({Name}) @ Line #{RowNumber}"
+            $"[{GetType().Name}] {nameof(Id)}={Id} ({SymbolName}) @ Line #{RowNumber}"
             + $", {nameof(SymbolId)}={SymbolId}";
     }
 }

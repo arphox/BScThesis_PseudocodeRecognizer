@@ -5,6 +5,7 @@ using SyntaxAnalysis.Analyzer;
 using SyntaxAnalysis.Tree;
 using System;
 using System.Linq;
+using SA = SyntaxAnalysis.Analyzer.SyntaxAnalyzer; 
 
 namespace SyntaxAnalysisTests
 {
@@ -17,9 +18,9 @@ namespace SyntaxAnalysisTests
             const string code = "program_kezd;\r\n" +
                                 "program_vége";
 
-            Assert.Throws<ArgumentNullException>(() => new SyntaxAnalyzer(null));
-            Assert.Throws<ArgumentException>(() => new SyntaxAnalyzer(Enumerable.Empty<Token>()));
-            Assert.Throws<SyntaxAnalysisException>(() => new SyntaxAnalyzer(new LexicalAnalyzer(code).Analyze().Tokens));
+            Assert.Throws<ArgumentNullException>(() => new SA(null));
+            Assert.Throws<ArgumentException>(() => new SA(Enumerable.Empty<Token>()));
+            Assert.Throws<SyntaxAnalysisException>(() => new SA(new LexicalAnalyzer(code).Analyze().Tokens));
         }
 
         [Test]
@@ -36,16 +37,16 @@ namespace SyntaxAnalysisTests
                 "kilép", "újsor", 
                 "program_vége");
 
-            TreeNode<Token> root = tree.Root;
+            var root = tree.Root;
             TestHelper.CheckRoot(root, isOneRowBody: true);
 
-            TreeNode<Token> állítások = root.GetNonTerminalChildOfName(nameof(SyntaxAnalyzer.Állítások));
-            állítások.ExpectChildrenNames(nameof(SyntaxAnalyzer.Állítás), "újsor");
+            var állítások = root.GetNonTerminalChildOfName(nameof(SA.Állítások));
+            állítások.ExpectChildrenNames(nameof(SA.Állítás), "újsor");
        
-            TreeNode<Token> állítás = állítások.GetNonTerminalChildOfName(nameof(SyntaxAnalyzer.Állítás));
+            var állítás = állítások.GetNonTerminalChildOfName(nameof(SA.Állítás));
             állítás.ExpectChildrenNames("kilép");
 
-            TreeNode<Token> kilép = állítás.GetTerminalChildOfName("kilép");
+            var kilép = állítás.GetTerminalChildOfName("kilép");
             kilép.ExpectChildrenNames();
         }
 
@@ -65,20 +66,57 @@ namespace SyntaxAnalysisTests
                 "kilép", "újsor",
                 "program_vége");
 
-            TreeNode<Token> root = tree.Root;
+            var root = tree.Root;
             TestHelper.CheckRoot(root);
 
-            TreeNode<Token> állítások = root.GetNonTerminalChildOfName(nameof(SyntaxAnalyzer.Állítások));
-            állítások.ExpectChildrenNames(nameof(SyntaxAnalyzer.Állítás), "újsor", nameof(SyntaxAnalyzer.Állítások));
+            var állítások = root.GetNonTerminalChildOfName(nameof(SA.Állítások));
+            állítások.ExpectChildrenNames(nameof(SA.Állítás), "újsor", nameof(SA.Állítások));
 
-            TreeNode<Token> állítás = állítások.GetNonTerminalChildOfName(nameof(SyntaxAnalyzer.Állítás));
+            var állítás = állítások.GetNonTerminalChildOfName(nameof(SA.Állítás));
             állítás.ExpectChildrenNames("kilép");
             állítás.GetTerminalChildOfName("kilép").ExpectChildrenNames();
 
-            TreeNode<Token> állítások2 = állítások.GetNonTerminalChildOfName(nameof(SyntaxAnalyzer.Állítások));
-            TreeNode<Token> állítás2 = állítások2.GetNonTerminalChildOfName(nameof(SyntaxAnalyzer.Állítás));
+            var állítások2 = állítások.GetNonTerminalChildOfName(nameof(SA.Állítások));
+            var állítás2 = állítások2.GetNonTerminalChildOfName(nameof(SA.Állítás));
             állítás2.ExpectChildrenNames("kilép");
             állítás2.GetTerminalChildOfName("kilép").ExpectChildrenNames();
+        }
+
+        [Test]
+        public void VáltozóDeklaráció1()
+        {
+            const string code = "program_kezd\r\n" +
+                                "egész a = 2\r\n" +
+                                "program_vége";
+
+            ParseTree<Token> tree = TestHelper.Parse(code);
+
+            tree.ExpectLeaves(
+                "program_kezd", "újsor",
+                "egész", "azonosító", "=", "egész literál", "újsor", 
+                "program_vége");
+
+            var root = tree.Root;
+            TestHelper.CheckRoot(root, isOneRowBody: true);
+
+            var állítások = root.GetNonTerminalChildOfName(nameof(SA.Állítások));
+            állítások.ExpectChildrenNames(nameof(SA.Állítás), "újsor");
+
+            var állítás = állítások.GetNonTerminalChildOfName(nameof(SA.Állítás));
+            állítás.ExpectChildrenNames(nameof(SA.VáltozóDeklaráció));
+
+            var változóDeklaráció = állítás.GetNonTerminalChildOfName(nameof(SA.VáltozóDeklaráció));
+            változóDeklaráció.ExpectChildrenNames(nameof(SA.AlapTípus), "azonosító", "=", nameof(SA.NemTömbLétrehozóKifejezés));
+
+            változóDeklaráció.GetTerminalChildOfName("azonosító").ExpectIdentifierNameOf("a");
+            változóDeklaráció.GetNonTerminalChildOfName(nameof(SA.AlapTípus)).ExpectChildrenNames("egész");
+
+            var nemTömbLétrehozóKifejezés = változóDeklaráció.GetNonTerminalChildOfName(nameof(SA.NemTömbLétrehozóKifejezés));
+            nemTömbLétrehozóKifejezés.ExpectChildrenNames(nameof(SA.Operandus));
+
+            var operandus = nemTömbLétrehozóKifejezés.GetNonTerminalChildOfName(nameof(SA.Operandus));
+            operandus.ExpectChildrenNames("egész literál");
+            operandus.GetTerminalChildOfName("egész literál").ExpectLiteralValueOf("2");
         }
     }
 }

@@ -93,6 +93,25 @@ namespace SyntaxAnalysisTests
             }
         }
 
+        internal static void ExpectIdentifierNameOf(this TreeNode<Token> node, string name)
+        {
+            Assert.That(node.Value, Is.TypeOf<IdentifierToken>());
+            IdentifierToken identifier = (IdentifierToken) node.Value;
+            Assert.That(identifier.SymbolName == name, $"Expected identifier name of {name}, but was {identifier.SymbolName}.");
+        }
+
+        internal static void ExpectLiteralValueOf(this TreeNode<Token> node, string value)
+        {
+            Assert.That(node.Value, Is.TypeOf<LiteralToken>());
+            LiteralToken literal = (LiteralToken)node.Value;
+            Assert.That(literal.LiteralValue == value, $"Expected literal value of {value}, but was {literal.LiteralValue}.");
+        }
+
+
+
+
+
+
         private static void ExpectName(this TerminalToken token, string expectedName)
         {
             string actualName = GetWord(token.Id);
