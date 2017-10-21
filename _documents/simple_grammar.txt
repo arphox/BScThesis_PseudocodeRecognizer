@@ -2,89 +2,89 @@
 	Dinamikus szabályok:
 -----------------------------------------------------------------------------------------------
 
-<Program>							::=		"program_kezd" "újsor" <Állítások> "program_vége"
-			
-<Állítások>							::=		<Állítás> "újsor" <Állítások>
-										|	<Állítás> "újsor"
-
-<Állítás>							::=		<VáltozóDeklaráció>
-										|	<Értékadás>
-										|	<IoParancs>
-										|	"kilép"
-										|	"ha" <NemTömbLétrehozóKifejezés> "akkor" "újsor" <Állítások> "újsor" "különben" "újsor" <Állítások> "újsor" "elágazás_vége"
-										|	"ha" <NemTömbLétrehozóKifejezés> "akkor" "újsor" <Állítások> "újsor" "elágazás_vége"
-										|	"ciklus_amíg" <NemTömbLétrehozóKifejezés> "újsor" <Állítások> "újsor" "ciklus_vége"
-
-<VáltozóDeklaráció>					::=		<AlapTípus> "azonosító" "=" <NemTömbLétrehozóKifejezés>
-										|	<TömbTípus> "azonosító" "=" <TömbLétrehozóKifejezés>
-										|	<AlapTípus> "azonosító" "=" <BelsőFüggvény> "(" <NemTömbLétrehozóKifejezés> ")"
-
-<Értékadás>							::=		"azonosító" "=" <NemTömbLétrehozóKifejezés>
-										|	"azonosító" "=" <TömbLétrehozóKifejezés>
-										|	"azonosító" "=" <BelsőFüggvény> "(" <NemTömbLétrehozóKifejezés> ")"
-										|	"azonosító" "[" <NemTömbLétrehozóKifejezés> "]" "=" <NemTömbLétrehozóKifejezés>
-
-<Operandus>							::=		<UnárisOperátor> "azonosító"
-										|	<UnárisOperátor> "literál"
-										|	"azonosító"
-										|	"literál"
-
-<NemTömbLétrehozóKifejezés>			::=		<BinárisKifejezés>
-										|	<Operandus>
-
-<TömbLétrehozóKifejezés>			::=		"azonosító"
-										|	"létrehoz" "[" <NemTömbLétrehozóKifejezés> "]"
-
-<BinárisKifejezés>					::=		<Operandus> <BinárisOperátor> <Operandus>
-
-<BinárisOperátor>					::=		"="
-										|	"=="
-										|	"!="
-										|	"és"
-										|	"vagy"
-										|	">"
-										|   ">="
-										|	"<"
-										|	"<="
-										|	"+"
-										|	"-"
-										|	"*"
-										|	"/"
-										|	"mod"
-										|	"."
-
+<Program>					    :=		"program_kezd" "újsor" <Állítások> "program_vége"
+                
+<Állítások>					    :=		<Állítás> "újsor" <Állítások>
+                                    |	<Állítás> "újsor"
+    
+<Állítás>					    :=		<VáltozóDeklaráció>
+                                    |	<Értékadás>
+                                    |	<IoParancs>
+                                    |	"kilép"
+                                    |	"ha" <NemTömbLétrehozóKifejezés> "akkor" "újsor" <Állítások> "újsor" "különben" "újsor" <Állítások> "újsor" "elágazás_vége"
+                                    |	"ha" <NemTömbLétrehozóKifejezés> "akkor" "újsor" <Állítások> "újsor" "elágazás_vége"
+                                    |	"ciklus_amíg" <NemTömbLétrehozóKifejezés> "újsor" <Állítások> "újsor" "ciklus_vége"
+    
+<VáltozóDeklaráció>			    :=		<AlapTípus> "azonosító" "=" <NemTömbLétrehozóKifejezés>
+                                    |	<TömbTípus> "azonosító" "=" <TömbLétrehozóKifejezés>
+                                    |	<AlapTípus> "azonosító" "=" <BelsőFüggvény> "(" <NemTömbLétrehozóKifejezés> ")"
+    
+<Értékadás>					    :=		"azonosító" "=" <NemTömbLétrehozóKifejezés>
+                                    |	"azonosító" "=" <TömbLétrehozóKifejezés>
+                                    |	"azonosító" "=" <BelsőFüggvény> "(" <NemTömbLétrehozóKifejezés> ")"
+                                    |	"azonosító" "[" <NemTömbLétrehozóKifejezés> "]" "=" <NemTömbLétrehozóKifejezés>
+    
+<Operandus>					    :=		<UnárisOperátor> "azonosító"
+                                    |	<UnárisOperátor> "literál"
+                                    |	"azonosító"
+                                    |	"literál"
+    
+<NemTömbLétrehozóKifejezés>	    :=		<BinárisKifejezés>
+                                    |	<Operandus>
+    
+<TömbLétrehozóKifejezés>	    :=		"azonosító"
+                                    |	"létrehoz" "[" <NemTömbLétrehozóKifejezés> "]"
+    
+<BinárisKifejezés>			    :=		<Operandus> <BinárisOperátor> <Operandus>
+    
+<BinárisOperátor>			    :=		"="
+                                    |	"=="
+                                    |	"!="
+                                    |	"és"
+                                    |	"vagy"
+                                    |	">"
+                                    |   ">="
+                                    |	"<"
+                                    |	"<="
+                                    |	"+"
+                                    |	"-"
+                                    |	"*"
+                                    |	"/"
+                                    |	"mod"
+                                    |	"."
+    
 -----------------------------------------------------------------------------------------------
 	Statikus szabályok:
 -----------------------------------------------------------------------------------------------
 
-<Típus>								::=		<AlapTípus>
-										|	<TömbTípus>
+<Típus>				::=		<AlapTípus>
+						|	<TömbTípus>
 
-<AlapTípus>							::=		"egész"
-										|	"tört"
-										|	"szöveg"
-										|	"logikai"
+<AlapTípus>			::=		"egész"
+						|	"tört"
+						|	"szöveg"
+						|	"logikai"
 
-<TömbTípus>							::=		"egész tömb"
-										|	"tört tömb"
-										|	"szöveg tömb"
-										|	"logikai tömb"
+<TömbTípus>			::=		"egész tömb"
+						|	"tört tömb"
+						|	"szöveg tömb"
+						|	"logikai tömb"
 
-<IoParancs>							::=		"beolvas" "azonosító"
-										|	"kiír" "azonosító"
+<IoParancs>			::=		"beolvas" "azonosító"
+						|	"kiír" "azonosító"
 
-<BelsőFüggvény>						::=		"egészből_logikaiba"
-										|	"egészből_törtbe"
-										|	"egészből_szövegbe"
-										|	"törtből_egészbe"
-										|	"törtből_logikaiba"
-										|	"törtből_szövegbe"
-										|	"logikaiból_egészbe"
-										|	"logikaiból_törtbe"
-										|	"logikaiból_szövegbe"
-										|	"szövegből_egészbe"
-										|	"szövegből_törtbe"
-										|	"szövegből_logikaiba"
+<BelsőFüggvény>		::=		"egészből_logikaiba"
+						|	"egészből_törtbe"
+						|	"egészből_szövegbe"
+						|	"törtből_egészbe"
+						|	"törtből_logikaiba"
+						|	"törtből_szövegbe"
+						|	"logikaiból_egészbe"
+						|	"logikaiból_törtbe"
+						|	"logikaiból_szövegbe"
+						|	"szövegből_egészbe"
+						|	"szövegből_törtbe"
+						|	"szövegből_logikaiba"
 
-<UnárisOperátor>					::=		"-"
-										|	"!"
+<UnárisOperátor>	::=		"-"
+						|	"!"
