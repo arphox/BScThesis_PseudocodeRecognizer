@@ -31,7 +31,7 @@ namespace SyntaxAnalysisTests
             root.AssertNoParent();
             root.AssertChildrenCount(4);
             program.AssertName(nameof(SyntaxAnalyzer.Program));
-            program.AssertRowNumber(rowNumberStartFrom - 1);
+            program.AssertRowNumber(rowNumberStartFrom);
 
             IList<TreeNode<Token>> children = root.Children;
 
@@ -92,7 +92,7 @@ namespace SyntaxAnalysisTests
         }
         internal static TreeNode<Token> GetTerminalChildOfName(this TreeNode<Token> node, string childName)
         {
-            return node.Children.Where(c => c.Value is TerminalToken).First(n => GetWord(node.Value.Id) == childName);
+            return node.Children.Where(c => c.Value is TerminalToken).First(n => GetWord(n.Value.Id) == childName);
         }
 
         private static string GetWord(int code)

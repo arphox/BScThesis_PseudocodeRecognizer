@@ -41,7 +41,7 @@ namespace SyntaxAnalysisTests
             állításNode.AssertChildrenCount(1);
             NonTerminalToken állításToken = (NonTerminalToken) állításNode.Value;
             állításToken.AssertName(nameof(SyntaxAnalyzer.Állítás));
-            állításToken.AssertRowNumber(1);
+            állításToken.AssertRowNumber(3);
 
             var kilép = állításNode.GetTerminalChildOfName("kilép");
         }

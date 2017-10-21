@@ -12,7 +12,7 @@ namespace SyntaxAnalysis.Analyzer
     {
         private readonly List<Token> _tokens;
         private int _tokenIndexer = -1;
-        private int _currentRowNumber;
+        private int _currentRowNumber = 1;
         private bool _alreadyStarted;
         private ParseTree<Token> _parseTree;
         private Token CurrentToken => _tokens[_tokenIndexer];
@@ -70,7 +70,7 @@ namespace SyntaxAnalysis.Analyzer
         {
             int indexerBackup = _tokenIndexer;
             ParseTree<Token> backupTree = _parseTree.Copy();
-            
+
             int i = 0;
             while (i < predicates.Length && predicates[i]())
                 i++;
@@ -91,22 +91,23 @@ namespace SyntaxAnalysis.Analyzer
         /// <summary>    Matches a terminal    </summary>
         private bool T(string tokenName)
         {
-            _tokenIndexer++;
-            _currentRowNumber = CurrentToken.RowNumber;
-            _parseTree.StartNode(CurrentToken);
-            _parseTree.EndNode();
-
+            Tbase();
             return CurrentToken.Id == LexicalElementCodeDictionary.GetCode(tokenName);
         }
 
+        /// <summary>    Matches a terminal    </summary>
         private bool T(Type tokenType)
+        {
+            Tbase();
+            return CurrentToken.GetType() == tokenType;
+        }
+
+        private void Tbase()
         {
             _tokenIndexer++;
             _currentRowNumber = CurrentToken.RowNumber;
             _parseTree.StartNode(CurrentToken);
             _parseTree.EndNode();
-
-            return CurrentToken.GetType() == tokenType;
         }
 
         private bool Literál() => T(typeof(LiteralToken));
