@@ -60,6 +60,7 @@ namespace SyntaxAnalysis.Analyzer
         {
             return Rule(() =>
                    Match(AlapTípus, Azonosító, () => T("="), NemTömbLétrehozóKifejezés)
+                || Match(TömbTípus, Azonosító, () => T("="), Azonosító)
                 || Match(TömbTípus, Azonosító, () => T("="), TömbLétrehozóKifejezés)
                 || Match(AlapTípus, Azonosító, () => T("="), BelsőFüggvény, () => T("("), NemTömbLétrehozóKifejezés, () => T(")")));
         }
@@ -88,8 +89,7 @@ namespace SyntaxAnalysis.Analyzer
         internal bool TömbLétrehozóKifejezés()
         {
             return Rule(() =>
-                   Match(Azonosító)
-                || Match(() => T("létrehoz"), () => T("["), NemTömbLétrehozóKifejezés, () => T("]")));
+                   Match(() => T("létrehoz"), () => T("["), NemTömbLétrehozóKifejezés, () => T("]")));
         }
         internal bool BinárisKifejezés()
         {

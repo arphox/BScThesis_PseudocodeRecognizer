@@ -16,6 +16,7 @@
                                     |	"ciklus_amíg" <NemTömbLétrehozóKifejezés> "újsor" <Állítások> "újsor" "ciklus_vége"
     
 <VáltozóDeklaráció>			    :=		<AlapTípus> "azonosító" "=" <NemTömbLétrehozóKifejezés>
+                                    |	<TömbTípus> "azonosító" "=" "azonosító"
                                     |	<TömbTípus> "azonosító" "=" <TömbLétrehozóKifejezés>
                                     |	<AlapTípus> "azonosító" "=" <BelsőFüggvény> "(" <NemTömbLétrehozóKifejezés> ")"
 
@@ -32,8 +33,7 @@
 <NemTömbLétrehozóKifejezés>	    :=		<BinárisKifejezés>
                                     |	<Operandus>
 
-<TömbLétrehozóKifejezés>	    :=		"azonosító"
-                                    |	"létrehoz" "[" <NemTömbLétrehozóKifejezés> "]"
+<TömbLétrehozóKifejezés>	    :=		"létrehoz" "[" <NemTömbLétrehozóKifejezés> "]"
     
 <BinárisKifejezés>			    :=		<Operandus> <BinárisOperátor> <Operandus>
     

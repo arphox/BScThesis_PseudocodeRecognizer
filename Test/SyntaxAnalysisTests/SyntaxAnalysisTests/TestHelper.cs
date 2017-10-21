@@ -83,6 +83,11 @@ namespace SyntaxAnalysisTests
             return node.Children.Where(c => c.Value is TerminalToken).First(n => GetWord(n.Value.Id) == childName);
         }
 
+        internal static TreeNode<Token> GetNthTerminalChildOfName(this TreeNode<Token> node, string childName, int index)
+        {
+            return node.Children.Where(c => c.Value is TerminalToken).Skip(index - 1).First(n => GetWord(n.Value.Id) == childName);
+        }
+
         internal static void ExpectLeaves(this ParseTree<Token> tree, params string[] leafNames)
         {
             IList<Token> leaves = tree.GetLeaves();
