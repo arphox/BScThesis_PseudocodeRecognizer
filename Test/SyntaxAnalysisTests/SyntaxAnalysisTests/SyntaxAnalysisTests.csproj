@@ -48,6 +48,8 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="SimpleTests.cs" />
     <Compile Include="TestHelper.cs" />
+    <Compile Include="VáltozóDeklaráció.cs" />
+    <Compile Include="Értékadás.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
