@@ -67,6 +67,9 @@ namespace SyntaxAnalysisTests
             {
                 node.Children[i].Value.ExpectName(childrenNames[i]);
                 node.Children[i].ExpectParentToBe(node);
+
+                if (node.Children[i].Value is TerminalToken)
+                    node.Children[i].ExpectChildrenCount(0);
             }
         }
 
