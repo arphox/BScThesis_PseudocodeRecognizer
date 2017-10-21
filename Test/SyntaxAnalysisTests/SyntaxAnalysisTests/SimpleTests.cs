@@ -108,8 +108,8 @@ namespace SyntaxAnalysisTests
             var változóDeklaráció = állítás.GetNonTerminalChildOfName(nameof(SA.VáltozóDeklaráció));
             változóDeklaráció.ExpectChildrenNames(nameof(SA.AlapTípus), "azonosító", "=", nameof(SA.NemTömbLétrehozóKifejezés));
 
-            változóDeklaráció.GetTerminalChildOfName("azonosító").ExpectIdentifierNameOf("a");
             változóDeklaráció.GetNonTerminalChildOfName(nameof(SA.AlapTípus)).ExpectChildrenNames("egész");
+            változóDeklaráció.GetTerminalChildOfName("azonosító").ExpectIdentifierNameOf("a");
 
             var nemTömbLétrehozóKifejezés = változóDeklaráció.GetNonTerminalChildOfName(nameof(SA.NemTömbLétrehozóKifejezés));
             nemTömbLétrehozóKifejezés.ExpectChildrenNames(nameof(SA.Operandus));
@@ -149,8 +149,8 @@ namespace SyntaxAnalysisTests
             var változóDeklaráció = állítás.GetNonTerminalChildOfName(nameof(SA.VáltozóDeklaráció));
             változóDeklaráció.ExpectChildrenNames(nameof(SA.AlapTípus), "azonosító", "=", nameof(SA.NemTömbLétrehozóKifejezés));
 
-            változóDeklaráció.GetTerminalChildOfName("azonosító").ExpectIdentifierNameOf("a");
             változóDeklaráció.GetNonTerminalChildOfName(nameof(SA.AlapTípus)).ExpectChildrenNames("egész");
+            változóDeklaráció.GetTerminalChildOfName("azonosító").ExpectIdentifierNameOf("a");
 
             var nemTömbLétrehozóKifejezés = változóDeklaráció.GetNonTerminalChildOfName(nameof(SA.NemTömbLétrehozóKifejezés));
             nemTömbLétrehozóKifejezés.ExpectChildrenNames(nameof(SA.Operandus));
@@ -177,6 +177,45 @@ namespace SyntaxAnalysisTests
 
             tömbLétrehozóKifejezés.GetTerminalChildOfName("azonosító").ExpectIdentifierNameOf("a");
         }
+
+        [Test]
+        public void VáltozóDeklaráció3()
+        {
+            const string code = "program_kezd\r\n" +
+                                "szöveg s = törtből_egészbe(-2,4)\r\n" +
+                                "program_vége";
+
+            ParseTree<Token> tree = TestHelper.Parse(code);
+
+            tree.ExpectLeaves(
+                "program_kezd", "újsor",
+                "szöveg", "azonosító", "=", "törtből_egészbe", "(", "tört literál", ")", "újsor",
+                "program_vége");
+
+            var root = tree.Root;
+            TestHelper.CheckRoot(root, isOneRowBody: true);
+
+            var állítások = root.GetNonTerminalChildOfName(nameof(SA.Állítások));
+            állítások.ExpectChildrenNames(nameof(SA.Állítás), "újsor");
+
+            var állítás = állítások.GetNonTerminalChildOfName(nameof(SA.Állítás));
+            állítás.ExpectChildrenNames(nameof(SA.VáltozóDeklaráció));
+
+            var változóDeklaráció = állítás.GetNonTerminalChildOfName(nameof(SA.VáltozóDeklaráció));
+            változóDeklaráció.ExpectChildrenNames(nameof(SA.AlapTípus), "azonosító", "=", nameof(SA.BelsőFüggvény), "(", nameof(SA.NemTömbLétrehozóKifejezés), ")");
+
+            változóDeklaráció.GetNonTerminalChildOfName(nameof(SA.AlapTípus)).ExpectChildrenNames("szöveg");
+            változóDeklaráció.GetTerminalChildOfName("azonosító").ExpectIdentifierNameOf("s");
+            változóDeklaráció.GetNonTerminalChildOfName(nameof(SA.BelsőFüggvény)).GetTerminalChildOfName("törtből_egészbe");
+
+            var nemTömbLétrehozóKifejezés = változóDeklaráció.GetNonTerminalChildOfName(nameof(SA.NemTömbLétrehozóKifejezés));
+            nemTömbLétrehozóKifejezés.ExpectChildrenNames(nameof(SA.Operandus));
+
+            var operandus = nemTömbLétrehozóKifejezés.GetNonTerminalChildOfName(nameof(SA.Operandus));
+            operandus.ExpectChildrenNames("tört literál");
+            operandus.GetTerminalChildOfName("tört literál").ExpectLiteralValueOf("-2,4");
+        }
+
 
         [Test]
         public void TömbLétrehozóKifejezés2() // 1 is checked in VáltozóDeklaráció2
@@ -216,6 +255,5 @@ namespace SyntaxAnalysisTests
             operandus.ExpectChildrenNames("egész literál");
             operandus.GetTerminalChildOfName("egész literál").ExpectLiteralValueOf("99");
         }
-
     }
 }

@@ -110,8 +110,6 @@ namespace SyntaxAnalysisTests
 
 
 
-
-
         private static void ExpectName(this TerminalToken token, string expectedName)
         {
             string actualName = GetWord(token.Id);
