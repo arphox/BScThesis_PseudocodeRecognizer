@@ -51,7 +51,7 @@ namespace SyntaxAnalysis.Analyzer
         /// <summary>   Matches a production rule   </summary>
         private bool Rule(Func<bool> predicate)
         {
-            _parseTree.StartNonTerminalNode(_currentRowNumber);
+            _parseTree.StartNonTerminalNode(CurrentToken.RowNumber);
 
             if (predicate())
             {

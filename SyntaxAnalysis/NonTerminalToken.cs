@@ -12,6 +12,6 @@ namespace SyntaxAnalysis
             Name = name;
         }
 
-        public override string ToString() => $"{Name} at Line {RowNumber}";
+        public override string ToString() => $"{Name} at Line #{RowNumber}";
     }
 }

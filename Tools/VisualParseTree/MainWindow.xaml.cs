@@ -25,6 +25,11 @@ namespace VisualParseTree
 
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
+            const string code = "program_kezd\r\n" +
+                                "kilép\r\n" +
+                                "program_vége";
+
+
             Stopwatch sw = Stopwatch.StartNew();
 
             LexicalAnalyzerResult lexicalAnalyzerResult = new LexicalAnalyzer(SyntaxAnalyzer.TestCode).Analyze();

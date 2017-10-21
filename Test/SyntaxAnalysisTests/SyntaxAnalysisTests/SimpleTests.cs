@@ -37,11 +37,12 @@ namespace SyntaxAnalysisTests
             TreeNode<Token> állítások = root.GetNonTerminalChildOfName("Állítások");
 
             TreeNode<Token> állításNode = állítások.GetNonTerminalChildOfName("Állítás");
-            állításNode.AssertParentToBe(állítások);
-            állításNode.AssertChildrenCount(1);
+            állításNode.ExpectParentToBe(állítások);
+            állításNode.ExpectChildrenCount(1);
             NonTerminalToken állításToken = (NonTerminalToken) állításNode.Value;
-            állításToken.AssertName(nameof(SyntaxAnalyzer.Állítás));
-            állításToken.AssertRowNumber(3);
+            állításToken.ExpectName(nameof(SyntaxAnalyzer.Állítás));
+            állításToken.ExpectRowNumber(1);
+            
 
             var kilép = állításNode.GetTerminalChildOfName("kilép");
         }
