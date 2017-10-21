@@ -78,6 +78,11 @@ namespace SyntaxAnalysisTests
             return node.Children.Where(c => c.Value is NonTerminalToken).First(n => ((NonTerminalToken)n.Value).Name == childName);
         }
 
+        internal static TreeNode<Token> GetNthNonTerminalChildOfName(this TreeNode<Token> node, string childName, int index)
+        {
+            return node.Children.Where(c => c.Value is NonTerminalToken).Skip(index - 1).First(n => ((NonTerminalToken)n.Value).Name == childName);
+        }
+
         internal static TreeNode<Token> GetTerminalChildOfName(this TreeNode<Token> node, string childName)
         {
             return node.Children.Where(c => c.Value is TerminalToken).First(n => GetWord(n.Value.Id) == childName);
