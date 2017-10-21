@@ -30,6 +30,9 @@ namespace SyntaxAnalysisTests
                                 "program_vége";
 
             ParseTree<Token> tree = TestHelper.Parse(code);
+
+            tree.ExpectLeaves("program_kezd", "újsor", "kilép", "újsor", "program_vége");
+
             TreeNode<Token> root = tree.Root;
             TestHelper.CheckRoot(root, isOneRowBody: true);
 
