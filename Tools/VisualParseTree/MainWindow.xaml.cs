@@ -25,6 +25,7 @@ namespace VisualParseTree
 
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
+            // ReSharper disable once UnusedVariable
             const string code = "program_kezd\r\n" +
                                 "kilép\r\n" +
                                 "program_vége";

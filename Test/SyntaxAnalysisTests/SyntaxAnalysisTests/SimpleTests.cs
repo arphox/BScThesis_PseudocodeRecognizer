@@ -1,11 +1,10 @@
-﻿using System;
-using System.Linq;
-using LexicalAnalysis.Analyzer;
+﻿using LexicalAnalysis.Analyzer;
 using LexicalAnalysis.Tokens;
 using NUnit.Framework;
-using SyntaxAnalysis;
 using SyntaxAnalysis.Analyzer;
 using SyntaxAnalysis.Tree;
+using System;
+using System.Linq;
 
 namespace SyntaxAnalysisTests
 {
