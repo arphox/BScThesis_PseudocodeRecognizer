@@ -34,17 +34,14 @@ namespace SyntaxAnalysisTests
             TreeNode<Token> root = tree.Root;
             TestHelper.CheckRoot(root, isOneRowBody: true);
 
-            TreeNode<Token> állítások = root.GetNonTerminalChildOfName("Állítások");
+            TreeNode<Token> állítások = root.GetNonTerminalChildOfName(nameof(SyntaxAnalyzer.Állítások));
+            állítások.ExpectChildrenNames(nameof(SyntaxAnalyzer.Állítás), "újsor");
+       
+            TreeNode<Token> állítás = állítások.GetNonTerminalChildOfName(nameof(SyntaxAnalyzer.Állítás));
+            állítás.ExpectChildrenNames("kilép");
 
-            TreeNode<Token> állításNode = állítások.GetNonTerminalChildOfName("Állítás");
-            állításNode.ExpectParentToBe(állítások);
-            állításNode.ExpectChildrenCount(1);
-            NonTerminalToken állításToken = (NonTerminalToken) állításNode.Value;
-            állításToken.ExpectName(nameof(SyntaxAnalyzer.Állítás));
-            állításToken.ExpectRowNumber(1);
-            
-
-            var kilép = állításNode.GetTerminalChildOfName("kilép");
+            TreeNode<Token> kilép = állítás.GetTerminalChildOfName("kilép");
+            kilép.ExpectChildrenNames();
         }
     }
 }
