@@ -11,9 +11,9 @@
                                     |	<Értékadás>
                                     |	<IoParancs>
                                     |	"kilép"
-                                    |	"ha" <NemTömbLétrehozóKifejezés> "akkor" "újsor" <Állítások> "újsor" "különben" "újsor" <Állítások> "újsor" "elágazás_vége"
-                                    |	"ha" <NemTömbLétrehozóKifejezés> "akkor" "újsor" <Állítások> "újsor" "elágazás_vége"
-                                    |	"ciklus_amíg" <NemTömbLétrehozóKifejezés> "újsor" <Állítások> "újsor" "ciklus_vége"
+                                    |	"ha" <NemTömbLétrehozóKifejezés> "akkor" "újsor" <Állítások> "különben" "újsor" <Állítások> "elágazás_vége"
+                                    |	"ha" <NemTömbLétrehozóKifejezés> "akkor" "újsor" <Állítások> "elágazás_vége"
+                                    |	"ciklus_amíg" <NemTömbLétrehozóKifejezés> "újsor" <Állítások> "ciklus_vége"
     
 <VáltozóDeklaráció>			    ::=		<AlapTípus> "azonosító" "=" <NemTömbLétrehozóKifejezés>
                                     |	<TömbTípus> "azonosító" "=" "azonosító"

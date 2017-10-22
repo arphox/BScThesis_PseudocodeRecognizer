@@ -1,6 +1,5 @@
 ﻿using LexicalAnalysis.Tokens;
 using NUnit.Framework;
-using SyntaxAnalysis.Analyzer;
 using SyntaxAnalysis.Tree;
 using SA = SyntaxAnalysis.Analyzer.SyntaxAnalyzer;
 

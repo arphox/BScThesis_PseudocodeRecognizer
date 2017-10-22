@@ -1,5 +1,4 @@
-﻿using System.CodeDom;
-using LexicalAnalysis.Tokens;
+﻿using LexicalAnalysis.Tokens;
 using NUnit.Framework;
 using SyntaxAnalysis.Tree;
 using SA = SyntaxAnalysis.Analyzer.SyntaxAnalyzer;
