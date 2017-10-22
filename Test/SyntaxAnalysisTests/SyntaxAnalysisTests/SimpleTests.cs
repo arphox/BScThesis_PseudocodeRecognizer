@@ -31,8 +31,8 @@ namespace SyntaxAnalysisTests
                                 "program_vége";
 
             SyntaxAnalyzer parser = new SyntaxAnalyzer(new LexicalAnalyzer(code).Analyze().Tokens);
-            SyntaxAnalyzerResult result = parser.Start();
-            Assert.Throws<InvalidOperationException>(() => result = parser.Start());
+            parser.Start();
+            Assert.Throws<InvalidOperationException>(() => parser.Start());
         }
 
         [Test]

@@ -143,11 +143,6 @@ namespace LexicalAnalysis.Analyzer
         }
         private void HandleState_NonWhitespace()
         {
-            if (_inputHandler.EndReached || _analyzerState == LexicalAnalyzerState.Final)
-            {
-                return;
-            }
-
             NonWhitespaceRecognitionResult result = NonWhitespaceRecognizer.RecognizeNonWhitespace(_inputHandler);
 
             if (result.LastCorrectCode != LexicalElementCodeDictionary.ErrorCode)

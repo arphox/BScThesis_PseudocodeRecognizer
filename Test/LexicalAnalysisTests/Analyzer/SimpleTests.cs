@@ -166,13 +166,16 @@ namespace LexicalAnalysisTests.Analyzer
                                 "program_vége";
 
             LexicalAnalyzerResult result = new LexicalAnalyzer(code).Analyze();
+            new TokenTester(result).ExpectNoMore();
+        }
 
-            TokenTester tt = new TokenTester(result)
-            {
-                CurrentRow = 2
-            };
+        [Test]
+        public void NotEndedOneLineComment()
+        {
+            const string code = "//asdasdsdasd";
 
-            tt.ExpectNoMore();
+            LexicalAnalyzerResult result = new LexicalAnalyzer(code).Analyze();
+            new TokenTester(result).ExpectNoMore();
         }
     }
 }

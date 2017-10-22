@@ -36,11 +36,11 @@ namespace SyntaxAnalysisTests
 
             IList<TreeNode<Token>> children = root.Children;
 
-            KeywordToken program_kezd = (KeywordToken)children[0].Value;
+            KeywordToken programKezd = (KeywordToken)children[0].Value;
             children[0].ExpectParentToBe(root);
             children[0].ExpectChildrenCount(0);
-            program_kezd.ExpectName(nameof(program_kezd));
-            program_kezd.ExpectRowNumber(rowNumberStartFrom);
+            programKezd.ExpectName("program_kezd");
+            programKezd.ExpectRowNumber(rowNumberStartFrom);
 
             KeywordToken újsor = (KeywordToken)children[1].Value;
             children[1].ExpectParentToBe(root);
@@ -54,10 +54,10 @@ namespace SyntaxAnalysisTests
             állítások.ExpectName(nameof(SyntaxAnalyzer.Állítások));
             állítások.ExpectRowNumber(rowNumberStartFrom);
 
-            KeywordToken program_vége = (KeywordToken)children[3].Value;
+            KeywordToken programVége = (KeywordToken)children[3].Value;
             children[3].ExpectParentToBe(root);
             children[3].ExpectChildrenCount(0);
-            program_vége.ExpectName(nameof(program_vége));
+            programVége.ExpectName("program_vége");
         }
 
         internal static void ExpectChildrenNames(this TreeNode<Token> node, params string[] childrenNames)

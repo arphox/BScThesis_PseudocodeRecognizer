@@ -19,12 +19,7 @@ namespace VisualParseTree
 
                 foreach (var child in item.Items)
                 {
-                    var childContainer = child as TreeViewItem;
-                    if (childContainer == null)
-                    {
-                        childContainer = item.ItemContainerGenerator.ContainerFromItem(child) as TreeViewItem;
-                    }
-
+                    var childContainer = child as TreeViewItem ?? item.ItemContainerGenerator.ContainerFromItem(child) as TreeViewItem;
                     stack.Push(childContainer);
                 }
 

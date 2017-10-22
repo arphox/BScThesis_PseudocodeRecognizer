@@ -91,7 +91,7 @@ namespace SyntaxAnalysis.Utilities
     
     internal class ArrayTraverse
     {
-        public int[] Position;
+        public readonly int[] Position;
         private readonly int[] _maxLengths;
 
         public ArrayTraverse(Array array)
