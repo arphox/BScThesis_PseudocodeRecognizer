@@ -23,7 +23,7 @@ namespace SyntaxAnalysisTests
                 "program_vége");
 
             var root = tree.Root;
-            TestHelper.CheckRoot(root, isOneRowBody: true);
+            TestHelper.CheckRoot(root, isOneStatementBody: true);
 
             var állítások = root.GetNonTerminalChildOfName(nameof(SA.Állítások));
             állítások.ExpectChildrenNames(nameof(SA.Állítás), "újsor");
@@ -104,7 +104,7 @@ namespace SyntaxAnalysisTests
                 "program_vége");
 
             var root = tree.Root;
-            TestHelper.CheckRoot(root, isOneRowBody: true);
+            TestHelper.CheckRoot(root, isOneStatementBody: true);
 
             var állítások = root.GetNonTerminalChildOfName(nameof(SA.Állítások));
             állítások.ExpectChildrenNames(nameof(SA.Állítás), "újsor");
@@ -140,7 +140,7 @@ namespace SyntaxAnalysisTests
                 "program_vége");
 
             var root = tree.Root;
-            TestHelper.CheckRoot(root, isOneRowBody: true);
+            TestHelper.CheckRoot(root, isOneStatementBody: true);
 
             var állítások = root.GetNonTerminalChildOfName(nameof(SA.Állítások));
             állítások.ExpectChildrenNames(nameof(SA.Állítás), "újsor");

@@ -26,7 +26,7 @@ namespace SyntaxAnalysisTests
             return result.ParseTree;
         }
 
-        internal static void CheckRoot(TreeNode<Token> root, int rowNumberStartFrom = 1, bool isOneRowBody = false)
+        internal static void CheckRoot(TreeNode<Token> root, int rowNumberStartFrom = 1, bool isOneStatementBody = false)
         {
             NonTerminalToken program = (NonTerminalToken)root.Value;
             root.ExpectParentToBe(null);
@@ -50,7 +50,7 @@ namespace SyntaxAnalysisTests
 
             NonTerminalToken állítások = (NonTerminalToken)children[2].Value;
             children[2].ExpectParentToBe(root);
-            children[2].ExpectChildrenCount(isOneRowBody ? 2 : 3);
+            children[2].ExpectChildrenCount(isOneStatementBody ? 2 : 3);
             állítások.ExpectName(nameof(SyntaxAnalyzer.Állítások));
             állítások.ExpectRowNumber(rowNumberStartFrom);
 

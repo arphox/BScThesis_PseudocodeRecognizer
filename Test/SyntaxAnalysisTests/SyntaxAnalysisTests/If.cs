@@ -27,7 +27,7 @@ namespace SyntaxAnalysisTests
                 "program_vége");
 
             var root = tree.Root;
-            TestHelper.CheckRoot(root, isOneRowBody: true);
+            TestHelper.CheckRoot(root, isOneStatementBody: true);
 
             var állítások = root.GetNonTerminalChildOfName(nameof(SA.Állítások));
             állítások.ExpectChildrenNames(nameof(SA.Állítás), "újsor");
@@ -37,8 +37,8 @@ namespace SyntaxAnalysisTests
 
             állításIf.ExpectOneNemTömbLétrehozóKifejezésChildWithLiteralValue("egész literál", "0");
 
-            //var állítások2 = állítások.GetNonTerminalChildOfName(nameof(SA.Állítások));
-            //var állítás2 = állítások2.GetNonTerminalChildOfName(nameof(SA.Állítás));
+            var állítások2 = állításIf.GetNonTerminalChildOfName(nameof(SA.Állítások));
+            var állítás2 = állítások2.GetNonTerminalChildOfName(nameof(SA.Állítás));
         }
     }
 }
