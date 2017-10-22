@@ -9,7 +9,7 @@ namespace SyntaxAnalysisTests
     public sealed class VáltozóDeklaráció
     {
         [Test]
-        public void VáltozóDeklaráció1()
+        public void VáltozóDeklaráció1_AlapTípus_NemTömbLétrehozóKifejezés()
         {
             const string code = "program_kezd\r\n" +
                                 "egész a = 2\r\n" +
@@ -46,7 +46,7 @@ namespace SyntaxAnalysisTests
         }
 
         [Test]
-        public void VáltozóDeklaráció2()
+        public void VáltozóDeklaráció2_TömbTípus_Azonosító()
         {
             const string code = "program_kezd\r\n" +
                                 "egész a = 123\r\n" +
@@ -100,7 +100,7 @@ namespace SyntaxAnalysisTests
         }
 
         [Test]
-        public void VáltozóDeklaráció3()
+        public void VáltozóDeklaráció3_TömbTípus_TömbLétrehozó()
         {
             const string code = "program_kezd\r\n" +
                                 "egész[] b = létrehoz[5]\r\n" +
@@ -141,7 +141,7 @@ namespace SyntaxAnalysisTests
         }
 
         [Test]
-        public void VáltozóDeklaráció4()
+        public void VáltozóDeklaráció4_AlapTípus_BelsőFüggvény()
         {
             const string code = "program_kezd\r\n" +
                                 "szöveg s = törtből_egészbe(-2,4)\r\n" +

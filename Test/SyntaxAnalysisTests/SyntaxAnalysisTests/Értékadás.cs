@@ -9,7 +9,7 @@ namespace SyntaxAnalysisTests
     public sealed class Értékadás
     {
         [Test]
-        public void Értékadás1()
+        public void Értékadás1_NemTömbLétrehozó()
         {
             const string code = "program_kezd\r\n" +
                                 "egész a = 2\r\n" +
@@ -68,7 +68,7 @@ namespace SyntaxAnalysisTests
         }
 
         [Test]
-        public void Értékadás2()
+        public void Értékadás2_TömbLétrehozó()
         {
             const string code = "program_kezd\r\n" +
                                 "egész[] tmb = létrehoz[8]\r\n" +
@@ -133,7 +133,7 @@ namespace SyntaxAnalysisTests
         }
 
         [Test]
-        public void Értékadás3()
+        public void Értékadás3_BelsőFüggvény()
         {
             const string code = "program_kezd\r\n" +
                                 "szöveg s = törtből_egészbe(-2,4)\r\n" +
@@ -196,7 +196,7 @@ namespace SyntaxAnalysisTests
         }
 
         [Test]
-        public void Értékadás4()
+        public void Értékadás4_TömbIndexelés()
         {
             const string code = "program_kezd\r\n" +
                                 "szöveg s = törtből_egészbe(-2,4)\r\n" +

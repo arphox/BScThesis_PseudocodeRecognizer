@@ -24,7 +24,7 @@ namespace SyntaxAnalysisTests
         }
 
         [Test]
-        public void ProgramOneRow()
+        public void ProgramOneRow_Kilép()
         {
             const string code = "program_kezd\r\n" +
                                 "kilép\r\n" +
@@ -51,7 +51,7 @@ namespace SyntaxAnalysisTests
         }
 
         [Test]
-        public void ProgramTwoRows()
+        public void ProgramTwoRows_KilépKilép()
         {
             const string code = "program_kezd\r\n" +
                                 "kilép\r\n" +
