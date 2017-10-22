@@ -6,7 +6,7 @@ using SA = SyntaxAnalysis.Analyzer.SyntaxAnalyzer;
 namespace SyntaxAnalysisTests
 {
     [TestFixture]
-    public sealed class If
+    public sealed class Ha
     {
         [Test]
         public void IfThenFi()
