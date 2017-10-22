@@ -157,5 +157,22 @@ namespace LexicalAnalysisTests.Analyzer
 
             Assert.Throws<InvalidOperationException>(() => analyzer.Analyze());
         }
+
+        [Test]
+        public void NotEndedMultilineComment()
+        {
+            const string code = "/*\r\n" +
+                                "program_kezd\r\n" +
+                                "program_vége";
+
+            LexicalAnalyzerResult result = new LexicalAnalyzer(code).Analyze();
+
+            TokenTester tt = new TokenTester(result)
+            {
+                CurrentRow = 2
+            };
+
+            tt.ExpectNoMore();
+        }
     }
 }
