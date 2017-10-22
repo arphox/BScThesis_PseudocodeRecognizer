@@ -118,7 +118,15 @@ namespace SyntaxAnalysisTests
             Assert.That(literal.LiteralValue == value, $"Expected literal value of {value}, but was {literal.LiteralValue}.");
         }
 
+        internal static void ExpectOneNemTömbLétrehozóKifejezésChildWithLiteralValue(this TreeNode<Token> node, string literalType, string literalValue)
+        {
+            var nemTömbLétrehozóKifejezés = node.GetNonTerminalChildOfName(nameof(SyntaxAnalyzer.NemTömbLétrehozóKifejezés));
+            nemTömbLétrehozóKifejezés.ExpectChildrenNames(nameof(SyntaxAnalyzer.Operandus));
 
+            var operandus = nemTömbLétrehozóKifejezés.GetNonTerminalChildOfName(nameof(SyntaxAnalyzer.Operandus));
+            operandus.ExpectChildrenNames(literalType);
+            operandus.GetTerminalChildOfName(literalType).ExpectLiteralValueOf(literalValue);
+        }
 
 
         private static void ExpectName(this TerminalToken token, string expectedName)

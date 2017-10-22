@@ -114,12 +114,7 @@ namespace SyntaxAnalysisTests
             változóDeklaráció.GetNonTerminalChildOfName(nameof(SA.AlapTípus)).ExpectChildrenNames("egész");
             változóDeklaráció.GetTerminalChildOfName("azonosító").ExpectIdentifierNameOf("a");
 
-            var nemTömbLétrehozóKifejezés = változóDeklaráció.GetNonTerminalChildOfName(nameof(SA.NemTömbLétrehozóKifejezés));
-            nemTömbLétrehozóKifejezés.ExpectChildrenNames(nameof(SA.Operandus));
-
-            var operandus = nemTömbLétrehozóKifejezés.GetNonTerminalChildOfName(nameof(SA.Operandus));
-            operandus.ExpectChildrenNames("egész literál");
-            operandus.GetTerminalChildOfName("egész literál").ExpectLiteralValueOf("2");
+            változóDeklaráció.ExpectOneNemTömbLétrehozóKifejezésChildWithLiteralValue("egész literál", "2");
 
             // a = - a + 4\r\n
 

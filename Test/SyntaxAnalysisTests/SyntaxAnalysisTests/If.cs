@@ -12,7 +12,7 @@ namespace SyntaxAnalysisTests
         public void If_Simple()
         {
             const string code = "program_kezd\r\n" +
-                                "ha hamis akkor\r\n" +
+                                "ha 0 akkor\r\n" +
                                 "   kilép\r\n" +
                                 "elágazás_vége\r\n" +
                                 "program_vége";
@@ -21,7 +21,7 @@ namespace SyntaxAnalysisTests
 
             tree.ExpectLeaves(
                 "program_kezd", "újsor",
-                "ha", "hamis", "akkor", "újsor",
+                "ha", "egész literál", "akkor", "újsor",
                 "kilép", "újsor",
                 "elágazás_vége", "újsor",
                 "program_vége");
@@ -34,6 +34,8 @@ namespace SyntaxAnalysisTests
 
             var állításIf = állítások.GetNonTerminalChildOfName(nameof(SA.Állítás));
             állításIf.ExpectChildrenNames("ha", nameof(SA.NemTömbLétrehozóKifejezés), "akkor", "újsor", nameof(SA.Állítások), "elágazás_vége");
+
+            állításIf.ExpectOneNemTömbLétrehozóKifejezésChildWithLiteralValue("egész literál", "0");
 
             //var állítások2 = állítások.GetNonTerminalChildOfName(nameof(SA.Állítások));
             //var állítás2 = állítások2.GetNonTerminalChildOfName(nameof(SA.Állítás));
