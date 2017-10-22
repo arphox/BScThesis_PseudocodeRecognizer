@@ -2,12 +2,12 @@
 	Dinamikus szabályok:
 -----------------------------------------------------------------------------------------------
 
-<Program>					    :=		"program_kezd" "újsor" <Állítások> "program_vége"
+<Program>					    ::=		"program_kezd" "újsor" <Állítások> "program_vége"
                 
-<Állítások>					    :=		<Állítás> "újsor" <Állítások>
+<Állítások>					    ::=		<Állítás> "újsor" <Állítások>
                                     |	<Állítás> "újsor"
 
-<Állítás>					    :=		<VáltozóDeklaráció>
+<Állítás>					    ::=		<VáltozóDeklaráció>
                                     |	<Értékadás>
                                     |	<IoParancs>
                                     |	"kilép"
@@ -15,29 +15,29 @@
                                     |	"ha" <NemTömbLétrehozóKifejezés> "akkor" "újsor" <Állítások> "újsor" "elágazás_vége"
                                     |	"ciklus_amíg" <NemTömbLétrehozóKifejezés> "újsor" <Állítások> "újsor" "ciklus_vége"
     
-<VáltozóDeklaráció>			    :=		<AlapTípus> "azonosító" "=" <NemTömbLétrehozóKifejezés>
+<VáltozóDeklaráció>			    ::=		<AlapTípus> "azonosító" "=" <NemTömbLétrehozóKifejezés>
                                     |	<TömbTípus> "azonosító" "=" "azonosító"
                                     |	<TömbTípus> "azonosító" "=" <TömbLétrehozóKifejezés>
                                     |	<AlapTípus> "azonosító" "=" <BelsőFüggvény> "(" <NemTömbLétrehozóKifejezés> ")"
 
-<Értékadás>					    :=		"azonosító" "=" <NemTömbLétrehozóKifejezés>
+<Értékadás>					    ::=		"azonosító" "=" <NemTömbLétrehozóKifejezés>
                                     |	"azonosító" "=" <TömbLétrehozóKifejezés>
                                     |	"azonosító" "=" <BelsőFüggvény> "(" <NemTömbLétrehozóKifejezés> ")"
                                     |	"azonosító" "[" <NemTömbLétrehozóKifejezés> "]" "=" <NemTömbLétrehozóKifejezés>
     
-<Operandus>					    :=		<UnárisOperátor> "azonosító"
+<Operandus>					    ::=		<UnárisOperátor> "azonosító"
                                     |	<UnárisOperátor> "literál"
                                     |	"azonosító"
                                     |	"literál"
     
-<NemTömbLétrehozóKifejezés>	    :=		<BinárisKifejezés>
+<NemTömbLétrehozóKifejezés>	    ::=		<BinárisKifejezés>
                                     |	<Operandus>
 
-<TömbLétrehozóKifejezés>	    :=		"létrehoz" "[" <NemTömbLétrehozóKifejezés> "]"
+<TömbLétrehozóKifejezés>	    ::=		"létrehoz" "[" <NemTömbLétrehozóKifejezés> "]"
     
-<BinárisKifejezés>			    :=		<Operandus> <BinárisOperátor> <Operandus>
+<BinárisKifejezés>			    ::=		<Operandus> <BinárisOperátor> <Operandus>
     
-<BinárisOperátor>			    :=		"="
+<BinárisOperátor>			    ::=		"="
                                     |	"=="
                                     |	"!="
                                     |	"és"
