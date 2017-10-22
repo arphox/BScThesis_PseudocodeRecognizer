@@ -8,7 +8,7 @@ namespace SyntaxAnalysisTests
     [TestFixture]
     public sealed class If
     {
-        //[Test]
+        [Test]
         public void If_Simple()
         {
             const string code = "program_kezd\r\n" +
@@ -34,11 +34,10 @@ namespace SyntaxAnalysisTests
 
             var állításIf = állítások.GetNonTerminalChildOfName(nameof(SA.Állítás));
             állításIf.ExpectChildrenNames("ha", nameof(SA.NemTömbLétrehozóKifejezés), "akkor", "újsor", nameof(SA.Állítások), "elágazás_vége");
-
             állításIf.ExpectOneNemTömbLétrehozóKifejezésChildWithLiteralValue("egész literál", "0");
 
             var állítások2 = állításIf.GetNonTerminalChildOfName(nameof(SA.Állítások));
-            var állítás2 = állítások2.GetNonTerminalChildOfName(nameof(SA.Állítás));
+            állítások2.GetNonTerminalChildOfName(nameof(SA.Állítás)).ExpectChildrenNames("kilép");
         }
     }
 }
