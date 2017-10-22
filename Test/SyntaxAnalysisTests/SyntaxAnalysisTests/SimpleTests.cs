@@ -45,9 +45,6 @@ namespace SyntaxAnalysisTests
 
             var állítás = állítások.GetNonTerminalChildOfName(nameof(SA.Állítás));
             állítás.ExpectChildrenNames("kilép");
-
-            var kilép = állítás.GetTerminalChildOfName("kilép");
-            kilép.ExpectChildrenNames();
         }
 
         [Test]
@@ -74,12 +71,10 @@ namespace SyntaxAnalysisTests
 
             var állítás = állítások.GetNonTerminalChildOfName(nameof(SA.Állítás));
             állítás.ExpectChildrenNames("kilép");
-            állítás.GetTerminalChildOfName("kilép").ExpectChildrenNames();
 
             var állítások2 = állítások.GetNonTerminalChildOfName(nameof(SA.Állítások));
             var állítás2 = állítások2.GetNonTerminalChildOfName(nameof(SA.Állítás));
             állítás2.ExpectChildrenNames("kilép");
-            állítás2.GetTerminalChildOfName("kilép").ExpectChildrenNames();
         }
         
         [Test]

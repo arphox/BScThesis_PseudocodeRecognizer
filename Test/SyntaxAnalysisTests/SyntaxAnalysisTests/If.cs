@@ -34,12 +34,9 @@ namespace SyntaxAnalysisTests
 
             var állításIf = állítások.GetNonTerminalChildOfName(nameof(SA.Állítás));
             állításIf.ExpectChildrenNames("ha", nameof(SA.NemTömbLétrehozóKifejezés), "akkor", "újsor", nameof(SA.Állítások), "elágazás_vége");
-            //állításIf.GetTerminalChildOfName("kilép").ExpectChildrenNames();
 
             //var állítások2 = állítások.GetNonTerminalChildOfName(nameof(SA.Állítások));
             //var állítás2 = állítások2.GetNonTerminalChildOfName(nameof(SA.Állítás));
-            //állítás2.ExpectChildrenNames("kilép");
-            //állítás2.GetTerminalChildOfName("kilép").ExpectChildrenNames();
         }
     }
 }
