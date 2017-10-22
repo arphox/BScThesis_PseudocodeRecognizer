@@ -78,13 +78,17 @@ namespace LexicalAnalysis.LexicalElementIdentification
             #region [ Add internal functions (400-499) ]
 
             WordsToCodes.Add("egészből_logikaiba", 401);
-            WordsToCodes.Add("törtből_egészbe", 402);
-            WordsToCodes.Add("törtből_logikaiba", 403);
-            WordsToCodes.Add("logikaiból_egészbe", 404);
-            WordsToCodes.Add("logikaiból_törtbe", 405);
-            WordsToCodes.Add("szövegből_egészbe", 406);
-            WordsToCodes.Add("szövegből_törtbe", 407);
-            WordsToCodes.Add("szövegből_logikaiba", 408);
+            WordsToCodes.Add("egészből_törtbe", 402);
+            WordsToCodes.Add("egészből_szövegbe", 403);
+            WordsToCodes.Add("törtből_egészbe", 404);
+            WordsToCodes.Add("törtből_logikaiba", 405);
+            WordsToCodes.Add("törtből_szövegbe", 406);
+            WordsToCodes.Add("logikaiból_egészbe", 407);
+            WordsToCodes.Add("logikaiból_törtbe", 408);
+            WordsToCodes.Add("logikaiból_szövegbe", 409);
+            WordsToCodes.Add("szövegből_egészbe", 410);
+            WordsToCodes.Add("szövegből_törtbe", 411);
+            WordsToCodes.Add("szövegből_logikaiba", 412);
 
             #endregion
 

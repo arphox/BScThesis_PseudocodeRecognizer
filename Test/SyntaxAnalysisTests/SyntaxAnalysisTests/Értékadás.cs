@@ -118,18 +118,30 @@ namespace SyntaxAnalysisTests
         }
 
         [Test]
-        public void Értékadás3_BelsőFüggvény()
+        [TestCase("egészből_logikaiba")]
+        [TestCase("egészből_törtbe")]
+        [TestCase("egészből_szövegbe")]
+        [TestCase("törtből_egészbe")]
+        [TestCase("törtből_logikaiba")]
+        [TestCase("törtből_szövegbe")]
+        [TestCase("logikaiból_egészbe")]
+        [TestCase("logikaiból_törtbe")]
+        [TestCase("logikaiból_szövegbe")]
+        [TestCase("szövegből_egészbe")]
+        [TestCase("szövegből_törtbe")]
+        [TestCase("szövegből_logikaiba")]
+        public void Értékadás3_BelsőFüggvény(string belsőFüggvény)
         {
-            const string code = "program_kezd\r\n" +
-                                "szöveg s = törtből_egészbe(-2,4)\r\n" +
-                                "s = egészből_logikaiba(1)\r\n" +
-                                "program_vége";
+            string code = "program_kezd\r\n" +
+                         $"szöveg s = {belsőFüggvény}(-2,4)\r\n" +
+                          "s = egészből_logikaiba(1)\r\n" +
+                          "program_vége";
 
             ParseTree<Token> tree = TestHelper.Parse(code);
 
             tree.ExpectLeaves(
                 "program_kezd", "újsor",
-                "szöveg", "azonosító", "=", "törtből_egészbe", "(", "tört literál", ")", "újsor",
+                "szöveg", "azonosító", "=", belsőFüggvény, "(", "tört literál", ")", "újsor",
                 "azonosító", "=", "egészből_logikaiba", "(", "egész literál", ")", "újsor",
                 "program_vége");
 
@@ -139,7 +151,7 @@ namespace SyntaxAnalysisTests
             var állítások = root.GetNonTerminalChildOfName(nameof(SA.Állítások));
             állítások.ExpectChildrenNames(nameof(SA.Állítás), "újsor", nameof(SA.Állítások));
 
-            // szöveg s = törtből_egészbe(-2,4)\r\n
+            // szöveg s = {belsőFüggvény}(-2,4)\r\n
 
             var állítás = állítások.GetNonTerminalChildOfName(nameof(SA.Állítás));
             állítás.ExpectChildrenNames(nameof(SA.VáltozóDeklaráció));
@@ -149,7 +161,7 @@ namespace SyntaxAnalysisTests
 
             változóDeklaráció.GetNonTerminalChildOfName(nameof(SA.AlapTípus)).ExpectChildrenNames("szöveg");
             változóDeklaráció.GetTerminalChildOfName("azonosító").ExpectIdentifierNameOf("s");
-            változóDeklaráció.GetNonTerminalChildOfName(nameof(SA.BelsőFüggvény)).GetTerminalChildOfName("törtből_egészbe");
+            változóDeklaráció.GetNonTerminalChildOfName(nameof(SA.BelsőFüggvény)).GetTerminalChildOfName(belsőFüggvény);
 
             változóDeklaráció.ExpectOneNemTömbLétrehozóKifejezésChildWithLiteralValue("tört literál", "-2,4");
 
