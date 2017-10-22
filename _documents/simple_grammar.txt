@@ -37,8 +37,7 @@
     
 <BinárisKifejezés>			    ::=		<Operandus> <BinárisOperátor> <Operandus>
     
-<BinárisOperátor>			    ::=		"="
-                                    |	"=="
+<BinárisOperátor>			    ::=		"=="
                                     |	"!="
                                     |	"és"
                                     |	"vagy"
