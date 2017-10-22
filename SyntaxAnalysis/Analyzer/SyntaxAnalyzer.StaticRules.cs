@@ -4,13 +4,6 @@ namespace SyntaxAnalysis.Analyzer
 {
     public sealed partial class SyntaxAnalyzer
     {
-        internal bool Típus()
-        {
-            return Rule(() =>
-                   Match(AlapTípus)
-                || Match(TömbTípus));
-        }
-
         internal bool AlapTípus()
         {
             return Rule(() =>
