@@ -96,6 +96,7 @@ namespace SyntaxAnalysisTests
         internal static void ExpectLeaves(this ParseTree<Token> tree, params string[] leafNames)
         {
             IList<Token> leaves = tree.GetLeaves();
+            leafNames = leafNames.Where(n => n != "").ToArray();
             Assert.That(leaves.Count == leafNames.Length, $"Expected leaf count to be {leafNames.Length}, but was {leaves.Count}.");
             for (var i = 0; i < leaves.Count; i++)
             {
