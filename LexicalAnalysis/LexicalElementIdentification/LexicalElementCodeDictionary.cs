@@ -156,10 +156,7 @@ namespace LexicalAnalysis.LexicalElementIdentification
                 blockCode == GetCode("elágazás_vége") ||
                 blockCode == GetCode("ciklus_vége");
         }
-
-        internal static bool IsOperator(int code)
-            => code >= 200 && code < 300;
-
+        
         internal static bool IsType(int code)
             => code >= 1000 && code < 1100;
 

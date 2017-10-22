@@ -56,7 +56,7 @@ namespace LexicalAnalysisTests
         {
             Token token = NextToken;
             Generic(token, typeof(LiteralToken), type);
-            string value = (token as LiteralToken).LiteralValue;
+            string value = ((LiteralToken)token).LiteralValue;
             Assert.That(value, Is.EqualTo(expectedValue), $"Expected literal value {expectedValue}, but was {value}.");
         }
 

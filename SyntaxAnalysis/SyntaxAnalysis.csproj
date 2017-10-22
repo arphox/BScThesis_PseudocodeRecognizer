@@ -44,7 +44,6 @@
     <Compile Include="Analyzer\SyntaxAnalyzer.Basic.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Analyzer\SyntaxAnalyzerResult.cs" />
-    <Compile Include="Trash\OldSyntaxAnalyzer.cs" />
     <Compile Include="Utilities\ObjectExtensions.cs" />
   </ItemGroup>
   <ItemGroup>

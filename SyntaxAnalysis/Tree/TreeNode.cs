@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 
 namespace SyntaxAnalysis.Tree
 {
@@ -25,25 +24,7 @@ namespace SyntaxAnalysis.Tree
             Children.Add(newNode);
             return newNode;
         }
-
-        internal void PrintNode(string prefix, TreeNode<T> currentNode)
-        {
-            string op = currentNode == this ? "~" : "+";
-            Console.WriteLine($"{prefix} {op} {Value}");
-
-            foreach (TreeNode<T> n in Children)
-            {
-                if (Children.IndexOf(n) == Children.Count - 1)
-                {
-                    n.PrintNode(prefix + "    ", currentNode);
-                }
-                else
-                {
-                    n.PrintNode(prefix + "   |", currentNode);
-                }
-            }
-        }
-
+        
         internal IList<T> GetLeaves()
         {
             if (Children.Count == 0)
