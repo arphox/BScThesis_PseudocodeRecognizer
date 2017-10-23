@@ -27,6 +27,7 @@
 
 <Operandus>                 ::=    <UnárisOperátor> "azonosító"
                                 |  <UnárisOperátor> "literál"
+								|  "azonosító" "[" <Operandus> "]"
                                 |  "azonosító"
                                 |  "literál"
 
