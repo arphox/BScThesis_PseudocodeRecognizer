@@ -13,6 +13,7 @@ namespace SyntaxAnalysis.Analyzer
         private readonly List<Token> _tokens;
         private int _tokenIndexer = -1;
         private int _currentRowNumber = 1;
+        private int _furthestRowNumber = 1;
         private bool _alreadyStarted;
         private ParseTree<Token> _parseTree;
         private Token CurrentToken => _tokens[_tokenIndexer];
@@ -35,7 +36,13 @@ namespace SyntaxAnalysis.Analyzer
             _alreadyStarted = true;
 
             bool success = Program();
-            return new SyntaxAnalyzerResult(_parseTree, success);
+
+            if (!success)
+            {
+                throw new SyntaxAnalysisException(CurrentToken, _currentRowNumber, _furthestRowNumber);
+            }
+
+            return new SyntaxAnalyzerResult(_parseTree, true);
         }
 
         internal bool Program()
@@ -106,6 +113,10 @@ namespace SyntaxAnalysis.Analyzer
         {
             _tokenIndexer++;
             _currentRowNumber = CurrentToken.RowNumber;
+
+            if (_currentRowNumber > _furthestRowNumber)
+                _furthestRowNumber = _currentRowNumber;
+
             _parseTree.StartNode(CurrentToken);
             _parseTree.EndNode();
         }

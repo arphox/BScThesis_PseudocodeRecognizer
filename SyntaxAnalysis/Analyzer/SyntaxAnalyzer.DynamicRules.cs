@@ -77,6 +77,7 @@ namespace SyntaxAnalysis.Analyzer
             return Rule(() =>
                    Match(UnárisOperátor, Azonosító)
                 || Match(UnárisOperátor, Literál)
+                || Match(Azonosító, () => T("["), Operandus, () => T("]"))
                 || Match(Azonosító)
                 || Match(Literál));
         }

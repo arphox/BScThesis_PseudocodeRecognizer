@@ -45,6 +45,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="BinárisKifejezés.cs" />
+    <Compile Include="ComplexTests.cs" />
     <Compile Include="Ha.cs" />
     <Compile Include="Ciklus.cs" />
     <Compile Include="ParseTreeTests.cs" />

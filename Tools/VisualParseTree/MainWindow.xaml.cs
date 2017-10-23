@@ -27,7 +27,15 @@ namespace VisualParseTree
         {
             // ReSharper disable once UnusedVariable
             const string code = "program_kezd\r\n" +
-                                "kilép\r\n" +
+                                "egész[] tömb = létrehoz[10]\r\n" +
+                                "egész i = 0\r\n" +
+                                "egész összeg = 0\r\n" +
+                                "ciklus_amíg i < 10\r\n" +
+                                "   egész temp = tömb[i]\r\n" +
+                                "   összeg = összeg + temp\r\n" +
+                                "   i = i + 1\r\n" +
+                                "ciklus_vége\r\n" +
+                                "kiír összeg\r\n" +
                                 "program_vége";
 
 

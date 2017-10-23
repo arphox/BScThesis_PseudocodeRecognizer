@@ -17,6 +17,8 @@ namespace SyntaxAnalysis.Analyzer
             FurthestRowNumber = furthestRowNumber;
         }
 
+        public override string Message => base.Message + ", " + ToString();
+
         public override string ToString()
         {
             string message = $"Szintaktikai hiba! Információk: Utolsó hozzáadott token: {LastToken}, A hiba fellépésekor az aktuális sorszám: {CurrentRowNumber}, Az elemzés során elért legtávolabbi sor száma: {FurthestRowNumber}";
