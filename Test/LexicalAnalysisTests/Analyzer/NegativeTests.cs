@@ -216,6 +216,36 @@ namespace LexicalAnalysisTests.Analyzer
         }
 
         [Test]
+        public void DeclarationUsingIdentifierDefinedInTheCurrentRow()
+        {
+            const string code = "program_kezd\r\n" +
+                                "egész x = x + 1\r\n" +
+                                "program_vége";
+
+            LexicalAnalyzerResult result = new LexicalAnalyzer(code).Analyze();
+
+            TokenTester tt = new TokenTester(result);
+
+            tt.ExpectStart();
+            tt.NewLine();
+
+            tt.ExpectKeyword("egész");
+            tt.ExpectIdentifier("x");
+            tt.ExpectKeyword("=");
+            tt.ExpectError(ErrorTokenType.CannotReferToVariableThatIsBeingDeclared);
+            tt.ExpectIdentifier("x");
+            tt.ExpectKeyword("+");
+            tt.ExpectEgeszLiteral("1");
+            tt.NewLine();
+
+            tt.ExpectEnd();
+            tt.ExpectNoMore();
+
+            // Symbol table
+            Assert.That(result.SymbolTable.IsEmpty, Is.False);
+        }
+
+        [Test]
         public void Redeclaration()
         {
             const string code = "program_kezd\r\n" +

@@ -7,6 +7,7 @@ namespace LexicalAnalysis.SymbolTableManagement
 {
     public class SymbolTableManager
     {
+        internal SymbolTable Root { get; private set; }
         internal SymbolTable SymbolTable { get; private set; }
 
         internal int LastInsertedSymbolId { get; private set; }
@@ -14,6 +15,7 @@ namespace LexicalAnalysis.SymbolTableManagement
         internal SymbolTableManager()
         {
             SymbolTable = new SymbolTable(null);
+            Root = SymbolTable;
         }
 
         internal void InsertNewSymbolTableEntry(string name, int tokenType, int currentRowNumber)
@@ -81,6 +83,25 @@ namespace LexicalAnalysis.SymbolTableManagement
                     }
                 }
                 return SymbolTable.NotFoundId;
+            }
+        }
+
+        internal static SingleEntry GetSingleEntryById(SymbolTableEntry entry, int id)
+        {
+            switch (entry)
+            {
+                case SingleEntry single:
+                    return single.Id == id ? single : null;
+                case SymbolTable subTable:
+                    foreach (SymbolTableEntry e in subTable.Entries)
+                    {
+                        SingleEntry res = GetSingleEntryById(e, id);
+                        if (res != null)
+                            return res;
+                    }
+                    return null;
+                default:
+                    return null;
             }
         }
 

@@ -6,5 +6,6 @@
         CannotRecognizeElement = 2,
         CannotRedefineVariable = 3,
         VariableTypeNotSpecified = 4,
+        CannotReferToVariableThatIsBeingDeclared = 5
     }
 }
