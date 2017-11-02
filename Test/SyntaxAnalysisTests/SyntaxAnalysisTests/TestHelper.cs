@@ -128,6 +128,31 @@ namespace SyntaxAnalysisTests
             operandus.GetTerminalChildOfName(literalType).ExpectLiteralValueOf(literalValue);
         }
 
+        internal static void ExpectSyntaxError(string code, int expectedCurrentRowNumber, int expectedFurthestRowNumber)
+        {
+            SyntaxAnalyzer parser = new SyntaxAnalyzer(new LexicalAnalyzer(code).Analyze().Tokens);
+
+            bool isThrown = false;
+
+            try
+            {
+                parser.Start();
+            }
+            catch (SyntaxAnalysisException e)
+            {
+                isThrown = true;
+                Assert.Multiple(() =>
+                {
+                    Assert.That(e.CurrentRowNumber, Is.EqualTo(expectedCurrentRowNumber), $"Expected current row number to be {expectedCurrentRowNumber}, but was {e.CurrentRowNumber}.");
+                    Assert.That(e.FurthestRowNumber, Is.EqualTo(expectedFurthestRowNumber), $"Expected furthest row number to be {expectedFurthestRowNumber}, but was {e.FurthestRowNumber}.");
+                });
+            }
+            finally
+            {
+                Assert.That(isThrown, Is.True);
+            }
+        }
+
 
         private static void ExpectName(this TerminalToken token, string expectedName)
         {
