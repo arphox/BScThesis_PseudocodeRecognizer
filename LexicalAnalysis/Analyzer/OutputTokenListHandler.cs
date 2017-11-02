@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using LexicalAnalysis.LexicalElementIdentification;
 using LexicalAnalysis.SymbolTableManagement;
@@ -78,7 +79,7 @@ namespace LexicalAnalysis.Analyzer
         private void AddExistingIdentifier(string name, int symbolId, int currentRowNumber)
         {
             SingleEntry singleEntry = SymbolTableManager.GetSingleEntryById(_symbolTableHandler.Root, _symbolTableHandler.GetIdByName(name));
-            if (singleEntry.Id == currentRowNumber)
+            if (singleEntry.DefinitionRowNumber == currentRowNumber)
             {
                 _outputTokens.Add(new ErrorToken(ErrorTokenType.CannotReferToVariableThatIsBeingDeclared, currentRowNumber, $"Variable name: {name}"));
             }

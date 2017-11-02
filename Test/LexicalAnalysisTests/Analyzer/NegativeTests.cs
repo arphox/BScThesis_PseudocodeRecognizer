@@ -216,7 +216,7 @@ namespace LexicalAnalysisTests.Analyzer
         }
 
         [Test]
-        public void DeclarationUsingIdentifierDefinedInTheCurrentRow()
+        public void DeclarationReferingToIdentifierDefinedInTheCurrentRow()
         {
             const string code = "program_kezd\r\n" +
                                 "egész x = x + 1\r\n" +

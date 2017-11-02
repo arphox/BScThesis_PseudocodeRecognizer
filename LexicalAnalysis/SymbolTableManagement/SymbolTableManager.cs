@@ -7,7 +7,7 @@ namespace LexicalAnalysis.SymbolTableManagement
 {
     public class SymbolTableManager
     {
-        internal SymbolTable Root { get; private set; }
+        internal SymbolTable Root { get; }
         internal SymbolTable SymbolTable { get; private set; }
 
         internal int LastInsertedSymbolId { get; private set; }
