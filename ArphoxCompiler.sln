@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
-VisualStudioVersion = 15.0.26730.16
+VisualStudioVersion = 15.0.27004.2006
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LexicalAnalysis", "LexicalAnalysis\LexicalAnalysis.csproj", "{5C7EF03C-6FC4-4BD7-A714-8F2B7B7765DE}"
 EndProject
@@ -16,6 +16,8 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LexicalAnalysisTests", "Test\LexicalAnalysisTests\LexicalAnalysisTests.csproj", "{74FDB26A-1071-401A-8A9C-A1AFE7772962}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SyntaxAnalysisTests", "Test\SyntaxAnalysisTests\SyntaxAnalysisTests\SyntaxAnalysisTests.csproj", "{97E18FB0-8246-49B6-B978-13A54EC018E0}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SemanticAnalysis", "SemanticAnalysis\SemanticAnalysis.csproj", "{3EB0B2CD-2DB8-4E38-9CE6-D2F89DE43AE7}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -43,6 +45,10 @@ Global
 		{97E18FB0-8246-49B6-B978-13A54EC018E0}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{97E18FB0-8246-49B6-B978-13A54EC018E0}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{97E18FB0-8246-49B6-B978-13A54EC018E0}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3EB0B2CD-2DB8-4E38-9CE6-D2F89DE43AE7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3EB0B2CD-2DB8-4E38-9CE6-D2F89DE43AE7}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3EB0B2CD-2DB8-4E38-9CE6-D2F89DE43AE7}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3EB0B2CD-2DB8-4E38-9CE6-D2F89DE43AE7}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
