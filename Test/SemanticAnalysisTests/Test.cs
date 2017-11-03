@@ -9,13 +9,18 @@ namespace SemanticAnalysisTests
     public sealed class Test
     {
         [Test]
-        public void SemATest()
+        public void NoSemanticAnalysisNeeded()
         {
-            string code = "";
+            const string code = "program_kezd\r\n" +
+                                "kilép\r\n" +
+                                "program_vége";
+
             LexicalAnalyzerResult lexerResult = new LexicalAnalyzer(code).Start();
             SyntaxAnalyzerResult parserResult = new SyntaxAnalyzer(lexerResult).Start();
 
             new SemanticAnalyzer(parserResult, lexerResult.SymbolTable).Start();
         }
+
+
     }
 }

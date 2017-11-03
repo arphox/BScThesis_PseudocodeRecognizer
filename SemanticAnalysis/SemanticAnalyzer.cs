@@ -76,9 +76,6 @@ namespace SemanticAnalysis
 
             else if (állításNode.ChildrenAreMatchingFor("ciklus_amíg", nameof(SA.NemTömbLétrehozóKifejezés), "újsor", nameof(SA.Állítások), "ciklus_vége"))
                 CheckCiklusAmíg(állításNode.Children);
-
-            else
-                throw new InvalidOperationException();
         }
 
         private void CheckVáltozóDeklaráció(TreeNode<Token> változóDeklarációNode)
