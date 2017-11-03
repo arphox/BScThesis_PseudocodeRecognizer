@@ -42,12 +42,11 @@ namespace VisualParseTree
             Stopwatch sw = Stopwatch.StartNew();
 
             LexicalAnalyzerResult lexicalAnalyzerResult = new LexicalAnalyzer(SyntaxAnalyzer.TestCode).Analyze();
-            List<TerminalToken> tokenList = lexicalAnalyzerResult.Tokens;
             sw.Stop();
             Console.WriteLine($"Lexer: {sw.ElapsedMilliseconds} ms.");
             sw.Restart();
 
-            SyntaxAnalyzerResult syntaxAnalyzerResult = new SyntaxAnalyzer(tokenList).Start();
+            SyntaxAnalyzerResult syntaxAnalyzerResult = new SyntaxAnalyzer(lexicalAnalyzerResult).Start();
             sw.Stop();
             Console.WriteLine($"Parser: {sw.ElapsedMilliseconds} ms.");
             sw.Restart();

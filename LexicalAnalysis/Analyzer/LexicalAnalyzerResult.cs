@@ -1,16 +1,16 @@
-﻿using System.Collections.Generic;
-using System.Linq;
-using LexicalAnalysis.SymbolTableManagement;
+﻿using LexicalAnalysis.SymbolTableManagement;
 using LexicalAnalysis.Tokens;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace LexicalAnalysis.Analyzer
 {
-    public struct LexicalAnalyzerResult
+    public class LexicalAnalyzerResult
     {
         public List<TerminalToken> Tokens { get; }
         public SymbolTable SymbolTable { get; }
         public bool IsSuccessful { get; }
-
+        
         public LexicalAnalyzerResult(List<TerminalToken> tokens, SymbolTable symbolTable)
         {
             Tokens = tokens;

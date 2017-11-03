@@ -165,7 +165,7 @@ namespace LexicalAnalysisTests.Analyzer
                                 "program_kezd\r\n" +
                                 "program_vége";
 
-            LexicalAnalyzerResult result = new LexicalAnalyzer(code).Analyze();
+            LexicalAnalyzerResult result = TestHelper.GetLexicalAnalyzerResultWithExceptionSwallowed(code);
             new TokenTester(result).ExpectNoMore();
         }
 
@@ -174,7 +174,7 @@ namespace LexicalAnalysisTests.Analyzer
         {
             const string code = "//asdasdsdasd";
 
-            LexicalAnalyzerResult result = new LexicalAnalyzer(code).Analyze();
+            LexicalAnalyzerResult result = TestHelper.GetLexicalAnalyzerResultWithExceptionSwallowed(code);
             new TokenTester(result).ExpectNoMore();
         }
     }

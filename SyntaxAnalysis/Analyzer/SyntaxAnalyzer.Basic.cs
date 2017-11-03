@@ -1,3 +1,4 @@
+using LexicalAnalysis.Analyzer;
 using LexicalAnalysis.LexicalElementIdentification;
 using LexicalAnalysis.Tokens;
 using SyntaxAnalysis.Tree;
@@ -18,15 +19,18 @@ namespace SyntaxAnalysis.Analyzer
         private ParseTree<Token> _parseTree;
         private Token CurrentToken => _tokens[_tokenIndexer];
 
-        public SyntaxAnalyzer(IEnumerable<Token> tokens)
+        public SyntaxAnalyzer(LexicalAnalyzerResult lexerResult)
         {
-            _tokens = tokens?.ToList() ?? throw new ArgumentNullException(nameof(tokens));
+            if (lexerResult == null)
+                throw new ArgumentNullException(nameof(lexerResult));
 
-            if (!_tokens.Any())
-                throw new ArgumentException($"{nameof(tokens)} cannot be an empty collection.", nameof(tokens));
-
-            if (_tokens.Any(token => token is ErrorToken))
+            if (!lexerResult.IsSuccessful)
                 throw new SyntaxAnalysisException("The syntax analyzer only starts if there are no lexical error tokens.");
+
+            if (lexerResult.Tokens.Count == 0)
+                throw new ArgumentException("The lexical analyzer result's token list cannot be an empty collection.");
+
+            _tokens = lexerResult.Tokens.Cast<Token>().ToList();
         }
 
         public SyntaxAnalyzerResult Start()

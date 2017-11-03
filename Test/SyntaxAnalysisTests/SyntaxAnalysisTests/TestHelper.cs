@@ -17,7 +17,7 @@ namespace SyntaxAnalysisTests
     {
         internal static ParseTree<Token> Parse(string code)
         {
-            SyntaxAnalyzer parser = new SyntaxAnalyzer(new LexicalAnalyzer(code).Analyze().Tokens);
+            SyntaxAnalyzer parser = new SyntaxAnalyzer(new LexicalAnalyzer(code).Analyze());
             SyntaxAnalyzerResult result = parser.Start();
 
             Assert.That(result.IsSuccessful, "The syntax analysis has failed.");
@@ -130,7 +130,7 @@ namespace SyntaxAnalysisTests
 
         internal static void ExpectSyntaxError(string code, int expectedCurrentRowNumber, int expectedFurthestRowNumber)
         {
-            SyntaxAnalyzer parser = new SyntaxAnalyzer(new LexicalAnalyzer(code).Analyze().Tokens);
+            SyntaxAnalyzer parser = new SyntaxAnalyzer(new LexicalAnalyzer(code).Analyze());
 
             bool isThrown = false;
 

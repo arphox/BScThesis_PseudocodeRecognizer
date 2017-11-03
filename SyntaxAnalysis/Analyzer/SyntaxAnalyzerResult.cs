@@ -3,7 +3,7 @@ using SyntaxAnalysis.Tree;
 
 namespace SyntaxAnalysis.Analyzer
 {
-    public struct SyntaxAnalyzerResult
+    public class SyntaxAnalyzerResult
     {
         public ParseTree<Token> ParseTree { get; }
         public bool IsSuccessful { get; }

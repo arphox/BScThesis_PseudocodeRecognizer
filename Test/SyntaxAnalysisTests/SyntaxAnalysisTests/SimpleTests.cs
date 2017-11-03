@@ -4,7 +4,6 @@ using NUnit.Framework;
 using SyntaxAnalysis.Analyzer;
 using SyntaxAnalysis.Tree;
 using System;
-using System.Linq;
 using SA = SyntaxAnalysis.Analyzer.SyntaxAnalyzer;
 
 namespace SyntaxAnalysisTests
@@ -19,8 +18,7 @@ namespace SyntaxAnalysisTests
                                 "program_vége";
 
             Assert.Throws<ArgumentNullException>(() => new SA(null));
-            Assert.Throws<ArgumentException>(() => new SA(Enumerable.Empty<Token>()));
-            Assert.Throws<LexicalAnalysisException>(() => new SA(new LexicalAnalyzer(code).Analyze().Tokens));
+            Assert.Throws<LexicalAnalysisException>(() => new SA(new LexicalAnalyzer(code).Analyze()));
         }
 
         [Test]
@@ -30,7 +28,7 @@ namespace SyntaxAnalysisTests
                                 "kilép\r\n" +
                                 "program_vége";
 
-            SyntaxAnalyzer parser = new SyntaxAnalyzer(new LexicalAnalyzer(code).Analyze().Tokens);
+            SyntaxAnalyzer parser = new SyntaxAnalyzer(new LexicalAnalyzer(code).Analyze());
             parser.Start();
             Assert.Throws<InvalidOperationException>(() => parser.Start());
         }
