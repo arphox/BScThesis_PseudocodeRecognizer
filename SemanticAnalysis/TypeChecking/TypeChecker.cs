@@ -1,11 +1,20 @@
 ﻿using LexicalAnalysis.LexicalElementIdentification;
 using LexicalAnalysis.SymbolTableManagement;
 using LexicalAnalysis.Tokens;
+using SemanticAnalysis.TypeFinding;
+using SyntaxAnalysis.Tree;
 
 namespace SemanticAnalysis.TypeChecking
 {
-    internal static class TypeChecker
+    internal sealed class TypeChecker
     {
+        private readonly TypeFinder _typeFinder;
+
+        public TypeChecker(TypeFinder typeFinder)
+        {
+            _typeFinder = typeFinder;
+        }
+
         internal static void CheckUnárisOperátorCompatibility(KeywordToken unárisOperátorKeywordToken, SingleEntryType operandType)
         {
             string op = LexicalElementCodeDictionary.GetWord(unárisOperátorKeywordToken.Id);
@@ -64,18 +73,34 @@ namespace SemanticAnalysis.TypeChecking
 
         internal static void CheckForArrayType(SingleEntryType firstOperandType)
         {
-            int code = (int) firstOperandType;
+            int code = (int)firstOperandType;
             if (!LexicalElementCodeDictionary.IsArrayType(code))
             {
                 throw new SemanticAnalyzerException("The array indexing operator can only be applied on array types.");
             }
         }
 
-        internal static void CheckTwoTypesForEquality(SingleEntryType first, SingleEntryType second)
+        internal void CheckTwoSidesForEqualTypes(TreeNode<Token> leftNode, TreeNode<Token> rightNode)
         {
-            if (first != second)
+            SingleEntryType leftSideType = _typeFinder.GetTypeOfNode(leftNode);
+            SingleEntryType rightSideType = _typeFinder.GetTypeOfNode(rightNode);
+
+            if (leftSideType != rightSideType)
             {
-                throw new SemanticAnalyzerException($"The types on the sides of the expression do not match. Left: {first}. Right: {second}.");
+                throw new SemanticAnalyzerException($"The types on the two sides of the expression do not match. Left: {leftSideType}. Right: {rightSideType}.");
+            }
+        }
+
+        internal void CheckForInternalFunctionParameterTypeMatch(TreeNode<Token> internalFunctionNode, TreeNode<Token> parameterNode)
+        {
+            SingleEntryType internalFunctionInputType = StaticTypeFinder.GetInputTypeOfInternalFunction((InternalFunctionToken)parameterNode.Value);
+            SingleEntryType parameterType = _typeFinder.GetTypeOfNode(internalFunctionNode);
+
+            string internalFunctionName = LexicalElementCodeDictionary.GetWord(((InternalFunctionToken) internalFunctionNode.Value).Id);
+
+            if (internalFunctionInputType != parameterType)
+            {
+                throw new SemanticAnalyzerException($"The internal function `{internalFunctionName}`'s input type has to be {internalFunctionInputType}, but {parameterType} was given.");
             }
         }
     }

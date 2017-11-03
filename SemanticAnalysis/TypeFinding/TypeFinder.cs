@@ -11,9 +11,10 @@ using SA = SyntaxAnalysis.Analyzer.SyntaxAnalyzer;
 
 namespace SemanticAnalysis.TypeFinding
 {
-    internal partial class TypeFinder
+    internal sealed class TypeFinder
     {
         private readonly SymbolTable _symbolTable;
+        internal TypeChecker TypeChecker { get; set; }
 
         public TypeFinder(SymbolTable symbolTable)
         {
@@ -40,7 +41,7 @@ namespace SemanticAnalysis.TypeFinding
                 case IdentifierToken identifier:
                     return SymbolTableManager.GetSingleEntryById(_symbolTable, identifier.SymbolId).EntryType;
                 case InternalFunctionToken internalFunctionToken:
-                    return StaticTypeFinder.GetTypeOfInternalFunction(internalFunctionToken);
+                    return StaticTypeFinder.GetOutputTypeOfInternalFunction(internalFunctionToken);
                 case LiteralToken literalToken:
                     return StaticTypeFinder.GetTypeOfLiteral(literalToken);
                 case ErrorToken _:
@@ -59,15 +60,19 @@ namespace SemanticAnalysis.TypeFinding
             {
                 case nameof(SA.AlapTípus):
                 case nameof(SA.TömbTípus):
+                case nameof(SA.BelsőFüggvény):
                     return GetTypeOfTerminal((TerminalToken)node.Children.Single().Value);
                 case nameof(SA.Operandus):
                     return GetTypeOfOperandus(node);
                 case nameof(SA.BinárisKifejezés):
                     return GetTypeOfBinárisKifejezés(node);
+                case nameof(SA.NemTömbLétrehozóKifejezés):
+                    return GetTypeOfNonTerminal(node.Children.Single());
                 default:
                     throw new InvalidOperationException();
             }
         }
+
 
         private SingleEntryType GetTypeOfOperandus(TreeNode<Token> node)
         {
@@ -100,7 +105,9 @@ namespace SemanticAnalysis.TypeFinding
         {
             // <BinárisKifejezés> ::= <Operandus> <BinárisOperátor> <Operandus>
 
-            SingleEntryType opType = CheckAndGetTypeOfTwoSides(node);
+            TypeChecker.CheckTwoSidesForEqualTypes(node.Children[0], node.Children[2]);
+
+            SingleEntryType opType = GetTypeOfOperandus(node.Children[0]);
 
             KeywordToken opNode = (KeywordToken)node.Children[1].Value;
             TypeChecker.CheckBinárisOperátorCompatibility(opNode, opType);
@@ -128,16 +135,6 @@ namespace SemanticAnalysis.TypeFinding
             }
 
             throw new InvalidOperationException();
-        }
-
-        private SingleEntryType CheckAndGetTypeOfTwoSides(TreeNode<Token> node)
-        {
-            SingleEntryType firstOpType = GetTypeOfOperandus(node.Children[0]);
-            SingleEntryType secondOpType = GetTypeOfOperandus(node.Children[2]);
-
-            TypeChecker.CheckTwoTypesForEquality(firstOpType, secondOpType);
-
-            return firstOpType;
         }
     }
 }

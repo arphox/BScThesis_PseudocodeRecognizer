@@ -3,7 +3,12 @@ using LexicalAnalysis.Tokens;
 using SyntaxAnalysis.Analyzer;
 using SyntaxAnalysis.Tree;
 using System;
+using System.Linq;
+using SyntaxAnalysis;
 using SA = SyntaxAnalysis.Analyzer.SyntaxAnalyzer;
+using System.Collections.Generic;
+using SemanticAnalysis.TypeChecking;
+using SemanticAnalysis.TypeFinding;
 
 namespace SemanticAnalysis
 {
@@ -11,6 +16,10 @@ namespace SemanticAnalysis
     {
         private readonly ParseTree<Token> _parseTree;
         private readonly SymbolTable _symbolTable;
+        private bool _isAlreadyStarted;
+
+        private readonly TypeFinder _typeFinder;
+        private readonly TypeChecker _typeChecker;
 
         public SemanticAnalyzer(SyntaxAnalyzerResult parserResult, SymbolTable symbolTable)
         {
@@ -23,21 +32,93 @@ namespace SemanticAnalysis
                 throw new SemanticAnalyzerException("The semantic analyzer only starts if there are no syntax errors.");
 
             _parseTree = parserResult.ParseTree;
+            _typeFinder = new TypeFinder(_symbolTable);
+            _typeChecker = new TypeChecker(_typeFinder);
+            _typeFinder.TypeChecker = _typeChecker;
         }
 
-        private static readonly string[] egyszerűenTípusosTokenek =
+        private void Analyze()
         {
-            "literál",
-            "azonosító",
-            nameof(SA.AlapTípus),
-            nameof(SA.TömbTípus),
-        };
+            if (_isAlreadyStarted)
+                throw new InvalidOperationException("This object is not reusable.");
+            _isAlreadyStarted = true;
 
-        private static readonly string[] komplexenTípusosTokenek =
+            CheckProgram(_parseTree.Root);
+        }
+
+        private void CheckProgram(TreeNode<Token> programNode)
         {
-            nameof(SA.NemTömbLétrehozóKifejezés),
-            nameof(SA.BelsőFüggvény),
-            nameof(SA.Operandus)
-        };
+            CheckÁllítások(programNode.Children.Single(c => c.Value is NonTerminalToken nonTerminal && nonTerminal.Name == nameof(SA.Állítások)));
+        }
+
+        private void CheckÁllítások(TreeNode<Token> állításokNode)
+        {
+            if (állításokNode.ChildrenAreMatchingFor(nameof(SA.Állítás), "újsor", nameof(SA.Állítások)))
+                CheckÁllítások(állításokNode.Children[2]);
+            else if (állításokNode.ChildrenAreMatchingFor(nameof(SA.Állítás), "újsor"))
+                CheckÁllítás(állításokNode.Children[0]);
+            else
+                throw new InvalidOperationException();
+        }
+
+        private void CheckÁllítás(TreeNode<Token> állításNode)
+        {
+            if (állításNode.ChildrenAreMatchingFor(nameof(SA.VáltozóDeklaráció)))
+                CheckVáltozóDeklaráció(állításNode.Children.Single());
+            else if (állításNode.ChildrenAreMatchingFor(nameof(SA.Értékadás)))
+                CheckÉrtékadás(állításNode.Children.Single());
+            else if (állításNode.ChildrenAreMatchingFor(nameof(SA.IoParancs)))
+                CheckIoParancs(állításNode.Children.Single());
+            else if (állításNode.ChildrenAreMatchingFor("ha", nameof(SA.NemTömbLétrehozóKifejezés), "akkor", "újsor", nameof(SA.Állítások), "különben", "újsor", nameof(SA.Állítások), "elágazás_vége"))
+                CheckHaAkkorKülönben(állításNode.Children);
+            else if (állításNode.ChildrenAreMatchingFor("ha", nameof(SA.NemTömbLétrehozóKifejezés), "akkor", "újsor", nameof(SA.Állítások), "elágazás_vége"))
+                CheckHaAkkor(állításNode.Children);
+            else if (állításNode.ChildrenAreMatchingFor("ciklus_amíg", nameof(SA.NemTömbLétrehozóKifejezés), "újsor", nameof(SA.Állítások), "ciklus_vége"))
+                CheckCiklusAmíg(állításNode.Children);
+            else
+                throw new InvalidOperationException();
+        }
+
+        private void CheckVáltozóDeklaráció(TreeNode<Token> változóDeklarációNode)
+        {
+            // <AlapTípus> "azonosító" "=" <NemTömbLétrehozóKifejezés> |
+            // <TömbTípus> "azonosító" "=" "azonosító"
+            if (változóDeklarációNode.ChildrenAreMatchingFor(nameof(SA.AlapTípus), "azonosító", "=", nameof(SA.NemTömbLétrehozóKifejezés)) ||
+                változóDeklarációNode.ChildrenAreMatchingFor(nameof(SA.TömbTípus), "azonosító", "=", "azonosító"))
+            {
+                _typeChecker.CheckTwoSidesForEqualTypes(változóDeklarációNode.Children[1], változóDeklarációNode.Children[3]);
+            }
+            // <AlapTípus> "azonosító" "=" <BelsőFüggvény> "(" <NemTömbLétrehozóKifejezés> ")"
+            else if (változóDeklarációNode.Children.Count == 7)
+            {
+                _typeChecker.CheckForInternalFunctionParameterTypeMatch(változóDeklarációNode.Children[3], változóDeklarációNode.Children[5]);
+                _typeChecker.CheckTwoSidesForEqualTypes(változóDeklarációNode.Children[1], változóDeklarációNode.Children[3]);
+;            }
+        }
+
+        private void CheckÉrtékadás(TreeNode<Token> értékadásNode)
+        {
+            throw new NotImplementedException();
+        }
+
+        private void CheckIoParancs(TreeNode<Token> ioParancsNode)
+        {
+            throw new NotImplementedException();
+        }
+
+        private void CheckHaAkkorKülönben(IList<TreeNode<Token>> nodes)
+        {
+            throw new NotImplementedException();
+        }
+
+        private void CheckHaAkkor(IList<TreeNode<Token>> nodes)
+        {
+            throw new NotImplementedException();
+        }
+
+        private void CheckCiklusAmíg(IList<TreeNode<Token>> nodes)
+        {
+            throw new NotImplementedException();
+        }
     }
 }
