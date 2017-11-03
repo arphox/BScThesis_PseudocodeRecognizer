@@ -20,7 +20,7 @@ namespace SyntaxAnalysisTests
 
             Assert.Throws<ArgumentNullException>(() => new SA(null));
             Assert.Throws<ArgumentException>(() => new SA(Enumerable.Empty<Token>()));
-            Assert.Throws<SyntaxAnalysisException>(() => new SA(new LexicalAnalyzer(code).Analyze().Tokens));
+            Assert.Throws<LexicalAnalysisException>(() => new SA(new LexicalAnalyzer(code).Analyze().Tokens));
         }
 
         [Test]

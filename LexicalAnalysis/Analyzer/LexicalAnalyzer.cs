@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using LexicalAnalysis.LexicalElementIdentification;
@@ -49,7 +50,16 @@ namespace LexicalAnalysis.Analyzer
             }
 
             _symbolTableManager.CleanUpIfNeeded();
-            return new LexicalAnalyzerResult(_outputTokensHandler.OutputTokens.ToList(), _symbolTableManager.SymbolTable);
+
+
+            List<TerminalToken> tokens = _outputTokensHandler.OutputTokens.ToList();
+            bool isSuccessful = !tokens.Any(t => t is ErrorToken);
+            LexicalAnalyzerResult result =  new LexicalAnalyzerResult(tokens, _symbolTableManager.SymbolTable, isSuccessful);
+
+            if (isSuccessful)
+                return result;
+            else
+                throw new LexicalAnalysisException(result);
         }
 
         private LexicalAnalyzerState SelectNextState()

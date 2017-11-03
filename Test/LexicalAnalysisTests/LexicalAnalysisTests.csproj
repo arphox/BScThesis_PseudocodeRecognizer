@@ -55,6 +55,7 @@
     <Compile Include="LexicalElementCodeDictionaryTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="SymbolTableTester.cs" />
+    <Compile Include="TestHelper.cs" />
     <Compile Include="TokenTester.cs" />
   </ItemGroup>
   <ItemGroup>

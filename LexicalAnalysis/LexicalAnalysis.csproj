@@ -36,6 +36,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Analyzer\InputIterator.cs" />
+    <Compile Include="Analyzer\LexicalAnalysisException.cs" />
     <Compile Include="Analyzer\LexicalAnalyzerResult.cs" />
     <Compile Include="Analyzer\LexicalAnalyzerState.cs" />
     <Compile Include="Analyzer\NonWhitespaceRecognitionResult.cs" />

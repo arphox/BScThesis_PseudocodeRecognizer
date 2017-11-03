@@ -42,7 +42,7 @@ namespace LexicalAnalysisTests.Analyzer
                           "egész " + identifierName + "\n" +
                           "program_vége";
 
-            LexicalAnalyzerResult result = new LexicalAnalyzer(code).Analyze();
+            LexicalAnalyzerResult result = TestHelper.GetLexicalAnalyzerResultWithExceptionSwallowed(code);
 
             TokenTester tt = new TokenTester(result);
 

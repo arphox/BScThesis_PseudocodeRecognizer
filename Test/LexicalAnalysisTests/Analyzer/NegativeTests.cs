@@ -154,7 +154,7 @@ namespace LexicalAnalysisTests.Analyzer
                                 "x = x + 1\r\n" +
                                 "program_vége";
 
-            LexicalAnalyzerResult result = new LexicalAnalyzer(code).Analyze();
+            LexicalAnalyzerResult result = TestHelper.GetLexicalAnalyzerResultWithExceptionSwallowed(code);
 
             TokenTester tt = new TokenTester(result);
 
@@ -194,7 +194,7 @@ namespace LexicalAnalysisTests.Analyzer
                                 "x = x + 1\r\n" +
                                 "program_vége";
 
-            LexicalAnalyzerResult result = new LexicalAnalyzer(code).Analyze();
+            LexicalAnalyzerResult result = TestHelper.GetLexicalAnalyzerResultWithExceptionSwallowed(code);
 
             TokenTester tt = new TokenTester(result);
 
@@ -222,7 +222,7 @@ namespace LexicalAnalysisTests.Analyzer
                                 "egész x = x + 1\r\n" +
                                 "program_vége";
 
-            LexicalAnalyzerResult result = new LexicalAnalyzer(code).Analyze();
+            LexicalAnalyzerResult result = TestHelper.GetLexicalAnalyzerResultWithExceptionSwallowed(code);
 
             TokenTester tt = new TokenTester(result);
 
@@ -254,7 +254,7 @@ namespace LexicalAnalysisTests.Analyzer
                                 "logikai a\r\n" +
                                 "program_vége";
 
-            LexicalAnalyzerResult result = new LexicalAnalyzer(code).Analyze();
+            LexicalAnalyzerResult result = TestHelper.GetLexicalAnalyzerResultWithExceptionSwallowed(code);
 
             TokenTester tt = new TokenTester(result);
 
@@ -287,7 +287,7 @@ namespace LexicalAnalysisTests.Analyzer
                                 "szöveg y = 3;\r\n" +
                                 "program_vége";
 
-            LexicalAnalyzerResult result = new LexicalAnalyzer(code).Analyze();
+            LexicalAnalyzerResult result = TestHelper.GetLexicalAnalyzerResultWithExceptionSwallowed(code);
 
             TokenTester tt = new TokenTester(result);
 
