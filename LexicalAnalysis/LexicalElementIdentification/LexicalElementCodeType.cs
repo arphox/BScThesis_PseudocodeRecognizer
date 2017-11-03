@@ -1,6 +1,6 @@
 ﻿namespace LexicalAnalysis.LexicalElementIdentification
 {
-    internal enum LexicalElementCodeType
+    public enum LexicalElementCodeType
     {
         Keyword = 1,
         Literal = 2,

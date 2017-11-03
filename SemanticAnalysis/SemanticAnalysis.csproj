@@ -40,9 +40,12 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="TypeChecking\TypeChecker.cs" />
     <Compile Include="SemanticAnalyzer.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="SemanticAnalyzerException.cs" />
+    <Compile Include="TypeFinding\TypeFinder.StaticTypeFinder.cs" />
+    <Compile Include="TypeFinding\TypeFinder.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\LexicalAnalysis\LexicalAnalysis.csproj">

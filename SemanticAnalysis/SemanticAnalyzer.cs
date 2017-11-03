@@ -1,8 +1,9 @@
-﻿using System;
-using LexicalAnalysis.SymbolTableManagement;
+﻿using LexicalAnalysis.SymbolTableManagement;
 using LexicalAnalysis.Tokens;
 using SyntaxAnalysis.Analyzer;
 using SyntaxAnalysis.Tree;
+using System;
+using SA = SyntaxAnalysis.Analyzer.SyntaxAnalyzer;
 
 namespace SemanticAnalysis
 {
@@ -23,5 +24,20 @@ namespace SemanticAnalysis
 
             _parseTree = parserResult.ParseTree;
         }
+
+        private static readonly string[] egyszerűenTípusosTokenek =
+        {
+            "literál",
+            "azonosító",
+            nameof(SA.AlapTípus),
+            nameof(SA.TömbTípus),
+        };
+
+        private static readonly string[] komplexenTípusosTokenek =
+        {
+            nameof(SA.NemTömbLétrehozóKifejezés),
+            nameof(SA.BelsőFüggvény),
+            nameof(SA.Operandus)
+        };
     }
 }

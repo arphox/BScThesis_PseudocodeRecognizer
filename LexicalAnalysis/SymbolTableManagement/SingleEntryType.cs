@@ -1,14 +1,16 @@
-﻿namespace LexicalAnalysis.SymbolTableManagement
+﻿using LexicalAnalysis.LexicalElementIdentification;
+
+namespace LexicalAnalysis.SymbolTableManagement
 {
     public enum SingleEntryType
     {
-        Egesz = 1001,
-        Tort = 1002,
-        Szoveg = 1003,
-        Logikai = 1004,
-        EgeszTomb = 1051,
-        TortTomb = 1052,
-        SzovegTomb = 1053,
-        LogikaiTomb = 1054
+        Egesz = LexicalElementCodeDictionary.EgeszCode,
+        Tort = LexicalElementCodeDictionary.TortCode,
+        Szoveg = LexicalElementCodeDictionary.SzovegCode,
+        Logikai = LexicalElementCodeDictionary.LogikaiCode,
+        EgeszTomb = LexicalElementCodeDictionary.EgeszTombCode,
+        TortTomb = LexicalElementCodeDictionary.TortTombCode,
+        SzovegTomb = LexicalElementCodeDictionary.SzovegTombCode,
+        LogikaiTomb = LexicalElementCodeDictionary.LogikaiTombCode
     }
 }

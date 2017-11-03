@@ -10,6 +10,15 @@ namespace LexicalAnalysis.LexicalElementIdentification
     {
         public const int ErrorCode = -1;
 
+        internal const int EgeszCode = 1001;
+        internal const int TortCode = 1002;
+        internal const int SzovegCode = 1003;
+        internal const int LogikaiCode = 1001;
+        internal const int EgeszTombCode = 1051;
+        internal const int TortTombCode = 1052;
+        internal const int SzovegTombCode = 1053;
+        internal const int LogikaiTombCode = 1054;
+
         private static readonly Dictionary<string, int> WordsToCodes = new Dictionary<string, int>();
         private static readonly Dictionary<int, string> CodesToWords = new Dictionary<int, string>();
 
@@ -124,7 +133,7 @@ namespace LexicalAnalysis.LexicalElementIdentification
 
         public static int GetCode(string word) => WordsToCodes.ContainsKey(word) ? WordsToCodes[word] : -1;
 
-        internal static LexicalElementCodeType GetCodeType(int code)
+        public static LexicalElementCodeType GetCodeType(int code)
         {
             if (code >= 0 && code < 100)
                 return LexicalElementCodeType.Keyword;
@@ -166,5 +175,8 @@ namespace LexicalAnalysis.LexicalElementIdentification
 
         internal static int GetArrayCodeFromSimpleTypeCode(int code)
             => code + 50;
+
+        public static int GetSimpleTypeCodeFromArrayCode(int code)
+            => code - 50;
     }
 }
