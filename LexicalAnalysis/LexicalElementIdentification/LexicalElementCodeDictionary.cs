@@ -178,5 +178,8 @@ namespace LexicalAnalysis.LexicalElementIdentification
 
         public static int GetSimpleTypeCodeFromArrayCode(int code)
             => code - 50;
+
+        public static bool IsArrayType(int code)
+            => code >= 1050 && code < 1100;
     }
 }
