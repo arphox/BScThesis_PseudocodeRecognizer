@@ -1,14 +1,13 @@
 ﻿using LexicalAnalysis.SymbolTableManagement;
 using LexicalAnalysis.Tokens;
+using SemanticAnalysis.TypeChecking;
+using SyntaxAnalysis;
 using SyntaxAnalysis.Analyzer;
 using SyntaxAnalysis.Tree;
 using System;
-using System.Linq;
-using SyntaxAnalysis;
-using SA = SyntaxAnalysis.Analyzer.SyntaxAnalyzer;
 using System.Collections.Generic;
-using SemanticAnalysis.TypeChecking;
-using SemanticAnalysis.TypeFinding;
+using System.Linq;
+using SA = SyntaxAnalysis.Analyzer.SyntaxAnalyzer;
 
 namespace SemanticAnalysis
 {
@@ -97,7 +96,7 @@ namespace SemanticAnalysis
             {
                 _typeChecker.CheckForInternalFunctionParameterTypeMatch(változóDeklarációNode.Children[3], változóDeklarációNode.Children[5]);
                 _typeChecker.ExpectTwoSidesToBeEqualTypes(változóDeklarációNode.Children[1], változóDeklarációNode.Children[3]);
-;            }
+            }
         }
 
         private void CheckÉrtékadás(TreeNode<Token> értékadásNode)
@@ -134,7 +133,7 @@ namespace SemanticAnalysis
 
         private void CheckIoParancs(TreeNode<Token> ioParancsNode)
         {
-            _typeChecker.CheckForIoParancsParameter(ioParancsNode);   
+            _typeChecker.CheckForIoParancsParameter(ioParancsNode);
         }
 
         private void CheckHaAkkorKülönben(IList<TreeNode<Token>> nodes)

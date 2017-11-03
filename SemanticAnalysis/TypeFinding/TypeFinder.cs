@@ -14,11 +14,12 @@ namespace SemanticAnalysis.TypeFinding
     internal sealed class TypeFinder
     {
         private readonly SymbolTable _symbolTable;
-        internal TypeChecker TypeChecker { get; set; }
+        private readonly TypeChecker _typeChecker;
 
-        public TypeFinder(SymbolTable symbolTable)
+        public TypeFinder(SymbolTable symbolTable, TypeChecker typeChecker)
         {
             _symbolTable = symbolTable;
+            _typeChecker = typeChecker;
         }
 
         internal SingleEntryType GetTypeOfNode(TreeNode<Token> node)
@@ -73,7 +74,6 @@ namespace SemanticAnalysis.TypeFinding
             }
         }
 
-
         private SingleEntryType GetTypeOfOperandus(TreeNode<Token> node)
         {
             /*          
@@ -90,12 +90,13 @@ namespace SemanticAnalysis.TypeFinding
                     return GetTypeOfTerminal((TerminalToken)children.Single().Value);
                 case 2:
                     SingleEntryType type = GetTypeOfTerminal((TerminalToken)children[1].Value);
-                    TypeChecker.CheckUnárisOperátorCompatibility(children[0].Value as KeywordToken, type);
+                    _typeChecker.CheckUnárisOperátorCompatibility(children[0].Value as KeywordToken, type);
                     return type;
                 case 4:
-                    SingleEntryType firstOperandType = GetTypeOfTerminal((TerminalToken)children.First().Value);
-                    TypeChecker.ExpectArrayType(firstOperandType);
-                    return (SingleEntryType)LexicalElementCodeDictionary.GetSimpleTypeCodeFromArrayCode((int)firstOperandType);
+                    SingleEntryType identifierType = GetTypeOfTerminal((TerminalToken)children.First().Value);
+                    _typeChecker.ExpectArrayType(identifierType);
+                    _typeChecker.ExpectType(children[2], SingleEntryType.Egesz);
+                    return (SingleEntryType)LexicalElementCodeDictionary.GetSimpleTypeCodeFromArrayCode((int)identifierType);
                 default:
                     throw new InvalidOperationException();
             }
@@ -105,15 +106,15 @@ namespace SemanticAnalysis.TypeFinding
         {
             // <BinárisKifejezés> ::= <Operandus> <BinárisOperátor> <Operandus>
 
-            TypeChecker.ExpectTwoSidesToBeEqualTypes(node.Children[0], node.Children[2]);
+            _typeChecker.ExpectTwoSidesToBeEqualTypes(node.Children[0], node.Children[2]);
 
-            SingleEntryType opType = GetTypeOfOperandus(node.Children[0]);
+            SingleEntryType operandsType = GetTypeOfOperandus(node.Children[0]);
 
-            KeywordToken opNode = (KeywordToken)node.Children[1].Value;
-            TypeChecker.CheckBinárisOperátorCompatibility(opNode, opType);
+            KeywordToken operatorNode = (KeywordToken)node.Children[1].Value;
+            _typeChecker.CheckBinárisOperátorCompatibility(operatorNode, operandsType);
 
-            string op = LexicalElementCodeDictionary.GetWord(opNode.Id);
-            switch (op)
+            string operat0r = LexicalElementCodeDictionary.GetWord(operatorNode.Id);
+            switch (operat0r)
             {
                 case ">":
                 case ">=":
@@ -129,7 +130,7 @@ namespace SemanticAnalysis.TypeFinding
                 case "*":
                 case "/":
                 case "mod":
-                    return opType;
+                    return operandsType;
                 case ".":
                     return SingleEntryType.Szoveg;
             }

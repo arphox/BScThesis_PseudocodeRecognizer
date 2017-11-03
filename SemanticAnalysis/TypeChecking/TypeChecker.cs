@@ -1,5 +1,4 @@
-﻿using System;
-using LexicalAnalysis.LexicalElementIdentification;
+﻿using LexicalAnalysis.LexicalElementIdentification;
 using LexicalAnalysis.SymbolTableManagement;
 using LexicalAnalysis.Tokens;
 using SemanticAnalysis.TypeFinding;
@@ -14,62 +13,15 @@ namespace SemanticAnalysis.TypeChecking
 
         public TypeChecker(SymbolTable symbolTable)
         {
-            _typeFinder = new TypeFinder(symbolTable);
+            _typeFinder = new TypeFinder(symbolTable, this);
         }
 
-        internal static void CheckUnárisOperátorCompatibility(KeywordToken unárisOperátorKeywordToken, SingleEntryType operandType)
+        internal void ExpectArrayType(SingleEntryType type)
         {
-            string op = LexicalElementCodeDictionary.GetWord(unárisOperátorKeywordToken.Id);
-            switch (op)
+            int code = (int)type;
+            if (!LexicalElementCodeDictionary.IsArrayType(code))
             {
-                case "-":
-                    if (!(operandType == SingleEntryType.Egesz || operandType == SingleEntryType.Tort))
-                    {
-                        throw new SemanticAnalyzerException($"The unary operator `{op}` cannot be applied for the type {operandType}.");
-                    }
-                    break;
-
-                case "!":
-                    if (operandType != SingleEntryType.Logikai)
-                    {
-                        throw new SemanticAnalyzerException($"The unary operator `{op}` cannot be applied for the type {operandType}.");
-                    }
-                    break;
-            }
-        }
-
-        internal static void CheckBinárisOperátorCompatibility(KeywordToken binárisOperátorKeywordToken, SingleEntryType operandsType)
-        {
-            string op = LexicalElementCodeDictionary.GetWord(binárisOperátorKeywordToken.Id);
-            switch (op)
-            {
-                case ">":
-                case ">=":
-                case "<":
-                case "<=":
-                    if (!(operandsType == SingleEntryType.Egesz || operandsType == SingleEntryType.Tort))
-                        throw new SemanticAnalyzerException($"The operator `{op}` cannot be applied between types of {operandsType}.");
-                    break;
-
-                case "és":
-                case "vagy":
-                    if (operandsType != SingleEntryType.Logikai)
-                        throw new SemanticAnalyzerException($"The operator `{op}` cannot be applied between types of {operandsType}.");
-                    break;
-
-                case "+":
-                case "-":
-                case "*":
-                case "/":
-                case "mod":
-                    if (!(operandsType == SingleEntryType.Egesz || operandsType == SingleEntryType.Tort))
-                        throw new SemanticAnalyzerException($"The operator `{op}` cannot be applied between types of {operandsType}.");
-                    break;
-
-                case ".":
-                    if (operandsType != SingleEntryType.Szoveg)
-                        throw new SemanticAnalyzerException($"The operator `{op}` cannot be applied between types of {operandsType}.");
-                    break;
+                throw new SemanticAnalyzerException("The expression's type should be an array type.");
             }
         }
 
@@ -142,6 +94,62 @@ namespace SemanticAnalysis.TypeChecking
             if (type != SingleEntryType.Szoveg)
             {
                 throw new SemanticAnalyzerException($"The given parameter for the {nameof(SA.IoParancs)} should be of type {SingleEntryType.Szoveg}.");
+            }
+        }
+
+        internal void CheckUnárisOperátorCompatibility(KeywordToken unárisOperátorKeywordToken, SingleEntryType operandType)
+        {
+            string op = LexicalElementCodeDictionary.GetWord(unárisOperátorKeywordToken.Id);
+            switch (op)
+            {
+                case "-":
+                    if (!(operandType == SingleEntryType.Egesz || operandType == SingleEntryType.Tort))
+                    {
+                        throw new SemanticAnalyzerException($"The unary operator `{op}` cannot be applied for the type {operandType}.");
+                    }
+                    break;
+
+                case "!":
+                    if (operandType != SingleEntryType.Logikai)
+                    {
+                        throw new SemanticAnalyzerException($"The unary operator `{op}` cannot be applied for the type {operandType}.");
+                    }
+                    break;
+            }
+        }
+
+        internal void CheckBinárisOperátorCompatibility(KeywordToken binárisOperátorKeywordToken, SingleEntryType operandsType)
+        {
+            string op = LexicalElementCodeDictionary.GetWord(binárisOperátorKeywordToken.Id);
+            switch (op)
+            {
+                case ">":
+                case ">=":
+                case "<":
+                case "<=":
+                    if (!(operandsType == SingleEntryType.Egesz || operandsType == SingleEntryType.Tort))
+                        throw new SemanticAnalyzerException($"The operator `{op}` cannot be applied between types of {operandsType}.");
+                    break;
+
+                case "és":
+                case "vagy":
+                    if (operandsType != SingleEntryType.Logikai)
+                        throw new SemanticAnalyzerException($"The operator `{op}` cannot be applied between types of {operandsType}.");
+                    break;
+
+                case "+":
+                case "-":
+                case "*":
+                case "/":
+                case "mod":
+                    if (!(operandsType == SingleEntryType.Egesz || operandsType == SingleEntryType.Tort))
+                        throw new SemanticAnalyzerException($"The operator `{op}` cannot be applied between types of {operandsType}.");
+                    break;
+
+                case ".":
+                    if (operandsType != SingleEntryType.Szoveg)
+                        throw new SemanticAnalyzerException($"The operator `{op}` cannot be applied between types of {operandsType}.");
+                    break;
             }
         }
     }
