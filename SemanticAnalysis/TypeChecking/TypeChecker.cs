@@ -4,6 +4,7 @@ using LexicalAnalysis.SymbolTableManagement;
 using LexicalAnalysis.Tokens;
 using SemanticAnalysis.TypeFinding;
 using SyntaxAnalysis.Tree;
+using SA = SyntaxAnalysis.Analyzer.SyntaxAnalyzer;
 
 namespace SemanticAnalysis.TypeChecking
 {
@@ -72,7 +73,7 @@ namespace SemanticAnalysis.TypeChecking
             }
         }
 
-        internal void CheckForArrayType(TreeNode<Token> node)
+        internal void ExpectArrayType(TreeNode<Token> node)
         {
             int code = (int)_typeFinder.GetTypeOfNode(node);
             if (!LexicalElementCodeDictionary.IsArrayType(code))
@@ -81,7 +82,7 @@ namespace SemanticAnalysis.TypeChecking
             }
         }
 
-        internal void CheckForNonArrayType(TreeNode<Token> node)
+        internal void ExpectForNonArrayType(TreeNode<Token> node)
         {
             int code = (int)_typeFinder.GetTypeOfNode(node);
             if (LexicalElementCodeDictionary.IsArrayType(code))
@@ -90,7 +91,7 @@ namespace SemanticAnalysis.TypeChecking
             }
         }
 
-        internal void CheckForExactType(TreeNode<Token> node, SingleEntryType expectedType)
+        internal void ExpectType(TreeNode<Token> node, SingleEntryType expectedType)
         {
             SingleEntryType realType = _typeFinder.GetTypeOfNode(node);
             if (realType != expectedType)
@@ -99,7 +100,7 @@ namespace SemanticAnalysis.TypeChecking
             }
         }
 
-        internal void CheckTwoSidesForEqualTypes(TreeNode<Token> leftNode, TreeNode<Token> rightNode)
+        internal void ExpectTwoSidesToBeEqualTypes(TreeNode<Token> leftNode, TreeNode<Token> rightNode)
         {
             SingleEntryType leftSideType = _typeFinder.GetTypeOfNode(leftNode);
             SingleEntryType rightSideType = _typeFinder.GetTypeOfNode(rightNode);
@@ -125,13 +126,22 @@ namespace SemanticAnalysis.TypeChecking
 
         internal void CheckForArrayIndexedAssignmentTypeMatch(TreeNode<Token> identifierNode, TreeNode<Token> indexNode, TreeNode<Token> rightHandNode)
         {
-            CheckForExactType(indexNode, SingleEntryType.Egesz);
+            ExpectType(indexNode, SingleEntryType.Egesz);
             SingleEntryType identifierType = _typeFinder.GetTypeOfNode(identifierNode);
             SingleEntryType rightHandType = _typeFinder.GetTypeOfNode(rightHandNode);
 
             if (identifierType != rightHandType)
             {
                 throw new SemanticAnalyzerException($"The right-hand value of the expresion has to be a compatible value for the array");
+            }
+        }
+
+        internal void CheckForIoParancsParameter(TreeNode<Token> ioParancsNode)
+        {
+            SingleEntryType type = _typeFinder.GetTypeOfNode(ioParancsNode);
+            if (type != SingleEntryType.Szoveg)
+            {
+                throw new SemanticAnalyzerException($"The given parameter for the {nameof(SA.IoParancs)} should be of type {SingleEntryType.Szoveg}.");
             }
         }
     }

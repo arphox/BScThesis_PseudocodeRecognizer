@@ -89,14 +89,14 @@ namespace SemanticAnalysis
             if (változóDeklarációNode.ChildrenAreMatchingFor(nameof(SA.AlapTípus), "azonosító", "=", nameof(SA.NemTömbLétrehozóKifejezés)) ||
                 változóDeklarációNode.ChildrenAreMatchingFor(nameof(SA.TömbTípus), "azonosító", "=", "azonosító"))
             {
-                _typeChecker.CheckTwoSidesForEqualTypes(változóDeklarációNode.Children[1], változóDeklarációNode.Children[3]);
+                _typeChecker.ExpectTwoSidesToBeEqualTypes(változóDeklarációNode.Children[1], változóDeklarációNode.Children[3]);
             }
 
             // <AlapTípus> "azonosító" "=" <BelsőFüggvény> "(" <NemTömbLétrehozóKifejezés> ")"
             else if (változóDeklarációNode.Children.Count == 7)
             {
                 _typeChecker.CheckForInternalFunctionParameterTypeMatch(változóDeklarációNode.Children[3], változóDeklarációNode.Children[5]);
-                _typeChecker.CheckTwoSidesForEqualTypes(változóDeklarációNode.Children[1], változóDeklarációNode.Children[3]);
+                _typeChecker.ExpectTwoSidesToBeEqualTypes(változóDeklarációNode.Children[1], változóDeklarációNode.Children[3]);
 ;            }
         }
 
@@ -105,51 +105,58 @@ namespace SemanticAnalysis
             // "azonosító" "=" <NemTömbLétrehozóKifejezés> |
             if (értékadásNode.ChildrenAreMatchingFor("azonosító", "=", nameof(SA.NemTömbLétrehozóKifejezés)))
             {
-                _typeChecker.CheckForNonArrayType(értékadásNode.Children[0]);
-                _typeChecker.CheckTwoSidesForEqualTypes(értékadásNode.Children[0], értékadásNode.Children[2]);
+                _typeChecker.ExpectForNonArrayType(értékadásNode.Children[0]);
+                _typeChecker.ExpectTwoSidesToBeEqualTypes(értékadásNode.Children[0], értékadásNode.Children[2]);
             }
 
             // "azonosító" "=" <TömbLétrehozóKifejezés>
             else if (értékadásNode.ChildrenAreMatchingFor("azonosító", "=", nameof(SA.TömbLétrehozóKifejezés)))
             {
-                _typeChecker.CheckForArrayType(értékadásNode.Children[0]);
-                _typeChecker.CheckTwoSidesForEqualTypes(értékadásNode.Children[0], értékadásNode.Children[2]);
+                _typeChecker.ExpectArrayType(értékadásNode.Children[0]);
+                _typeChecker.ExpectTwoSidesToBeEqualTypes(értékadásNode.Children[0], értékadásNode.Children[2]);
             }
 
             // "azonosító" "=" <BelsőFüggvény> "(" <NemTömbLétrehozóKifejezés> ")"
             else if (értékadásNode.ChildrenAreMatchingFor("azonosító", "=", nameof(SA.BelsőFüggvény), "(", nameof(SA.NemTömbLétrehozóKifejezés), ")"))
             {
-                _typeChecker.CheckForNonArrayType(értékadásNode.Children[0]);
+                _typeChecker.ExpectForNonArrayType(értékadásNode.Children[0]);
                 _typeChecker.CheckForInternalFunctionParameterTypeMatch(értékadásNode.Children[2], értékadásNode.Children[4]);
-                _typeChecker.CheckTwoSidesForEqualTypes(értékadásNode.Children[0], értékadásNode.Children[2]);
+                _typeChecker.ExpectTwoSidesToBeEqualTypes(értékadásNode.Children[0], értékadásNode.Children[2]);
             }
 
             // "azonosító" "[" <NemTömbLétrehozóKifejezés> "]" "=" <NemTömbLétrehozóKifejezés>
             else if (értékadásNode.ChildrenAreMatchingFor("azonosító", "[", nameof(SA.NemTömbLétrehozóKifejezés), "]", "=", nameof(SA.NemTömbLétrehozóKifejezés)))
             {
-                _typeChecker.CheckForArrayType(értékadásNode.Children[0]);
+                _typeChecker.ExpectArrayType(értékadásNode.Children[0]);
                 _typeChecker.CheckForArrayIndexedAssignmentTypeMatch(értékadásNode.Children[0], értékadásNode.Children[2], értékadásNode.Children[5]);
             }
         }
 
         private void CheckIoParancs(TreeNode<Token> ioParancsNode)
         {
-            throw new NotImplementedException();
+            _typeChecker.CheckForIoParancsParameter(ioParancsNode);   
         }
 
         private void CheckHaAkkorKülönben(IList<TreeNode<Token>> nodes)
         {
-            throw new NotImplementedException();
+            // "ha" <NemTömbLétrehozóKifejezés> "akkor" "újsor" <Állítások> "különben" "újsor" <Állítások> "elágazás_vége"
+            _typeChecker.ExpectType(nodes[1], SingleEntryType.Logikai);
+            CheckÁllítások(nodes[4]);
+            CheckÁllítások(nodes[7]);
         }
 
         private void CheckHaAkkor(IList<TreeNode<Token>> nodes)
         {
-            throw new NotImplementedException();
+            // "ha" <NemTömbLétrehozóKifejezés> "akkor" "újsor" <Állítások> "elágazás_vége"
+            _typeChecker.ExpectType(nodes[1], SingleEntryType.Logikai);
+            CheckÁllítások(nodes[4]);
         }
 
         private void CheckCiklusAmíg(IList<TreeNode<Token>> nodes)
         {
-            throw new NotImplementedException();
+            // "ciklus_amíg" <NemTömbLétrehozóKifejezés> "újsor" <Állítások> "ciklus_vége"
+            _typeChecker.ExpectType(nodes[1], SingleEntryType.Logikai);
+            CheckÁllítások(nodes[3]);
         }
     }
 }

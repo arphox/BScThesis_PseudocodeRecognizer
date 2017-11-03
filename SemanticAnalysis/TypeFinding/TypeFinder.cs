@@ -94,7 +94,7 @@ namespace SemanticAnalysis.TypeFinding
                     return type;
                 case 4:
                     SingleEntryType firstOperandType = GetTypeOfTerminal((TerminalToken)children.First().Value);
-                    TypeChecker.CheckForArrayType(firstOperandType);
+                    TypeChecker.ExpectArrayType(firstOperandType);
                     return (SingleEntryType)LexicalElementCodeDictionary.GetSimpleTypeCodeFromArrayCode((int)firstOperandType);
                 default:
                     throw new InvalidOperationException();
@@ -105,7 +105,7 @@ namespace SemanticAnalysis.TypeFinding
         {
             // <BinárisKifejezés> ::= <Operandus> <BinárisOperátor> <Operandus>
 
-            TypeChecker.CheckTwoSidesForEqualTypes(node.Children[0], node.Children[2]);
+            TypeChecker.ExpectTwoSidesToBeEqualTypes(node.Children[0], node.Children[2]);
 
             SingleEntryType opType = GetTypeOfOperandus(node.Children[0]);
 
