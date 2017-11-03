@@ -18,7 +18,6 @@ namespace SemanticAnalysis
         private readonly SymbolTable _symbolTable;
         private bool _isAlreadyStarted;
 
-        private readonly TypeFinder _typeFinder;
         private readonly TypeChecker _typeChecker;
 
         public SemanticAnalyzer(SyntaxAnalyzerResult parserResult, SymbolTable symbolTable)
@@ -32,9 +31,7 @@ namespace SemanticAnalysis
                 throw new SemanticAnalyzerException("The semantic analyzer only starts if there are no syntax errors.");
 
             _parseTree = parserResult.ParseTree;
-            _typeFinder = new TypeFinder(_symbolTable);
-            _typeChecker = new TypeChecker(_typeFinder);
-            _typeFinder.TypeChecker = _typeChecker;
+            _typeChecker = new TypeChecker(_symbolTable);
         }
 
         private void Analyze()
@@ -65,16 +62,22 @@ namespace SemanticAnalysis
         {
             if (állításNode.ChildrenAreMatchingFor(nameof(SA.VáltozóDeklaráció)))
                 CheckVáltozóDeklaráció(állításNode.Children.Single());
+
             else if (állításNode.ChildrenAreMatchingFor(nameof(SA.Értékadás)))
                 CheckÉrtékadás(állításNode.Children.Single());
+
             else if (állításNode.ChildrenAreMatchingFor(nameof(SA.IoParancs)))
                 CheckIoParancs(állításNode.Children.Single());
+
             else if (állításNode.ChildrenAreMatchingFor("ha", nameof(SA.NemTömbLétrehozóKifejezés), "akkor", "újsor", nameof(SA.Állítások), "különben", "újsor", nameof(SA.Állítások), "elágazás_vége"))
                 CheckHaAkkorKülönben(állításNode.Children);
+
             else if (állításNode.ChildrenAreMatchingFor("ha", nameof(SA.NemTömbLétrehozóKifejezés), "akkor", "újsor", nameof(SA.Állítások), "elágazás_vége"))
                 CheckHaAkkor(állításNode.Children);
+
             else if (állításNode.ChildrenAreMatchingFor("ciklus_amíg", nameof(SA.NemTömbLétrehozóKifejezés), "újsor", nameof(SA.Állítások), "ciklus_vége"))
                 CheckCiklusAmíg(állításNode.Children);
+
             else
                 throw new InvalidOperationException();
         }
@@ -88,6 +91,7 @@ namespace SemanticAnalysis
             {
                 _typeChecker.CheckTwoSidesForEqualTypes(változóDeklarációNode.Children[1], változóDeklarációNode.Children[3]);
             }
+
             // <AlapTípus> "azonosító" "=" <BelsőFüggvény> "(" <NemTömbLétrehozóKifejezés> ")"
             else if (változóDeklarációNode.Children.Count == 7)
             {
@@ -98,7 +102,34 @@ namespace SemanticAnalysis
 
         private void CheckÉrtékadás(TreeNode<Token> értékadásNode)
         {
-            throw new NotImplementedException();
+            // "azonosító" "=" <NemTömbLétrehozóKifejezés> |
+            if (értékadásNode.ChildrenAreMatchingFor("azonosító", "=", nameof(SA.NemTömbLétrehozóKifejezés)))
+            {
+                _typeChecker.CheckForNonArrayType(értékadásNode.Children[0]);
+                _typeChecker.CheckTwoSidesForEqualTypes(értékadásNode.Children[0], értékadásNode.Children[2]);
+            }
+
+            // "azonosító" "=" <TömbLétrehozóKifejezés>
+            else if (értékadásNode.ChildrenAreMatchingFor("azonosító", "=", nameof(SA.TömbLétrehozóKifejezés)))
+            {
+                _typeChecker.CheckForArrayType(értékadásNode.Children[0]);
+                _typeChecker.CheckTwoSidesForEqualTypes(értékadásNode.Children[0], értékadásNode.Children[2]);
+            }
+
+            // "azonosító" "=" <BelsőFüggvény> "(" <NemTömbLétrehozóKifejezés> ")"
+            else if (értékadásNode.ChildrenAreMatchingFor("azonosító", "=", nameof(SA.BelsőFüggvény), "(", nameof(SA.NemTömbLétrehozóKifejezés), ")"))
+            {
+                _typeChecker.CheckForNonArrayType(értékadásNode.Children[0]);
+                _typeChecker.CheckForInternalFunctionParameterTypeMatch(értékadásNode.Children[2], értékadásNode.Children[4]);
+                _typeChecker.CheckTwoSidesForEqualTypes(értékadásNode.Children[0], értékadásNode.Children[2]);
+            }
+
+            // "azonosító" "[" <NemTömbLétrehozóKifejezés> "]" "=" <NemTömbLétrehozóKifejezés>
+            else if (értékadásNode.ChildrenAreMatchingFor("azonosító", "[", nameof(SA.NemTömbLétrehozóKifejezés), "]", "=", nameof(SA.NemTömbLétrehozóKifejezés)))
+            {
+                _typeChecker.CheckForArrayType(értékadásNode.Children[0]);
+                _typeChecker.CheckForArrayIndexedAssignmentTypeMatch(értékadásNode.Children[0], értékadásNode.Children[2], értékadásNode.Children[5]);
+            }
         }
 
         private void CheckIoParancs(TreeNode<Token> ioParancsNode)

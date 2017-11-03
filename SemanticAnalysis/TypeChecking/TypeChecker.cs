@@ -1,4 +1,5 @@
-﻿using LexicalAnalysis.LexicalElementIdentification;
+﻿using System;
+using LexicalAnalysis.LexicalElementIdentification;
 using LexicalAnalysis.SymbolTableManagement;
 using LexicalAnalysis.Tokens;
 using SemanticAnalysis.TypeFinding;
@@ -10,9 +11,9 @@ namespace SemanticAnalysis.TypeChecking
     {
         private readonly TypeFinder _typeFinder;
 
-        public TypeChecker(TypeFinder typeFinder)
+        public TypeChecker(SymbolTable symbolTable)
         {
-            _typeFinder = typeFinder;
+            _typeFinder = new TypeFinder(symbolTable);
         }
 
         internal static void CheckUnárisOperátorCompatibility(KeywordToken unárisOperátorKeywordToken, SingleEntryType operandType)
@@ -71,12 +72,30 @@ namespace SemanticAnalysis.TypeChecking
             }
         }
 
-        internal static void CheckForArrayType(SingleEntryType firstOperandType)
+        internal void CheckForArrayType(TreeNode<Token> node)
         {
-            int code = (int)firstOperandType;
+            int code = (int)_typeFinder.GetTypeOfNode(node);
             if (!LexicalElementCodeDictionary.IsArrayType(code))
             {
-                throw new SemanticAnalyzerException("The array indexing operator can only be applied on array types.");
+                throw new SemanticAnalyzerException("The expression's type should be an array type.");
+            }
+        }
+
+        internal void CheckForNonArrayType(TreeNode<Token> node)
+        {
+            int code = (int)_typeFinder.GetTypeOfNode(node);
+            if (LexicalElementCodeDictionary.IsArrayType(code))
+            {
+                throw new SemanticAnalyzerException("The expression's type cannot be an array type.");
+            }
+        }
+
+        internal void CheckForExactType(TreeNode<Token> node, SingleEntryType expectedType)
+        {
+            SingleEntryType realType = _typeFinder.GetTypeOfNode(node);
+            if (realType != expectedType)
+            {
+                throw new SemanticAnalyzerException($"Expected type to be {expectedType}, but was {realType}.");
             }
         }
 
@@ -101,6 +120,18 @@ namespace SemanticAnalysis.TypeChecking
             if (internalFunctionInputType != parameterType)
             {
                 throw new SemanticAnalyzerException($"The internal function `{internalFunctionName}`'s input type has to be {internalFunctionInputType}, but {parameterType} was given.");
+            }
+        }
+
+        internal void CheckForArrayIndexedAssignmentTypeMatch(TreeNode<Token> identifierNode, TreeNode<Token> indexNode, TreeNode<Token> rightHandNode)
+        {
+            CheckForExactType(indexNode, SingleEntryType.Egesz);
+            SingleEntryType identifierType = _typeFinder.GetTypeOfNode(identifierNode);
+            SingleEntryType rightHandType = _typeFinder.GetTypeOfNode(rightHandNode);
+
+            if (identifierType != rightHandType)
+            {
+                throw new SemanticAnalyzerException($"The right-hand value of the expresion has to be a compatible value for the array");
             }
         }
     }
