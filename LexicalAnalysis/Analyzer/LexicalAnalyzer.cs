@@ -54,7 +54,7 @@ namespace LexicalAnalysis.Analyzer
 
             List<TerminalToken> tokens = _outputTokensHandler.OutputTokens.ToList();
             bool isSuccessful = !tokens.Any(t => t is ErrorToken);
-            LexicalAnalyzerResult result =  new LexicalAnalyzerResult(tokens, _symbolTableManager.SymbolTable, isSuccessful);
+            LexicalAnalyzerResult result =  new LexicalAnalyzerResult(tokens, _symbolTableManager.SymbolTable);
 
             if (isSuccessful)
                 return result;
