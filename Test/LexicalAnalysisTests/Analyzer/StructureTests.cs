@@ -17,7 +17,7 @@ namespace LexicalAnalysisTests.Analyzer
                                 "elágazás_vége\n" +
                                 "program_vége";
 
-            LexicalAnalyzerResult result = new LexicalAnalyzer(code).Analyze();
+            LexicalAnalyzerResult result = new LexicalAnalyzer(code).Start();
 
             TokenTester tt = new TokenTester(result);
 
@@ -57,7 +57,7 @@ namespace LexicalAnalysisTests.Analyzer
                                 "ciklus_vége\n" +
                                 "program_vége";
 
-            LexicalAnalyzerResult result = new LexicalAnalyzer(code).Analyze();
+            LexicalAnalyzerResult result = new LexicalAnalyzer(code).Start();
 
             TokenTester tt = new TokenTester(result);
 

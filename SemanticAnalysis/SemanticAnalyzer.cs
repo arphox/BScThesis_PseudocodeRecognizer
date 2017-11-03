@@ -33,7 +33,7 @@ namespace SemanticAnalysis
             _typeChecker = new TypeChecker(_symbolTable);
         }
 
-        private void Analyze()
+        public void Start()
         {
             if (_isAlreadyStarted)
                 throw new InvalidOperationException("This object is not reusable.");

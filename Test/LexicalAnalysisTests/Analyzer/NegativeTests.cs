@@ -16,7 +16,7 @@ namespace LexicalAnalysisTests.Analyzer
                                 "kód a fájlban!\r\n" +
                                 "Jaj.\r\n";
 
-            LexicalAnalyzerResult result = new LexicalAnalyzer(code).Analyze();
+            LexicalAnalyzerResult result = new LexicalAnalyzer(code).Start();
 
             // Tokens
             Assert.That(result.Tokens.Count, Is.EqualTo(0));
@@ -34,7 +34,7 @@ namespace LexicalAnalysisTests.Analyzer
                                 "x = x + 1\r\n" +
                                 "program_vége";
 
-            LexicalAnalyzerResult result = new LexicalAnalyzer(code).Analyze();
+            LexicalAnalyzerResult result = new LexicalAnalyzer(code).Start();
 
             // Tokens
             Assert.That(result.Tokens.Count, Is.EqualTo(0));
@@ -52,7 +52,7 @@ namespace LexicalAnalysisTests.Analyzer
                                 "egész x = 2\r\n" +
                                 "x = x + 1";
 
-            LexicalAnalyzerResult result = new LexicalAnalyzer(code).Analyze();
+            LexicalAnalyzerResult result = new LexicalAnalyzer(code).Start();
 
             TokenTester tt = new TokenTester(result);
 
@@ -99,7 +99,7 @@ namespace LexicalAnalysisTests.Analyzer
                                 "program_kezd\r\n" +
                                 "program_vége";
 
-            LexicalAnalyzerResult result = new LexicalAnalyzer(code).Analyze();
+            LexicalAnalyzerResult result = new LexicalAnalyzer(code).Start();
 
             TokenTester tt = new TokenTester(result)
             {

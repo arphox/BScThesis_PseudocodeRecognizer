@@ -16,7 +16,7 @@ namespace LexicalAnalysisTests.Analyzer
                           "egész " + identifierName + "\n" +
                           "program_vége";
 
-            LexicalAnalyzerResult result = new LexicalAnalyzer(code).Analyze();
+            LexicalAnalyzerResult result = new LexicalAnalyzer(code).Start();
 
             TokenTester tt = new TokenTester(result);
 

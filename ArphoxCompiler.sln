@@ -19,6 +19,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SyntaxAnalysisTests", "Test
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SemanticAnalysis", "SemanticAnalysis\SemanticAnalysis.csproj", "{3EB0B2CD-2DB8-4E38-9CE6-D2F89DE43AE7}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SemanticAnalysisTests", "Test\SemanticAnalysisTests\SemanticAnalysisTests.csproj", "{F81D9F5E-A198-409D-83C8-6E6B9E575CE2}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -49,6 +51,10 @@ Global
 		{3EB0B2CD-2DB8-4E38-9CE6-D2F89DE43AE7}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{3EB0B2CD-2DB8-4E38-9CE6-D2F89DE43AE7}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{3EB0B2CD-2DB8-4E38-9CE6-D2F89DE43AE7}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F81D9F5E-A198-409D-83C8-6E6B9E575CE2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F81D9F5E-A198-409D-83C8-6E6B9E575CE2}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F81D9F5E-A198-409D-83C8-6E6B9E575CE2}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F81D9F5E-A198-409D-83C8-6E6B9E575CE2}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -57,6 +63,7 @@ Global
 		{AAE83F8A-F6C8-43ED-8C50-712F292C518E} = {CB8D196D-EAD1-4921-A87F-EAFEB658DC57}
 		{74FDB26A-1071-401A-8A9C-A1AFE7772962} = {F491CA7E-3982-461A-B500-1285B029D6B3}
 		{97E18FB0-8246-49B6-B978-13A54EC018E0} = {F491CA7E-3982-461A-B500-1285B029D6B3}
+		{F81D9F5E-A198-409D-83C8-6E6B9E575CE2} = {F491CA7E-3982-461A-B500-1285B029D6B3}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {26E9ED42-D1DB-43FE-9E4E-7084A53BB9DA}

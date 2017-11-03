@@ -29,7 +29,7 @@ namespace LexicalAnalysis.Analyzer
             _outputTokensHandler = new OutputTokenListHandler(_symbolTableManager);
         }
 
-        public LexicalAnalyzerResult Analyze()
+        public LexicalAnalyzerResult Start()
         {
             if (_isAnalyzeCalled)
                 throw new InvalidOperationException("Sorry, this object is not reusable!");

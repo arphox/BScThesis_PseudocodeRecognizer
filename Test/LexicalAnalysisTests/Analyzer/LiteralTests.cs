@@ -39,7 +39,7 @@ namespace LexicalAnalysisTests.Analyzer
                           value + "\n" +
                           "program_vége";
 
-            LexicalAnalyzerResult result = new LexicalAnalyzer(code).Analyze();
+            LexicalAnalyzerResult result = new LexicalAnalyzer(code).Start();
 
             TokenTester tt = new TokenTester(result);
 
@@ -64,7 +64,7 @@ namespace LexicalAnalysisTests.Analyzer
                            value + "\n" +
                           "program_vége";
 
-            LexicalAnalyzerResult result = new LexicalAnalyzer(code).Analyze();
+            LexicalAnalyzerResult result = new LexicalAnalyzer(code).Start();
 
             TokenTester tt = new TokenTester(result);
 
@@ -90,7 +90,7 @@ namespace LexicalAnalysisTests.Analyzer
                                 "hamis\n" +
                                 "program_vége";
 
-            LexicalAnalyzerResult result = new LexicalAnalyzer(code).Analyze();
+            LexicalAnalyzerResult result = new LexicalAnalyzer(code).Start();
 
             TokenTester tt = new TokenTester(result);
 

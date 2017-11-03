@@ -18,7 +18,7 @@ namespace SyntaxAnalysisTests
                                 "program_vége";
 
             Assert.Throws<ArgumentNullException>(() => new SA(null));
-            Assert.Throws<LexicalAnalysisException>(() => new SA(new LexicalAnalyzer(code).Analyze()));
+            Assert.Throws<LexicalAnalysisException>(() => new SA(new LexicalAnalyzer(code).Start()));
         }
 
         [Test]
@@ -28,7 +28,7 @@ namespace SyntaxAnalysisTests
                                 "kilép\r\n" +
                                 "program_vége";
 
-            SyntaxAnalyzer parser = new SyntaxAnalyzer(new LexicalAnalyzer(code).Analyze());
+            SyntaxAnalyzer parser = new SyntaxAnalyzer(new LexicalAnalyzer(code).Start());
             parser.Start();
             Assert.Throws<InvalidOperationException>(() => parser.Start());
         }

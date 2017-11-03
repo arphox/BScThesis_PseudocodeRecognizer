@@ -40,7 +40,7 @@ namespace VisualParseTree
 
             Stopwatch sw = Stopwatch.StartNew();
 
-            LexicalAnalyzerResult lexicalAnalyzerResult = new LexicalAnalyzer(SyntaxAnalyzer.TestCode).Analyze();
+            LexicalAnalyzerResult lexicalAnalyzerResult = new LexicalAnalyzer(SyntaxAnalyzer.TestCode).Start();
             sw.Stop();
             Console.WriteLine($"Lexer: {sw.ElapsedMilliseconds} ms.");
             sw.Restart();

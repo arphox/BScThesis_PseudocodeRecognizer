@@ -9,7 +9,7 @@ namespace LexicalAnalysisTests
             LexicalAnalyzerResult result;
             try
             {
-                result = new LexicalAnalyzer(code).Analyze();
+                result = new LexicalAnalyzer(code).Start();
             }
             catch (LexicalAnalysisException e)
             {

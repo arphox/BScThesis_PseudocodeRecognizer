@@ -17,7 +17,7 @@ namespace LexicalAnalysisTests.Analyzer
                           type + " óóüöúőűáéí\n" +
                           "program_vége";
 
-            LexicalAnalyzerResult result = new LexicalAnalyzer(code).Analyze();
+            LexicalAnalyzerResult result = new LexicalAnalyzer(code).Start();
 
             TokenTester tt = new TokenTester(result);
 
@@ -44,7 +44,7 @@ namespace LexicalAnalysisTests.Analyzer
                           type + "[] alma_körte\n" +
                           "program_vége";
 
-            LexicalAnalyzerResult result = new LexicalAnalyzer(code).Analyze();
+            LexicalAnalyzerResult result = new LexicalAnalyzer(code).Start();
 
             TokenTester tt = new TokenTester(result);
 
@@ -71,7 +71,7 @@ namespace LexicalAnalysisTests.Analyzer
                                 "tört s = -3,1111\n" +
                                 "program_vége";
 
-            LexicalAnalyzerResult result = new LexicalAnalyzer(code).Analyze();
+            LexicalAnalyzerResult result = new LexicalAnalyzer(code).Start();
 
             TokenTester tt = new TokenTester(result);
 
@@ -100,7 +100,7 @@ namespace LexicalAnalysisTests.Analyzer
                                 "szöveg[] sorok = létrehoz[97]\n" +
                                 "program_vége";
 
-            LexicalAnalyzerResult result = new LexicalAnalyzer(code).Analyze();
+            LexicalAnalyzerResult result = new LexicalAnalyzer(code).Start();
 
             TokenTester tt = new TokenTester(result);
 
