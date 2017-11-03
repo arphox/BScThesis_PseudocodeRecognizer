@@ -86,7 +86,7 @@ namespace LexicalAnalysis.SymbolTableManagement
             }
         }
 
-        internal static SingleEntry GetSingleEntryById(SymbolTableEntry entry, int id)
+        public static SingleEntry GetSingleEntryById(SymbolTableEntry entry, int id)
         {
             switch (entry)
             {
