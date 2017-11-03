@@ -149,7 +149,7 @@ namespace SyntaxAnalysisTests
             }
             finally
             {
-                Assert.That(isThrown, Is.True);
+                Assert.That(isThrown, Is.True, $"Expected {nameof(SyntaxAnalysisException)} to be thrown, but was none.");
             }
         }
 
