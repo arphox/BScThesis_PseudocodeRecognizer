@@ -27,7 +27,7 @@ namespace SemanticAnalysis
             _symbolTable = symbolTable ?? throw new ArgumentNullException(nameof(symbolTable));
 
             if (!parserResult.IsSuccessful)
-                throw new SemanticAnalyzerException("The semantic analyzer only starts if there are no syntax errors.");
+                throw new SemanticAnalysisException(SemanticAnalysisErrorType.OnlyStartsIfNoSyntaxError, "The semantic analyzer only starts if there are no syntax errors.");
 
             _parseTree = parserResult.ParseTree;
             _typeChecker = new TypeChecker(_symbolTable);

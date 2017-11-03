@@ -13,5 +13,18 @@ namespace SemanticAnalysisTests
 
             new SemanticAnalyzer(parserResult, lexerResult.SymbolTable).Start();
         }
+
+        internal static SemanticAnalysisException DoSemanticAnalysisWithExceptionSwallowing(string code)
+        {
+            try
+            {
+                DoSemanticAnalysis(code);
+            }
+            catch (SemanticAnalysisException e)
+            {
+                return e;
+            }
+            return null;
+        }
     }
 }

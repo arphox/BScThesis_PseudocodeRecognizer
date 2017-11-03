@@ -1,7 +1,6 @@
-﻿using LexicalAnalysis.Analyzer;
-using NUnit.Framework;
+﻿using NUnit.Framework;
 using SemanticAnalysis;
-using SyntaxAnalysis.Analyzer;
+using System;
 
 namespace SemanticAnalysisTests
 {
@@ -15,6 +14,28 @@ namespace SemanticAnalysisTests
                                 "kilép\r\n" +
                                 "program_vége";
             TestHelper.DoSemanticAnalysis(code);
+        }
+
+        [Test]
+        public void Declaration1()
+        {
+            const string code = "program_kezd\r\n" +
+                                "egész a = 2\r\n" +
+                                "program_vége";
+
+            TestHelper.DoSemanticAnalysis(code);
+        }
+
+        [Test]
+        public void Declaration1_Negative()
+        {
+            const string code = "program_kezd\r\n" +
+                                "egész a = igaz\r\n" +
+                                "program_vége";
+
+            SemanticAnalysisException exceptionCaught = TestHelper.DoSemanticAnalysisWithExceptionSwallowing(code);
+
+            Console.WriteLine();
         }
     }
 }

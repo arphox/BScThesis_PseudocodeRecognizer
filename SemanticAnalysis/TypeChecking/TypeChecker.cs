@@ -21,16 +21,17 @@ namespace SemanticAnalysis.TypeChecking
             int code = (int)type;
             if (!LexicalElementCodeDictionary.IsArrayType(code))
             {
-                throw new SemanticAnalyzerException("The expression's type should be an array type.");
+                throw new SemanticAnalysisException(SemanticAnalysisErrorType.AnotherTypeExpected, $"The type should be an array type, but was {type}.");
             }
         }
 
         internal void ExpectArrayType(TreeNode<Token> node)
         {
-            int code = (int)_typeFinder.GetTypeOfNode(node);
+            SingleEntryType type = _typeFinder.GetTypeOfNode(node);
+            int code = (int)type;
             if (!LexicalElementCodeDictionary.IsArrayType(code))
             {
-                throw new SemanticAnalyzerException("The expression's type should be an array type.");
+                throw new SemanticAnalysisException(SemanticAnalysisErrorType.AnotherTypeExpected, $"The type should be an array type, but was {type}.");
             }
         }
 
@@ -39,7 +40,7 @@ namespace SemanticAnalysis.TypeChecking
             int code = (int)_typeFinder.GetTypeOfNode(node);
             if (LexicalElementCodeDictionary.IsArrayType(code))
             {
-                throw new SemanticAnalyzerException("The expression's type cannot be an array type.");
+                throw new SemanticAnalysisException(SemanticAnalysisErrorType.AnotherTypeExpected, "The type cannot be an array type.");
             }
         }
 
@@ -48,7 +49,7 @@ namespace SemanticAnalysis.TypeChecking
             SingleEntryType realType = _typeFinder.GetTypeOfNode(node);
             if (realType != expectedType)
             {
-                throw new SemanticAnalyzerException($"Expected type to be {expectedType}, but was {realType}.");
+                throw new SemanticAnalysisException(SemanticAnalysisErrorType.AnotherTypeExpected, $"Expected type to be {expectedType}, but was {realType}.");
             }
         }
 
@@ -59,7 +60,8 @@ namespace SemanticAnalysis.TypeChecking
 
             if (leftSideType != rightSideType)
             {
-                throw new SemanticAnalyzerException($"The types on the two sides of the expression do not match. Left: {leftSideType}. Right: {rightSideType}.");
+                throw new SemanticAnalysisException(SemanticAnalysisErrorType.TypeMismatchOnTwoSides,
+                    $"The types on the two sides of the expression do not match. Left: `{leftSideType}`. Right: `{rightSideType}`.");
             }
         }
 
@@ -68,11 +70,12 @@ namespace SemanticAnalysis.TypeChecking
             SingleEntryType internalFunctionInputType = StaticTypeFinder.GetInputTypeOfInternalFunction((InternalFunctionToken)parameterNode.Value);
             SingleEntryType parameterType = _typeFinder.GetTypeOfNode(internalFunctionNode);
 
-            string internalFunctionName = LexicalElementCodeDictionary.GetWord(((InternalFunctionToken) internalFunctionNode.Value).Id);
+            string internalFunctionName = LexicalElementCodeDictionary.GetWord(((InternalFunctionToken)internalFunctionNode.Value).Id);
 
             if (internalFunctionInputType != parameterType)
             {
-                throw new SemanticAnalyzerException($"The internal function `{internalFunctionName}`'s input type has to be {internalFunctionInputType}, but {parameterType} was given.");
+                throw new SemanticAnalysisException(SemanticAnalysisErrorType.BadInternalFunctionInputType,
+                    $"The internal function `{internalFunctionName}`'s input type has to be {internalFunctionInputType}, but {parameterType} was given.");
             }
         }
 
@@ -84,7 +87,8 @@ namespace SemanticAnalysis.TypeChecking
 
             if (identifierType != rightHandType)
             {
-                throw new SemanticAnalyzerException($"The right-hand value of the expresion has to be a compatible value for the array");
+                throw new SemanticAnalysisException(SemanticAnalysisErrorType.ArrayElementAssignmentTypeMismatch,
+                    $"The right-hand value of the expresion has to be a compatible value for the array");
             }
         }
 
@@ -93,7 +97,8 @@ namespace SemanticAnalysis.TypeChecking
             SingleEntryType type = _typeFinder.GetTypeOfNode(ioParancsNode);
             if (type != SingleEntryType.Szoveg)
             {
-                throw new SemanticAnalyzerException($"The given parameter for the {nameof(SA.IoParancs)} should be of type {SingleEntryType.Szoveg}.");
+                throw new SemanticAnalysisException(SemanticAnalysisErrorType.IoParancsTypeMismatch,
+                    $"The given parameter for the {nameof(SA.IoParancs)} should be of type {SingleEntryType.Szoveg}.");
             }
         }
 
@@ -105,14 +110,16 @@ namespace SemanticAnalysis.TypeChecking
                 case "-":
                     if (!(operandType == SingleEntryType.Egesz || operandType == SingleEntryType.Tort))
                     {
-                        throw new SemanticAnalyzerException($"The unary operator `{op}` cannot be applied for the type {operandType}.");
+                        throw new SemanticAnalysisException(SemanticAnalysisErrorType.UnaryOperatorCannotBeAppliedToType,
+                            $"The unary operator `{op}` cannot be applied for the type {operandType}.");
                     }
                     break;
 
                 case "!":
                     if (operandType != SingleEntryType.Logikai)
                     {
-                        throw new SemanticAnalyzerException($"The unary operator `{op}` cannot be applied for the type {operandType}.");
+                        throw new SemanticAnalysisException(SemanticAnalysisErrorType.UnaryOperatorCannotBeAppliedToType,
+                            $"The unary operator `{op}` cannot be applied for the type {operandType}.");
                     }
                     break;
             }
@@ -128,13 +135,15 @@ namespace SemanticAnalysis.TypeChecking
                 case "<":
                 case "<=":
                     if (!(operandsType == SingleEntryType.Egesz || operandsType == SingleEntryType.Tort))
-                        throw new SemanticAnalyzerException($"The operator `{op}` cannot be applied between types of {operandsType}.");
+                        throw new SemanticAnalysisException(SemanticAnalysisErrorType.BinaryOperatorCannotBeAppliedToType,
+                            $"The operator `{op}` cannot be applied between types of {operandsType}.");
                     break;
 
                 case "és":
                 case "vagy":
                     if (operandsType != SingleEntryType.Logikai)
-                        throw new SemanticAnalyzerException($"The operator `{op}` cannot be applied between types of {operandsType}.");
+                        throw new SemanticAnalysisException(SemanticAnalysisErrorType.BinaryOperatorCannotBeAppliedToType, 
+                            $"The operator `{op}` cannot be applied between types of {operandsType}.");
                     break;
 
                 case "+":
@@ -143,12 +152,14 @@ namespace SemanticAnalysis.TypeChecking
                 case "/":
                 case "mod":
                     if (!(operandsType == SingleEntryType.Egesz || operandsType == SingleEntryType.Tort))
-                        throw new SemanticAnalyzerException($"The operator `{op}` cannot be applied between types of {operandsType}.");
+                        throw new SemanticAnalysisException(SemanticAnalysisErrorType.BinaryOperatorCannotBeAppliedToType, 
+                            $"The operator `{op}` cannot be applied between types of {operandsType}.");
                     break;
 
                 case ".":
                     if (operandsType != SingleEntryType.Szoveg)
-                        throw new SemanticAnalyzerException($"The operator `{op}` cannot be applied between types of {operandsType}.");
+                        throw new SemanticAnalysisException(SemanticAnalysisErrorType.BinaryOperatorCannotBeAppliedToType, 
+                            $"The operator `{op}` cannot be applied between types of {operandsType}.");
                     break;
             }
         }

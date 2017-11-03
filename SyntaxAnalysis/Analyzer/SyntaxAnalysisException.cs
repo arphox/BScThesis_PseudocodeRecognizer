@@ -1,9 +1,9 @@
-﻿using System;
+﻿using Common;
 using LexicalAnalysis.Tokens;
 
 namespace SyntaxAnalysis.Analyzer
 {
-    public class SyntaxAnalysisException : ApplicationException
+    public class SyntaxAnalysisException : ArphoxCompilerException
     {
         public Token LastToken { get; }
         public int CurrentRowNumber { get; }

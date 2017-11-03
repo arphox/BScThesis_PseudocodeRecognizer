@@ -13,7 +13,7 @@ namespace LexicalAnalysis.LexicalElementIdentification
         internal const int EgeszCode = 1001;
         internal const int TortCode = 1002;
         internal const int SzovegCode = 1003;
-        internal const int LogikaiCode = 1001;
+        internal const int LogikaiCode = 1004;
         internal const int EgeszTombCode = 1051;
         internal const int TortTombCode = 1052;
         internal const int SzovegTombCode = 1053;

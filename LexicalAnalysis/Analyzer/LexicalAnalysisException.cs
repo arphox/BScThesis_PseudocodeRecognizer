@@ -1,8 +1,8 @@
-﻿using System;
+﻿using Common;
 
 namespace LexicalAnalysis.Analyzer
 {
-    public sealed class LexicalAnalysisException : ApplicationException
+    public sealed class LexicalAnalysisException : ArphoxCompilerException
     {
         public LexicalAnalyzerResult Result { get; }
 

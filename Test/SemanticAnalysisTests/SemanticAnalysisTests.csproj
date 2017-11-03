@@ -45,6 +45,10 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\..\Common\Common.csproj">
+      <Project>{acf3e381-c720-4ad3-8710-eeea14b288fc}</Project>
+      <Name>Common</Name>
+    </ProjectReference>
     <ProjectReference Include="..\..\LexicalAnalysis\LexicalAnalysis.csproj">
       <Project>{5c7ef03c-6fc4-4bd7-a714-8f2b7b7765de}</Project>
       <Name>LexicalAnalysis</Name>
