@@ -66,7 +66,7 @@ namespace SemanticAnalysis.TypeFinding
             {
                 case "egész literál": return SingleEntryType.Egesz;
                 case "tört literál": return SingleEntryType.Tort;
-                case "szöveg literál": return SingleEntryType.Tort;
+                case "szöveg literál": return SingleEntryType.Szoveg;
                 case "igaz":
                 case "hamis": return SingleEntryType.Logikai;
                 default:

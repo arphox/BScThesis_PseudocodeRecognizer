@@ -1,4 +1,5 @@
-﻿using LexicalAnalysis.LexicalElementIdentification;
+﻿using System.Linq;
+using LexicalAnalysis.LexicalElementIdentification;
 using LexicalAnalysis.SymbolTableManagement;
 using LexicalAnalysis.Tokens;
 using SemanticAnalysis.Exceptions;
@@ -68,10 +69,11 @@ namespace SemanticAnalysis.TypeChecking
 
         internal void CheckForInternalFunctionParameterTypeMatch(TreeNode<Token> internalFunctionNode, TreeNode<Token> parameterNode)
         {
-            SingleEntryType internalFunctionInputType = StaticTypeFinder.GetInputTypeOfInternalFunction((InternalFunctionToken)parameterNode.Value);
-            SingleEntryType parameterType = _typeFinder.GetTypeOfNode(internalFunctionNode);
+            InternalFunctionToken internalFunctionToken = (InternalFunctionToken) internalFunctionNode.Children.Single().Value;
+            SingleEntryType internalFunctionInputType = StaticTypeFinder.GetInputTypeOfInternalFunction(internalFunctionToken);
+            SingleEntryType parameterType = _typeFinder.GetTypeOfNode(parameterNode);
 
-            string internalFunctionName = LexicalElementCodeDictionary.GetWord(((InternalFunctionToken)internalFunctionNode.Value).Id);
+            string internalFunctionName = LexicalElementCodeDictionary.GetWord(internalFunctionToken.Id);
 
             if (internalFunctionInputType != parameterType)
             {
