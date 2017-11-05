@@ -87,6 +87,12 @@ namespace SemanticAnalysis
                 _typeChecker.ExpectRightTypeToBeLeftType(változóDeklarációNode.Children[1], változóDeklarációNode.Children[3]);
             }
 
+            // <TömbTípus> "azonosító" "=" <TömbLétrehozóKifejezés>
+            else if (változóDeklarációNode.ChildrenAreMatchingFor(nameof(SA.TömbTípus), "azonosító", "=", nameof(SA.TömbLétrehozóKifejezés)))
+            {
+                _typeChecker.CheckTömblétrehozóKifejezés(változóDeklarációNode.Children[3]);
+            }
+
             // <AlapTípus> "azonosító" "=" <BelsőFüggvény> "(" <NemTömbLétrehozóKifejezés> ")"
             else if (változóDeklarációNode.Children.Count == 7)
             {

@@ -170,5 +170,11 @@ namespace SemanticAnalysis.TypeChecking
                     break;
             }
         }
+
+        internal void CheckTömblétrehozóKifejezés(TreeNode<Token> tömbLétrehozóKifejezésNode)
+        {
+            TreeNode<Token> nemTömbLétrehozóKifejezésChild = tömbLétrehozóKifejezésNode.Children[2];
+            ExpectType(nemTömbLétrehozóKifejezésChild, SingleEntryType.Egesz);
+        }
     }
 }
