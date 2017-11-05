@@ -44,6 +44,8 @@
     <Compile Include="NegativeTests\Declaration\ArrayDeclaration1.cs" />
     <Compile Include="NegativeTests\Declaration\NonArrayDeclaration2.cs" />
     <Compile Include="NegativeTests\Declaration\NonArrayDeclaration1.cs" />
+    <Compile Include="NegativeTests\If\If1.cs" />
+    <Compile Include="NegativeTests\If\If2.cs" />
     <Compile Include="NegativeTests\SimpleTests.cs" />
     <Compile Include="NegativeTests\While1.cs" />
     <Compile Include="PositiveTests\CorrectCodes.cs" />

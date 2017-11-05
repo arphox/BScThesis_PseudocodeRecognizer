@@ -32,7 +32,7 @@ namespace SemanticAnalysisTests.NegativeTests
                                 "program_vége";
 
             SemanticAnalysisException e = TestHelper.DoSemanticAnalysisWithExceptionSwallowing(code);
-            TestHelper.ExpectAnotherTypeExpectedException(e, SingleEntryType.Logikai.ToString(), SingleEntryType.Szoveg.ToString(), 3);
+            TestHelper.ExpectAnotherTypeExpectedException(e, SingleEntryType.Logikai.ToString(), SingleEntryType.Tort.ToString(), 3);
         }
 
         [Test]
