@@ -16,7 +16,7 @@ namespace LexicalAnalysis.Analyzer
 
         private LexicalAnalyzerState _analyzerState = LexicalAnalyzerState.Initial;
 
-        private int _currentRow = 1;
+        private int _currentLine = 1;
         private bool _isAnalyzeCalled;
         private bool _isProgramStartTokenFound;
 
@@ -40,8 +40,8 @@ namespace LexicalAnalysis.Analyzer
             {
                 switch (_analyzerState)
                 {
-                    case LexicalAnalyzerState.Comment1Row: HandleState_SingleRowComment(); break;
-                    case LexicalAnalyzerState.CommentNRow: HandleState_MultiRowComment(); break;
+                    case LexicalAnalyzerState.Comment1Line: HandleState_SingleLineComment(); break;
+                    case LexicalAnalyzerState.CommentNLine: HandleState_MultiLineComment(); break;
                     case LexicalAnalyzerState.StringLiteral: HandleState_StringLiteral(); break;
                     case LexicalAnalyzerState.Whitespace: HandleState_Whitespace(); break;
                     case LexicalAnalyzerState.NonWhitespace: HandleState_NonWhitespace(); break;
@@ -78,8 +78,8 @@ namespace LexicalAnalysis.Analyzer
             {
                 switch (_inputHandler.NextChar)
                 {
-                    case '/': return LexicalAnalyzerState.Comment1Row;
-                    case '*': return LexicalAnalyzerState.CommentNRow;
+                    case '/': return LexicalAnalyzerState.Comment1Line;
+                    case '*': return LexicalAnalyzerState.CommentNLine;
                 }
             }
 
@@ -91,7 +91,7 @@ namespace LexicalAnalysis.Analyzer
             return LexicalAnalyzerState.NonWhitespace;
         }
 
-        private void HandleState_SingleRowComment()
+        private void HandleState_SingleLineComment()
         {
             _inputHandler.Indexer += 2;   //  skip "//"
             while (!_inputHandler.EndReached && _inputHandler.CurrentChar != '\n')
@@ -102,7 +102,7 @@ namespace LexicalAnalysis.Analyzer
             AddNewLine();
         }
 
-        private void HandleState_MultiRowComment()
+        private void HandleState_MultiLineComment()
         {
             _inputHandler.Indexer += 2; //    skip "/*"
             while (_inputHandler.HasNextChar && !(_inputHandler.CurrentChar == '*' && _inputHandler.NextChar == '/'))
@@ -137,7 +137,7 @@ namespace LexicalAnalysis.Analyzer
             _inputHandler.Indexer++; //   skip closing "
 
             int code = LexicalElementCodeDictionary.GetCode("szöveg literál");
-            _outputTokensHandler.AddToken(new LiteralToken(code, currentLiteral.ToString(), _currentRow));
+            _outputTokensHandler.AddToken(new LiteralToken(code, currentLiteral.ToString(), _currentLine));
         }
 
         private void HandleState_Whitespace()
@@ -163,7 +163,7 @@ namespace LexicalAnalysis.Analyzer
             }
             else
             {
-                _outputTokensHandler.AddToken(new ErrorToken(ErrorTokenType.CannotRecognizeElement, _currentRow, $"Unrecognized string: '{result.CurrentSubstring}'"));
+                _outputTokensHandler.AddToken(new ErrorToken(ErrorTokenType.CannotRecognizeElement, _currentLine, $"Unrecognized string: '{result.CurrentSubstring}'"));
                 _inputHandler.Indexer += result.CurrentSubstring.Length;
             }
         }
@@ -173,9 +173,9 @@ namespace LexicalAnalysis.Analyzer
             if (_outputTokensHandler.IsLastTokenNotNewLine())
             {
                 int code = LexicalElementCodeDictionary.GetCode("újsor");
-                _outputTokensHandler.AddToken(new KeywordToken(code, _currentRow));
+                _outputTokensHandler.AddToken(new KeywordToken(code, _currentLine));
             }
-            _currentRow++;
+            _currentLine++;
         }
         private void AddNonWhitespaceToken(string recognizedSubString, int code)
         {
@@ -191,24 +191,24 @@ namespace LexicalAnalysis.Analyzer
             switch (LexicalElementCodeDictionary.GetCodeType(code))
             {
                 case LexicalElementCodeType.Operator:
-                    _outputTokensHandler.AddToken(new KeywordToken(code, _currentRow));
+                    _outputTokensHandler.AddToken(new KeywordToken(code, _currentLine));
                     break;
                 case LexicalElementCodeType.Literal:
-                    _outputTokensHandler.AddToken(new LiteralToken(code, recognizedSubString, _currentRow));
+                    _outputTokensHandler.AddToken(new LiteralToken(code, recognizedSubString, _currentLine));
                     break;
                 case LexicalElementCodeType.Identifier:
-                    _outputTokensHandler.AddIdentifierToken(recognizedSubString, _currentRow);
+                    _outputTokensHandler.AddIdentifierToken(recognizedSubString, _currentLine);
                     break;
                 case LexicalElementCodeType.TypeName:
-                    _outputTokensHandler.AddToken(new KeywordToken(code, _currentRow));
+                    _outputTokensHandler.AddToken(new KeywordToken(code, _currentLine));
                     break;
                 case LexicalElementCodeType.InternalFunction:
-                    _outputTokensHandler.AddToken(new InternalFunctionToken(code, _currentRow));
+                    _outputTokensHandler.AddToken(new InternalFunctionToken(code, _currentLine));
                     break;
                 case LexicalElementCodeType.Keyword:
                 {
                     _symbolTableManager.ChangeSymbolTableIndentIfNeeded(code);
-                    _outputTokensHandler.AddKeyword(code, _currentRow);
+                    _outputTokensHandler.AddKeyword(code, _currentLine);
                     if (_outputTokensHandler.ProgramEndTokenAdded)
                     {
                         _analyzerState = LexicalAnalyzerState.Final;

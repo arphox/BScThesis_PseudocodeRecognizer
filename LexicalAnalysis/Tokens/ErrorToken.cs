@@ -9,8 +9,8 @@ namespace LexicalAnalysis.Tokens
 
         public ErrorTokenType ErrorType { get; }
 
-        internal ErrorToken(ErrorTokenType errorType, int rowNumber, string message = "")
-            : base(LexicalElementCodeDictionary.ErrorCode, rowNumber)
+        internal ErrorToken(ErrorTokenType errorType, int line, string message = "")
+            : base(LexicalElementCodeDictionary.ErrorCode, line)
         {
             ErrorType = errorType;
             Message = message ?? throw new ArgumentNullException(nameof(message));

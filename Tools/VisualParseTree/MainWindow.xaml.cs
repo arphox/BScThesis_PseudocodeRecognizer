@@ -57,6 +57,9 @@ namespace VisualParseTree
             Console.WriteLine("IsSuccessful = " + syntaxAnalyzerResult.IsSuccessful);
 
             ButtonExpandAll_Click(null, null);
+
+            if (!syntaxAnalyzerResult.IsSuccessful)
+                MessageBox.Show("The syntax analysis failed!!! :( ");
         }
 
         private TreeViewItem SelectedItem

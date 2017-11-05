@@ -27,7 +27,7 @@ namespace LexicalAnalysisTests.Analyzer
 
             TokenTester tt = new TokenTester(result)
             {
-                CurrentRow = 2
+                CurrentLine = 2
             };
 
             // 1.   //komment
@@ -36,14 +36,14 @@ namespace LexicalAnalysisTests.Analyzer
             tt.NewLine();
 
             // 3.   (newline)
-            tt.CurrentRow++;
+            tt.CurrentLine++;
             // 4.   kiír     "H//ello világ!" //Ez egy egysoros komment
             tt.ExpectKeyword("kiír");
             tt.ExpectSzovegLiteral("H//ello világ!");
             tt.NewLine();
 
             //      (commented lines through 5 to 9)
-            tt.CurrentRow = 10;
+            tt.CurrentLine = 10;
             // 10.  szöveg alma="almavagyok"
             tt.ExpectKeyword("szöveg");
             tt.ExpectIdentifier("alma");
@@ -495,7 +495,7 @@ namespace LexicalAnalysisTests.Analyzer
             tt.NewLine();
 
             // 2. \r\n
-            tt.CurrentRow++;
+            tt.CurrentLine++;
 
             // 3. egész[] tömb = létrehoz[10]\r\n
             tt.ExpectKeyword("egész tömb");
@@ -509,7 +509,7 @@ namespace LexicalAnalysisTests.Analyzer
             tt.NewLine();
 
             // 4. \r\n
-            tt.CurrentRow++;
+            tt.CurrentLine++;
 
             // 5. egész a = 2\r\n
             tt.ExpectKeyword("egész");
@@ -520,10 +520,10 @@ namespace LexicalAnalysisTests.Analyzer
             tt.NewLine();
 
             // 6. \r\n
-            tt.CurrentRow++;
+            tt.CurrentLine++;
 
             // 7. \r\n
-            tt.CurrentRow++;
+            tt.CurrentLine++;
 
             // 8. egész b = 0\r\n
             tt.ExpectKeyword("egész");
@@ -534,7 +534,7 @@ namespace LexicalAnalysisTests.Analyzer
             tt.NewLine();
 
             // 9. \r\n
-            tt.CurrentRow++;
+            tt.CurrentLine++;
 
             // 10. egész c = 0\r\n
             tt.ExpectKeyword("egész");
@@ -629,7 +629,7 @@ namespace LexicalAnalysisTests.Analyzer
             tt.NewLine();
 
             // 2. \r\n
-            tt.CurrentRow++;
+            tt.CurrentLine++;
 
             // 3. egész[] tömb = létrehoz[10]\r\n
             tt.ExpectKeyword("egész tömb");

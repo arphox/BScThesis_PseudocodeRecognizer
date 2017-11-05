@@ -13,8 +13,8 @@ namespace SyntaxAnalysis.Analyzer
     {
         private readonly List<Token> _tokens;
         private int _tokenIndexer = -1;
-        private int _currentRowNumber = 1;
-        private int _furthestRowNumber = 1;
+        private int _currentLine = 1;
+        private int _furthestLine = 1;
         private bool _alreadyStarted;
         private ParseTree<Token> _parseTree;
         private Token CurrentToken => _tokens[_tokenIndexer];
@@ -43,7 +43,7 @@ namespace SyntaxAnalysis.Analyzer
 
             if (!success)
             {
-                throw new SyntaxAnalysisException(CurrentToken, _currentRowNumber, _furthestRowNumber);
+                throw new SyntaxAnalysisException(CurrentToken, _currentLine, _furthestLine);
             }
 
             return new SyntaxAnalyzerResult(_parseTree, true);
@@ -51,7 +51,7 @@ namespace SyntaxAnalysis.Analyzer
 
         internal bool Program()
         {
-            _parseTree = new ParseTree<Token>(new NonTerminalToken(nameof(Program), _currentRowNumber));
+            _parseTree = new ParseTree<Token>(new NonTerminalToken(nameof(Program), _currentLine));
 
             return T("program_kezd")
                    && Újsor()
@@ -62,7 +62,7 @@ namespace SyntaxAnalysis.Analyzer
         /// <summary>   Matches a production rule   </summary>
         private bool Rule(Func<bool> predicate)
         {
-            _parseTree.StartNonTerminalNode(CurrentToken.RowNumber);
+            _parseTree.StartNonTerminalNode(CurrentToken.Line);
 
             if (predicate())
             {
@@ -116,10 +116,10 @@ namespace SyntaxAnalysis.Analyzer
         private void Tbase()
         {
             _tokenIndexer++;
-            _currentRowNumber = CurrentToken.RowNumber;
+            _currentLine = CurrentToken.Line;
 
-            if (_currentRowNumber > _furthestRowNumber)
-                _furthestRowNumber = _currentRowNumber;
+            if (_currentLine > _furthestLine)
+                _furthestLine = _currentLine;
 
             _parseTree.StartNode(CurrentToken);
             _parseTree.EndNode();

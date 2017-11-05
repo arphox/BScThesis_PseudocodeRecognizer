@@ -30,7 +30,7 @@ namespace SemanticAnalysis.TypeChecking
             SingleEntryType type = _typeFinder.GetTypeOfNode(node);
             int code = (int)type;
             if (!LexicalElementCodeDictionary.IsArrayType(code))
-                throw new AnotherTypeExpectedException("Tomb", type.ToString(), node.Value.RowNumber, "The type should be an array type.");
+                throw new AnotherTypeExpectedException("Tomb", type.ToString(), node.Value.Line, "The type should be an array type.");
         }
 
         internal void ExpectForNonArrayType(TreeNode<Token> node)
@@ -38,14 +38,14 @@ namespace SemanticAnalysis.TypeChecking
             SingleEntryType type = _typeFinder.GetTypeOfNode(node);
             int code = (int)type;
             if (LexicalElementCodeDictionary.IsArrayType(code))
-                throw new AnotherTypeExpectedException("Not Tomb", type.ToString(), node.Value.RowNumber, "The type should not be an array type.");
+                throw new AnotherTypeExpectedException("Not Tomb", type.ToString(), node.Value.Line, "The type should not be an array type.");
         }
 
         internal void ExpectType(TreeNode<Token> node, SingleEntryType expectedType)
         {
             SingleEntryType realType = _typeFinder.GetTypeOfNode(node);
             if (realType != expectedType)
-                throw new AnotherTypeExpectedException(expectedType.ToString(), realType.ToString(), node.Value.RowNumber);
+                throw new AnotherTypeExpectedException(expectedType.ToString(), realType.ToString(), node.Value.Line);
         }
 
         internal void ExpectTwoSidesToBeEqualTypes(TreeNode<Token> leftNode, TreeNode<Token> rightNode)
@@ -54,7 +54,7 @@ namespace SemanticAnalysis.TypeChecking
             SingleEntryType rightSideType = _typeFinder.GetTypeOfNode(rightNode);
 
             if (leftSideType != rightSideType)
-                throw new TypeMismatchException(leftSideType.ToString(), rightSideType.ToString(), leftNode.Value.RowNumber);
+                throw new TypeMismatchException(leftSideType.ToString(), rightSideType.ToString(), leftNode.Value.Line);
         }
 
         internal void ExpectRightTypeToBeLeftType(TreeNode<Token> leftNode, TreeNode<Token> rightNode)
@@ -63,7 +63,7 @@ namespace SemanticAnalysis.TypeChecking
             SingleEntryType rightSideType = _typeFinder.GetTypeOfNode(rightNode);
 
             if (leftSideType != rightSideType)
-                throw new AnotherTypeExpectedException(leftSideType.ToString(), rightSideType.ToString(), leftNode.Value.RowNumber);
+                throw new AnotherTypeExpectedException(leftSideType.ToString(), rightSideType.ToString(), leftNode.Value.Line);
         }
 
 
@@ -77,7 +77,7 @@ namespace SemanticAnalysis.TypeChecking
 
             if (internalFunctionInputType != parameterType)
             {
-                throw new AnotherTypeExpectedException(internalFunctionInputType.ToString(), parameterType.ToString(), internalFunctionNode.Value.RowNumber,
+                throw new AnotherTypeExpectedException(internalFunctionInputType.ToString(), parameterType.ToString(), internalFunctionNode.Value.Line,
                     $"The internal function `{internalFunctionName}`'s input type has to be {internalFunctionInputType}, but {parameterType} was given.");
             }
         }
@@ -90,7 +90,7 @@ namespace SemanticAnalysis.TypeChecking
             SingleEntryType rightHandType = _typeFinder.GetTypeOfNode(rightHandNode);
 
             if (arrayElementsType != rightHandType)
-                throw new AnotherTypeExpectedException(arrayElementsType.ToString(), rightHandType.ToString(), arrayIdentifierNode.Value.RowNumber,
+                throw new AnotherTypeExpectedException(arrayElementsType.ToString(), rightHandType.ToString(), arrayIdentifierNode.Value.Line,
                     "The right-hand value of the expresion has to be a compatible value for the array");
         }
 
@@ -99,7 +99,7 @@ namespace SemanticAnalysis.TypeChecking
             SingleEntryType type = _typeFinder.GetTypeOfNode(ioParancsNode);
             if (type != SingleEntryType.Szoveg)
             {
-                throw new AnotherTypeExpectedException(SingleEntryType.Szoveg.ToString(), type.ToString(), ioParancsNode.Value.RowNumber,
+                throw new AnotherTypeExpectedException(SingleEntryType.Szoveg.ToString(), type.ToString(), ioParancsNode.Value.Line,
                     $"The given parameter for the {nameof(SA.IoParancs)} should be of type {SingleEntryType.Szoveg}.");
             }
         }
@@ -107,7 +107,7 @@ namespace SemanticAnalysis.TypeChecking
         internal void CheckUnárisOperátorCompatibility(KeywordToken unárisOperátorKeywordToken, SingleEntryType operandType)
         {
             string op = LexicalElementCodeDictionary.GetWord(unárisOperátorKeywordToken.Id);
-            int line = unárisOperátorKeywordToken.RowNumber;
+            int line = unárisOperátorKeywordToken.Line;
             switch (op)
             {
                 case "-":
@@ -131,7 +131,7 @@ namespace SemanticAnalysis.TypeChecking
         internal void CheckBinárisOperátorCompatibility(KeywordToken binárisOperátorKeywordToken, SingleEntryType operandsType)
         {
             string op = LexicalElementCodeDictionary.GetWord(binárisOperátorKeywordToken.Id);
-            int line = binárisOperátorKeywordToken.RowNumber;
+            int line = binárisOperátorKeywordToken.Line;
             switch (op)
             {
                 case ">":

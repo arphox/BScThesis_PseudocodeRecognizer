@@ -13,7 +13,7 @@ namespace LexicalAnalysisTests
         private readonly List<TerminalToken> _tokens;
         private readonly SymbolTable _symbolTable;
         private int _indexer;
-        internal int CurrentRow { get; set; } = 1;
+        internal int CurrentLine { get; set; } = 1;
         private Token NextToken => _tokens[_indexer++];
 
         internal TokenTester(LexicalAnalyzerResult result)
@@ -25,7 +25,7 @@ namespace LexicalAnalysisTests
         internal void NewLine()
         {
             Generic(NextToken, typeof(KeywordToken), "újsor");
-            CurrentRow++;
+            CurrentLine++;
         }
 
         internal void ExpectStart()
@@ -74,7 +74,7 @@ namespace LexicalAnalysisTests
             Assert.That(token, Is.TypeOf<ErrorToken>(), $"Expected an {nameof(ErrorToken)}, but was a(n) {token.GetType().Name} with a ToString() of: {token}.");
             const int errorCode = LexicalElementCodeDictionary.ErrorCode;
             Assert.That(token.Id, Is.EqualTo(errorCode), $"The {nameof(ErrorToken)}'s Id should be {errorCode}, but was {token.Id}");
-            Assert.That(token.RowNumber, Is.EqualTo(CurrentRow), $"Expected row {CurrentRow}, but was {token.RowNumber}.");
+            Assert.That(token.Line, Is.EqualTo(CurrentLine), $"Expected row {CurrentLine}, but was {token.Line}.");
 
             ErrorToken errorToken = (ErrorToken) token;
             Assert.That(errorToken.ErrorType, Is.EqualTo(errorType), $"Expected error type {errorType}, but was: {errorToken.ErrorType}");
@@ -94,7 +94,7 @@ namespace LexicalAnalysisTests
         {
             Assert.That(token, Is.TypeOf(expectedType), $"Expected token type {expectedType.Name}, but was {token.GetType().Name}");
             Assert.That(token.Id, Is.EqualTo(CodeFor(word)), $"Expected {word}, but was {WordFor(token.Id)}.");
-            Assert.That(token.RowNumber, Is.EqualTo(CurrentRow), $"Expected row {CurrentRow}, but was {token.RowNumber}.");
+            Assert.That(token.Line, Is.EqualTo(CurrentLine), $"Expected row {CurrentLine}, but was {token.Line}.");
         }
 
         private static int CodeFor(string word)

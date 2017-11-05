@@ -128,7 +128,7 @@ namespace SyntaxAnalysisTests
             operandus.GetTerminalChildOfName(literalType).ExpectLiteralValueOf(literalValue);
         }
 
-        internal static void ExpectSyntaxError(string code, int expectedCurrentRowNumber, int expectedFurthestRowNumber)
+        internal static void ExpectSyntaxError(string code, int expectedcurrentLine, int expectedFurthestRowNumber)
         {
             SyntaxAnalyzer parser = new SyntaxAnalyzer(new LexicalAnalyzer(code).Start());
 
@@ -143,8 +143,8 @@ namespace SyntaxAnalysisTests
                 isThrown = true;
                 Assert.Multiple(() =>
                 {
-                    Assert.That(e.CurrentRowNumber, Is.EqualTo(expectedCurrentRowNumber), $"Expected current row number to be {expectedCurrentRowNumber}, but was {e.CurrentRowNumber}.");
-                    Assert.That(e.FurthestRowNumber, Is.EqualTo(expectedFurthestRowNumber), $"Expected furthest row number to be {expectedFurthestRowNumber}, but was {e.FurthestRowNumber}.");
+                    Assert.That(e.CurrentLine, Is.EqualTo(expectedcurrentLine), $"Expected current row number to be {expectedcurrentLine}, but was {e.CurrentLine}.");
+                    Assert.That(e.FurthestLine, Is.EqualTo(expectedFurthestRowNumber), $"Expected furthest row number to be {expectedFurthestRowNumber}, but was {e.FurthestLine}.");
                 });
             }
             finally
@@ -178,7 +178,7 @@ namespace SyntaxAnalysisTests
 
         private static void ExpectRowNumber(this Token token, int expectedRowNumber)
         {
-            Assert.That(token.RowNumber == expectedRowNumber, $"Expected row number to be {expectedRowNumber}, but was {token.RowNumber}.");
+            Assert.That(token.Line == expectedRowNumber, $"Expected row number to be {expectedRowNumber}, but was {token.Line}.");
         }
 
         private static void ExpectChildrenCount(this TreeNode<Token> node, int expectedChildrenCount)

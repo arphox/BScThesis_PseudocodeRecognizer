@@ -2,8 +2,8 @@
 {
     public abstract class TerminalToken : Token
     {
-        protected TerminalToken(int id, int rowNumber)
-            : base(id, rowNumber)
+        protected TerminalToken(int id, int line)
+            : base(id, line)
         { }
     }
 }

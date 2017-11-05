@@ -103,7 +103,7 @@ namespace LexicalAnalysisTests.Analyzer
 
             TokenTester tt = new TokenTester(result)
             {
-                CurrentRow = 3
+                CurrentLine = 3
             };
 
             // 3.    program_kezd

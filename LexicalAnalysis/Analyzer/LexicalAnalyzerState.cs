@@ -3,8 +3,8 @@
     internal enum LexicalAnalyzerState
     {
         Initial,
-        Comment1Row,
-        CommentNRow,
+        Comment1Line,
+        CommentNLine,
         Whitespace,
         NonWhitespace,
         StringLiteral,

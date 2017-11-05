@@ -95,7 +95,7 @@ namespace SemanticAnalysis.TypeFinding
                 case 4:
                     TerminalToken terminalToken = (TerminalToken) children.First().Value;
                     SingleEntryType identifierType = GetTypeOfTerminal(terminalToken);
-                    _typeChecker.ExpectArrayType(identifierType, terminalToken.RowNumber);
+                    _typeChecker.ExpectArrayType(identifierType, terminalToken.Line);
                     _typeChecker.ExpectType(children[2], SingleEntryType.Egesz);
                     return (SingleEntryType)LexicalElementCodeDictionary.GetSimpleTypeCodeFromArrayCode((int)identifierType);
                 default:

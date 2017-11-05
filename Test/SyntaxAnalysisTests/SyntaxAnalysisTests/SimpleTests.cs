@@ -17,8 +17,8 @@ namespace SyntaxAnalysisTests
             const string code = "program_kezd;\r\n" +
                                 "program_vége";
 
-            Assert.Throws<ArgumentNullException>(() => new SA(null));
-            Assert.Throws<LexicalAnalysisException>(() => new SA(new LexicalAnalyzer(code).Start()));
+            Assert.Throws<ArgumentNullException>(() => new SyntaxAnalyzer(null));
+            Assert.Throws<LexicalAnalysisException>(() => new SyntaxAnalyzer(new LexicalAnalyzer(code).Start()));
         }
 
         [Test]
@@ -34,7 +34,7 @@ namespace SyntaxAnalysisTests
         }
 
         [Test]
-        public void ProgramOneRow_Kilép()
+        public void ProgramOneLine_Kilép()
         {
             const string code = "program_kezd\r\n" +
                                 "kilép\r\n" +
@@ -58,7 +58,7 @@ namespace SyntaxAnalysisTests
         }
 
         [Test]
-        public void ProgramTwoRows_KilépKilép()
+        public void ProgramTwoLines_KilépKilép()
         {
             const string code = "program_kezd\r\n" +
                                 "kilép\r\n" +

@@ -5,14 +5,14 @@ namespace LexicalAnalysis.Tokens
     public abstract class Token
     {
         public int Id { get; internal set; }
-        public int RowNumber { get; }
+        public int Line { get; }
 
-        protected Token(int id, int rowNumber)
+        protected Token(int id, int line)
         {
             Id = id;
-            RowNumber = rowNumber;
+            Line = line;
         }
 
-        public override string ToString() => $"[{GetType().Name}] {nameof(Id)}={Id} ({LexicalElementCodeDictionary.GetWord(Id)}) @ Line #{RowNumber}";
+        public override string ToString() => $"[{GetType().Name}] {nameof(Id)}={Id} ({LexicalElementCodeDictionary.GetWord(Id)}) @ Line #{Line}";
     }
 }

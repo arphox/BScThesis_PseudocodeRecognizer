@@ -18,9 +18,9 @@ namespace LexicalAnalysis.SymbolTableManagement
             Root = SymbolTable;
         }
 
-        internal void InsertNewSymbolTableEntry(string name, int tokenType, int currentRowNumber)
+        internal void InsertNewSymbolTableEntry(string name, int tokenType, int currentLine)
         {
-            SingleEntry entry = new SingleEntry(name, (SingleEntryType)tokenType, currentRowNumber);
+            SingleEntry entry = new SingleEntry(name, (SingleEntryType)tokenType, currentLine);
             SymbolTable.InsertNewEntry(entry);
             LastInsertedSymbolId = entry.Id;
         }

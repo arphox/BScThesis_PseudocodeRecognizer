@@ -21,7 +21,7 @@ namespace LexicalAnalysisTests
             SingleEntry entry = CurrentEntry as SingleEntry;
             Assert.That(entry, Is.Not.Null, $"Expected a {nameof(SingleEntry)}, but was {CurrentEntry.GetType().Name}.");
             Assert.That(entry.Name, Is.EqualTo(name), $"Expected entry name {name}, but was {entry.Name}");
-            Assert.That(entry.DefinitionRowNumber, Is.EqualTo(lineNumber), $"Expected row definition number {lineNumber}, but was {entry.DefinitionRowNumber}");
+            Assert.That(entry.DefinitionLineNumber, Is.EqualTo(lineNumber), $"Expected row definition number {lineNumber}, but was {entry.DefinitionLineNumber}");
             Assert.That(entry.EntryType, Is.EqualTo(entryType), $"Expected {nameof(SingleEntryType)} {entryType}, but was {entry.EntryType}");
             _indexer++;
         }
@@ -54,7 +54,7 @@ namespace LexicalAnalysisTests
             SingleEntry x = entry as SingleEntry;
             Assert.That(x, Is.Not.Null);
             Assert.That(x.Name, Is.EqualTo(name));
-            Assert.That(x.DefinitionRowNumber, Is.EqualTo(lineNumber));
+            Assert.That(x.DefinitionLineNumber, Is.EqualTo(lineNumber));
             Assert.That(x.EntryType, Is.EqualTo(entryType));
         }
     }

@@ -84,7 +84,7 @@ namespace LexicalAnalysisTests.Analyzer
 
             tt.ExpectStart();
             tt.NewLine();
-            tt.CurrentRow = 7;
+            tt.CurrentLine = 7;
             tt.ExpectEnd();
             tt.ExpectNoMore();
 

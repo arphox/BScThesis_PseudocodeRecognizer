@@ -2,8 +2,8 @@
 {
     public sealed class InternalFunctionToken : TerminalToken
     {
-        internal InternalFunctionToken(int id, int rowNumber)
-            : base(id, rowNumber)
+        internal InternalFunctionToken(int id, int line)
+            : base(id, line)
         { }
     }
 }

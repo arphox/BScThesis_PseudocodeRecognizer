@@ -2,7 +2,7 @@
 {
     public sealed class KeywordToken : TerminalToken
     {
-        internal KeywordToken(int id, int rowNumber)
-            : base(id, rowNumber) { }
+        internal KeywordToken(int id, int line)
+            : base(id, line) { }
     }
 }
