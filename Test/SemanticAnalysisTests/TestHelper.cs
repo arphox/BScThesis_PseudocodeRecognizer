@@ -1,5 +1,6 @@
 ﻿using LexicalAnalysis.Analyzer;
 using SemanticAnalysis;
+using SemanticAnalysis.Exceptions;
 using SyntaxAnalysis.Analyzer;
 
 namespace SemanticAnalysisTests

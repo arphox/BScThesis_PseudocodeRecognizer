@@ -1,6 +1,7 @@
 ﻿using NUnit.Framework;
-using SemanticAnalysis;
+using SemanticAnalysis.Exceptions;
 using System;
+using LexicalAnalysis.SymbolTableManagement;
 
 namespace SemanticAnalysisTests
 {
@@ -34,8 +35,11 @@ namespace SemanticAnalysisTests
                                 "program_vége";
 
             SemanticAnalysisException exceptionCaught = TestHelper.DoSemanticAnalysisWithExceptionSwallowing(code);
+            AnotherTypeExpectedException e = exceptionCaught as AnotherTypeExpectedException;
 
-            Console.WriteLine();
+            Assert.That(e, Is.Not.Null);
+            Assert.That(e.Expected, Is.EqualTo(SingleEntryType.Egesz.ToString()));
+            Assert.That(e.Actual, Is.EqualTo(SingleEntryType.Logikai.ToString()));
         }
     }
 }

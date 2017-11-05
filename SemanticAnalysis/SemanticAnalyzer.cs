@@ -7,6 +7,7 @@ using SyntaxAnalysis.Tree;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using SemanticAnalysis.Exceptions;
 using SA = SyntaxAnalysis.Analyzer.SyntaxAnalyzer;
 
 namespace SemanticAnalysis
@@ -27,7 +28,7 @@ namespace SemanticAnalysis
             _symbolTable = symbolTable ?? throw new ArgumentNullException(nameof(symbolTable));
 
             if (!parserResult.IsSuccessful)
-                throw new SemanticAnalysisException(SemanticAnalysisErrorType.OnlyStartsIfNoSyntaxError, "The semantic analyzer only starts if there are no syntax errors.");
+                throw new SemanticAnalysisException("The semantic analyzer only starts if there are no syntax errors.");
 
             _parseTree = parserResult.ParseTree;
             _typeChecker = new TypeChecker(_symbolTable);
@@ -85,14 +86,14 @@ namespace SemanticAnalysis
             if (változóDeklarációNode.ChildrenAreMatchingFor(nameof(SA.AlapTípus), "azonosító", "=", nameof(SA.NemTömbLétrehozóKifejezés)) ||
                 változóDeklarációNode.ChildrenAreMatchingFor(nameof(SA.TömbTípus), "azonosító", "=", "azonosító"))
             {
-                _typeChecker.ExpectTwoSidesToBeEqualTypes(változóDeklarációNode.Children[1], változóDeklarációNode.Children[3]);
+                _typeChecker.ExpectRightTypeToBeLeftType(változóDeklarációNode.Children[1], változóDeklarációNode.Children[3]);
             }
 
             // <AlapTípus> "azonosító" "=" <BelsőFüggvény> "(" <NemTömbLétrehozóKifejezés> ")"
             else if (változóDeklarációNode.Children.Count == 7)
             {
                 _typeChecker.CheckForInternalFunctionParameterTypeMatch(változóDeklarációNode.Children[3], változóDeklarációNode.Children[5]);
-                _typeChecker.ExpectTwoSidesToBeEqualTypes(változóDeklarációNode.Children[1], változóDeklarációNode.Children[3]);
+                _typeChecker.ExpectRightTypeToBeLeftType(változóDeklarációNode.Children[1], változóDeklarációNode.Children[3]);
             }
         }
 
@@ -102,14 +103,14 @@ namespace SemanticAnalysis
             if (értékadásNode.ChildrenAreMatchingFor("azonosító", "=", nameof(SA.NemTömbLétrehozóKifejezés)))
             {
                 _typeChecker.ExpectForNonArrayType(értékadásNode.Children[0]);
-                _typeChecker.ExpectTwoSidesToBeEqualTypes(értékadásNode.Children[0], értékadásNode.Children[2]);
+                _typeChecker.ExpectRightTypeToBeLeftType(értékadásNode.Children[0], értékadásNode.Children[2]);
             }
 
             // "azonosító" "=" <TömbLétrehozóKifejezés>
             else if (értékadásNode.ChildrenAreMatchingFor("azonosító", "=", nameof(SA.TömbLétrehozóKifejezés)))
             {
                 _typeChecker.ExpectArrayType(értékadásNode.Children[0]);
-                _typeChecker.ExpectTwoSidesToBeEqualTypes(értékadásNode.Children[0], értékadásNode.Children[2]);
+                _typeChecker.ExpectRightTypeToBeLeftType(értékadásNode.Children[0], értékadásNode.Children[2]);
             }
 
             // "azonosító" "=" <BelsőFüggvény> "(" <NemTömbLétrehozóKifejezés> ")"
@@ -117,7 +118,7 @@ namespace SemanticAnalysis
             {
                 _typeChecker.ExpectForNonArrayType(értékadásNode.Children[0]);
                 _typeChecker.CheckForInternalFunctionParameterTypeMatch(értékadásNode.Children[2], értékadásNode.Children[4]);
-                _typeChecker.ExpectTwoSidesToBeEqualTypes(értékadásNode.Children[0], értékadásNode.Children[2]);
+                _typeChecker.ExpectRightTypeToBeLeftType(értékadásNode.Children[0], értékadásNode.Children[2]);
             }
 
             // "azonosító" "[" <NemTömbLétrehozóKifejezés> "]" "=" <NemTömbLétrehozóKifejezés>
