@@ -37,6 +37,7 @@
     <Reference Include="System.Core" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AssignmentTests.cs" />
     <Compile Include="DeclarationTests\ArrayDeclarationTests.cs" />
     <Compile Include="DeclarationTests\NonArrayDeclarationTests.cs" />
     <Compile Include="SimpleTests.cs" />
