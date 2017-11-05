@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Linq;
 using System.Reflection;
 using NUnit.Framework;
@@ -8,16 +9,16 @@ using NUnit.Framework;
 
 namespace SemanticAnalysisTests.PositiveTests
 {
-    public static class CorrectCodes
+    public static class SimpleCorrectCodes
     {
-        public static IEnumerable CodeProvider()
+        public static IEnumerable GetCodeProvider(Type type)
         {
-            return
-                typeof(CorrectCodes)
-                .GetFields(BindingFlags.NonPublic | BindingFlags.NonPublic | BindingFlags.Static | BindingFlags.FlattenHierarchy)
+            return type.GetFields(BindingFlags.NonPublic | BindingFlags.NonPublic | BindingFlags.Static | BindingFlags.FlattenHierarchy)
                 .Where(fi => fi.IsLiteral && !fi.IsInitOnly && fi.FieldType == typeof(string))
                 .Select(x => new TestCaseData((string)x.GetRawConstantValue()).SetName(x.Name));
         }
+
+        public static IEnumerable CodeProvider() => GetCodeProvider(typeof(SimpleCorrectCodes));
 
         const string NoSemanticAnalysisNeeded_OneLine = "program_kezd\r\n" + "kilép\r\n" + "program_vége";
         const string NoSemanticAnalysisNeeded_TwoLines = "program_kezd\r\n" + "kilép\r\n" + "kilép\r\n" + "program_vége";
@@ -59,15 +60,15 @@ namespace SemanticAnalysisTests.PositiveTests
         const string Assignment4_Logikai = "program_kezd\r\n" + "logikai[] tömb = létrehoz[10]\r\n" + "tömb[0] = igaz\r\n" + "program_vége";
 
         // While
-        const string While1 = "program_kezd\r\n" + "egész i = 0\r\n" + "ciklus_amíg i < 10\r\n"+ "i = - i + 2\r\n" + "ciklus_vége\r\n" + "program_vége";
+        const string While1 = "program_kezd\r\n" + "egész i = 0\r\n" + "ciklus_amíg i < 10\r\n" + "i = - i + 2\r\n" + "ciklus_vége\r\n" + "program_vége";
         const string While2 = "program_kezd\r\n" + "egész i = 0\r\n" + "ciklus_amíg i < 10\r\n" + "i = i + 1\r\n" + "i = i + 1\r\n" + "ciklus_vége\r\n" + "program_vége";
 
         // If
         const string If1 = "program_kezd\r\n" + "ha hamis akkor\r\n" + "kilép\r\n" + "elágazás_vége\r\n" + "program_vége";
-        const string If2 = "program_kezd\r\n" + "ha hamis akkor\r\n" + "kilép\r\n" + "különben\r\n" + "kilép\r\n" +"elágazás_vége\r\n" + "program_vége";
+        const string If2 = "program_kezd\r\n" + "ha hamis akkor\r\n" + "kilép\r\n" + "különben\r\n" + "kilép\r\n" + "elágazás_vége\r\n" + "program_vége";
 
         // IoParancs
-        const string IoParancs_Beolvas = "program_kezd\r\n" + "szöveg a = \"\"\r\n" + "beolvas a\r\n" +"program_vége";
+        const string IoParancs_Beolvas = "program_kezd\r\n" + "szöveg a = \"\"\r\n" + "beolvas a\r\n" + "program_vége";
         const string IoParancs_Kiir = "program_kezd\r\n" + "szöveg a = \"alma\"\r\n" + "kiír a\r\n" + "program_vége";
 
         // Operandus
