@@ -35,11 +35,8 @@ namespace SemanticAnalysisTests
                                 "program_vége";
 
             SemanticAnalysisException exceptionCaught = TestHelper.DoSemanticAnalysisWithExceptionSwallowing(code);
-            AnotherTypeExpectedException e = exceptionCaught as AnotherTypeExpectedException;
-
-            Assert.That(e, Is.Not.Null);
-            Assert.That(e.Expected, Is.EqualTo(SingleEntryType.Egesz.ToString()));
-            Assert.That(e.Actual, Is.EqualTo(SingleEntryType.Logikai.ToString()));
+     
+            TestHelper.ExpectAnotherTypeExpectedException(exceptionCaught, SingleEntryType.Egesz.ToString(), SingleEntryType.Logikai.ToString());
         }
     }
 }
