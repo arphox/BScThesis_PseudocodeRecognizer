@@ -99,7 +99,7 @@ namespace SemanticAnalysis.TypeChecking
             SingleEntryType type = _typeFinder.GetTypeOfNode(ioParancsNode.Children[1]);
             if (type != SingleEntryType.Szoveg)
             {
-                throw new AnotherTypeExpectedException(SingleEntryType.Szoveg.ToString(), type.ToString(), ioParancsNode.Value.Line,
+                throw new AnotherTypeExpectedException(SingleEntryType.Szoveg.ToString(), type.ToString(), ioParancsNode.Children.First().Value.Line,
                     $"The given parameter for the {nameof(SA.IoParancs)} should be of type {SingleEntryType.Szoveg}.");
             }
         }
