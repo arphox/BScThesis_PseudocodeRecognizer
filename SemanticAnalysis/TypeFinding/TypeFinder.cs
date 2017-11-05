@@ -90,7 +90,7 @@ namespace SemanticAnalysis.TypeFinding
                     return GetTypeOfTerminal((TerminalToken)children.Single().Value);
                 case 2:
                     SingleEntryType type = GetTypeOfTerminal((TerminalToken)children[1].Value);
-                    _typeChecker.CheckUnárisOperátorCompatibility(children[0].Value as KeywordToken, type);
+                    _typeChecker.CheckUnárisOperátorCompatibility(children[0].Children.First().Value as KeywordToken, type);
                     return type;
                 case 4:
                     TerminalToken terminalToken = (TerminalToken) children.First().Value;

@@ -41,10 +41,10 @@ namespace SemanticAnalysisTests.PositiveTests
         const string ArrayDeclaration2_Logikai = "program_kezd\r\n" + "logikai[] tömb = létrehoz[10]\r\n" + "logikai[] tömb2 = tömb\r\n" + "program_vége";
 
         // Assignment
-        const string Assignment1_Egesz = "program_kezd\r\n" + "egész a = 2\r\n" + "a = -10\r\n" + "program_vége";
+        const string Assignment1_Egesz = "program_kezd\r\n" + "egész a = - - 2\r\n" + "a = -10\r\n" + "program_vége";
         const string Assignment1_Tort = "program_kezd\r\n" + "tört a = 2,4\r\n" + "a = 7,45\r\n" + "program_vége";
-        const string Assignment1_Szoveg = "program_kezd\r\n" + "szöveg a = \"kukorica\"\r\n" + "a = \"vége\"\r\n" + "program_vége";
-        const string Assignment1_Logikai = "program_kezd\r\n" + "logikai a = igaz\r\n" + "a = hamis\r\n" + "program_vége";
+        const string Assignment1_Szoveg = "program_kezd\r\n" + "szöveg a = \"kukor\" . \"ica\"\r\n" + "a = \"vége\"\r\n" + "program_vége";
+        const string Assignment1_Logikai = "program_kezd\r\n" + "logikai a = igaz vagy hamis\r\n" + "a = hamis\r\n" + "program_vége";
         const string Assignment2_Egesz = "program_kezd\r\n" + "egész[] tömb = létrehoz[3]\r\n" + "tömb = létrehoz[5]\r\n" + "program_vége";
         const string Assignment2_Tort = "program_kezd\r\n" + "tört[] tömb = létrehoz[3]\r\n" + "tömb = létrehoz[5]\r\n" + "program_vége";
         const string Assignment2_Szoveg = "program_kezd\r\n" + "szöveg[] tömb = létrehoz[3]\r\n" + "tömb = létrehoz[5]\r\n" + "program_vége";
@@ -52,7 +52,7 @@ namespace SemanticAnalysisTests.PositiveTests
         const string Assignment3_Egesz = "program_kezd\r\n" + "egész a = 2\r\n" + "a = törtből_egészbe(1,23)\r\n" + "program_vége";
         const string Assignment3_Tort = "program_kezd\r\n" + "tört a = 2,4\r\n" + "a = egészből_törtbe(1)\r\n" + "program_vége";
         const string Assignment3_Szoveg = "program_kezd\r\n" + "szöveg a = \"barack\"\r\n" + "a = törtből_szövegbe(3,4)\r\n" + "program_vége";
-        const string Assignment3_Logikai = "program_kezd\r\n" + "logikai a = igaz\r\n" + "a = szövegből_logikaiba(\"asd\")\r\n" + "program_vége";
+        const string Assignment3_Logikai = "program_kezd\r\n" + "logikai a = ! igaz\r\n" + "a = szövegből_logikaiba(\"asd\")\r\n" + "program_vége";
         const string Assignment4_Egesz = "program_kezd\r\n" + "egész[] tömb = létrehoz[10]\r\n" + "tömb[0] = 3 + 4\r\n" + "program_vége";
         const string Assignment4_Tort = "program_kezd\r\n" + "tört[] tömb = létrehoz[10]\r\n" + "tömb[0] = 78,0\r\n" + "program_vége";
         const string Assignment4_Szoveg = "program_kezd\r\n" + "szöveg[] tömb = létrehoz[10]\r\n" + "tömb[0] = \"szilva\"\r\n" + "program_vége";
