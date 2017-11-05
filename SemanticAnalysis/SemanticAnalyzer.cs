@@ -48,10 +48,11 @@ namespace SemanticAnalysis
 
         private void CheckÁllítások(TreeNode<Token> állításokNode)
         {
+            CheckÁllítás(állításokNode.Children[0]);
             if (állításokNode.ChildrenAreMatchingFor(nameof(SA.Állítás), "újsor", nameof(SA.Állítások)))
+            {
                 CheckÁllítások(állításokNode.Children[2]);
-            else if (állításokNode.ChildrenAreMatchingFor(nameof(SA.Állítás), "újsor"))
-                CheckÁllítás(állításokNode.Children[0]);
+            }
         }
 
         private void CheckÁllítás(TreeNode<Token> állításNode)

@@ -42,9 +42,9 @@ namespace SemanticAnalysisTests.PositiveTests
 
         // Assignment
         const string Assignment1_Egesz = "program_kezd\r\n" + "egész a = 2\r\n" + "a = -10\r\n" + "program_vége";
-        const string Assignment1_Tort = "program_kezd\r\n" + "tört a = 2\r\n" + "a = 7,45\r\n" + "program_vége";
-        const string Assignment1_Szoveg = "program_kezd\r\n" + "szöveg a = 2\r\n" + "a = \"vége\"\r\n" + "program_vége";
-        const string Assignment1_Logikai = "program_kezd\r\n" + "logikai a = 2\r\n" + "a = hamis\r\n" + "program_vége";
+        const string Assignment1_Tort = "program_kezd\r\n" + "tört a = 2,4\r\n" + "a = 7,45\r\n" + "program_vége";
+        const string Assignment1_Szoveg = "program_kezd\r\n" + "szöveg a = \"kukorica\"\r\n" + "a = \"vége\"\r\n" + "program_vége";
+        const string Assignment1_Logikai = "program_kezd\r\n" + "logikai a = igaz\r\n" + "a = hamis\r\n" + "program_vége";
         const string Assignment2_Egesz = "program_kezd\r\n" + "egész[] tömb = létrehoz[3]\r\n" + "tömb = létrehoz[5]\r\n" + "program_vége";
         const string Assignment2_Tort = "program_kezd\r\n" + "tört[] tömb = létrehoz[3]\r\n" + "tömb = létrehoz[5]\r\n" + "program_vége";
         const string Assignment2_Szoveg = "program_kezd\r\n" + "szöveg[] tömb = létrehoz[3]\r\n" + "tömb = létrehoz[5]\r\n" + "program_vége";

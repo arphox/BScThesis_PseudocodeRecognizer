@@ -38,6 +38,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="NegativeTests\Assignment\Assignment1.cs" />
+    <Compile Include="NegativeTests\Assignment\Assignment3.cs" />
     <Compile Include="NegativeTests\Declaration\ArrayDeclaration2.cs" />
     <Compile Include="NegativeTests\Declaration\ArrayDeclaration1.cs" />
     <Compile Include="NegativeTests\Declaration\NonArrayDeclaration2.cs" />
