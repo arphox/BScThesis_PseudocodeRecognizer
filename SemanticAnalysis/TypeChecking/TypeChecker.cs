@@ -1,10 +1,9 @@
 ﻿using LexicalAnalysis.LexicalElementIdentification;
 using LexicalAnalysis.SymbolTableManagement;
 using LexicalAnalysis.Tokens;
+using SemanticAnalysis.Exceptions;
 using SemanticAnalysis.TypeFinding;
 using SyntaxAnalysis.Tree;
-using System;
-using SemanticAnalysis.Exceptions;
 using SA = SyntaxAnalysis.Analyzer.SyntaxAnalyzer;
 
 namespace SemanticAnalysis.TypeChecking

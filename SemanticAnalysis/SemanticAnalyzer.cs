@@ -15,7 +15,6 @@ namespace SemanticAnalysis
     public sealed class SemanticAnalyzer
     {
         private readonly ParseTree<Token> _parseTree;
-        private readonly SymbolTable _symbolTable;
         private bool _isAlreadyStarted;
 
         private readonly TypeChecker _typeChecker;
@@ -24,14 +23,13 @@ namespace SemanticAnalysis
         {
             if (parserResult == null)
                 throw new ArgumentNullException(nameof(parserResult));
-
-            _symbolTable = symbolTable ?? throw new ArgumentNullException(nameof(symbolTable));
-
+            if (symbolTable == null)
+                throw new ArgumentNullException(nameof(symbolTable));
             if (!parserResult.IsSuccessful)
                 throw new SemanticAnalysisException("The semantic analyzer only starts if there are no syntax errors.");
 
             _parseTree = parserResult.ParseTree;
-            _typeChecker = new TypeChecker(_symbolTable);
+            _typeChecker = new TypeChecker(symbolTable);
         }
 
         public void Start()

@@ -1,7 +1,6 @@
-﻿using NUnit.Framework;
+﻿using LexicalAnalysis.SymbolTableManagement;
+using NUnit.Framework;
 using SemanticAnalysis.Exceptions;
-using System;
-using LexicalAnalysis.SymbolTableManagement;
 
 namespace SemanticAnalysisTests
 {
