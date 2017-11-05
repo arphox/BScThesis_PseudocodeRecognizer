@@ -4,10 +4,10 @@ namespace Common
 {
     public abstract class ArphoxCompilerException : ApplicationException
     {
-        public ArphoxCompilerException()
+        protected ArphoxCompilerException()
         { }
 
-        public ArphoxCompilerException(string message)
+        protected ArphoxCompilerException(string message)
             : base(message)
         { }
     }

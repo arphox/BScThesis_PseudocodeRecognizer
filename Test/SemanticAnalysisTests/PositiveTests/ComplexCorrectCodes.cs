@@ -1,8 +1,5 @@
 ﻿using System.Collections;
 
-// ReSharper disable UnusedMember.Local
-// ReSharper disable InconsistentNaming
-
 namespace SemanticAnalysisTests.PositiveTests
 {
     public static class ComplexCorrectCodes
