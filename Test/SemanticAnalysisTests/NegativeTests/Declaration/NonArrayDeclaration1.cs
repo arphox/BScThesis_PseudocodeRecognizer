@@ -5,9 +5,9 @@ using SemanticAnalysis.Exceptions;
 namespace SemanticAnalysisTests.NegativeTests.Declaration
 {
     [TestFixture]
-    public sealed class NonArrayDeclaration
+    public sealed class NonArrayDeclaration1
     {
-       [Test]
+        [Test]
         public void NonArrayDeclaration1_Negative1()
         {
             const string code = "program_kezd\r\n" +
@@ -42,25 +42,14 @@ namespace SemanticAnalysisTests.NegativeTests.Declaration
         }
 
         [Test]
-        public void NonArrayDeclaration2_Negative1()
+        public void NonArrayDeclaration1_Negative4()
         {
-            const string code = "program_kezd\r\n" + "\r\n" + "\r\n" +
-                                "egész a = törtből_egészbe(2)\r\n" +
+            const string code = "program_kezd\r\n" +
+                                "egész a = 6,4\r\n" +
                                 "program_vége";
 
             SemanticAnalysisException e = TestHelper.DoSemanticAnalysisWithExceptionSwallowing(code);
-            TestHelper.ExpectAnotherTypeExpectedException(e, SingleEntryType.Tort.ToString(), SingleEntryType.Egesz.ToString(), 4);
-        }
-
-        [Test]
-        public void NonArrayDeclaration2_Negative2()
-        {
-            const string code = "program_kezd\r\n" + "\r\n" + "\r\n" + "\r\n" +
-                                "egész a = logikaiból_törtbe(hamis)\r\n" +
-                                "program_vége";
-
-            SemanticAnalysisException e = TestHelper.DoSemanticAnalysisWithExceptionSwallowing(code);
-            TestHelper.ExpectAnotherTypeExpectedException(e, SingleEntryType.Egesz.ToString(), SingleEntryType.Tort.ToString(), 5);
+            TestHelper.ExpectAnotherTypeExpectedException(e, SingleEntryType.Egesz.ToString(), SingleEntryType.Tort.ToString(), 2);
         }
     }
 }
