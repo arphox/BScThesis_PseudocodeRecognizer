@@ -81,18 +81,15 @@ namespace SemanticAnalysis.TypeChecking
             }
         }
 
-        internal void CheckForArrayIndexedAssignmentTypeMatch(TreeNode<Token> identifierNode, TreeNode<Token> indexNode, TreeNode<Token> rightHandNode)
+        internal void CheckForArrayIndexedAssignmentTypeMatch(TreeNode<Token> arrayIdentifierNode, TreeNode<Token> indexNode, TreeNode<Token> rightHandNode)
         {
-            throw new NotImplementedException("Itt lehet mást kéne ellenőrizni");
-
             ExpectType(indexNode, SingleEntryType.Egesz);
-            SingleEntryType identifierType = _typeFinder.GetTypeOfNode(identifierNode);
+            SingleEntryType arrayIdentifierType = _typeFinder.GetTypeOfNode(arrayIdentifierNode);
+            SingleEntryType arrayElementsType = (SingleEntryType)LexicalElementCodeDictionary.GetSimpleTypeCodeFromArrayCode((int) arrayIdentifierType);
             SingleEntryType rightHandType = _typeFinder.GetTypeOfNode(rightHandNode);
 
-            if (identifierType != rightHandType)
-            {
-                //throw new SemanticAnalysisException(SemanticAnalysisErrorType.ArrayElementAssignmentTypeMismatch,$"The right-hand value of the expresion has to be a compatible value for the array");
-            }
+            if (arrayElementsType != rightHandType)
+                throw new AnotherTypeExpectedException(arrayElementsType.ToString(), rightHandType.ToString(), "The right-hand value of the expresion has to be a compatible value for the array");
         }
 
         internal void CheckForIoParancsParameter(TreeNode<Token> ioParancsNode)

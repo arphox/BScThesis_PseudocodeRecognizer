@@ -35,7 +35,6 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Exceptions\AnotherTypeExpectedException.cs" />
-    <Compile Include="Exceptions\ArrayIndexedAssignmentTypeMatchException.cs" />
     <Compile Include="Exceptions\TypeMismatchException.cs" />
     <Compile Include="TreeNodeListExtensions.cs" />
     <Compile Include="TypeChecking\TypeChecker.cs" />
