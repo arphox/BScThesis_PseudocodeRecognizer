@@ -45,7 +45,5 @@ namespace SemanticAnalysisTests.PositiveTests
         // IoParancs
         const string IoParancs_Beolvas = "program_kezd\r\n" + "szöveg a = \"\"\r\n" + "beolvas a\r\n" +"program_vége";
         const string IoParancs_Kiir = "program_kezd\r\n" + "szöveg a = \"alma\"\r\n" + "kiír a\r\n" + "program_vége";
-
-
     }
 }

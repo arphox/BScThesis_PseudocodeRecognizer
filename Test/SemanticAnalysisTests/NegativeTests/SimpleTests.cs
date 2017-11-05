@@ -24,5 +24,18 @@ namespace SemanticAnalysisTests.NegativeTests
             parserResult = new SyntaxAnalyzerResult(parserResult.ParseTree, false);
             Assert.Throws<SemanticAnalysisException>(() => new SemanticAnalyzer(parserResult, lexerResult.SymbolTable));
         }
+
+        [Test]
+        public void CanNotRestart()
+        {
+            string code = "program_kezd\r\n" + "kilép\r\n" + "program_vége";
+            LexicalAnalyzerResult lexerResult = new LexicalAnalyzer(code).Start();
+            SyntaxAnalyzerResult parserResult = new SyntaxAnalyzer(lexerResult).Start();
+
+            SemanticAnalyzer semanticAnalyzer = new SemanticAnalyzer(parserResult, lexerResult.SymbolTable);
+
+            Assert.DoesNotThrow(() => semanticAnalyzer.Start());
+            Assert.Throws<InvalidOperationException>(() => semanticAnalyzer.Start());
+        }
     }
 }
