@@ -41,6 +41,7 @@
     <Compile Include="NegativeTests\Assignment\Assignment3.cs" />
     <Compile Include="NegativeTests\Assignment\Assignment4.cs" />
     <Compile Include="NegativeTests\BinaryOperatorCompatibility.cs" />
+    <Compile Include="NegativeTests\BinárisKifejezés.cs" />
     <Compile Include="NegativeTests\Declaration\ArrayDeclaration2.cs" />
     <Compile Include="NegativeTests\Declaration\ArrayDeclaration1.cs" />
     <Compile Include="NegativeTests\Declaration\NonArrayDeclaration2.cs" />
@@ -48,6 +49,7 @@
     <Compile Include="NegativeTests\If\If1.cs" />
     <Compile Include="NegativeTests\If\If2.cs" />
     <Compile Include="NegativeTests\IoParancs.cs" />
+    <Compile Include="NegativeTests\Operandus1.cs" />
     <Compile Include="NegativeTests\SimpleTests.cs" />
     <Compile Include="NegativeTests\UnaryOperatorCompatibility.cs" />
     <Compile Include="NegativeTests\While1.cs" />

@@ -150,5 +150,17 @@ namespace SemanticAnalysisTests.NegativeTests.Assignment
             SemanticAnalysisException e = TestHelper.DoSemanticAnalysisWithExceptionSwallowing(code);
             TestHelper.ExpectAnotherTypeExpectedException(e, SingleEntryType.Logikai.ToString(), SingleEntryType.Szoveg.ToString(), 3);
         }
+
+        [Test]
+        public void Assignment4_Negative13()
+        {
+            const string code = "program_kezd\r\n" +
+                                "egész a = 2\r\n" +
+                                "a[0] = \"szőlő\"\r\n" +
+                                "program_vége";
+
+            SemanticAnalysisException e = TestHelper.DoSemanticAnalysisWithExceptionSwallowing(code);
+            TestHelper.ExpectAnotherTypeExpectedException(e, "Tomb", SingleEntryType.Egesz.ToString(), 3);
+        }
     }
 }

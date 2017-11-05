@@ -41,7 +41,7 @@ namespace SemanticAnalysisTests.PositiveTests
         const string ArrayDeclaration2_Logikai = "program_kezd\r\n" + "logikai[] tömb = létrehoz[10]\r\n" + "logikai[] tömb2 = tömb\r\n" + "program_vége";
 
         // Assignment
-        const string Assignment1_Egesz = "program_kezd\r\n" + "egész a = - - 2\r\n" + "a = -10\r\n" + "program_vége";
+        const string Assignment1_Egesz = "program_kezd\r\n" + "egész a = 2\r\n" + "a = -10\r\n" + "program_vége";
         const string Assignment1_Tort = "program_kezd\r\n" + "tört a = 2,4\r\n" + "a = 7,45\r\n" + "program_vége";
         const string Assignment1_Szoveg = "program_kezd\r\n" + "szöveg a = \"kukor\" . \"ica\"\r\n" + "a = \"vége\"\r\n" + "program_vége";
         const string Assignment1_Logikai = "program_kezd\r\n" + "logikai a = igaz vagy hamis\r\n" + "a = hamis\r\n" + "program_vége";
@@ -59,7 +59,7 @@ namespace SemanticAnalysisTests.PositiveTests
         const string Assignment4_Logikai = "program_kezd\r\n" + "logikai[] tömb = létrehoz[10]\r\n" + "tömb[0] = igaz\r\n" + "program_vége";
 
         // While
-        const string While1 = "program_kezd\r\n" + "egész i = 0\r\n" + "ciklus_amíg i < 10\r\n"+ "i = i + 1\r\n" + "ciklus_vége\r\n" + "program_vége";
+        const string While1 = "program_kezd\r\n" + "egész i = 0\r\n" + "ciklus_amíg i < 10\r\n"+ "i = - i + 2\r\n" + "ciklus_vége\r\n" + "program_vége";
         const string While2 = "program_kezd\r\n" + "egész i = 0\r\n" + "ciklus_amíg i < 10\r\n" + "i = i + 1\r\n" + "i = i + 1\r\n" + "ciklus_vége\r\n" + "program_vége";
 
         // If
@@ -69,5 +69,8 @@ namespace SemanticAnalysisTests.PositiveTests
         // IoParancs
         const string IoParancs_Beolvas = "program_kezd\r\n" + "szöveg a = \"\"\r\n" + "beolvas a\r\n" +"program_vége";
         const string IoParancs_Kiir = "program_kezd\r\n" + "szöveg a = \"alma\"\r\n" + "kiír a\r\n" + "program_vége";
+
+        // Operandus
+        const string Operandus1 = "program_kezd\r\n" + "egész[] tömb = létrehoz[3]\r\n" + "egész a = tömb[4]\r\n" + "program_vége";
     }
 }

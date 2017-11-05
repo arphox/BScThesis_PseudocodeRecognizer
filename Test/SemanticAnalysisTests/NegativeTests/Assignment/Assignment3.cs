@@ -54,5 +54,17 @@ namespace SemanticAnalysisTests.NegativeTests.Assignment
             SemanticAnalysisException e = TestHelper.DoSemanticAnalysisWithExceptionSwallowing(code);
             TestHelper.ExpectAnotherTypeExpectedException(e, SingleEntryType.Logikai.ToString(), SingleEntryType.Egesz.ToString(), 3);
         }
+
+        [Test]
+        public void Assignment3_Negative5()
+        {
+            const string code = "program_kezd\r\n" +
+                                "egész[] tömb = létrehoz[5]\r\n" +
+                                "tömb = szövegből_egészbe(\"x\")\r\n" +
+                                "program_vége";
+
+            SemanticAnalysisException e = TestHelper.DoSemanticAnalysisWithExceptionSwallowing(code);
+            TestHelper.ExpectAnotherTypeExpectedException(e, "Not Tomb", SingleEntryType.EgeszTomb.ToString(), 3);
+        }
     }
 }

@@ -45,10 +45,6 @@ namespace SemanticAnalysis.TypeFinding
                     return StaticTypeFinder.GetOutputTypeOfInternalFunction(internalFunctionToken);
                 case LiteralToken literalToken:
                     return StaticTypeFinder.GetTypeOfLiteral(literalToken);
-                case ErrorToken _:
-                    throw new InvalidOperationException($"Unexpected {nameof(ErrorToken)} found.");
-                case KeywordToken _:
-                    throw new InvalidOperationException($"A {nameof(KeywordToken)} does not have a type.");
             }
 
             throw new InvalidOperationException($"Unexpected {nameof(TerminalToken)} type found: {token.GetType().Name}");
