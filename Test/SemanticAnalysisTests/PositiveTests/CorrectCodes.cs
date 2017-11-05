@@ -3,8 +3,8 @@ using System.Linq;
 using System.Reflection;
 using NUnit.Framework;
 
+// ReSharper disable UnusedMember.Local
 // ReSharper disable InconsistentNaming
-// ReSharper disable UnusedMember.Global
 
 namespace SemanticAnalysisTests.PositiveTests
 {
