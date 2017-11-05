@@ -93,8 +93,9 @@ namespace SemanticAnalysis.TypeFinding
                     _typeChecker.CheckUnárisOperátorCompatibility(children[0].Value as KeywordToken, type);
                     return type;
                 case 4:
-                    SingleEntryType identifierType = GetTypeOfTerminal((TerminalToken)children.First().Value);
-                    _typeChecker.ExpectArrayType(identifierType);
+                    TerminalToken terminalToken = (TerminalToken) children.First().Value;
+                    SingleEntryType identifierType = GetTypeOfTerminal(terminalToken);
+                    _typeChecker.ExpectArrayType(identifierType, terminalToken.RowNumber);
                     _typeChecker.ExpectType(children[2], SingleEntryType.Egesz);
                     return (SingleEntryType)LexicalElementCodeDictionary.GetSimpleTypeCodeFromArrayCode((int)identifierType);
                 default:

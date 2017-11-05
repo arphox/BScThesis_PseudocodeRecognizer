@@ -25,7 +25,7 @@ namespace SemanticAnalysisTests.DeclarationTests
                                 "program_vége";
 
             SemanticAnalysisException ex = TestHelper.DoSemanticAnalysisWithExceptionSwallowing(code);
-            TestHelper.ExpectAnotherTypeExpectedException(ex, SingleEntryType.Egesz.ToString(), SingleEntryType.Logikai.ToString());
+            TestHelper.ExpectAnotherTypeExpectedException(ex, SingleEntryType.Egesz.ToString(), SingleEntryType.Logikai.ToString(), 2);
         }
 
         [Test]
@@ -48,7 +48,7 @@ namespace SemanticAnalysisTests.DeclarationTests
                                 "program_vége";
 
             SemanticAnalysisException ex = TestHelper.DoSemanticAnalysisWithExceptionSwallowing(code);
-            TestHelper.ExpectAnotherTypeExpectedException(ex, SingleEntryType.EgeszTomb.ToString(), SingleEntryType.TortTomb.ToString());
+            TestHelper.ExpectAnotherTypeExpectedException(ex, SingleEntryType.EgeszTomb.ToString(), SingleEntryType.TortTomb.ToString(), 3);
         }
 
         [Test]
@@ -60,7 +60,7 @@ namespace SemanticAnalysisTests.DeclarationTests
                                 "program_vége";
 
             SemanticAnalysisException ex = TestHelper.DoSemanticAnalysisWithExceptionSwallowing(code);
-            TestHelper.ExpectAnotherTypeExpectedException(ex, SingleEntryType.TortTomb.ToString(), SingleEntryType.EgeszTomb.ToString());
+            TestHelper.ExpectAnotherTypeExpectedException(ex, SingleEntryType.TortTomb.ToString(), SingleEntryType.EgeszTomb.ToString(), 3);
         }
     }
 }

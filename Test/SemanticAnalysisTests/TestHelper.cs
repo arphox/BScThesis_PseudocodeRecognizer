@@ -29,13 +29,14 @@ namespace SemanticAnalysisTests
             return null;
         }
 
-        internal static void ExpectAnotherTypeExpectedException(SemanticAnalysisException exception, string expectedExpected, string expectedActual)
+        internal static void ExpectAnotherTypeExpectedException(SemanticAnalysisException exception, string expectedExpected, string expectedActual, int line)
         {
             AnotherTypeExpectedException e = exception as AnotherTypeExpectedException;
 
             Assert.That(e, Is.Not.Null, $"Expected {nameof(AnotherTypeExpectedException)}, but was {exception.GetType().Name}");
             Assert.That(e.Expected == expectedExpected, $"Expected the `Expected` value to be {expectedExpected}, but was {e.Expected}.");
             Assert.That(e.Actual == expectedActual, $"Expected the `Actual` value to be {expectedActual}, but was {e.Actual}.");
+            Assert.That(e.Line == line, $"Expected line to be {line}, but was {e.Line}.");
         }
     }
 }

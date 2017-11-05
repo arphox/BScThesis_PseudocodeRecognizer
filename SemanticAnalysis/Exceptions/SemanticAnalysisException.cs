@@ -4,11 +4,12 @@ namespace SemanticAnalysis.Exceptions
 {
     public class SemanticAnalysisException : ArphoxCompilerException
     {
-        public SemanticAnalysisException()
-        { }
+        public int Line { get; }
 
-        public SemanticAnalysisException(string message)
-            : base(message)
-        { }
+        public SemanticAnalysisException(string message, int line)
+            : base(message + $" at line #{line}.")
+        {
+            Line = line;
+        }
     }
 }
