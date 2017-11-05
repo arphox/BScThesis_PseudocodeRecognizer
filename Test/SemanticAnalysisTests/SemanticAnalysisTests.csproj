@@ -42,6 +42,7 @@
     <Compile Include="NegativeTests\Assignment\Assignment4.cs" />
     <Compile Include="NegativeTests\BinaryOperatorCompatibility.cs" />
     <Compile Include="NegativeTests\BinárisKifejezés.cs" />
+    <Compile Include="NegativeTests\Complex\Complex1.cs" />
     <Compile Include="NegativeTests\Declaration\ArrayDeclaration2.cs" />
     <Compile Include="NegativeTests\Declaration\ArrayDeclaration1.cs" />
     <Compile Include="NegativeTests\Declaration\NonArrayDeclaration2.cs" />
