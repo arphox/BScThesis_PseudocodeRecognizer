@@ -111,7 +111,7 @@ namespace SemanticAnalysis.TypeFinding
 
             SingleEntryType operandsType = GetTypeOfOperandus(node.Children[0]);
 
-            KeywordToken operatorNode = (KeywordToken)node.Children[1].Value;
+            KeywordToken operatorNode = (KeywordToken)node.Children[1].Children.Single().Value;
             _typeChecker.CheckBinárisOperátorCompatibility(operatorNode, operandsType);
 
             string operat0r = LexicalElementCodeDictionary.GetWord(operatorNode.Id);

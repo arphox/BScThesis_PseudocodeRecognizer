@@ -96,7 +96,7 @@ namespace SemanticAnalysis.TypeChecking
 
         internal void CheckForIoParancsParameter(TreeNode<Token> ioParancsNode)
         {
-            SingleEntryType type = _typeFinder.GetTypeOfNode(ioParancsNode);
+            SingleEntryType type = _typeFinder.GetTypeOfNode(ioParancsNode.Children[1]);
             if (type != SingleEntryType.Szoveg)
             {
                 throw new AnotherTypeExpectedException(SingleEntryType.Szoveg.ToString(), type.ToString(), ioParancsNode.Value.Line,

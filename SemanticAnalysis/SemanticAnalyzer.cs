@@ -52,8 +52,6 @@ namespace SemanticAnalysis
                 CheckÁllítások(állításokNode.Children[2]);
             else if (állításokNode.ChildrenAreMatchingFor(nameof(SA.Állítás), "újsor"))
                 CheckÁllítás(állításokNode.Children[0]);
-            else
-                throw new InvalidOperationException();
         }
 
         private void CheckÁllítás(TreeNode<Token> állításNode)
@@ -114,7 +112,6 @@ namespace SemanticAnalysis
             else if (értékadásNode.ChildrenAreMatchingFor("azonosító", "=", nameof(SA.TömbLétrehozóKifejezés)))
             {
                 _typeChecker.ExpectArrayType(értékadásNode.Children[0]);
-                _typeChecker.ExpectRightTypeToBeLeftType(értékadásNode.Children[0], értékadásNode.Children[2]);
             }
 
             // "azonosító" "=" <BelsőFüggvény> "(" <NemTömbLétrehozóKifejezés> ")"

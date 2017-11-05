@@ -40,6 +40,7 @@
     <Compile Include="NegativeTests\Assignment.cs" />
     <Compile Include="NegativeTests\Declaration\ArrayDeclaration.cs" />
     <Compile Include="NegativeTests\Declaration\NonArrayDeclaration.cs" />
+    <Compile Include="NegativeTests\SimpleTests.cs" />
     <Compile Include="PositiveTests\CorrectCodes.cs" />
     <Compile Include="PositiveTests\PositiveTester.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
