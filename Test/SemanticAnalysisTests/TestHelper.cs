@@ -1,4 +1,6 @@
-﻿using LexicalAnalysis.Analyzer;
+﻿using System;
+using System.Linq;
+using LexicalAnalysis.Analyzer;
 using NUnit.Framework;
 using SemanticAnalysis;
 using SemanticAnalysis.Exceptions;
@@ -16,17 +18,23 @@ namespace SemanticAnalysisTests
             new SemanticAnalyzer(parserResult, lexerResult.SymbolTable).Start();
         }
 
-        internal static SemanticAnalysisException DoSemanticAnalysisWithExceptionSwallowing(string code)
+        internal static AggregateException DoSemanticAnalysisWithExceptionSwallowing(string code)
         {
             try
             {
                 DoSemanticAnalysis(code);
             }
-            catch (SemanticAnalysisException e)
+            catch (AggregateException e)
             {
                 return e;
             }
             return null;
+        }
+
+        internal static SemanticAnalysisException ExpectSingleException(AggregateException aggregate)
+        {
+            Assert.That(aggregate.InnerExceptions.Count, Is.EqualTo(1));
+            return (SemanticAnalysisException)aggregate.InnerExceptions.Single();
         }
 
         internal static void ExpectAnotherTypeExpectedException(SemanticAnalysisException exception, string expectedExpected, string expectedActual, int line)

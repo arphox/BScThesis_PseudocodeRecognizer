@@ -1,6 +1,7 @@
 ﻿using LexicalAnalysis.SymbolTableManagement;
 using NUnit.Framework;
 using SemanticAnalysis.Exceptions;
+using System;
 
 namespace SemanticAnalysisTests.NegativeTests.If
 {
@@ -16,7 +17,8 @@ namespace SemanticAnalysisTests.NegativeTests.If
                                 "elágazás_vége\r\n" +
                                 "program_vége";
 
-            SemanticAnalysisException e = TestHelper.DoSemanticAnalysisWithExceptionSwallowing(code);
+            AggregateException aggregate = TestHelper.DoSemanticAnalysisWithExceptionSwallowing(code);
+            SemanticAnalysisException e = TestHelper.ExpectSingleException(aggregate);
             TestHelper.ExpectAnotherTypeExpectedException(e, SingleEntryType.Logikai.ToString(), SingleEntryType.Egesz.ToString(), 2);
         }
 
@@ -29,7 +31,8 @@ namespace SemanticAnalysisTests.NegativeTests.If
                                 "elágazás_vége\r\n" +
                                 "program_vége";
 
-            SemanticAnalysisException e = TestHelper.DoSemanticAnalysisWithExceptionSwallowing(code);
+            AggregateException aggregate = TestHelper.DoSemanticAnalysisWithExceptionSwallowing(code);
+            SemanticAnalysisException e = TestHelper.ExpectSingleException(aggregate);
             TestHelper.ExpectAnotherTypeExpectedException(e, SingleEntryType.Logikai.ToString(), SingleEntryType.Tort.ToString(), 2);
         }
 
@@ -42,7 +45,8 @@ namespace SemanticAnalysisTests.NegativeTests.If
                                 "elágazás_vége\r\n" +
                                 "program_vége";
 
-            SemanticAnalysisException e = TestHelper.DoSemanticAnalysisWithExceptionSwallowing(code);
+            AggregateException aggregate = TestHelper.DoSemanticAnalysisWithExceptionSwallowing(code);
+            SemanticAnalysisException e = TestHelper.ExpectSingleException(aggregate);
             TestHelper.ExpectAnotherTypeExpectedException(e, SingleEntryType.Logikai.ToString(), SingleEntryType.Szoveg.ToString(), 2);
         }
     }

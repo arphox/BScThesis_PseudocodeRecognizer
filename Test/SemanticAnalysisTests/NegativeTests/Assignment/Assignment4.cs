@@ -1,4 +1,5 @@
-﻿using LexicalAnalysis.SymbolTableManagement;
+﻿using System;
+using LexicalAnalysis.SymbolTableManagement;
 using NUnit.Framework;
 using SemanticAnalysis.Exceptions;
 
@@ -15,7 +16,8 @@ namespace SemanticAnalysisTests.NegativeTests.Assignment
                                 "tömb[0] = 3,4\r\n" +
                                 "program_vége";
 
-            SemanticAnalysisException e = TestHelper.DoSemanticAnalysisWithExceptionSwallowing(code);
+            AggregateException aggregate = TestHelper.DoSemanticAnalysisWithExceptionSwallowing(code);
+            SemanticAnalysisException e = TestHelper.ExpectSingleException(aggregate);
             TestHelper.ExpectAnotherTypeExpectedException(e, SingleEntryType.Egesz.ToString(), SingleEntryType.Tort.ToString(), 3);
         }
 
@@ -27,7 +29,8 @@ namespace SemanticAnalysisTests.NegativeTests.Assignment
                                 "tömb[0] = \"kalap\"\r\n" +
                                 "program_vége";
 
-            SemanticAnalysisException e = TestHelper.DoSemanticAnalysisWithExceptionSwallowing(code);
+            AggregateException aggregate = TestHelper.DoSemanticAnalysisWithExceptionSwallowing(code);
+            SemanticAnalysisException e = TestHelper.ExpectSingleException(aggregate);
             TestHelper.ExpectAnotherTypeExpectedException(e, SingleEntryType.Egesz.ToString(), SingleEntryType.Szoveg.ToString(), 3);
         }
 
@@ -39,7 +42,8 @@ namespace SemanticAnalysisTests.NegativeTests.Assignment
                                 "tömb[0] = hamis\r\n" +
                                 "program_vége";
 
-            SemanticAnalysisException e = TestHelper.DoSemanticAnalysisWithExceptionSwallowing(code);
+            AggregateException aggregate = TestHelper.DoSemanticAnalysisWithExceptionSwallowing(code);
+            SemanticAnalysisException e = TestHelper.ExpectSingleException(aggregate);
             TestHelper.ExpectAnotherTypeExpectedException(e, SingleEntryType.Egesz.ToString(), SingleEntryType.Logikai.ToString(), 3);
         }
 
@@ -51,7 +55,8 @@ namespace SemanticAnalysisTests.NegativeTests.Assignment
                                 "tömb[0] = 3\r\n" +
                                 "program_vége";
 
-            SemanticAnalysisException e = TestHelper.DoSemanticAnalysisWithExceptionSwallowing(code);
+            AggregateException aggregate = TestHelper.DoSemanticAnalysisWithExceptionSwallowing(code);
+            SemanticAnalysisException e = TestHelper.ExpectSingleException(aggregate);
             TestHelper.ExpectAnotherTypeExpectedException(e, SingleEntryType.Tort.ToString(), SingleEntryType.Egesz.ToString(), 3);
         }
 
@@ -63,7 +68,8 @@ namespace SemanticAnalysisTests.NegativeTests.Assignment
                                 "tömb[0] = \"kalap\"\r\n" +
                                 "program_vége";
 
-            SemanticAnalysisException e = TestHelper.DoSemanticAnalysisWithExceptionSwallowing(code);
+            AggregateException aggregate = TestHelper.DoSemanticAnalysisWithExceptionSwallowing(code);
+            SemanticAnalysisException e = TestHelper.ExpectSingleException(aggregate);
             TestHelper.ExpectAnotherTypeExpectedException(e, SingleEntryType.Tort.ToString(), SingleEntryType.Szoveg.ToString(), 3);
         }
 
@@ -75,7 +81,8 @@ namespace SemanticAnalysisTests.NegativeTests.Assignment
                                 "tömb[0] = hamis\r\n" +
                                 "program_vége";
 
-            SemanticAnalysisException e = TestHelper.DoSemanticAnalysisWithExceptionSwallowing(code);
+            AggregateException aggregate = TestHelper.DoSemanticAnalysisWithExceptionSwallowing(code);
+            SemanticAnalysisException e = TestHelper.ExpectSingleException(aggregate);
             TestHelper.ExpectAnotherTypeExpectedException(e, SingleEntryType.Tort.ToString(), SingleEntryType.Logikai.ToString(), 3);
         }
 
@@ -87,7 +94,8 @@ namespace SemanticAnalysisTests.NegativeTests.Assignment
                                 "tömb[0] = 3\r\n" +
                                 "program_vége";
 
-            SemanticAnalysisException e = TestHelper.DoSemanticAnalysisWithExceptionSwallowing(code);
+            AggregateException aggregate = TestHelper.DoSemanticAnalysisWithExceptionSwallowing(code);
+            SemanticAnalysisException e = TestHelper.ExpectSingleException(aggregate);
             TestHelper.ExpectAnotherTypeExpectedException(e, SingleEntryType.Szoveg.ToString(), SingleEntryType.Egesz.ToString(), 3);
         }
 
@@ -99,7 +107,8 @@ namespace SemanticAnalysisTests.NegativeTests.Assignment
                                 "tömb[0] = 7,4\r\n" +
                                 "program_vége";
 
-            SemanticAnalysisException e = TestHelper.DoSemanticAnalysisWithExceptionSwallowing(code);
+            AggregateException aggregate = TestHelper.DoSemanticAnalysisWithExceptionSwallowing(code);
+            SemanticAnalysisException e = TestHelper.ExpectSingleException(aggregate);
             TestHelper.ExpectAnotherTypeExpectedException(e, SingleEntryType.Szoveg.ToString(), SingleEntryType.Tort.ToString(), 3);
         }
 
@@ -111,7 +120,8 @@ namespace SemanticAnalysisTests.NegativeTests.Assignment
                                 "tömb[0] = hamis\r\n" +
                                 "program_vége";
 
-            SemanticAnalysisException e = TestHelper.DoSemanticAnalysisWithExceptionSwallowing(code);
+            AggregateException aggregate = TestHelper.DoSemanticAnalysisWithExceptionSwallowing(code);
+            SemanticAnalysisException e = TestHelper.ExpectSingleException(aggregate);
             TestHelper.ExpectAnotherTypeExpectedException(e, SingleEntryType.Szoveg.ToString(), SingleEntryType.Logikai.ToString(), 3);
         }
 
@@ -123,7 +133,8 @@ namespace SemanticAnalysisTests.NegativeTests.Assignment
                                 "tömb[0] = 3\r\n" +
                                 "program_vége";
 
-            SemanticAnalysisException e = TestHelper.DoSemanticAnalysisWithExceptionSwallowing(code);
+            AggregateException aggregate = TestHelper.DoSemanticAnalysisWithExceptionSwallowing(code);
+            SemanticAnalysisException e = TestHelper.ExpectSingleException(aggregate);
             TestHelper.ExpectAnotherTypeExpectedException(e, SingleEntryType.Logikai.ToString(), SingleEntryType.Egesz.ToString(), 3);
         }
 
@@ -135,7 +146,8 @@ namespace SemanticAnalysisTests.NegativeTests.Assignment
                                 "tömb[0] = 1,3\r\n" +
                                 "program_vége";
 
-            SemanticAnalysisException e = TestHelper.DoSemanticAnalysisWithExceptionSwallowing(code);
+            AggregateException aggregate = TestHelper.DoSemanticAnalysisWithExceptionSwallowing(code);
+            SemanticAnalysisException e = TestHelper.ExpectSingleException(aggregate);
             TestHelper.ExpectAnotherTypeExpectedException(e, SingleEntryType.Logikai.ToString(), SingleEntryType.Tort.ToString(), 3);
         }
 
@@ -147,7 +159,8 @@ namespace SemanticAnalysisTests.NegativeTests.Assignment
                                 "tömb[0] = \"szőlő\"\r\n" +
                                 "program_vége";
 
-            SemanticAnalysisException e = TestHelper.DoSemanticAnalysisWithExceptionSwallowing(code);
+            AggregateException aggregate = TestHelper.DoSemanticAnalysisWithExceptionSwallowing(code);
+            SemanticAnalysisException e = TestHelper.ExpectSingleException(aggregate);
             TestHelper.ExpectAnotherTypeExpectedException(e, SingleEntryType.Logikai.ToString(), SingleEntryType.Szoveg.ToString(), 3);
         }
 
@@ -159,7 +172,8 @@ namespace SemanticAnalysisTests.NegativeTests.Assignment
                                 "a[0] = \"szőlő\"\r\n" +
                                 "program_vége";
 
-            SemanticAnalysisException e = TestHelper.DoSemanticAnalysisWithExceptionSwallowing(code);
+            AggregateException aggregate = TestHelper.DoSemanticAnalysisWithExceptionSwallowing(code);
+            SemanticAnalysisException e = TestHelper.ExpectSingleException(aggregate);
             TestHelper.ExpectAnotherTypeExpectedException(e, "Tomb", SingleEntryType.Egesz.ToString(), 3);
         }
     }

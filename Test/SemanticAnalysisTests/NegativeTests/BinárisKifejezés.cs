@@ -1,4 +1,5 @@
-﻿using LexicalAnalysis.SymbolTableManagement;
+﻿using System;
+using LexicalAnalysis.SymbolTableManagement;
 using NUnit.Framework;
 using SemanticAnalysis.Exceptions;
 
@@ -14,8 +15,8 @@ namespace SemanticAnalysisTests.NegativeTests
                                 "egész a = 2 + hamis\r\n" +
                                 "program_vége";
 
-            SemanticAnalysisException exception = TestHelper.DoSemanticAnalysisWithExceptionSwallowing(code);
-            TypeMismatchException e = exception as TypeMismatchException;
+            AggregateException exception = TestHelper.DoSemanticAnalysisWithExceptionSwallowing(code);
+            TypeMismatchException e = TestHelper.ExpectSingleException(exception) as TypeMismatchException;
 
             Assert.That(exception != null, "Expected any exception, but was none.");
             Assert.That(e != null, $"Expected {nameof(TypeMismatchException)}, but was {exception.GetType().Name}");

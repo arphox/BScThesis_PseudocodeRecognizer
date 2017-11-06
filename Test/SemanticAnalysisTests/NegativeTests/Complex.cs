@@ -1,6 +1,7 @@
 ﻿using LexicalAnalysis.SymbolTableManagement;
 using NUnit.Framework;
 using SemanticAnalysis.Exceptions;
+using System;
 
 namespace SemanticAnalysisTests.NegativeTests
 {
@@ -24,7 +25,8 @@ namespace SemanticAnalysisTests.NegativeTests
                                 "ciklus_vége\r\n" +
                                 "program_vége";
 
-            SemanticAnalysisException e = TestHelper.DoSemanticAnalysisWithExceptionSwallowing(code);
+            AggregateException aggregate = TestHelper.DoSemanticAnalysisWithExceptionSwallowing(code);
+            SemanticAnalysisException e = TestHelper.ExpectSingleException(aggregate);
             Assert.That(e.Message.Contains("Unexpected binary operator"));
             Assert.That(e.Line, Is.EqualTo(8));
         }
@@ -44,7 +46,8 @@ namespace SemanticAnalysisTests.NegativeTests
                                 "ciklus_vége\r\n" +
                                 "program_vége";
 
-            SemanticAnalysisException e = TestHelper.DoSemanticAnalysisWithExceptionSwallowing(code);
+            AggregateException aggregate = TestHelper.DoSemanticAnalysisWithExceptionSwallowing(code);
+            SemanticAnalysisException e = TestHelper.ExpectSingleException(aggregate);
             TestHelper.ExpectAnotherTypeExpectedException(e, SingleEntryType.Szoveg.ToString(), SingleEntryType.Egesz.ToString() ,5);
         }
     }

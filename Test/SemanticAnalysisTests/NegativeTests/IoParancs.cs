@@ -1,6 +1,7 @@
 ﻿using LexicalAnalysis.SymbolTableManagement;
 using NUnit.Framework;
 using SemanticAnalysis.Exceptions;
+using System;
 
 namespace SemanticAnalysisTests.NegativeTests
 {
@@ -15,7 +16,8 @@ namespace SemanticAnalysisTests.NegativeTests
                                 "beolvas a\r\n" + 
                                 "program_vége";
 
-            SemanticAnalysisException e = TestHelper.DoSemanticAnalysisWithExceptionSwallowing(code);
+            AggregateException aggregate = TestHelper.DoSemanticAnalysisWithExceptionSwallowing(code);
+            SemanticAnalysisException e = TestHelper.ExpectSingleException(aggregate);
             TestHelper.ExpectAnotherTypeExpectedException(e, SingleEntryType.Szoveg.ToString(), SingleEntryType.Egesz.ToString(), 3);
         }
 
@@ -27,7 +29,8 @@ namespace SemanticAnalysisTests.NegativeTests
                                 "beolvas a\r\n" +
                                 "program_vége";
 
-            SemanticAnalysisException e = TestHelper.DoSemanticAnalysisWithExceptionSwallowing(code);
+            AggregateException aggregate = TestHelper.DoSemanticAnalysisWithExceptionSwallowing(code);
+            SemanticAnalysisException e = TestHelper.ExpectSingleException(aggregate);
             TestHelper.ExpectAnotherTypeExpectedException(e, SingleEntryType.Szoveg.ToString(), SingleEntryType.Tort.ToString(), 3);
         }
 
@@ -39,7 +42,8 @@ namespace SemanticAnalysisTests.NegativeTests
                                 "beolvas a\r\n" +
                                 "program_vége";
 
-            SemanticAnalysisException e = TestHelper.DoSemanticAnalysisWithExceptionSwallowing(code);
+            AggregateException aggregate = TestHelper.DoSemanticAnalysisWithExceptionSwallowing(code);
+            SemanticAnalysisException e = TestHelper.ExpectSingleException(aggregate);
             TestHelper.ExpectAnotherTypeExpectedException(e, SingleEntryType.Szoveg.ToString(), SingleEntryType.Logikai.ToString(), 3);
         }
 
@@ -51,7 +55,8 @@ namespace SemanticAnalysisTests.NegativeTests
                                 "kiír a\r\n" +
                                 "program_vége";
 
-            SemanticAnalysisException e = TestHelper.DoSemanticAnalysisWithExceptionSwallowing(code);
+            AggregateException aggregate = TestHelper.DoSemanticAnalysisWithExceptionSwallowing(code);
+            SemanticAnalysisException e = TestHelper.ExpectSingleException(aggregate);
             TestHelper.ExpectAnotherTypeExpectedException(e, SingleEntryType.Szoveg.ToString(), SingleEntryType.Egesz.ToString(), 3);
         }
 
@@ -63,7 +68,8 @@ namespace SemanticAnalysisTests.NegativeTests
                                 "kiír a\r\n" +
                                 "program_vége";
 
-            SemanticAnalysisException e = TestHelper.DoSemanticAnalysisWithExceptionSwallowing(code);
+            AggregateException aggregate = TestHelper.DoSemanticAnalysisWithExceptionSwallowing(code);
+            SemanticAnalysisException e = TestHelper.ExpectSingleException(aggregate);
             TestHelper.ExpectAnotherTypeExpectedException(e, SingleEntryType.Szoveg.ToString(), SingleEntryType.EgeszTomb.ToString(), 3);
         }
     }

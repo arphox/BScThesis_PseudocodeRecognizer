@@ -18,6 +18,7 @@ namespace SemanticAnalysis
         private bool _isAlreadyStarted;
 
         private readonly TypeChecker _typeChecker;
+        private readonly ExceptionCollector _exceptionCollector = new ExceptionCollector();
 
         public SemanticAnalyzer(SyntaxAnalyzerResult parserResult, SymbolTable symbolTable)
         {
@@ -44,11 +45,19 @@ namespace SemanticAnalysis
         private void CheckProgram(TreeNode<Token> programNode)
         {
             CheckÁllítások(programNode.Children.Single(c => c.Value is NonTerminalToken nonTerminal && nonTerminal.Name == nameof(SA.Állítások)));
+            _exceptionCollector.ThrowIfAny();
         }
 
         private void CheckÁllítások(TreeNode<Token> állításokNode)
         {
-            CheckÁllítás(állításokNode.Children[0]);
+            try
+            {
+                CheckÁllítás(állításokNode.Children[0]);
+            }
+            catch (Exception e)
+            {
+                _exceptionCollector.Add(e);
+            }
             if (állításokNode.ChildrenAreMatchingFor(nameof(SA.Állítás), "újsor", nameof(SA.Állítások)))
             {
                 CheckÁllítások(állításokNode.Children[2]);

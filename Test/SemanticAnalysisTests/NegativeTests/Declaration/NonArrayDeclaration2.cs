@@ -1,5 +1,6 @@
 ﻿using LexicalAnalysis.SymbolTableManagement;
 using NUnit.Framework;
+using System;
 using SemanticAnalysis.Exceptions;
 
 namespace SemanticAnalysisTests.NegativeTests.Declaration
@@ -14,7 +15,8 @@ namespace SemanticAnalysisTests.NegativeTests.Declaration
                                 "egész a = törtből_egészbe(2)\r\n" +
                                 "program_vége";
 
-            SemanticAnalysisException e = TestHelper.DoSemanticAnalysisWithExceptionSwallowing(code);
+            AggregateException aggregate = TestHelper.DoSemanticAnalysisWithExceptionSwallowing(code);
+            SemanticAnalysisException e = TestHelper.ExpectSingleException(aggregate);
             TestHelper.ExpectAnotherTypeExpectedException(e, SingleEntryType.Tort.ToString(), SingleEntryType.Egesz.ToString(), 4);
         }
 
@@ -25,7 +27,8 @@ namespace SemanticAnalysisTests.NegativeTests.Declaration
                                 "egész a = logikaiból_törtbe(hamis)\r\n" +
                                 "program_vége";
 
-            SemanticAnalysisException e = TestHelper.DoSemanticAnalysisWithExceptionSwallowing(code);
+            AggregateException aggregate = TestHelper.DoSemanticAnalysisWithExceptionSwallowing(code);
+            SemanticAnalysisException e = TestHelper.ExpectSingleException(aggregate);
             TestHelper.ExpectAnotherTypeExpectedException(e, SingleEntryType.Egesz.ToString(), SingleEntryType.Tort.ToString(), 5);
         }
 
@@ -36,7 +39,8 @@ namespace SemanticAnalysisTests.NegativeTests.Declaration
                                 "tört a = logikaiból_szövegbe(hamis)\r\n" +
                                 "program_vége";
 
-            SemanticAnalysisException e = TestHelper.DoSemanticAnalysisWithExceptionSwallowing(code);
+            AggregateException aggregate = TestHelper.DoSemanticAnalysisWithExceptionSwallowing(code);
+            SemanticAnalysisException e = TestHelper.ExpectSingleException(aggregate);
             TestHelper.ExpectAnotherTypeExpectedException(e, SingleEntryType.Tort.ToString(), SingleEntryType.Szoveg.ToString(), 4);
         }
 
@@ -47,7 +51,8 @@ namespace SemanticAnalysisTests.NegativeTests.Declaration
                                 "logikai a = logikaiból_egészbe(hamis)\r\n" +
                                 "program_vége";
 
-            SemanticAnalysisException e = TestHelper.DoSemanticAnalysisWithExceptionSwallowing(code);
+            AggregateException aggregate = TestHelper.DoSemanticAnalysisWithExceptionSwallowing(code);
+            SemanticAnalysisException e = TestHelper.ExpectSingleException(aggregate);
             TestHelper.ExpectAnotherTypeExpectedException(e, SingleEntryType.Logikai.ToString(), SingleEntryType.Egesz.ToString(), 3);
         }
 
@@ -58,7 +63,8 @@ namespace SemanticAnalysisTests.NegativeTests.Declaration
                                 "szöveg a = törtből_logikaiba(-1,35)\r\n" +
                                 "program_vége";
 
-            SemanticAnalysisException e = TestHelper.DoSemanticAnalysisWithExceptionSwallowing(code);
+            AggregateException aggregate = TestHelper.DoSemanticAnalysisWithExceptionSwallowing(code);
+            SemanticAnalysisException e = TestHelper.ExpectSingleException(aggregate);
             TestHelper.ExpectAnotherTypeExpectedException(e, SingleEntryType.Szoveg.ToString(), SingleEntryType.Logikai.ToString(), 2);
         }
     }
