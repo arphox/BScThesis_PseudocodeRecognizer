@@ -22,7 +22,7 @@ namespace SemanticAnalysis.TypeChecking
         {
             int code = (int)type;
             if (!LexicalElementCodeDictionary.IsArrayType(code))
-                throw new AnotherTypeExpectedException("Tomb", type.ToString(), line, "The type should be an array type.");
+                throw new AnotherTypeExpectedException("Tomb", type.ToString(), line, "The type should be an array type");
         }
 
         internal void ExpectArrayType(TreeNode<Token> node)
@@ -30,7 +30,7 @@ namespace SemanticAnalysis.TypeChecking
             SingleEntryType type = _typeFinder.GetTypeOfNode(node);
             int code = (int)type;
             if (!LexicalElementCodeDictionary.IsArrayType(code))
-                throw new AnotherTypeExpectedException("Tomb", type.ToString(), node.Value.Line, "The type should be an array type.");
+                throw new AnotherTypeExpectedException("Tomb", type.ToString(), node.Value.Line, "The type should be an array type");
         }
 
         internal void ExpectForNonArrayType(TreeNode<Token> node)
@@ -38,7 +38,7 @@ namespace SemanticAnalysis.TypeChecking
             SingleEntryType type = _typeFinder.GetTypeOfNode(node);
             int code = (int)type;
             if (LexicalElementCodeDictionary.IsArrayType(code))
-                throw new AnotherTypeExpectedException("Not Tomb", type.ToString(), node.Value.Line, "The type should not be an array type.");
+                throw new AnotherTypeExpectedException("Not Tomb", type.ToString(), node.Value.Line, "The type should not be an array type");
         }
 
         internal void ExpectType(TreeNode<Token> node, SingleEntryType expectedType)
@@ -78,7 +78,7 @@ namespace SemanticAnalysis.TypeChecking
             if (internalFunctionInputType != parameterType)
             {
                 throw new AnotherTypeExpectedException(internalFunctionInputType.ToString(), parameterType.ToString(), internalFunctionNode.Value.Line,
-                    $"The internal function `{internalFunctionName}`'s input type has to be {internalFunctionInputType}, but {parameterType} was given.");
+                    $"The internal function `{internalFunctionName}`'s input type has to be {internalFunctionInputType}, but {parameterType} was given");
             }
         }
 
@@ -100,7 +100,7 @@ namespace SemanticAnalysis.TypeChecking
             if (type != SingleEntryType.Szoveg)
             {
                 throw new AnotherTypeExpectedException(SingleEntryType.Szoveg.ToString(), type.ToString(), ioParancsNode.Children.First().Value.Line,
-                    $"The given parameter for the {nameof(SA.IoParancs)} should be of type {SingleEntryType.Szoveg}.");
+                    $"The given parameter for the {nameof(SA.IoParancs)} should be of type {SingleEntryType.Szoveg}");
             }
         }
 
@@ -114,7 +114,7 @@ namespace SemanticAnalysis.TypeChecking
                     if (!(operandType == SingleEntryType.Egesz || operandType == SingleEntryType.Tort))
                     {
                         throw new AnotherTypeExpectedException($"{SingleEntryType.Egesz} or {SingleEntryType.Tort}", operandType.ToString(), line,
-                            $"The unary operator `{op}` cannot be applied for the type {operandType}.");
+                            $"The unary operator `{op}` cannot be applied for the type {operandType}");
                     }
                     break;
 
@@ -122,7 +122,7 @@ namespace SemanticAnalysis.TypeChecking
                     if (operandType != SingleEntryType.Logikai)
                     {
                         throw new AnotherTypeExpectedException(SingleEntryType.Logikai.ToString(), operandType.ToString(), line,
-                            $"The unary operator `{op}` cannot be applied for the type {operandType}.");
+                            $"The unary operator `{op}` cannot be applied for the type {operandType}");
                     }
                     break;
             }
@@ -141,7 +141,7 @@ namespace SemanticAnalysis.TypeChecking
                     if (!(operandsType == SingleEntryType.Egesz || operandsType == SingleEntryType.Tort))
                     {
                         throw new AnotherTypeExpectedException($"{SingleEntryType.Egesz} or {SingleEntryType.Tort}", operandsType.ToString(), line,
-                            $"The binary operator `{op}` cannot be applied between types of {operandsType}.");
+                            $"The binary operator `{op}` cannot be applied between types of {operandsType}");
                     }
                     break;
 
@@ -150,7 +150,7 @@ namespace SemanticAnalysis.TypeChecking
                     if (operandsType != SingleEntryType.Logikai)
                     {
                         throw new AnotherTypeExpectedException(SingleEntryType.Logikai.ToString(), operandsType.ToString(), line,
-                            $"The binary operator `{op}` cannot be applied between types of {operandsType}.");
+                            $"The binary operator `{op}` cannot be applied between types of {operandsType}");
                     }
                     break;
 
@@ -162,7 +162,7 @@ namespace SemanticAnalysis.TypeChecking
                     if (!(operandsType == SingleEntryType.Egesz || operandsType == SingleEntryType.Tort))
                     {
                         throw new AnotherTypeExpectedException($"{SingleEntryType.Egesz} or {SingleEntryType.Tort}", operandsType.ToString(), line,
-                            $"The binary operator `{op}` cannot be applied between types of {operandsType}.");
+                            $"The binary operator `{op}` cannot be applied between types of {operandsType}");
                     }
                     break;
 
@@ -170,7 +170,7 @@ namespace SemanticAnalysis.TypeChecking
                     if (operandsType != SingleEntryType.Szoveg)
                     {
                         throw new AnotherTypeExpectedException(SingleEntryType.Szoveg.ToString(), operandsType.ToString(), line,
-                            $"The binary operator `{op}` cannot be applied between types of {operandsType}.");
+                            $"The binary operator `{op}` cannot be applied between types of {operandsType}");
                     }
                     break;
             }

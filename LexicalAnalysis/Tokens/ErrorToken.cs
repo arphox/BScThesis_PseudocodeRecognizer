@@ -16,6 +16,6 @@ namespace LexicalAnalysis.Tokens
             Message = message ?? throw new ArgumentNullException(nameof(message));
         }
 
-        public override string ToString() => base.ToString() + $", {nameof(ErrorType)}={ErrorType}, {nameof(Message)}={Message}";
+        public override string ToString() => base.ToString() + $", {nameof(ErrorType)} = {ErrorType}, {nameof(Message)} = {Message}";
     }
 }

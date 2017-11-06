@@ -32,7 +32,7 @@ namespace SemanticAnalysis.TypeFinding
                 case NonTerminalToken _:
                     return GetTypeOfNonTerminal(node);
                 default:
-                    throw new InvalidOperationException($"Unexpected {nameof(Token)} type found: {node.GetType().Name}.");
+                    throw new InvalidOperationException($"Unexpected {nameof(Token)} type found: {node.GetType().Name}");
             }
         }
 

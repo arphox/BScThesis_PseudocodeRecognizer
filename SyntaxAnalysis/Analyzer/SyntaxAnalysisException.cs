@@ -1,4 +1,5 @@
-﻿using Common;
+﻿using System;
+using Common;
 using LexicalAnalysis.Tokens;
 
 namespace SyntaxAnalysis.Analyzer
@@ -17,12 +18,11 @@ namespace SyntaxAnalysis.Analyzer
             FurthestLine = furthestLine;
         }
 
-        public override string Message => base.Message + ", " + ToString();
-
         public override string ToString()
         {
-            string message = $"Szintaktikai hiba! Információk: Utolsó hozzáadott token: {LastToken}, A hiba fellépésekor az aktuális sorszám: {CurrentLine}, Az elemzés során elért legtávolabbi sor száma: {FurthestLine}";
-            return message;
+            return $"Last added token: {LastToken}.{Environment.NewLine}" +
+                   $"Current line: {CurrentLine}.{Environment.NewLine}" +
+                   $"Furthest line reached: {FurthestLine}{Environment.NewLine}";
         }
     }
 }
