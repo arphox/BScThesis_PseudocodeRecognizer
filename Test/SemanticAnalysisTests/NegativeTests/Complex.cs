@@ -42,13 +42,16 @@ namespace SemanticAnalysisTests.NegativeTests
                                 "ciklus_vége\r\n" +
                                 "i = 0\r\n" +
                                 "ciklus_amíg i < 10\r\n" +
-                                "   számok[i] = számok[i] és 2\r\n" + // <- this should be indicated, too.
+                                "   számok[i] = számok[i] és 2\r\n" +
                                 "ciklus_vége\r\n" +
                                 "program_vége";
 
             AggregateException aggregate = TestHelper.DoSemanticAnalysisWithExceptionSwallowing(code);
-            SemanticAnalysisException e = TestHelper.ExpectSingleException(aggregate);
-            TestHelper.ExpectAnotherTypeExpectedException(e, SingleEntryType.Szoveg.ToString(), SingleEntryType.Egesz.ToString() ,5);
+            SemanticAnalysisException first = aggregate.InnerExceptions[0] as SemanticAnalysisException;
+            SemanticAnalysisException second = aggregate.InnerExceptions[1] as SemanticAnalysisException;
+
+            TestHelper.ExpectAnotherTypeExpectedException(first, SingleEntryType.Szoveg.ToString(), SingleEntryType.Egesz.ToString() ,5);
+            TestHelper.ExpectAnotherTypeExpectedException(second, SingleEntryType.Logikai.ToString(), SingleEntryType.Egesz.ToString(), 9);
         }
     }
 }
