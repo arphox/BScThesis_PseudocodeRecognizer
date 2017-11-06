@@ -53,5 +53,44 @@ namespace SemanticAnalysisTests.NegativeTests
             TestHelper.ExpectAnotherTypeExpectedException(first, SingleEntryType.Szoveg.ToString(), SingleEntryType.Egesz.ToString() ,5);
             TestHelper.ExpectAnotherTypeExpectedException(second, SingleEntryType.Logikai.ToString(), SingleEntryType.Egesz.ToString(), 9);
         }
+
+        [Test]
+        public void Complex3_Negative()
+        {
+            const string code = "program_kezd\r\n" +
+                                "egész e = 2\r\n" +
+                                "tört t = egészből_törtbe(e)\r\n" +
+                                "szöveg sz = törtből_szövegbe(t)\r\n" +
+                                "logikai l = szövegből_logikaiba(t)\r\n" +
+                                "egész final = logikaiból_egészbe(l)\r\n" +
+                                "szöveg finalSzöveg = egészből_szövegbe(t)\r\n" +
+                                "kiír finalSzöveg\r\n" +
+                                "program_vége";
+
+            AggregateException aggregate = TestHelper.DoSemanticAnalysisWithExceptionSwallowing(code);
+            SemanticAnalysisException first = aggregate.InnerExceptions[0] as SemanticAnalysisException;
+            SemanticAnalysisException second = aggregate.InnerExceptions[1] as SemanticAnalysisException;
+
+            TestHelper.ExpectAnotherTypeExpectedException(first, SingleEntryType.Szoveg.ToString(), SingleEntryType.Tort.ToString(), 5);
+            TestHelper.ExpectAnotherTypeExpectedException(second, SingleEntryType.Egesz.ToString(), SingleEntryType.Tort.ToString(), 7);
+        }
+
+        [Test]
+        public void Complex4_Negative()
+        {
+            const string code = "program_kezd\r\n" +
+                                "egész e = 2\r\n" +
+                                "szöveg eSz = egészből_szövegbe(e)\r\n" +
+                                "szöveg f = \"Az e változó értéke: \" + eSz\r\n" +
+                                "kiír e\r\n" +
+                                "program_vége";
+
+            AggregateException aggregate = TestHelper.DoSemanticAnalysisWithExceptionSwallowing(code);
+            SemanticAnalysisException first = aggregate.InnerExceptions[0] as SemanticAnalysisException;
+            SemanticAnalysisException second = aggregate.InnerExceptions[1] as SemanticAnalysisException;
+
+            TestHelper.ExpectAnotherTypeExpectedException(first, "Egesz or Tort", SingleEntryType.Szoveg.ToString(), 4);
+            TestHelper.ExpectAnotherTypeExpectedException(second, SingleEntryType.Szoveg.ToString(), SingleEntryType.Egesz.ToString(), 5);
+        }
     }
 }
