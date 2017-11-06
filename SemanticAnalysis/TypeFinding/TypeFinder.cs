@@ -7,6 +7,7 @@ using SyntaxAnalysis.Tree;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using SemanticAnalysis.Exceptions;
 using SA = SyntaxAnalysis.Analyzer.SyntaxAnalyzer;
 
 namespace SemanticAnalysis.TypeFinding
@@ -130,9 +131,9 @@ namespace SemanticAnalysis.TypeFinding
                     return operandsType;
                 case ".":
                     return SingleEntryType.Szoveg;
+                default:
+                    throw new SemanticAnalysisException($"Unexpected binary operator: `{operat0r}` ", node.Children[0].Children.First().Value.Line);
             }
-
-            throw new InvalidOperationException();
         }
     }
 }
