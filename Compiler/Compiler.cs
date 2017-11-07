@@ -5,7 +5,6 @@ using SyntaxAnalysis.Analyzer;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using LexicalAnalysis.SymbolTableManagement;
 
 namespace Compiler
 {
