@@ -26,21 +26,44 @@ namespace VisualParseTree
         {
             // ReSharper disable once UnusedVariable
             const string code = "program_kezd\r\n" +
-                                "egész[] tömb = létrehoz[10]\r\n" +
-                                "egész i = 0\r\n" +
-                                "egész összeg = 0\r\n" +
-                                "ciklus_amíg i < 10\r\n" +
-                                "   egész temp = tömb[i]\r\n" +
-                                "   összeg = összeg + temp\r\n" +
-                                "   i = i + 1\r\n" +
+                                "egész e = 2\r\n" +
+                                "tört t = -2,4\r\n" +
+                                "logikai l = hamis\r\n" +
+                                "szöveg sz = \"alma\"\r\n" +
+                                "szöveg[] szt = létrehoz[10]\r\n" +
+                                "szt[0] = 2\r\n" +
+                                "e = 3\r\n" +
+                                "ha igaz akkor\r\n" +
+                                "    beolvas e\r\n" +
+                                "különben\r\n" +
+                                "    kiír t\r\n" +
+                                "elágazás_vége\r\n" +
+                                "ha hamis akkor\r\n" +
+                                "    beolvas e\r\n" +
+                                "elágazás_vége\r\n" +
+                                "ciklus_amíg hamis\r\n" +
+                                "    kilép\r\n" +
                                 "ciklus_vége\r\n" +
-                                "kiír összeg\r\n" +
+                                "egész i = 0\r\n" +
+                                "i = - i\r\n" +
+                                "i = ! hamis\r\n" +
+                                "i = i\r\n" +
+                                "i = -9,4\r\n" +
+                                "i = 9 / i\r\n" +
+                                "i = -9 mod i\r\n" +
+                                "i = 9 . - i\r\n" +
+                                "i = ! 9 - ! i\r\n" +
+                                "egész[] et = létrehoz[10 + 2]\r\n" +
+                                "et = létrehoz[e + 2]\r\n" +
+                                "szt[0 - 3] = 2\r\n" +
+                                "e = törtből_egészbe(e + 2)\r\n" +
+                                "egész e2 = törtből_egészbe(e + 2)\r\n" +
                                 "program_vége";
 
 
             Stopwatch sw = Stopwatch.StartNew();
 
-            LexicalAnalyzerResult lexicalAnalyzerResult = new LexicalAnalyzer(SyntaxAnalyzer.TestCode).Start();
+            LexicalAnalyzerResult lexicalAnalyzerResult = new LexicalAnalyzer(code).Start();
             sw.Stop();
             Console.WriteLine($"Lexer: {sw.ElapsedMilliseconds} ms.");
             sw.Restart();

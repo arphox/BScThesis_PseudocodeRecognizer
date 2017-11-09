@@ -1,4 +1,4 @@
-using System;
+ï»¿using System;
 using LexicalAnalysis.LexicalElementIdentification;
 using LexicalAnalysis.SymbolTableManagement;
 using LexicalAnalysis.Tokens;
@@ -12,21 +12,21 @@ namespace SemanticAnalysis.TypeFinding
             string name = LexicalElementCodeDictionary.GetWord(internalFunctionToken.Id);
             switch (name)
             {
-                case "törtbõl_egészbe":
-                case "logikaiból_egészbe":
-                case "szövegbõl_egészbe": return SingleEntryType.Egesz;
+                case "tÃ¶rtbÅ‘l_egÃ©szbe":
+                case "logikaibÃ³l_egÃ©szbe":
+                case "szÃ¶vegbÅ‘l_egÃ©szbe": return SingleEntryType.Egesz;
 
-                case "egészbõl_törtbe":
-                case "logikaiból_törtbe":
-                case "szövegbõl_törtbe": return SingleEntryType.Tort;
+                case "egÃ©szbÅ‘l_tÃ¶rtbe":
+                case "logikaibÃ³l_tÃ¶rtbe":
+                case "szÃ¶vegbÅ‘l_tÃ¶rtbe": return SingleEntryType.Tort;
 
-                case "egészbõl_szövegbe":
-                case "törtbõl_szövegbe":
-                case "logikaiból_szövegbe": return SingleEntryType.Szoveg;
+                case "egÃ©szbÅ‘l_szÃ¶vegbe":
+                case "tÃ¶rtbÅ‘l_szÃ¶vegbe":
+                case "logikaibÃ³l_szÃ¶vegbe": return SingleEntryType.Szoveg;
 
-                case "egészbõl_logikaiba":
-                case "törtbõl_logikaiba":
-                case "szövegbõl_logikaiba": return SingleEntryType.Logikai;
+                case "egÃ©szbÅ‘l_logikaiba":
+                case "tÃ¶rtbÅ‘l_logikaiba":
+                case "szÃ¶vegbÅ‘l_logikaiba": return SingleEntryType.Logikai;
 
                 default:
                     throw new InvalidOperationException();
@@ -38,21 +38,21 @@ namespace SemanticAnalysis.TypeFinding
             string name = LexicalElementCodeDictionary.GetWord(internalFunctionToken.Id);
             switch (name)
             {
-                case "egészbõl_törtbe":
-                case "egészbõl_szövegbe":
-                case "egészbõl_logikaiba": return SingleEntryType.Egesz;
+                case "egÃ©szbÅ‘l_tÃ¶rtbe":
+                case "egÃ©szbÅ‘l_szÃ¶vegbe":
+                case "egÃ©szbÅ‘l_logikaiba": return SingleEntryType.Egesz;
 
-                case "törtbõl_egészbe":
-                case "törtbõl_szövegbe":
-                case "törtbõl_logikaiba": return SingleEntryType.Tort;
+                case "tÃ¶rtbÅ‘l_egÃ©szbe":
+                case "tÃ¶rtbÅ‘l_szÃ¶vegbe":
+                case "tÃ¶rtbÅ‘l_logikaiba": return SingleEntryType.Tort;
 
-                case "szövegbõl_egészbe":
-                case "szövegbõl_törtbe":
-                case "szövegbõl_logikaiba": return SingleEntryType.Szoveg;
+                case "szÃ¶vegbÅ‘l_egÃ©szbe":
+                case "szÃ¶vegbÅ‘l_tÃ¶rtbe":
+                case "szÃ¶vegbÅ‘l_logikaiba": return SingleEntryType.Szoveg;
 
-                case "logikaiból_egészbe":
-                case "logikaiból_törtbe":
-                case "logikaiból_szövegbe": return SingleEntryType.Logikai;
+                case "logikaibÃ³l_egÃ©szbe":
+                case "logikaibÃ³l_tÃ¶rtbe":
+                case "logikaibÃ³l_szÃ¶vegbe": return SingleEntryType.Logikai;
 
                 default:
                     throw new InvalidOperationException();
@@ -64,9 +64,9 @@ namespace SemanticAnalysis.TypeFinding
             string name = LexicalElementCodeDictionary.GetWord(literalToken.Id);
             switch (name)
             {
-                case "egész literál": return SingleEntryType.Egesz;
-                case "tört literál": return SingleEntryType.Tort;
-                case "szöveg literál": return SingleEntryType.Szoveg;
+                case "egÃ©sz literÃ¡l": return SingleEntryType.Egesz;
+                case "tÃ¶rt literÃ¡l": return SingleEntryType.Tort;
+                case "szÃ¶veg literÃ¡l": return SingleEntryType.Szoveg;
                 case "igaz":
                 case "hamis": return SingleEntryType.Logikai;
                 default:
