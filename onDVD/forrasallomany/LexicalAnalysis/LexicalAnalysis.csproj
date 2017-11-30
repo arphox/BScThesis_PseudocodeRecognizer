@@ -1,0 +1,94 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="14.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{5C7EF03C-6FC4-4BD7-A714-8F2B7B7765DE}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>LexicalAnalysis</RootNamespace>
+    <AssemblyName>LexicalAnalysis</AssemblyName>
+    <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <TargetFrameworkProfile />
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Analyzer\InputIterator.cs" />
+    <Compile Include="Analyzer\LexicalAnalysisException.cs" />
+    <Compile Include="Analyzer\LexicalAnalyzerResult.cs" />
+    <Compile Include="Analyzer\LexicalAnalyzerState.cs" />
+    <Compile Include="Analyzer\NonWhitespaceRecognitionResult.cs" />
+    <Compile Include="Analyzer\NonWhitespaceRecognizer.cs" />
+    <Compile Include="LexicalElementIdentification\LexicalElementIdentifier.cs" />
+    <Compile Include="Analyzer\OutputTokenListHandler.cs" />
+    <Compile Include="Properties\Settings.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+      <DependentUpon>Settings.settings</DependentUpon>
+    </Compile>
+    <Compile Include="LexicalElementIdentification\LexicalElementCodeDictionary.cs" />
+    <Compile Include="Analyzer\LexicalAnalyzer.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="LexicalElementIdentification\LexicalElementCodeType.cs" />
+    <Compile Include="SymbolTableManagement\SymbolTableManager.cs" />
+    <Compile Include="SymbolTableManagement\SingleEntryType.cs" />
+    <Compile Include="SymbolTableManagement\SymbolTable.cs" />
+    <Compile Include="SymbolTableManagement\SymbolTableEntry.cs" />
+    <Compile Include="SymbolTableManagement\SingleEntry.cs" />
+    <Compile Include="Tokens\ErrorTokenType.cs" />
+    <Compile Include="Tokens\IdentifierToken.cs" />
+    <Compile Include="Tokens\InternalFunctionToken.cs" />
+    <Compile Include="Tokens\KeywordToken.cs" />
+    <Compile Include="Tokens\LiteralToken.cs" />
+    <Compile Include="Tokens\ErrorToken.cs" />
+    <Compile Include="Tokens\TerminalToken.cs" />
+    <Compile Include="Tokens\Token.cs" />
+    <Compile Include="Tokens\TokenListExtensions.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Trash can.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="app.config" />
+    <None Include="Properties\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Common\Common.csproj">
+      <Project>{acf3e381-c720-4ad3-8710-eeea14b288fc}</Project>
+      <Name>Common</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>
